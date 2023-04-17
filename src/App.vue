@@ -1,9 +1,33 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">TecnicasLimpieza</router-link>
-  </nav>
-  <router-view/>
+  <div class="container">
+    <nav class="navbar bg-body-tertiary navbar-expand-lg navbar-dark" data-bs-theme="dark">
+      <div class="container-fluid">
+        <router-link class="navbar-brand" to="/">
+          <img class="img-fluid me-2" id="logotipo" src="/img/logotipo.svg" alt="Logo">Home
+        </router-link>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <router-link class="nav-link" to="/about">Riesgos de los microplasticos</router-link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <router-view />
+  <!-- Footer 
+  <footer class="bg-light text-center text-lg-start">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright:
+      <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+  </footer>
+  -->
 </template>
 
 <style>
@@ -15,16 +39,28 @@
   color: #2c3e50;
 }
 
+#logotipo {
+  width: 7em;
+}
+
 nav {
   padding: 30px;
 }
 
-nav a {
+.navbar-brand a {
   font-weight: bold;
-  color: #2c3e50;
+  color: red;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+nav a.router-link-exact-active.nav-link,
+nav a.router-link-exact-active.navbar-brand {
+  color: #50D890;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 </style>

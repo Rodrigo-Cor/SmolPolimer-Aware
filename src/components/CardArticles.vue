@@ -43,6 +43,15 @@ export default {
             this.cardsData = await response.data
             console.log(this.cardsData)
             
+        },
+        prueba() {
+            this.cardsData = [{
+                "id": 1,
+                "title": "prueba",
+                "author": "prueba",
+                "link": "prueba"
+            }]
+            console.log("prueba")
         }
     },
 }
