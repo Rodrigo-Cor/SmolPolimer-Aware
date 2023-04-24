@@ -17,10 +17,7 @@ const axios = require("axios");
 export default {
     name: 'CardArticles',
     props: {
-        buttonValue: {
-            type: String,
-            required: true
-        }
+        buttonValue: String
     },
     data() {
         return {
@@ -47,11 +44,10 @@ export default {
         prueba() {
             this.cardsData = [{
                 "id": 1,
-                "title": "prueba",
+                "title": this.buttonValue,
                 "author": "prueba",
                 "link": "prueba"
             }]
-            console.log("prueba")
         }
     },
 }
