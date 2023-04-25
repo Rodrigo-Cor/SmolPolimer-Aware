@@ -3,7 +3,7 @@
     <nav class="navbar bg-body-tertiary navbar-expand-lg navbar-dark" data-bs-theme="dark">
       <div class="container-fluid">
         <router-link class="navbar-brand" to="/">
-          <img class="img-fluid me-2" id="logotipo" src="/img/logotipo.svg" alt="Logo">Home
+          <img class="img-fluid me-2 ms-5" id="logotipo" src="/img/logotipo.svg" alt="Logo">Home
         </router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
