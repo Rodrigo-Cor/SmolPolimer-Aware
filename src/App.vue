@@ -1,5 +1,4 @@
 <template>
-  <div class="container">
     <nav class="navbar bg-body-tertiary navbar-expand-lg navbar-dark" data-bs-theme="dark">
       <div class="container-fluid">
         <router-link class="navbar-brand" to="/">
@@ -18,7 +17,6 @@
         </div>
       </div>
     </nav>
-  </div>
   <router-view />
   <!-- Footer 
   <footer class="bg-light text-center text-lg-start">
