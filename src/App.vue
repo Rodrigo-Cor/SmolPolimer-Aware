@@ -2,7 +2,7 @@
     <nav class="navbar bg-body-tertiary navbar-expand-lg navbar-dark" data-bs-theme="dark">
       <div class="container-fluid">
         <router-link class="navbar-brand" to="/">
-          <img class="img-fluid me-2 ms-5" id="logotipo" src="/img/logotipo.svg" alt="Logo">Home
+          <img class="img-fluid mx-auto" id="logotipo" src="/img/smolpolimeraware.svg" alt="Logo">
         </router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,7 +11,21 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <router-link class="nav-link" to="/about">Riesgos de los microplasticos</router-link>
+              <router-link class="nav-link" to="/about">Secciones informativas</router-link>
+            </li>
+          </ul>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <router-link class="nav-link" to="/about">Técnicas de limpieza</router-link>
+            </li>
+          </ul>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <router-link class="nav-link" to="/about">Referencias</router-link>
             </li>
           </ul>
         </div>
