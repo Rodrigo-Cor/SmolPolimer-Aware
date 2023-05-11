@@ -22,19 +22,12 @@
             </li>
           </ul>
         </div>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <router-link class="nav-link" to="/about">Referencias</router-link>
-            </li>
-          </ul>
-        </div>
       </div>
     </nav>
   <router-view />
-  <footer class="text-center text-lg-start">
+  <footer class="text-lg-start">
     <div class="text-center p-3 text-light">
-      © 2020 Copyright:
+      Referencias
     </div>
   </footer>
  
