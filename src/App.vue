@@ -11,14 +11,17 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <router-link class="nav-link" to="/about">Secciones informativas</router-link>
+              <router-link class="nav-link" to="/about">Los microplásticos</router-link>
             </li>
           </ul>
         </div>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <router-link class="nav-link" to="/about">Técnicas de limpieza</router-link>
+              <router-link class="nav-link" to="/about">Filtración granular rápida</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/about">Degradación por bacterias Bacillus</router-link>
             </li>
           </ul>
         </div>
