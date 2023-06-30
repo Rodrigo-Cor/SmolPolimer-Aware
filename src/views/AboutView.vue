@@ -1,11 +1,12 @@
 <template>
   <InfoSection
-    txt="Desde 2016, se ha registrado un alarmante aumento en el uso de plásticos, especialmente productos de un solo uso, que han provocado la acumulación masiva en el medio ambiente."
-    img= "~@/assets/WaterPlasticPollution.jpg"
+    :txt="`Desde 2016, se ha registrado un alarmante aumento en el uso de plásticos, especialmente productos de un solo uso, que han provocado la acumulación masiva en el medio ambiente.`"
+    :img="require('../assets/WaterPlasticPollution.jpg')"
   ></InfoSection>
+  <!--
   <InfoSectionAlt
-    txt="Los productos etiquetados biodegradables u oxo-degradables no han disminuido la cantidad de plástico que llega al agua ni su impacto ambiental."
-    img="~@/assets/Biodegradable.jpg"
+    :txt="Los productos etiquetados biodegradables u oxo-degradables no han disminuido la cantidad de plástico que llega al agua ni su impacto ambiental."
+    :img="~@/assets/Biodegradable.jpg"
   ></InfoSectionAlt>
   <InfoSection
     txt="Los plásticos se degradan con el tiempo, sometiéndose a erosión tanto física como química, descomponiéndose en fragmentos más pequeños conocidos como microplásticos."
@@ -27,7 +28,7 @@
     txt="Afectan la calidad de recursos hídricos, utilizados para el consumo humano. En 2020, el INECC informó que los microplásticos representan entre el 60 y el 80% de los residuos que se encuentran en el mar."
     img=""
   ></InfoSection>
-</template>
+--></template>
 <script>
 import InfoSection from "@/components/InfoSection.vue";
 import InfoSectionAlt from "@/components/InfoSectionAlt.vue";
@@ -35,7 +36,7 @@ export default {
   name: "AboutView",
   components: {
     InfoSection,
-    InfoSectionAlt
+    InfoSectionAlt,
   },
 };
 </script>
