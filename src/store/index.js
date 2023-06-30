@@ -17,7 +17,7 @@ export default createStore({
       },
       actions: {
         async fetchReferences(
-          { commit },
+          /* { commit }, */
           searchTerm,
           typeRequest,
           articlesNum
