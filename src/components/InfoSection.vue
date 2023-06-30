@@ -5,24 +5,30 @@
         <img
           :src= img 
           class="img-fluid"
-          alt="..."
+          alt="Imagen"
         />
       </div>
       <div class="col align-self-center">
-        <h4>
+        <p class="text-justify">
             {{txt}}
-        </h4>
+        </p>
       </div>
     </div>
-    <div class="row"></div>
   </div>
 </template>
+
 <script>
     export default{
-        name:'InfoSection',
-        props:{
-            txt: 'String',
-            img: 'String'
+      name:'InfoSection',
+      props:{
+        txt: {
+          type: String,
+          required: true
+        },
+        img: {
+          type: String,
+          required: true
         }
+      } 
     }
 </script>
