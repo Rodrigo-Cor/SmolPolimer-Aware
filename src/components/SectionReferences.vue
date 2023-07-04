@@ -1,9 +1,10 @@
 <template>
   <div>
-    <div class="container" id="sectionReferences">
-      <div class="row">
+    <div class="container">
+      ¿Quieres conocer más? Aquí te dejamos algunas referencias
+      <div class="row g-2">
         <div class="col-6">
-          <div class="justify-content-around">
+          <div>
             <button
               v-bind:class="{
                 btn: true,
@@ -15,7 +16,10 @@
             >
               Cuidado del agua
             </button>
-
+          </div>
+        </div>
+        <div class="col-6">
+          <div>
             <button
               v-bind:class="{
                 btn: true,
@@ -27,31 +31,33 @@
             >
               Microplásticos en el agua
             </button>
-
+          </div>
+        </div>
+        <div class="col-12">
+          <div>
             <button
               v-bind:class="{
                 btn: true,
-                'btn-outline-info': !buttonStates['psychology'],
-                'btn btn-info': buttonStates['psychology'],
+                'btn-outline-info': !buttonStates['microplastic effects'],
+                'btn btn-info': buttonStates['microplastic effects'],
               }"
               type="button"
-              @click="navigate('psychology')"
+              @click="navigate('microplastic effects')"
             >
-              Psicologia
+              Efectos de los microplásticos
             </button>
-            <img class="img-fluid" alt="Vue logo" src="../assets/logo.png" />
           </div>
         </div>
-        <div class="col-6">
-          <CardArticles :button-value="buttonValue" ref="childComponent" />
-        </div>
       </div>
+      <CardArticles />
     </div>
   </div>
 </template>
 
 <script>
-import CardArticles from "./CardArticles.vue";
+import CardArticles from "@/components/CardArticles.vue";
+import { mapActions } from "vuex";
+
 export default {
   name: "SectionReferences",
   components: {
@@ -63,21 +69,25 @@ export default {
       buttonStates: {
         "water care": false,
         "microplastics water": false,
-        psychology: false,
+        "microplastic effects": false,
       },
     };
   },
   methods: {
+    ...mapActions({
+      fetchReferences: "fetchReferences",
+    }),
     navigate(buttonValue) {
       this.buttonValue = buttonValue;
       for (let key in this.buttonStates) {
         if (key === buttonValue) this.buttonStates[key] = true;
         else this.buttonStates[key] = false;
       }
-      this.$nextTick(() => {
-        this.$refs.childComponent.prueba();
-        //this.$refs.childComponent.getData();
-      });
+      const data = {
+        searchTerm: buttonValue,
+        articlesNum: 3,
+      };
+      this.fetchReferences(data);
     },
   },
 };

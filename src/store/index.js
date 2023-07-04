@@ -5,28 +5,18 @@ export default createStore({
   modules: {
     references: {
       state: {
-        references: [],
+        referencesData: [],
       },
       getters: {
-        getReferences: (state) => state.references,
+        getReferences: (state) => state.referencesData,
       },
       mutations: {
         setReferences(state, references) {
-          state.references = references;
+          state.referencesData = references;
         },
       },
       actions: {
-        async fetchReferences(
-          /* { commit }, */
-          searchTerm,
-          typeRequest,
-          articlesNum
-        ) {
-          const data = {
-            searchTerm: searchTerm,
-            typeRequest: typeRequest,
-            articlesNum: articlesNum,
-          };
+        async fetchReferences({ commit }, data) {
           const config = {
             headers: {
               "Content-Type": "application/json",
@@ -38,7 +28,8 @@ export default createStore({
               data,
               config
             );
-            console.log(response.data);
+            const referencesData = response.data;
+            commit("setReferences", referencesData);
           } catch (error) {
             console.log(error);
           }
