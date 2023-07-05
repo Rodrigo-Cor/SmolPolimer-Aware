@@ -1,15 +1,33 @@
 <template>
-  <div id="progressing-chart"></div>
+  <div id="progressing-chart-container" ref="containerRef">
+    <div id="progressing-chart"></div>
+  </div>
 </template>
+
 <script>
 import * as d3 from "d3";
+
 export default {
+  data() {
+    return {
+      isFullscreen: false,
+    };
+  },
   mounted() {
     this.createProgressingChart();
+    this.observeContainerResize();
+    document.addEventListener("fullscreenchange", this.handleFullscreenChange);
+  },
+  beforeUnmount() {
+    this.unobserveContainerResize();
+    document.removeEventListener(
+      "fullscreenchange",
+      this.handleFullscreenChange
+    );
   },
   methods: {
     createProgressingChart() {
-      // Sample data
+      // Sample data and chart dimensions
       const data1 = [
         { date: "2023-01-01", value: 48 },
         { date: "2023-02-01", value: 92 },
@@ -30,18 +48,40 @@ export default {
         { date: "2023-07-01", value: 21 },
       ];
 
-      // Chart dimensions
-      const width = 500;
-      const height = 300;
+      // Get the container dimensions
+      const container = this.$refs.containerRef;
+      const containerWidth = container.clientWidth;
+      const containerHeight = containerWidth * 0.6; // Adjust the aspect ratio as needed
+
+      // Clear existing content
+      container.innerHTML = "";
+
+      // Check if in fullscreen mode
+      const fullscreenWidth = window.innerWidth;
+      const fullscreenHeight = window.innerHeight;
+      const isFullscreen =
+        containerWidth === fullscreenWidth &&
+        containerHeight === fullscreenHeight;
+
+      // Update isFullscreen state
+      this.isFullscreen = isFullscreen;
+
+      // Calculate chart dimensions
       const margin = { top: 20, right: 20, bottom: 30, left: 50 };
+      const width = isFullscreen
+        ? fullscreenWidth - margin.left - margin.right
+        : containerWidth - margin.left - margin.right;
+      const height = isFullscreen
+        ? fullscreenHeight - margin.top - margin.bottom
+        : containerHeight - margin.top - margin.bottom;
 
       // Create SVG container
       const svg = d3
-        .select("#progressing-chart")
+        .select(container)
         .append("svg")
-        .attr("width", width)
-        .attr("height", height);
-      //rem y em
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom);
+
       // Create scales
       const xScale = d3
         .scaleTime()
@@ -112,6 +152,42 @@ export default {
         .ease(d3.easeLinear)
         .attr("stroke-dashoffset", 0);
 
+      // Append x axis
+      svg
+        .append("g")
+        .attr("transform", `translate(0, ${height - margin.bottom})`)
+        .call(d3.axisBottom(xScale));
+
+      // Append y axis
+      svg
+        .append("g")
+        .attr("transform", `translate(${margin.left}, 0)`)
+        .call(d3.axisLeft(yScale));
+
+      // Append gridlines
+      const makeXGridlines = () => d3.axisBottom(xScale);
+      const makeYGridlines = () => d3.axisLeft(yScale);
+
+      svg
+        .append("g")
+        .attr("class", "grid")
+        .attr("transform", `translate(0, ${height - margin.bottom})`)
+        .call(
+          makeXGridlines()
+            .tickSize(-height + margin.bottom)
+            .tickFormat("")
+        );
+
+      svg
+        .append("g")
+        .attr("class", "grid")
+        .attr("transform", `translate(${margin.left}, 0)`)
+        .call(
+          makeYGridlines()
+            .tickSize(-width + margin.left)
+            .tickFormat("")
+        );
+
       // Append x label
       svg
         .append("text")
@@ -129,12 +205,53 @@ export default {
         .attr("text-anchor", "middle")
         .text("Microplastics");
     },
+    observeContainerResize() {
+      const container = this.$refs.containerRef;
+      this.resizeObserver = new ResizeObserver(() => {
+        this.createProgressingChart();
+      });
+      this.resizeObserver.observe(container);
+    },
+    unobserveContainerResize() {
+      if (this.resizeObserver) {
+        this.resizeObserver.disconnect();
+        this.resizeObserver = null;
+      }
+    },
+    handleFullscreenChange() {
+      if (!document.fullscreenElement) {
+        this.isFullscreen = false;
+        this.createProgressingChart();
+      }
+    },
   },
 };
 </script>
 
 <style>
+#progressing-chart-container {
+  width: 100%;
+  height: 0;
+  padding-bottom: 60%; /* Adjust the aspect ratio as needed */
+  position: relative;
+}
+
 #progressing-chart {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: #f5f5f5;
+}
+
+.grid line {
+  stroke: lightgray;
+  stroke-opacity: 0.7;
+  shape-rendering: crispEdges;
+}
+
+.grid path {
+  stroke-width: 0;
 }
 </style>
