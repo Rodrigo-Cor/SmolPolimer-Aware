@@ -42,36 +42,31 @@ export default {
   methods: {
     createProgressingChart() {
       if (this.values !== null && typeof this.values !== "undefined") {
-        // Sample data and chart dimensions
+        // Datos de la muestra y dimensiones de la gráfica
         const data1 = this.values.map((value, index) => ({
-          date: `2023-0${index + 1}-01`,
+          months: index + 1,
           value,
         }));
 
-        const data2 = this.values.map((value, index) => ({
-          date: `2023-0${index + 1}-01`,
-          value,
-        }));
-
-        // Get the container dimensions
+        // Obtener las dimensiones de la gráfica
         const container = this.$refs.containerRef;
         const containerWidth = container.clientWidth;
         const containerHeight = containerWidth * 0.6; // Adjust the aspect ratio as needed
 
-        // Clear existing content
+        // Limpia el contenido ya existente
         container.innerHTML = "";
 
-        // Check if in fullscreen mode
+        // Verifica si está en modo pantalla completa
         const fullscreenWidth = window.innerWidth;
         const fullscreenHeight = window.innerHeight;
         const isFullscreen =
           containerWidth === fullscreenWidth &&
           containerHeight === fullscreenHeight;
 
-        // Update isFullscreen state
+        // Actualiza el estado isFullscreen
         this.isFullscreen = isFullscreen;
 
-        // Calculate chart dimensions
+        // Calcula las dimensiones de la gráfica
         const margin = { top: 20, right: 20, bottom: 30, left: 50 };
         const width = isFullscreen
           ? fullscreenWidth - margin.left - margin.right
@@ -80,39 +75,30 @@ export default {
           ? fullscreenHeight - margin.top - margin.bottom
           : containerHeight - margin.top - margin.bottom;
 
-        // Create SVG container
+        // Crea el contenedor SVG
         const svg = d3
           .select(container)
           .append("svg")
           .attr("width", width + margin.left + margin.right)
           .attr("height", height + margin.top + margin.bottom);
 
-        // Create scales
+        // Crea las escalas
         const xScale = d3
-          .scaleTime()
-          .domain([
-            new Date(data1[0].date),
-            new Date(data1[data1.length - 1].date),
-          ])
+          .scaleLinear()
+          .domain([1, data1.length])
           .range([margin.left, width - margin.right]);
-
         const yScale = d3
           .scaleLinear()
-          .domain([0, d3.max([...data1, ...data2], (d) => d.value)])
+          .domain([0, d3.max([...data1], (d) => d.value)])
           .range([height - margin.bottom, margin.top]);
 
-        // Create line generators
+        // Crea los generadores de línea
         const line1 = d3
           .line()
-          .x((d) => xScale(new Date(d.date)))
+          .x((d) => xScale(d.months))
           .y((d) => yScale(d.value));
 
-        const line2 = d3
-          .line()
-          .x((d) => xScale(new Date(d.date)))
-          .y((d) => yScale(d.value));
-
-        // Append line paths
+        // Agrega los caminos de las línea
         svg
           .append("path")
           .datum(data1)
@@ -121,24 +107,11 @@ export default {
           .attr("stroke-width", 2)
           .attr("d", line1);
 
-        svg
-          .append("path")
-          .datum(data2)
-          .attr("fill", "none")
-          .attr("stroke", "green")
-          .attr("stroke-width", 2)
-          .attr("d", line2);
-
-        // Animate line drawing
+        // Animación del dibujo de la línea
         const totalLength1 = svg
           .select("path:nth-child(1)")
           .node()
           .getTotalLength();
-        const totalLength2 = svg
-          .select("path:nth-child(2)")
-          .node()
-          .getTotalLength();
-
         svg
           .select("path:nth-child(1)")
           .attr("stroke-dasharray", `${totalLength1} ${totalLength1}`)
@@ -148,28 +121,19 @@ export default {
           .ease(d3.easeLinear)
           .attr("stroke-dashoffset", 0);
 
-        svg
-          .select("path:nth-child(2)")
-          .attr("stroke-dasharray", `${totalLength2} ${totalLength2}`)
-          .attr("stroke-dashoffset", totalLength2)
-          .transition()
-          .duration(2000)
-          .ease(d3.easeLinear)
-          .attr("stroke-dashoffset", 0);
-
-        // Append x axis
+        // Añade eje de las x
         svg
           .append("g")
           .attr("transform", `translate(0, ${height - margin.bottom})`)
           .call(d3.axisBottom(xScale));
 
-        // Append y axis
+        // Añade eje de las y
         svg
           .append("g")
           .attr("transform", `translate(${margin.left}, 0)`)
           .call(d3.axisLeft(yScale));
 
-        // Append gridlines
+        // Añade cuadrícula
         const makeXGridlines = () => d3.axisBottom(xScale);
         const makeYGridlines = () => d3.axisLeft(yScale);
 
@@ -193,22 +157,38 @@ export default {
               .tickFormat("")
           );
 
-        // Append x label
+        // Añade la etiqueta "Tiempo" al eje de las x
         svg
           .append("text")
           .attr("x", width / 2)
-          .attr("y", height - margin.bottom)
+          .attr("y", height + margin.bottom)
           .attr("text-anchor", "middle")
-          .text("Time");
+          .text("Tiempo");
 
-        // Append y label
+        // Añade la etiqueta Microplásticos al eje de las y
         svg
           .append("text")
           .attr("transform", "rotate(-90)")
           .attr("x", -height / 2)
           .attr("y", margin.left / 2)
           .attr("text-anchor", "middle")
-          .text("Microplastics");
+          .text("Microplasticos");
+        //Etiqueta de unidades para el eje y
+        svg
+          .append("text")
+          .attr("x", margin.left - 10)
+          .attr("y", margin.top - 10)
+          .attr("text-anchor", "start")
+          .attr("class", "axis-label")
+          .text("n");
+        //Etiqueta de unidades para el eje x
+        svg
+          .append("text")
+          .attr("x", width - margin.right)
+          .attr("y", height - margin.bottom + 30)
+          .attr("text-anchor", "end")
+          .attr("class", "axis-label")
+          .text("Meses");
       }
     },
     observeContainerResize() {
@@ -234,11 +214,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #progressing-chart-container {
   width: 100%;
   height: 0;
-  padding-bottom: 60%; /* Adjust the aspect ratio as needed */
+  padding-bottom: 60%;
   position: relative;
 }
 
