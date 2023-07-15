@@ -24,7 +24,7 @@ export default createStore({
           };
           try {
             const response = await axios.post(
-              "http://localhost:7071/api/GetIDArticles",
+              "https://microplasticosapi.azurewebsites.net/api/GetIDArticles?code=TF6d-H1Lk5DlgNk-hn7sEthaqCD-rN4m6LR_w9Ca-Q3eAzFudmQ1kA==",
               data,
               config
             );

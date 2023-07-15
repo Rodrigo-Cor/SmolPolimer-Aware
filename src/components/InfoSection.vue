@@ -1,17 +1,30 @@
 <template>
   <div class="container">
-    <div class="row mb-3">
+    <div class="row">
       <div class="col align-self-center">
-        <img :src="img" class="img-fluid" alt="Imagen" />
+        <template v-if="sideImage">
+          <img :src="img" class="img-fluid" alt="Imagen" />
+        </template>
+        <template v-else>
+          <p class="text-justify-custom custom-font">
+            {{ txt }}
+          </p>
+        </template>
       </div>
-      <div class="col align-self-center custom-primary custom-column">
-        <p class="text-justify-custom custom-font">
-          {{ txt }}
-        </p>
+      <div class="col align-self-center">
+        <template v-if="sideImage">
+          <p class="text-justify-custom custom-font">
+            {{ txt }}
+          </p>
+        </template>
+        <template v-else>
+          <img :src="img" class="img-fluid" alt="Imagen" />
+        </template>
       </div>
     </div>
   </div>
 </template>
+
 <style>
 .text-justify-custom {
   text-align: justify;
@@ -43,6 +56,10 @@ export default {
     },
     img: {
       type: String,
+      required: true,
+    },
+    sideImage: {
+      type: Boolean,
       required: true,
     },
   },

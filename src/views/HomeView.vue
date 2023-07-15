@@ -39,7 +39,19 @@
         </div>
       </div>
     </nav>
-    <router-view />
+    <router-view v-if="isHomeView">
+      <InfoSection
+        :txt="`Desde 2016, se ha registrado un alarmante aumento en el uso de plásticos, especialmente productos de un solo uso, que han provocado la acumulación masiva en el medio ambiente.`"
+        :img="require('../assets/WaterPlasticPollution.svg')"
+        :sideImage="true"
+      />
+      <InfoSection
+        :txt="`Los productos etiquetados biodegradables u oxo-degradables no han disminuido la cantidad de plástico que llega al agua ni su impacto ambiental.`"
+        :img="require('../assets/Biodegradable.svg')"
+        :sideImage="false"
+      />
+    </router-view>
+    <router-view v-else />
     <footer class="text-lg-start">
       <div class="text-center p-3 text-light">Referencias</div>
     </footer>
@@ -47,8 +59,18 @@
 </template>
 
 <script>
+import InfoSection from "@/components/InfoSection.vue";
+
 export default {
   name: "HomeView",
+  components: {
+    InfoSection,
+  },
+  computed: {
+    isHomeView() {
+      return this.$route.name === "HomeView";
+    },
+  },
 };
 </script>
 
