@@ -40,6 +40,8 @@
       </div>
     </nav>
     <router-view v-if="isHomeView">
+      <CarouselHome />
+      <!--
       <InfoSection
         :txt="`Desde 2016, se ha registrado un alarmante aumento en el uso de plásticos, especialmente productos de un solo uso, que han provocado la acumulación masiva en el medio ambiente.`"
         :img="require('../assets/WaterPlasticPollution.svg')"
@@ -50,6 +52,12 @@
         :img="require('../assets/Biodegradable.svg')"
         :sideImage="false"
       />
+      <InfoSection
+        :txt="`Los plásticos se degradan con el tiempo, sometiéndose a erosión tanto física como química, descomponiéndose en fragmentos más pequeños conocidos como microplásticos.`"
+        :img="require('../assets/Microplastics.svg')"
+        :sideImage="true"
+      />
+      -->
     </router-view>
     <router-view v-else />
     <footer class="text-lg-start">
@@ -59,12 +67,12 @@
 </template>
 
 <script>
-import InfoSection from "@/components/InfoSection.vue";
+import CarouselHome from "@/components/CarouselHome.vue";
 
 export default {
   name: "HomeView",
   components: {
-    InfoSection,
+    CarouselHome,
   },
   computed: {
     isHomeView() {
@@ -90,7 +98,7 @@ footer {
   background-color: #2b3035;
   color: #fff;
   padding: 20px;
-  margin-top: auto; /* Mueve el footer hacia abajo */
+  margin-top: auto;
   width: 100%;
 }
 </style>

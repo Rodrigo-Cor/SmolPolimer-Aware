@@ -2,51 +2,45 @@
   <div>
     <div class="container">
       ¿Quieres conocer más? Aquí te dejamos algunas referencias
-      <div class="row g-2">
-        <div class="col-6">
-          <div>
-            <button
-              v-bind:class="{
-                btn: true,
-                'btn-outline-info': !buttonStates['water care'],
-                'btn btn-info': buttonStates['water care'],
-              }"
-              type="button"
-              @click="navigate('water care')"
-            >
-              Cuidado del agua
-            </button>
-          </div>
+      <div class="row">
+        <div class="col">
+          <button
+            v-bind:class="{
+              btn: true,
+              'btn-outline-info': !buttonStates['water care'],
+              'btn btn-info': buttonStates['water care'],
+            }"
+            type="button"
+            @click="navigate('water care')"
+          >
+            Cuidado del agua
+          </button>
         </div>
-        <div class="col-6">
-          <div>
-            <button
-              v-bind:class="{
-                btn: true,
-                'btn-outline-info': !buttonStates['microplastics water'],
-                'btn btn-info': buttonStates['microplastics water'],
-              }"
-              type="button"
-              @click="navigate('microplastics water')"
-            >
-              Microplásticos en el agua
-            </button>
-          </div>
+        <div class="col">
+          <button
+            v-bind:class="{
+              btn: true,
+              'btn-outline-info': !buttonStates['microplastics water'],
+              'btn btn-info': buttonStates['microplastics water'],
+            }"
+            type="button"
+            @click="navigate('microplastics water')"
+          >
+            Microplásticos en el agua
+          </button>
         </div>
-        <div class="col-12">
-          <div>
-            <button
-              v-bind:class="{
-                btn: true,
-                'btn-outline-info': !buttonStates['microplastic effects'],
-                'btn btn-info': buttonStates['microplastic effects'],
-              }"
-              type="button"
-              @click="navigate('microplastic effects')"
-            >
-              Efectos de los microplásticos
-            </button>
-          </div>
+        <div class="col">
+          <button
+            v-bind:class="{
+              btn: true,
+              'btn-outline-info': !buttonStates['microplastic effects'],
+              'btn btn-info': buttonStates['microplastic effects'],
+            }"
+            type="button"
+            @click="navigate('microplastic effects')"
+          >
+            Efectos de los microplásticos
+          </button>
         </div>
       </div>
       <CardArticles />
