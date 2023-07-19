@@ -43,19 +43,9 @@
       <CarouselHome />
       <!--
       <InfoSection
-        :txt="`Desde 2016, se ha registrado un alarmante aumento en el uso de plásticos, especialmente productos de un solo uso, que han provocado la acumulación masiva en el medio ambiente.`"
-        :img="require('../assets/WaterPlasticPollution.svg')"
-        :sideImage="true"
-      />
-      <InfoSection
         :txt="`Los productos etiquetados biodegradables u oxo-degradables no han disminuido la cantidad de plástico que llega al agua ni su impacto ambiental.`"
         :img="require('../assets/Biodegradable.svg')"
         :sideImage="false"
-      />
-      <InfoSection
-        :txt="`Los plásticos se degradan con el tiempo, sometiéndose a erosión tanto física como química, descomponiéndose en fragmentos más pequeños conocidos como microplásticos.`"
-        :img="require('../assets/Microplastics.svg')"
-        :sideImage="true"
       />
       -->
     </router-view>
