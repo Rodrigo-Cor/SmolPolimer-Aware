@@ -1,23 +1,23 @@
 <template>
   <div class="container">
-    <div class="row justify-content-start mb-4">
+    <div class="row justify-content-center my-2">
       <div
-        class="col-sm-6 col-md-4 col-lg-3"
-        v-for="(value, index) in values"
-        :key="index"
+        class="col-12 my-2 text-center"
+        v-for="index in values.length"
+        :key="'input' + index"
       >
-        <label>
-          Input {{ index + 1 }}:
+        <label v-if="index !== 0">
+          {{ inputLabels[index - 1] }}
           <input
             type="number"
             class="form-control my-input"
-            v-model="values[index]"
-            input="validateInput(index)"
+            v-model="values[index - 1]"
+            input="validateInput(index - 1)"
           />
         </label>
       </div>
-      <div class="row justify-content-start mt-4">
-        <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="row justify-content-center my-4">
+        <div class="col-12 text-center my-4">
           <button @click="sendValues" class="btn btn-outline-primary btn-lg">
             Aceptar
           </button>
@@ -61,6 +61,15 @@ export default {
   data() {
     return {
       values: [null, null, null, null, null, null, null],
+      inputLabels: [
+        "Cantidad inicial de Microplásticos",
+        "Temperatura",
+        "Tamaño de Microplásticos",
+        "Tiempo",
+        "Input 5",
+        "Input 6",
+        "Input 7",
+      ],
     };
   },
   methods: {

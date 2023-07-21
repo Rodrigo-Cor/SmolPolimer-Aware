@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div class="row justify-content-start">
-      <div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="row justify-content-center">
+      <div class="col-12 my-4 text-center">
         <h2 class="form-title">Filtración Granular Rápida (Simulación)</h2>
       </div>
     </div>
