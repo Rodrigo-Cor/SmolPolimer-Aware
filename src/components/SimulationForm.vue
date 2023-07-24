@@ -8,7 +8,22 @@
       >
         <label v-if="index !== 0">
           {{ inputLabels[index - 1] }}
+          <select
+            v-if="index === 4"
+            class="form-control my-input"
+            v-model="values[index - 1]"
+            @change="calculateDegradation"
+          >
+            <option
+              v-for="option in percentageOptions"
+              :key="option"
+              :value="option"
+            >
+              {{ option }} %
+            </option>
+          </select>
           <input
+            v-else
             type="number"
             class="form-control my-input"
             v-model="values[index - 1]"
@@ -24,52 +39,34 @@
         </div>
       </div>
     </div>
+
+    <!-- Mostrar resultado de la simulación -->
+    <div v-if="results.length > 0" class="row justify-content-center">
+      <div class="col-12 text-center">
+        <p>Resultados de la simulación:</p>
+        <ul>
+          <li v-for="(result, index) in results" :key="index">
+            C(t{{ index }}) = {{ result }}
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
-
-<style scoped>
-.my-input {
-  width: 100%;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  border: 0.0625rem solid #4f98ca;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.my-input:focus {
-  border-color: #50d890;
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(80, 216, 144, 0.25);
-}
-
-.btn-outline-primary {
-  color: #4f98ca;
-  border-color: #4f98ca;
-}
-.btn-outline-primary:hover {
-  background-color: #4f98ca;
-  color: #fff;
-}
-</style>
 
 <script>
 export default {
   data() {
     return {
-      values: [null, null, null, null, null, null, null],
+      values: [null, null, null, null],
       inputLabels: [
         "Cantidad inicial de Microplásticos",
         "Temperatura",
-        "Tamaño de Microplásticos",
         "Tiempo",
-        "Input 5",
-        "Input 6",
-        "Input 7",
+        "Porcentaje de degradación",
       ],
+      percentageOptions: [0, 25, 50, 75, 100],
+      results: [], // Arreglo para almacenar los resultados de la simulación en cada intervalo de tiempo
     };
   },
   methods: {
@@ -80,7 +77,25 @@ export default {
         this.values[index] = 100;
       }
     },
+    calculateDegradation() {
+      // Limpiamos el arreglo de resultados antes de hacer una nueva simulación
+      this.results = [];
+
+      // Realizar cálculo de degradación basado en los valores ingresados
+      const n = this.values[0]; // Cantidad inicial de microplásticos
+      const percentage = this.values[3] / 100; // Porcentaje de degradación en decimal
+      const t = this.values[2]; // Tiempo
+
+      // Realizamos la simulación en intervalos de tiempo y almacenamos los resultados en el arreglo 'results'
+      for (let i = 0; i <= t; i++) {
+        const result = n * Math.pow(1 - percentage, i); // Aplicar la fórmula C(t) = n * (1 - p)^t
+        this.results.push(result);
+      }
+    },
     sendValues() {
+      // Realizar el cálculo de degradación antes de emitir los valores
+      this.calculateDegradation();
+
       // Emite un evento con el arreglo de valores
       this.$emit("values-updated", this.values);
     },

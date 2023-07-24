@@ -43,9 +43,12 @@ export default {
     createProgressingChart() {
       if (this.values !== null && typeof this.values !== "undefined") {
         // Datos de la muestra y dimensiones de la gráfica
-        const data1 = this.values.map((value, index) => ({
-          months: index + 1,
-          value,
+        const initialMicroplastics = this.values[0];
+        const percentage = this.values[this.values.length - 1];
+        const time = this.values[2]; // Obtener el valor de tiempo ingresado
+        const data1 = this.values.map((_, index) => ({
+          months: index,
+          value: initialMicroplastics * Math.pow(1 - percentage / 100, index),
         }));
 
         // Obtener las dimensiones de la gráfica
@@ -85,7 +88,7 @@ export default {
         // Crea las escalas
         const xScale = d3
           .scaleLinear()
-          .domain([1, data1.length])
+          .domain([0, time]) // Ajusta el dominio para que abarque desde 0 hasta el valor máximo de tiempo
           .range([margin.left, width - margin.right]);
         const yScale = d3
           .scaleLinear()
@@ -106,20 +109,6 @@ export default {
           .attr("stroke", "steelblue")
           .attr("stroke-width", 2)
           .attr("d", line1);
-
-        // Animación del dibujo de la línea
-        const totalLength1 = svg
-          .select("path:nth-child(1)")
-          .node()
-          .getTotalLength();
-        svg
-          .select("path:nth-child(1)")
-          .attr("stroke-dasharray", `${totalLength1} ${totalLength1}`)
-          .attr("stroke-dashoffset", totalLength1)
-          .transition()
-          .duration(2000)
-          .ease(d3.easeLinear)
-          .attr("stroke-dashoffset", 0);
 
         // Añade eje de las x
         svg
@@ -189,6 +178,17 @@ export default {
           .attr("text-anchor", "end")
           .attr("class", "axis-label")
           .text("Meses");
+
+        // Animación del dibujo de la línea
+        const path = svg.select("path");
+        const totalLength = path.node().getTotalLength();
+        path
+          .attr("stroke-dasharray", totalLength)
+          .attr("stroke-dashoffset", totalLength)
+          .transition()
+          .duration(2000)
+          .ease(d3.easeLinear)
+          .attr("stroke-dashoffset", 0);
       }
     },
     observeContainerResize() {
