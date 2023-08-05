@@ -18,6 +18,10 @@ export default {
       type: Array,
       required: true,
     },
+    results: {
+      type: Array,
+      required: true,
+    },
   },
   mounted() {
     this.createProgressingChart();
@@ -28,7 +32,11 @@ export default {
     values: {
       immediate: true,
       handler() {
-        this.createProgressingChart();
+        try {
+          this.createProgressingChart();
+        } catch (error) {
+          console.error("Error in watcher:", error);
+        }
       },
     },
   },
@@ -41,20 +49,18 @@ export default {
   },
   methods: {
     createProgressingChart() {
-      if (this.values !== null && typeof this.values !== "undefined") {
+      if (this.results !== null && typeof this.results !== "undefined") {
         // Datos de la muestra y dimensiones de la gráfica
-        const initialMicroplastics = this.values[0];
-        const percentage = this.values[this.values.length - 1];
-        const time = this.values[2]; // Obtener el valor de tiempo ingresado
-        const data1 = this.values.map((_, index) => ({
+        const time = this.results.length; // Obtener el valor de tiempo ingresado
+        const data1 = this.results.map((result, index) => ({
           months: index,
-          value: initialMicroplastics * Math.pow(1 - percentage / 100, index),
+          value: result,
         }));
 
         // Obtener las dimensiones de la gráfica
         const container = this.$refs.containerRef;
         const containerWidth = container.clientWidth;
-        const containerHeight = containerWidth * 0.6; // Adjust the aspect ratio as needed
+        const containerHeight = containerWidth * 0.6; // ajusta el aspect ratio cuando sea necesario
 
         // Limpia el contenido ya existente
         container.innerHTML = "";
@@ -192,13 +198,16 @@ export default {
       }
     },
     observeContainerResize() {
+      console.log("Observing container resize");
       const container = this.$refs.containerRef;
       this.resizeObserver = new ResizeObserver(() => {
+        console.log("Container resize detected");
         this.createProgressingChart();
       });
       this.resizeObserver.observe(container);
     },
     unobserveContainerResize() {
+      console.log("Unobserving container resize");
       if (this.resizeObserver) {
         this.resizeObserver.disconnect();
         this.resizeObserver = null;

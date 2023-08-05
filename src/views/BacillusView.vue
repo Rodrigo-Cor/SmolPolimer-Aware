@@ -8,8 +8,16 @@
       </div>
     </div>
     <div>
-      <SimulationForm @values-updated="handleValuesUpdated" />
-      <ProgressingChart :values="formValues" />
+      <SimulationForm
+        @values-updated="handleValuesUpdated"
+        @results-updated="handleResultsUpdated"
+      />
+      <ProgressingChart
+        v-if="formResults.length > 0"
+        :values="formValues"
+        :results="formResults"
+        :key="chartKey"
+      />
     </div>
   </div>
 </template>
@@ -31,13 +39,19 @@ export default {
   },
   data() {
     return {
-      formValues: null,
+      formValues: [null, null, null, null],
+      formResults: [],
+      chartKey: 0,
     };
   },
   methods: {
     handleValuesUpdated(values) {
       // Recibe los valores del componente del formulario
       this.formValues = values;
+    },
+    handleResultsUpdated(results) {
+      this.formResults = results;
+      this.chartKey++;
     },
   },
 };

@@ -12,7 +12,6 @@
             v-if="index === 4"
             class="form-control my-input"
             v-model="values[index - 1]"
-            @change="calculateDegradation"
           >
             <option
               v-for="option in percentageOptions"
@@ -41,14 +40,19 @@
     </div>
 
     <!-- Mostrar resultado de la simulación -->
-    <div v-if="results.length > 0" class="row justify-content-center">
+    <div
+      v-if="results.length > 0 && !calculating"
+      class="row justify-content-center"
+    >
       <div class="col-12 text-center">
         <p>Resultados de la simulación:</p>
-        <ul>
-          <li v-for="(result, index) in results" :key="index">
-            C(t{{ index }}) = {{ result }}
-          </li>
-        </ul>
+        <div class="row">
+          <div class="col-12 my-4">
+            <div v-for="(result, index) in results" :key="index">
+              C(t{{ index }}) = {{ result }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -58,6 +62,7 @@
 export default {
   data() {
     return {
+      calculating: false,
       values: [null, null, null, null],
       inputLabels: [
         "Cantidad inicial de Microplásticos",
@@ -78,6 +83,8 @@ export default {
       }
     },
     calculateDegradation() {
+      //Bandera
+      this.calculating = true;
       // Limpiamos el arreglo de resultados antes de hacer una nueva simulación
       this.results = [];
 
@@ -91,13 +98,14 @@ export default {
         const result = n * Math.pow(1 - percentage, i); // Aplicar la fórmula C(t) = n * (1 - p)^t
         this.results.push(result);
       }
+      this.calculating = false;
     },
     sendValues() {
-      // Realizar el cálculo de degradación antes de emitir los valores
-      this.calculateDegradation();
-
       // Emite un evento con el arreglo de valores
       this.$emit("values-updated", this.values);
+      // Realizar el cálculo de degradación antes de emitir los valores
+      this.calculateDegradation();
+      this.$emit("results-updated", this.results);
     },
   },
 };
