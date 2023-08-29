@@ -50,6 +50,7 @@ export default {
       this.formValues = values;
     },
     handleResultsUpdated(results) {
+      // Recibe los resultados calculados del componente SimulationForm.
       this.formResults = results;
       this.chartKey++;
     },
