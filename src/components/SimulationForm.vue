@@ -5,7 +5,8 @@
       <!-- Columna para etiqueta -->
       <div class="col-12 my-1 text-center">
         <label for="values[0]">Cantidad inicial de Microplásticos</label>
-        <span>: {{ values[0] }} partículas</span>
+        <span v-if="values[0] == 1">: {{ values[0] }} partícula</span>
+        <span v-else>: {{ values[0] }} partículas</span>
       </div>
       <!-- Columna para input -->
       <div class="col-12 my-1 text-center">
@@ -13,8 +14,9 @@
           v-model="values[0]"
           @input="validateInitialQuantity"
           placeholder="Introduce un valor"
+          id = "values[0]"
         />
-        <p v-if="!isInputValid[0] && values[0] != null">{{ msg[0] }}</p>
+        <p id= "myMsg" v-if="!isInputValid[0] && values[0] != null">{{ msg[0] }}</p>
         <p v-else>&nbsp;</p>
       </div>
     </div>
@@ -31,8 +33,9 @@
           v-model="values[1]"
           @input="validateTemperature"
           placeholder="Introduce un valor"
+          id="values[1]"
         />
-        <p v-if="!isInputValid[1] && values[1] != null">{{ msg[1] }}</p>
+        <p id= "myMsg" v-if="!isInputValid[1] && values[1] != null">{{ msg[1] }}</p>
         <p v-else>&nbsp;</p>
       </div>
     </div>
@@ -41,7 +44,8 @@
       <!-- Columna para etiqueta -->
       <div class="col-12 my-1 text-center">
         <label for="values[2]">Tiempo</label>
-        <span>: {{ values[2] }} Meses</span>
+        <span v-if= "values[2] == 1">: {{ values[2] }} Bimestre</span>
+        <span v-else>: {{ values[2] }} Bimestres</span>
       </div>
       <!-- Columna para renglón -->
       <div class="col-12 my-1 text-center">
@@ -49,8 +53,9 @@
           v-model="values[2]"
           @input="validateTime"
           placeholder="Introduce un valor"
+          id="values[2]"
         />
-        <p v-if="!isInputValid[2] && values[2] != null">{{ msg[2] }}</p>
+        <p id= "myMsg" v-if="!isInputValid[2] && values[2] != null">{{ msg[2] }}</p>
         <p v-else>&nbsp;</p>
       </div>
     </div>
@@ -67,8 +72,9 @@
           v-model="values[3]"
           @input="validateDegradationPercentage"
           placeholder="Introduce un valor"
+          id="values[3]"
         />
-        <p v-if="!isInputValid[3] && values[3] != null">{{ msg[3] }}</p>
+        <p id= "myMsg" v-if="!isInputValid[3] && values[3] != null">{{ msg[3] }}</p>
         <p v-else>&nbsp;</p>
       </div>
     </div>
@@ -110,33 +116,29 @@ export default {
       results: [], // Arreglo para almacenar los resultados de la simulación en cada intervalo de tiempo
       isInputValid: [false, false, false, false],
       msg: [
-        "Introduce un número entero mayor o igual a uno, de hasta 5 dígitos",
-        "Introduce un número entero mayor o igual a uno, de hasta 4 dígitos",
-        "Introduce un número entero mayor o igual a uno, de hasta 2 dígitos",
-        "Introduce un número entero entre uno y cien",
+        "Introduce un número entre uno y 9999",
+        "Introduce un número entre uno y noventa y nueve",
+        "Introduce un número entre uno y doce",
+        "Introduce un número entre uno y cien",
       ],
     };
   },
   methods: {
     /* Valida la Cantidad inicial de microplásticos */
     validateInitialQuantity() {
-      const valuePattern = /^[1-9]\d{0,3}$/;
-      this.isInputValid[0] = valuePattern.test(this.values[0]);
+      this.isInputValid[0] = this.values[0] >= 1 && this.values[0] <= 9999;
     },
     /* Valida la temperatura */
     validateTemperature() {
-      const valuePattern = /^[1-9]\d{0,3}$/;
-      this.isInputValid[1] = valuePattern.test(this.values[1]);
+      this.isInputValid[1] = this.values[1] >= 1 && this.values[1] <= 99;
     },
     /* Valida el tiempo */
     validateTime() {
-      const valuePattern = /^[1-9]\d{0,1}$/;
-      this.isInputValid[2] = valuePattern.test(this.values[2]);
+      this.isInputValid[2] = this.values[2] >= 1 && this.values[2] <= 12;
     },
     /* Valida el porcentaje de degradación */
     validateDegradationPercentage() {
-      const valuePattern = /^(100|[0-9]{1,2})$/;
-      this.isInputValid[3] = valuePattern.test(this.values[3]);
+      this.isInputValid[3] = this.values[3] >= 1 && this.values[3] <= 100;;
     },
     /* Hace el cálculo de la degradación */
     calculateDegradation() {
@@ -164,11 +166,27 @@ export default {
     },
     showAlert() {
       Swal.fire({
-        title: "Valores inválidos del formulario",
-        text: "Presiona 'OK' para corregir los campos antes de continuar",
-        icon: "warning",
-        confirmButtonText: "OK",
-      });
+	      title: '<span class="amarillo">Datos erróneos o faltantes</span>',
+	      html: '<p class="justificado">Los datos que has ingresado son erróneos o has dejado campos sin llenar. Revisalos antes de poder continuar con la simulación.</p>',
+	      background: '#1e1e1e',
+        color: '#effffb',
+	      icon: 'warning',
+	      confirmButtonText: '<span class="negro">Aceptar</span>',
+	      position: 'center',
+
+	      allowOutsideClick: false,
+      	allowEscapeKey: false,
+	      allowEnterKey: false,
+	      stopKeydownPropagation: false, //evitar comandos
+
+	      showConfirmButton: true,
+	      confirmButtonColor: '#50d890',
+	      confirmButtonAriaLabel: 'Confirmar',
+
+      	showCancelButton: false,
+	      cancelButtonText: 'Cancelar',
+	      cancelButtonAriaLabel: 'Cancelar',
+});
     },
     sendValues() {
       // Realizar el cálculo de degradación antes de emitir los valores
@@ -183,7 +201,25 @@ export default {
 </script>
 
 <style scoped>
-/* .my-input {}
-.my-label{}
-.my-msg{} */
+/* 
+#1e1e1e negro
+#50d890 verde
+#4f98ca azul
+#effffb blanco
+*/
+input{
+  border-width: 0.125rem;
+  border-radius: 0.4rem;
+  border-color: #4f98ca;
+  transition: 0.5s;
+  outline: none;
+}
+input:focus{
+  border: 0.125rem solid #1e1e1e;
+}
+#myMsg{
+  color: #d2704d; 
+  font-size: 0.85rem;
+  font-weight: bold;;
+}
 </style>

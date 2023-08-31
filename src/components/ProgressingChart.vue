@@ -183,7 +183,7 @@ export default {
           .attr("y", height - margin.bottom + 30)
           .attr("text-anchor", "end")
           .attr("class", "axis-label")
-          .text("Meses");
+          .text("Bimestres");
 
         // Animación del dibujo de la línea
         const path = svg.select("path");
