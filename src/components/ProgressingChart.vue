@@ -225,6 +225,11 @@ export default {
 </script>
 
 <style scoped>
+h3{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #50d890;
+}
 #progressing-chart-container {
   width: 100%;
   height: 0;
