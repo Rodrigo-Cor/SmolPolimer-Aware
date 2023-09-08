@@ -1,17 +1,18 @@
 <template>
   <div>
-    <div class="container">
-      ¿Quieres conocer más? Aquí te dejamos algunas referencias
+    <div class="container-fluid text-size border border-info pt-2 bg-success bg-opacity-50 bg-gradient">
+      ¿Quieres conocer más? Selecciona el tema de tu interés
       <div class="row">
         <div class="col">
           <button
             v-bind:class="{
               btn: true,
-              'btn-outline-info': !buttonStates['water care'],
-              'btn btn-info': buttonStates['water care'],
+              'btn-outline-primary': !buttonStates['water care'],
+              'btn-secondary': buttonStates['water care'] && referencesData.length > 0,
             }"
             type="button"
             @click="navigate('water care')"
+            :disabled="buttonStates['water care'] && referencesData.length > 0"
           >
             Cuidado del agua
           </button>
@@ -20,11 +21,12 @@
           <button
             v-bind:class="{
               btn: true,
-              'btn-outline-info': !buttonStates['microplastics water'],
-              'btn btn-info': buttonStates['microplastics water'],
+              'btn-outline-primary': !buttonStates['microplastics water'],
+              'btn-secondary': buttonStates['microplastics water'] && referencesData.length > 0,
             }"
             type="button"
             @click="navigate('microplastics water')"
+            :disabled="buttonStates['microplastics water'] && referencesData.length > 0"
           >
             Microplásticos en el agua
           </button>
@@ -33,24 +35,32 @@
           <button
             v-bind:class="{
               btn: true,
-              'btn-outline-info': !buttonStates['microplastic effects'],
-              'btn btn-info': buttonStates['microplastic effects'],
+              'btn-outline-primary': !buttonStates['microplastic effects'],
+              'btn-secondary': buttonStates['microplastic effects'] && referencesData.length > 0,
             }"
             type="button"
             @click="navigate('microplastic effects')"
+            :disabled="buttonStates['microplastic effects'] && referencesData.length > 0"
           >
             Efectos de los microplásticos
           </button>
         </div>
       </div>
-      <CardArticles />
+      <div v-if="!stateRequest">
+        <CardArticles />
+      </div>
+      <div v-else>
+        <div class="progress" role="progressbar" style="height: 30px">
+          <div class="progress-bar" style="width: 75%">Cargando...</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import CardArticles from "@/components/CardArticles.vue";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "SectionReferences",
@@ -66,6 +76,12 @@ export default {
         "microplastic effects": false,
       },
     };
+  },
+  computed: {
+    ...mapGetters({
+      referencesData: "getReferences",
+      stateRequest: "getStateRequest",
+    }),
   },
   methods: {
     ...mapActions({

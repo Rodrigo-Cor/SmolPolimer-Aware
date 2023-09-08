@@ -109,6 +109,7 @@
 <script>
 import Swal from "sweetalert2";
 export default {
+  name: "SimulationForm",
   data() {
     return {
       calculating: false,

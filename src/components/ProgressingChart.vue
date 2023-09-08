@@ -8,6 +8,7 @@
 import * as d3 from "d3";
 
 export default {
+  name: "ProgressingChart",
   data() {
     return {
       isFullscreen: false,

@@ -47,7 +47,6 @@
         :credits="`Foto de Naja Bertolt Jensen en Unsplash`"
         :arrayText="[
           `Desde 2016, se ha registrado un alarmante aumento en el uso de plásticos, especialmente productos de un solo uso, que han provocado la acumulación masiva en el medio ambiente.`,
-          `Los productos etiquetados biodegradables u oxo-degradables no han disminuido la cantidad de plástico que llega al agua ni su impacto ambiental.`,
         ]"
       />
       <InfoSection
@@ -55,14 +54,14 @@
         :sideImage="true"
         :credits='`Foto cortesía de "The Ocean Cleanup"`'
         :arrayText="[
-          `En 2008, la National Oceanic and Atmospheric Administration (NOAA) estableció que el tamaño límite de los materiales para ser considerados microplásticos sería de 5 milímetros.`,
-          `La European Chemicals Agency (ECHA), además del tamaño, abarca en su definición criterios como el tipo de material, estado físico (sólido o semisólido) y morfología (las formas que pueden presentar, como esferas, fibras o láminas).`
+          `En 2008, la National Oceanic and Atmospheric Administration (NOAA) estableció que el tamaño límite de los materiales para ser considerados microplásticos sería de 5 milímetros.`
         ]"
       />
+      <SectionReferences />
     </router-view>
     <router-view v-else />
     <footer class="text-lg-start">
-      <div class="text-center p-3 text-light">Referencias</div>
+      <div class="text-center p-3 text-light">Copyright. Derechos reservados</div>
     </footer>
   </div>
 </template>
@@ -70,12 +69,13 @@
 <script>
 import CarouselHome from "@/components/CarouselHome.vue";
 import InfoSection from "@/components/InfoSection.vue";
-
+import SectionReferences from "@/components/SectionReferences.vue";
 export default {
   name: "HomeView",
   components: {
     CarouselHome,
     InfoSection,
+    SectionReferences,
   },
   computed: {
     isHomeView() {

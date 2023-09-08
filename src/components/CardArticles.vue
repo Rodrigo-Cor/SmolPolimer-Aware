@@ -1,17 +1,33 @@
 <template>
-  <div class="container text-center">
-    <div v-if="referencesData.length === 0">
-      Selecciona alguna opción para ver recomendaciones
-    </div>
-    <div v-else class="row justify-content-around">
+  <div class="row">
+    <div class="d-flex flex-column col-6">
       <div
-        class="card col-4 m-2 p-0"
-        v-for="card in referencesData"
-        :key="card.id"
+        id="list-references"
+        class="list-group"
+        v-for="(card, index) in referencesData"
+        :key="index"
       >
-        <div class="card-body">
-          <h5 class="card-title">{{ card.title }}</h5>
-          <p class="card-text">Autores: {{ card.author }}</p>
+        <a
+          class="list-group-item list-group-item-action text-size text-sm-end menu-body p-3"
+          :href="'#list-item-' + index"
+          >{{ card.title }}</a
+        >
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div
+        data-bs-spy="scroll"
+        data-bs-target="#list-references"
+        data-bs-smooth-scroll="true"
+        class="scrollspy-example"
+        tabindex="0"
+        v-for="(card, index) in referencesData"
+        :key="index"
+      >
+        <div class="card-body p-2 text-center m-2 text-size">
+          <p :id="'list-item-' + index">{{ card.title }}</p>
+          <p>Autores: {{ card.author }}</p>
           <a target="_blank" :href="card.link" class="btn btn-info"
             >Ir al articulo</a
           >
@@ -31,11 +47,6 @@ export default {
       referencesData: "getReferences",
     }),
   },
-  data() {
-    return {
-      cardsData: [],
-    };
-  },
   methods: {
     ...mapActions({
       fetchReferences: "fetchReferences",
@@ -46,11 +57,11 @@ export default {
 
 <style scoped>
 .card-body {
-  /*background-color: #4F98CA;*/
   background-image: linear-gradient(to bottom, #4f98ca, #50d890);
 }
 
-.card {
-  width: 18rem;
+.menu-body {
+  background-image: linear-gradient(to bottom, #EFFFFB, #4F98CA);
 }
+
 </style>
