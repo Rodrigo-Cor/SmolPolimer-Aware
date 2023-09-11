@@ -1,4 +1,11 @@
 <template>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 text-center my-2">
+        <h2>Simulación Gráfica</h2>
+      </div>
+    </div>
+  </div>
   <div id="progressing-chart-container" ref="containerRef">
     <div id="progressing-chart"></div>
   </div>
@@ -165,9 +172,9 @@ export default {
           .append("text")
           .attr("transform", "rotate(-90)")
           .attr("x", -height / 2)
-          .attr("y", margin.left / 2)
+          .attr("y", (margin.left / 2) - 12)
           .attr("text-anchor", "middle")
-          .text("Microplasticos");
+          .text("Microplásticos");
         //Etiqueta de unidades para el eje y
         svg
           .append("text")
@@ -179,8 +186,8 @@ export default {
         //Etiqueta de unidades para el eje x
         svg
           .append("text")
-          .attr("x", width - margin.right)
-          .attr("y", height - margin.bottom + 30)
+          .attr("x", width - margin.right + 90)
+          .attr("y", height - margin.bottom)
           .attr("text-anchor", "end")
           .attr("class", "axis-label")
           .text("Bimestres");
@@ -224,7 +231,7 @@ export default {
 </script>
 
 <style scoped>
-h3{
+h2{
   font-size: 1.5rem;
   font-weight: bold;
   color: #50d890;
