@@ -41,7 +41,7 @@
       <div class="row">
         <div class="col-12 text-center my-2">
           <button 
-            v-if="alertFlag === true && formResults.length > 1"
+            v-if="formResults.length > 1"
             class="btn btn-outline-danger btn-lg"
           >Generar PDF
           </button>
