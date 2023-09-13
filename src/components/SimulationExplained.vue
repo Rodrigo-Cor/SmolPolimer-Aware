@@ -1,16 +1,23 @@
 <template>
 <div class="container">
+  <hr>
   <div class="row justify-content-center">
-    <div class="col-12 my-2 text-center">
+    <div class="col-12 text-center">
       <h2>Explicación de la Simulación</h2>
     </div>
   </div>
   <div class="row justify-content-center">
-    <div class="col-12 my-2 text-center">
+    <div class="col-12 text-center">
       <p>
         En la simulación gráfica, se ve reflejada la correspondencia entre la cantidad de microplásticos
         y el tiempo, bajo la fórmula: C(t) = n * (1 - p)^t, donde t es el tiempo, p es el porcentaje de
         limpieza y n es el número de microplásticos.
+      </p>
+      <p v-if="!alertChoice">
+        Los valores por defecto, corresponden a una cantidad inicial de 1000 microplásticos, para que sea
+        fácilmente visualizado el porcentaje de limpieza, de 34.55%, proveniente de la cepa B. carbonipphilus;
+        sobre mineral Agar. El tiempo considerado es de 12 bimestros, equivalentes a dos años, mientras que
+        la temperatura a la que se sometieron los microplásticos es de 30°C.
       </p>
     </div>
   </div>    
@@ -41,6 +48,10 @@ export default {
     },
     results: {
       type: Array,
+      required: true,
+    },
+    alertChoice: {
+      type: Boolean,
       required: true,
     },
   }

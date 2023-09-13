@@ -16,6 +16,17 @@ export default {
   },
   data() {
 	return {
+	  quantityAlert: {
+		alertTitle: "Cantidad de microplásticos",
+		alertText: "Introduce una cantidad de microplásticos entre 1 y 9999",
+		alertIcon: "info",
+		alertConfirmButton: "Confirmar",
+		alertToDenyButton: false,
+	  },
+	  /* TemperatureAlert: {},
+	  timeAlert: {},
+	  material: {},
+	  percentage: {}, */
 	  choice : false,
 	};
   },

@@ -21,6 +21,7 @@
       </div>
     </div>
   </div>
+  <hr>
 </div>
 </template>
 <style scoped>

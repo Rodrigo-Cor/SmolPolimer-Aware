@@ -1,37 +1,36 @@
 <template>
   <div class="container">
-    <!-- Renglón para input de Cantidad inicial de Microplásticos -->
     <div class="row justify-content-center my-1">
       <div class="col-12 my-1 text-center">
         <h2>Formulario</h2>
       </div>
     </div>
+    <!-- Renglón para inputs -->
     <div class="row justify-content-center my-1">
-      <!-- Columna para etiqueta -->
-      <div class="col-12 my-1 text-center">
-        <label for="values[0]">Cantidad inicial de Microplásticos</label>
-        <span v-if="values[0] == 1">: {{ values[0] }} partícula</span>
-        <span v-else>: {{ values[0] }} partículas</span>
-      </div>
-      <!-- Columna para input -->
-      <div class="col-12 my-1 text-center">
+      <div class="col-sm-12 col-md-4 my-1 text-center">
+        <label for="values[0]">Cantidad</label>
+        <span v-if="values[0] == 1">: {{ values[0] }} microplástico</span>
+        <span v-else>: {{ values[0] }} microplásticos</span>
+        <button @click="handleQuestionButton" class="custom-button">
+          <i class="bi bi-question-circle"></i>
+        </button>
+        
+        <br>
         <input
           v-model="values[0]"
           @input="validateInitialQuantity"
           id = "values[0]"
+          @keypress= "validateKeyPress"
         />
-        <p id= "myMsg" v-if="!isInputValid[0] && showFormAlerts === true">{{ msg[0] }}</p>
+        <p id= "myMsg" v-if="!isInputValid[0]">{{ msg[0] }}</p>
       </div>
-    </div>
-    <!-- Renglón para input de Temperatura -->
-    <div class="row justify-content-center my-1">
-      <!-- Columna para etiqueta -->
-      <div class="col-12 my-1 text-center">
+      <div class="col-dm-12 col-md-4 my-1 text-center">
         <label for="values[1]">Temperatura</label>
         <span>: {{ values[1] }}°C</span>
-      </div>
-      <!-- Columna para input -->
-      <div class="col-12 my-1 text-center">
+        <button @click="handleQuestionButton" class="custom-button">
+          <i class="bi bi-question-circle"></i>
+        </button>
+        <br>
         <select
           class="form-select mx-auto"
           aria-label="Select de temperatura"
@@ -39,53 +38,60 @@
           @change="validateTemperature"
           id="values[1]"
         >
-        <option :value="15">15°C</option>
-        <option :value="30">30°C</option>
+          <option :value="15">15°C</option>
+          <option :value="30">30°C</option>
         </select>
-        <p id= "myMsg" v-if="!isInputValid[1] && showFormAlerts === true">{{ msg[1] }}</p>
+        <p id= "myMsg" v-if="!isInputValid[1]">{{ msg[1] }}</p>
       </div>
-    </div>
-    <!-- Renglón para input de Tiempo -->
-    <div class="row justify-content-center my-1">
-      <!-- Columna para etiqueta -->
-      <div class="col-12 my-1 text-center">
+      <div class="col-sm-12 col-md-4 my-1 text-center">
         <label for="values[2]">Tiempo</label>
-        <span v-if= "values[2] == 1">: {{ values[2] }} Bimestre</span>
-        <span v-else>: {{ values[2] }} Bimestres</span>
-      </div>
-      <!-- Columna para input -->
-      <div class="col-12 my-1 text-center">
+        <span v-if= "values[2] == 1">: {{ values[2] }} bimestre</span>
+        <span v-else>: {{ values[2] }} bimestres</span>
+        <button @click="handleQuestionButton" class="custom-button">
+          <i class="bi bi-question-circle"></i>
+        </button>
+        <br>
         <input
           v-model="values[2]"
           @input="validateTime"
           id="values[2]"
+          @keypress= "validateKeyPress"
         />
-        <p id= "myMsg" v-if="!isInputValid[2] && showFormAlerts === true">{{ msg[2] }}</p>
+        <p id= "myMsg" v-if="!isInputValid[2]">{{ msg[2] }}</p>
       </div>
     </div>
-    <div class= "row justify-content-center my-1">
-      <!-- Columna para indicaciones de botones -->
-      <div class= "col-12 my-1 text-center">
-        <span class= "myP">Mineral {{ mineral }}</span>
+    <div class="row justify-content-center">
+      <div class="col-12 my-3">
+        <span>
+          Selecciona un material
+        </span>
+        <button @click="handleButton" class="custom-button">
+          <i class="bi bi-question-circle"></i>
+        </button>
       </div>
     </div>
     <!-- Renglón para botones para escoger material -->
+    <div class="row justify-content-center mb-2">
+      <div class="col-12">
+        <input type="radio" id="materialChoice1" name="materialChoice" value="Agar" @change="setAgar"/>
+        <label for="materialChoice1">Mineral Agar</label>
+      </div>
+    </div>
     <div class="row justify-content-center my-1">
-      <!-- Columna para botones para escoger material -->
-      <div class="col-12 text-center">
-        <button @click="setAgar" class="btn btn-outline-primary btn-lg">Mineral Agar</button>
-        <button @click="setBroth" class="btn btn-outline-secondary btn-lg">Mineral Broth</button>
+      <div class="col-12">
+        <input type="radio" id="materialChoice2" name="materialChoice" value="Broth" @change="setBroth"/>
+        <label for="materialChoice2">Mineral Broth</label>
       </div>
     </div>
     <!-- Renglón para input de Porcentaje de degradación -->
     <div class="row justify-content-center my-1">
-      <!-- Columna para etiqueta -->
-      <div v-if="this.buttonPressed" class="col-12 my-1 text-center">
+      <div v-if="this.buttonPressed" class="col-12 my-2 text-center">
         <label for="values[3]">Porcentaje de degradación</label>
         <span>: {{ values[3] }}%</span>
-      </div>
-      <!-- Columna para select -->
-      <div v-if="this.buttonPressed" class="col-12 my-1 text-center">
+        <button @click="handleQuestionButton" class="custom-button">
+          <i class="bi bi-question-circle"></i>
+        </button>
+        <br>
         <select
           class="form-select mx-auto"
           v-model="values[3]"
@@ -100,7 +106,7 @@
         <option :value="percentageOptions[4]" >B. smithii</option>
         <option :value="percentageOptions[5]" >B. megaterium</option>
         </select>
-        <p id= "myMsg" v-if="!isInputValid[3] && showFormAlerts === true">{{ msg[3] }}</p>
+        <p id= "myMsg" v-if="!isInputValid[3]">{{ msg[3] }}</p>
       </div>
     </div>
     <!-- Renglón para botón para enviar-->
@@ -118,6 +124,7 @@
         />
       </div>
     </div>
+    <hr>
   </div> 
 </template>
 
@@ -141,9 +148,9 @@ export default {
       buttonPressed: false,
       mineral: "",
       msg: [ 
-        "Introduce una cantidad entre uno y 9999",
+        "Introduce una cantidad entre 1 y 9999",
         "Selecciona una temperatura",
-        "Introduce un tiempo entre uno y doce",
+        "Introduce un tiempo entre 1 y 12",
         "Selecciona una opción para determinar el porcentaje",
       ],
     };
@@ -177,6 +184,18 @@ export default {
     validateDegradationPercentage() {
       this.isInputValid[3] = this.values[3] >= 1 && this.values[3] <= 100;;
     },
+    validateKeyPress(event) {
+      if (
+        !/[0-9\b]/.test(event.key)
+      ) event.preventDefault(); 
+    },
+    handleQuestionButton () {
+      const genericAlert = this.$refs.genericAlertRef;
+        this.showFormAlerts = true;
+        if (genericAlert){
+          genericAlert.showAlert();
+        }
+    },
     handleButton() {
       if (this.isInputValid.every((element) => element)) {
         this.exitValues = this.values.slice();
@@ -199,6 +218,7 @@ export default {
 #50d890 verde
 #4f98ca azul
 #effffb blanco
+#d2704d rojo
 */
 h2{
   font-size: 1.5rem;
@@ -216,7 +236,7 @@ label{
   color: #4f98ca;
 }
 input{
-  width: 20rem;
+  width: 10rem;
   padding: 1rem;
   border: 0.2rem solid #4f98ca;
   border-radius: 0.8rem;
@@ -229,16 +249,21 @@ input:focus{
   border: 0.2rem solid #50d890;
   background-color: #50d890;
 }
+.custom-button {
+  background-color: transparent;
+  border: transparent;
+}
+
 .form-select{
   border: 0.2rem solid #4f98ca;
-  width: 20rem;
+  width: 10rem;
   padding: 1rem;
   border-radius: 0.8rem;
   outline: none;
 }
 #myMsg{
   margin: 1rem;
-  color: #d2704d; 
+  color: #50d890; 
   font-size: 0.85rem;
   font-weight: bold;
 }
