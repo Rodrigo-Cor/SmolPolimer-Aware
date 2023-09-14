@@ -100,5 +100,8 @@ export default createStore({
         },
       },
     },
+    formValues: {
+
+    },
   },
 });

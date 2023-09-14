@@ -1,88 +1,101 @@
 <template>
   <div class="container">
-    <!-- Renglón para input de Cantidad inicial de Microplásticos -->
     <div class="row justify-content-center my-1">
-      <!-- Columna para etiqueta -->
       <div class="col-12 my-1 text-center">
-        <label for="values[0]">Cantidad inicial de Microplásticos</label>
-        <span v-if="values[0] == 1">: {{ values[0] }} partícula</span>
-        <span v-else>: {{ values[0] }} partículas</span>
+        <h2>Formulario</h2>
       </div>
-      <!-- Columna para input -->
-      <div class="col-12 my-1 text-center">
+    </div>
+    <!-- Renglón para inputs -->
+    <div class="row justify-content-center my-1">
+      <div class="col-sm-12 col-md-4 my-1 text-center">
+        <label for="values[0]">Cantidad</label>
+        <span v-if="values[0] == 1">: {{ values[0] }} microplástico</span>
+        <span v-else>: {{ values[0] }} microplásticos</span>
+        <button @click="handleQuestionButton" class="custom-button">
+          <i class="bi bi-question-circle"></i>
+        </button>
+        
+        <br>
         <input
           v-model="values[0]"
           @input="validateInitialQuantity"
           id = "values[0]"
+          @keypress= "validateKeyPress"
         />
-        <p id= "myMsg" v-if="!isInputValid[0] && showFormAlerts === true">{{ msg[0] }}</p>
+        <p id= "myMsg" v-if="!isInputValid[0]">{{ msg[0] }}</p>
       </div>
-    </div>
-    <!-- Renglón para input de Temperatura -->
-    <div class="row justify-content-center my-1">
-      <!-- Columna para etiqueta -->
-      <div class="col-12 my-1 text-center">
+      <div class="col-dm-12 col-md-4 my-1 text-center">
         <label for="values[1]">Temperatura</label>
-        <span>: {{ values[1] }} °C</span>
-      </div>
-      <!-- Columna para input -->
-      <div class="col-12 my-1 text-center">
+        <span>: {{ values[1] }}°C</span>
+        <button @click="handleQuestionButton" class="custom-button">
+          <i class="bi bi-question-circle"></i>
+        </button>
+        <br>
         <select
+          class="form-select mx-auto"
+          aria-label="Select de temperatura"
           v-model="values[1]"
           @change="validateTemperature"
           id="values[1]"
         >
-        <option :value="15">15°C</option>
-        <option :value="30">30°C</option>
+          <option :value="15">15°C</option>
+          <option :value="30">30°C</option>
         </select>
-        <p id= "myMsg" v-if="!isInputValid[1] && showFormAlerts === true">{{ msg[1] }}</p>
+        <p id= "myMsg" v-if="!isInputValid[1]">{{ msg[1] }}</p>
       </div>
-    </div>
-    <!-- Renglón para input de Tiempo -->
-    <div class="row justify-content-center my-1">
-      <!-- Columna para etiqueta -->
-      <div class="col-12 my-1 text-center">
+      <div class="col-sm-12 col-md-4 my-1 text-center">
         <label for="values[2]">Tiempo</label>
-        <span v-if= "values[2] == 1">: {{ values[2] }} Bimestre</span>
-        <span v-else>: {{ values[2] }} Bimestres</span>
-      </div>
-      <!-- Columna para input -->
-      <div class="col-12 my-1 text-center">
+        <span v-if= "values[2] == 1">: {{ values[2] }} bimestre</span>
+        <span v-else>: {{ values[2] }} bimestres</span>
+        <button @click="handleQuestionButton" class="custom-button">
+          <i class="bi bi-question-circle"></i>
+        </button>
+        <br>
         <input
           v-model="values[2]"
           @input="validateTime"
           id="values[2]"
+          @keypress= "validateKeyPress"
         />
-        <p id= "myMsg" v-if="!isInputValid[2] && showFormAlerts === true">{{ msg[2] }}</p>
+        <p id= "myMsg" v-if="!isInputValid[2]">{{ msg[2] }}</p>
       </div>
     </div>
-    <div class="row justify-content-center my-1">
-      <!-- Columna para indicaciones de botones -->
-      <div class="col-12 my-1 text-center">
-        <p v-if="this.buttonPressed != true" id="myMsg">Selecciona una opción</p>
+    <div class="row justify-content-center">
+      <div class="col-12 my-3">
+        <span>
+          Selecciona un material
+        </span>
+        <button @click="handleButton" class="custom-button">
+          <i class="bi bi-question-circle"></i>
+        </button>
       </div>
     </div>
     <!-- Renglón para botones para escoger material -->
-    <div class="row justify-content-center my-1">
-      <!-- Columna para botones para escoger material -->
-      <div class="col-6 my-1 text-end">
-        <button @click="setAgar" class="btn btn-outline-primary btn-lg">Mineral Agar</button>
+    <div class="row justify-content-center mb-2">
+      <div class="col-12">
+        <input type="radio" id="materialChoice1" name="materialChoice" value="Agar" @change="setAgar"/>
+        <label for="materialChoice1">Mineral Agar</label>
       </div>
-      <div class="col-6 my-1 text-start">
-        <button @click="setBroth" class="btn btn-outline-primary btn-lg">Mineral Broth</button>
+    </div>
+    <div class="row justify-content-center my-1">
+      <div class="col-12">
+        <input type="radio" id="materialChoice2" name="materialChoice" value="Broth" @change="setBroth"/>
+        <label for="materialChoice2">Mineral Broth</label>
       </div>
     </div>
     <!-- Renglón para input de Porcentaje de degradación -->
     <div class="row justify-content-center my-1">
-      <!-- Columna para etiqueta -->
-      <div v-if="this.buttonPressed" class="col-12 my-1 text-center">
+      <div v-if="this.buttonPressed" class="col-12 my-2 text-center">
         <label for="values[3]">Porcentaje de degradación</label>
         <span>: {{ values[3] }}%</span>
-      </div>
-      <!-- Columna para select -->
-      <div v-if="this.buttonPressed" class="col-12 my-1 text-center">
+        <button @click="handleQuestionButton" class="custom-button">
+          <i class="bi bi-question-circle"></i>
+        </button>
+        <br>
         <select
+          class="form-select mx-auto"
           v-model="values[3]"
+          aria-label="Select de Porcentaje"
           @change="validateDegradationPercentage"
           id="values[3]"
         >
@@ -93,60 +106,52 @@
         <option :value="percentageOptions[4]" >B. smithii</option>
         <option :value="percentageOptions[5]" >B. megaterium</option>
         </select>
-        <p id= "myMsg" v-if="!isInputValid[3] && showFormAlerts === true">{{ msg[3] }}</p>
+        <p id= "myMsg" v-if="!isInputValid[3]">{{ msg[3] }}</p>
       </div>
     </div>
     <!-- Renglón para botón para enviar-->
     <div class="row justify-content-center my-2">
       <div class="col-12 text-center my-2">
-        <button @click="handleButton" class="btn btn-outline-primary btn-lg">
-          Aceptar
+        <button @click="handleButton" class="btn btn-primary btn-lg">
+          Enviar
         </button>
+        <GenericAlert
+          v-if = "this.showFormAlerts"
+          :alertTitle="'Datos erróneos o campos sin llenar'"
+          :alertText="'Revisa los datos antes de poder continuar con la simulación.'"
+          :alertIcon="'warning'"
+          ref="genericAlertRef"
+        />
       </div>
     </div>
-
-    <!-- Mostrar resultado de la simulación -->
-    <div
-      v-if="results.length > 0 && !calculating"
-      class="row justify-content-center"
-    >
-      <div class="col-12 text-center my-2">
-        <h3>Resultados de la simulación:</h3>
-      </div>
-      <div v-if="results.length > 0 && !calculating" class="col-12 scroll-box my-2">
-        <div v-for="(result, index) in results" :key="index">
-            C(t{{ index }}) = {{ result.toFixed(2) }}
-        </div>
-      </div>
-    </div>
-    <div class="row justify-content-center">
-      <div v-if="results.length > 0 && !calculating" class="col-12 my-2 text-center">
-        <h3>Simulación Gráfica:</h3>
-      </div>
-    </div> 
-  </div>
+    <hr>
+  </div> 
 </template>
 
 <script>
-import Swal from "sweetalert2";
+import GenericAlert from "@/components/GenericAlert.vue"
+
 export default {
   name: "SimulationForm",
+  components: {
+    GenericAlert,
+  },
   data() {
     return {
-      calculating: false,
+      exitValues: [null, null, null, null],
       values: [null, null, null, null],
-      results: [], // Arreglo para almacenar los resultados de la simulación en cada intervalo de tiempo
       isInputValid: [false, false, false, false],
       mineralAgarValues: [34.55, 36.54, 18.37, 36.07, 16.40, 34.48],
       mineralBrothValues: [25, 21, 16, 14, 8, 21],
       percentageOptions: [null, null, null, null, null, null],
       showFormAlerts: false,
       buttonPressed: false,
+      mineral: "",
       msg: [ 
-        "Introduce un número entre uno y 9999",
-        "Selecciona una opción",
-        "Introduce un número entre uno y doce",
-        "Selecciona una opción",
+        "Introduce una cantidad entre 1 y 9999",
+        "Selecciona una temperatura",
+        "Introduce un tiempo entre 1 y 12",
+        "Selecciona una opción para determinar el porcentaje",
       ],
     };
   },
@@ -154,10 +159,14 @@ export default {
     setAgar() {
       this.percentageOptions = this.mineralAgarValues.slice();
       this.buttonPressed = true;
+      this.values[3] = null;
+      this.mineral = "Agar";
     },
     setBroth() {
       this.percentageOptions = this.mineralBrothValues.slice();
       this.buttonPressed = true;
+      this.values[3] = null;
+      this.mineral = "Broth";
     },
     /* Valida la Cantidad inicial de microplásticos */
     validateInitialQuantity() {
@@ -175,64 +184,29 @@ export default {
     validateDegradationPercentage() {
       this.isInputValid[3] = this.values[3] >= 1 && this.values[3] <= 100;;
     },
-    /* Hace el cálculo de la degradación */
-    calculateDegradation() {
-      //Bandera
-      this.calculating = true;
-      // Limpiamos el arreglo de resultados antes de hacer una nueva simulación
-      this.results = [];
-
-      // Realizar cálculo de degradación basado en los valores ingresados
-      const n = this.values[0]; // Cantidad inicial de microplásticos
-      const percentage = this.values[3] / 100; // Porcentaje de degradación en decimal
-      const t = this.values[2]; // Tiempo
-
-      // Realizamos la simulación en intervalos de tiempo y almacenamos los resultados en el arreglo 'results'
-      for (let i = 0; i <= t; i++) {
-        const result = n * Math.pow(1 - percentage, i); // Aplicar la fórmula C(t) = n * (1 - p)^t
-        this.results.push(result);
-      }
-      this.calculating = false;
+    validateKeyPress(event) {
+      if (
+        !/[0-9\b]/.test(event.key)
+      ) event.preventDefault(); 
+    },
+    handleQuestionButton () {
+      const genericAlert = this.$refs.genericAlertRef;
+        this.showFormAlerts = true;
+        if (genericAlert){
+          genericAlert.showAlert();
+        }
     },
     handleButton() {
       if (this.isInputValid.every((element) => element)) {
-        this.sendValues();
+        this.exitValues = this.values.slice();
+        this.$emit("values-updated", this.exitValues);
       } else {
-        this.showAlert();
         this.showFormAlerts = true;
+        const genericAlert = this.$refs.genericAlertRef;
+        if (genericAlert){
+          genericAlert.showAlert();
+        }
       }
-    },
-    showAlert() {
-      Swal.fire({
-	      title: '<span class="amarillo">Datos erróneos o faltantes</span>',
-	      html: '<p class="justificado">Los datos que has ingresado son erróneos o has dejado campos sin llenar. Revisalos antes de poder continuar con la simulación.</p>',
-	      background: '#1e1e1e',
-        color: '#effffb',
-	      icon: 'warning',
-	      confirmButtonText: '<span class="negro">Aceptar</span>',
-	      position: 'center',
-
-	      allowOutsideClick: false,
-      	allowEscapeKey: false,
-	      allowEnterKey: false,
-	      stopKeydownPropagation: false, //evitar comandos
-
-	      showConfirmButton: true,
-	      confirmButtonColor: '#50d890',
-	      confirmButtonAriaLabel: 'Confirmar',
-
-      	showCancelButton: false,
-	      cancelButtonText: 'Cancelar',
-	      cancelButtonAriaLabel: 'Cancelar',
-});
-    },
-    sendValues() {
-      // Realizar el cálculo de degradación antes de emitir los valores
-      this.calculateDegradation();
-      // Emite un evento con el arreglo de valores
-      this.$emit("values-updated", this.values);
-      // Emite un evento con el arreglo de los resultados
-      this.$emit("results-updated", this.results);
     },
   },
 };
@@ -244,14 +218,15 @@ export default {
 #50d890 verde
 #4f98ca azul
 #effffb blanco
+#d2704d rojo
 */
-h3{
+h2{
   font-size: 1.5rem;
   font-weight: bold;
   color: #50d890;
 }
-h4{
-  font-size: 1.2rem;
+#myP{
+  font-size: 1rem;
   font-weight: bold;
   color: #4f98ca;
 }
@@ -261,7 +236,7 @@ label{
   color: #4f98ca;
 }
 input{
-  width: 20rem;
+  width: 10rem;
   padding: 1rem;
   border: 0.2rem solid #4f98ca;
   border-radius: 0.8rem;
@@ -270,21 +245,26 @@ input{
 }
 input:focus{
   color: #effffb;
+  font-weight: bold;
   border: 0.2rem solid #50d890;
   background-color: #50d890;
 }
+.custom-button {
+  background-color: transparent;
+  border: transparent;
+}
+
+.form-select{
+  border: 0.2rem solid #4f98ca;
+  width: 10rem;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  outline: none;
+}
 #myMsg{
   margin: 1rem;
-  color: #d2704d; 
+  color: #50d890; 
   font-size: 0.85rem;
   font-weight: bold;
-}
-.scroll-box{
-  width: auto;
-  height: 10rem;
-  overflow-y: auto;
-  background-color: #effffb;
-  border: 0.2rem solid #50d890;
-  border-radius: 0.5rem;
 }
 </style>
