@@ -21,18 +21,25 @@
           aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          v-if="selectedOptionInitial !== ''"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav" v-if="selectedOptionInitial !== ''">
           <div class="navbar-nav text-center">
-            <router-link class="nav-link" to="/efectos"
-              >Los microplásticos</router-link
-            >
-            <router-link class="nav-link" to="/filtracion"
+            <router-link
+              class="nav-link"
+              to="/efectos"
+              >Los microplásticos
+            </router-link>
+            <router-link
+              class="nav-link"
+              to="/filtracion"
               >Filtración granular rápida</router-link
             >
-            <router-link class="nav-link" to="/bacillus"
+            <router-link
+              class="nav-link"
+              to="/bacillus"
               >Degradación por bacterias Bacillus</router-link
             >
           </div>
@@ -41,27 +48,44 @@
     </nav>
     <router-view v-if="isHomeView">
       <CarouselHome />
+      <AwarenessHomeSection />
       <InfoSection
-        :img="require('@/assets/unsplash1.svg')"
+        :img="require('@/assets/naja-bertolt-jensen-FxnqdmKBJps-unsplash.jpg')"
         :sideImage="false"
-        :credits="`Foto de Naja Bertolt Jensen en Unsplash`"
+        :credits="[
+          { 'Foto de ': '' },
+          {
+            'Naja Bertolt Jensen ':
+              'https://unsplash.com/es/@naja_bertolt_jensen?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
+          },
+          { 'en ': '' },
+          {
+            Unsplash:
+              'https://unsplash.com/es/fotos/FxnqdmKBJps?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
+          },
+        ]"
         :arrayText="[
-          `Desde 2016, se ha registrado un alarmante aumento en el uso de plásticos, especialmente productos de un solo uso, que han provocado la acumulación masiva en el medio ambiente.`,
+          `Desde 2016, se ha
+      registrado un alarmante aumento en el uso de plásticos, especialmente
+      productos de un solo uso, que han provocado la acumulación masiva en el
+      medio ambiente.`,
         ]"
       />
       <InfoSection
-        :img="require('@/assets/TheOceanCleanup3.svg')"
+        :img="require('@/assets/TheOceanCleanup3.jpg')"
         :sideImage="true"
-        :credits='`Foto cortesía de "The Ocean Cleanup"`'
+        :credits="[{ 'Foto cortesía de The Ocean Cleanup': '' }]"
         :arrayText="[
-          `En 2008, la National Oceanic and Atmospheric Administration (NOAA) estableció que el tamaño límite de los materiales para ser considerados microplásticos sería de 5 milímetros.`
+          `En 2008, la National Oceanic and Atmospheric Administration (NOAA) estableció que el tamaño límite de los materiales para ser considerados microplásticos sería de 5 milímetros.`,
         ]"
       />
       <SectionReferences />
     </router-view>
     <router-view v-else />
     <footer class="text-lg-start">
-      <div class="text-center p-3 text-light">Copyright. Derechos reservados</div>
+      <div class="text-center p-3 text-light">
+        Copyright. Derechos reservados
+      </div>
     </footer>
   </div>
 </template>
@@ -70,17 +94,25 @@
 import CarouselHome from "@/components/CarouselHome.vue";
 import InfoSection from "@/components/InfoSection.vue";
 import SectionReferences from "@/components/SectionReferences.vue";
+import AwarenessHomeSection from "@/components/AwarenessHomeSection.vue";
+
+import { mapGetters } from "vuex";
+
 export default {
   name: "HomeView",
   components: {
     CarouselHome,
     InfoSection,
     SectionReferences,
+    AwarenessHomeSection,
   },
   computed: {
     isHomeView() {
       return this.$route.name === "HomeView";
     },
+    ...mapGetters({
+      selectedOptionInitial: "getSelectedOptionInitial",
+    }),
   },
 };
 </script>

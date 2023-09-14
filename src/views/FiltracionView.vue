@@ -6,16 +6,7 @@
       </div>
     </div>
     <div>
-      <SimulationForm
-        @values-updated="handleValuesUpdated"
-        @results-updated="handleResultsUpdated"
-      />
-      <ProgressingChart
-        v-if="formResults.length > 0"
-        :values="formValues"
-        :results="formResults"
-        :key="chartKey"
-      />
+      <AwarenessSimulationSection />
     </div>
   </div>
 </template>
@@ -27,13 +18,17 @@
 }
 </style>
 <script>
-import SimulationForm from "@/components/SimulationForm.vue";
-import ProgressingChart from "@/components/ProgressingChart.vue";
+//import SimulationForm from "@/components/SimulationForm.vue";
+//import ProgressingChart from "@/components/ProgressingChart.vue";
+import AwarenessSimulationSection from "@/components/AwarenessSimulationSection.vue";
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   name: "FiltracionView",
   components: {
-    SimulationForm,
-    ProgressingChart,
+    //SimulationForm,
+    //ProgressingChart,
+    AwarenessSimulationSection,
   },
   data() {
     return {

@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
+import store from "@/store";
+
 import HomeView from "@/views/HomeView.vue";
 import Bacillus from "@/views/BacillusView.vue";
 import FiltracionGranular from "@/views/FiltracionView.vue";
@@ -36,6 +38,16 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  //console.log("Abandonando la ruta: " + from.path);
+  //console.log("Entrando a la ruta: " + to.path);
+
+  if (from.path === "/home") {
+    store.commit("setIsDisabled", true);
+  }
+  next();
 });
 
 export default router;

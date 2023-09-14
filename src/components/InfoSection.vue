@@ -8,7 +8,12 @@
               <img :src="img" class="img-thumbnail pic" alt="Imagen" />
             </div>
             <figcaption class="text-center fst-italic">
-              {{ credits }}
+              <template v-for="(credit, index) in credits" :key="index">
+                <template v-for="(value, key) in credit">
+                  <a :href="value" v-if="value !== ''">{{ key }}</a>
+                  <template v-else>{{ key }}</template>
+                </template>
+              </template>
             </figcaption>
           </figure>
         </template>
@@ -34,7 +39,12 @@
               <img :src="img" class="img-thumbnail pic" alt="Imagen" />
             </div>
             <figcaption class="text-center fst-italic">
-              {{ credits }}
+              <template v-for="(credit, index) in credits" :key="index">
+                <template v-for="(value, key) in credit">
+                  <a :href="value" v-if="value !== ''">{{ key }}</a>
+                  <template v-else>{{ key }}</template>
+                </template>
+              </template>
             </figcaption>
           </figure>
         </template>
@@ -56,11 +66,12 @@ export default {
       required: true,
     },
     credits: {
-      type: String,
+      type: Array,
       required: true,
     },
     arrayText: {
       type: Array,
+      required: true,
     },
   },
 };

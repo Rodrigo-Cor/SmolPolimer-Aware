@@ -1,9 +1,59 @@
 import { createStore } from "vuex";
 import axios from "axios";
 import Swal from "sweetalert2";
+const { v4: uuidv4 } = require("uuid");
 
 export default createStore({
   modules: {
+    users: {
+      state: {
+        initialData: {
+          idUser: "",
+          numberQuestion: 0,
+        },
+        selectedOption: {
+          initial: "",
+          final: "",
+        },
+        isDisabled: false,
+      },
+      getters: {
+        getUserId: (state) => state.initialData.idUser,
+        getNumberQuestion: (state) => state.initialData.numberQuestion,
+        getSelectedOptionInitial: (state) => state.selectedOption.initial,
+        getSelectedOptionFinal: (state) => state.selectedOption.final,
+        getIsDisabled: (state) => state.isDisabled,
+      },
+      mutations: {
+        setInitialData(state, { idUser, numberQuestion }) {
+          state.initialData.idUser = idUser;
+          state.initialData.numberQuestion = numberQuestion;
+        },
+        setSelectedOptionInitial(state, selectedOptionInitial) {
+          state.selectedOption.initial = selectedOptionInitial;
+        },
+        setSelectedOptionFinal(state, selectedOptionFinal) {
+          state.selectedOption.final = selectedOptionFinal;
+        },
+        setIsDisabled(state, isDisabled) {
+          state.isDisabled = isDisabled;
+        },
+      },
+      actions: {
+        modifyData({ commit }, numberQuestion) {
+          commit("setInitialData", {
+            idUser: uuidv4(),
+            numberQuestion: numberQuestion,
+          });
+        },
+        modifySelectedOptionInitial({ commit }, selectedOptionInitial) {
+          commit("setSelectedOptionInitial", selectedOptionInitial);
+        },
+        modifySelectedOptionFinal({ commit }, selectedOptionFinal) {
+          commit("setSelectedOptionFinal", selectedOptionFinal);
+        },
+      },
+    },
     references: {
       state: {
         referencesData: [],
