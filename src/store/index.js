@@ -100,8 +100,60 @@ export default createStore({
         },
       },
     },
-    formValues: {
-
+    filtracionValues: {
+      state: {
+        filtracionValues: [],
+        inputIsValid: [false, false, false],
+      },
+      getters: {
+        getFiltracionValues: state => state.filtracionValues,
+        getInputIsValid: state => state.inputIsValid,
+      },
+      mutations: {
+        setFiltracionValues(state, values) {
+          state.filtracionValues = values;
+        },
+        setInputIsValid(state, isValid) {
+          state.inputIsValid = isValid;
+        },
+      },
+      actions: {
+        handleSendButtonClick({ commit, state }) {
+          const [microplastic, residue, treatment] = state.filtracionValues;
+          const isValid = [
+            microplastic >= 1 && microplastic <= 70,
+            residue >= 1 && residue <= 20,
+            treatment >= 1 && treatment <= 24,
+          ];
+          commit('setInputIsValid', isValid);
+          if (isValid.every(element => element)) {
+            commit('setFiltracionValues', [microplastic, residue, treatment]);
+          } else {
+            Swal.fire({
+              title: "Campos sin llenar o valores inválidos",
+              text: "Haz clic en 'Confirmar' y llena los campos adecuadamente.",
+              background: "#1e1e1e",
+              color: "#effffb",
+              icon: "warning",
+              position: "center",
+    
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              allowEnterKey: false,
+              stopKeydownPropagation: false,
+    
+              showConfirmButton: true,
+              confirmButtonText: "Confirmar",
+              confirmButtonColor: "#50d890",
+              confirmButtonAriaLabel: "Confirmar",
+    
+              showCancelButton: false,
+              cancelButtonText: "Cancelar",
+              cancelButtonAriaLabel: "Cancelar",
+            })
+          }
+        },
+      },
     },
   },
 });

@@ -1,109 +1,56 @@
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-12 my-4 text-center">
-        <h1 class="form-title">Filtración Granular Rápida (Simulación)</h1>
+      <div class="col-12 text-center">
+        <h1 id="formTitle" >Filtración granular rápida (Simulación)</h1>
       </div>
     </div>
     <div>
       <AwarenessSimulationSection />
-      <GenericAlert
-        :alertTitle="'¿Usar valores por defecto?'"
-        :alertText="'Ve a la simulación con valores por defecto o asígnalos por medio del formulario.'"
-        :alertIcon="'question'"
-        :alertConfirmButton="'Formulario'"
-        :alertToDenyButton= true
-        @choice-made="handleChoiceMade"
-      />
-      <SimulationForm
-        v-if="alertChoice === true"
+      <FiltracionForm
         @values-updated="handleValuesUpdated"
       />
-      <CalculatingResults
-        v-if="choiceFlag !== false"
+      <FiltracionResults
         :values="formValues"
-        @results-updated="handleResultsUpdated"
       />
-      <SimulationResults
-        v-if="formResults.length > 1 && choiceFlag !== false"
-        :results="formResults"
-      />
-      <ProgressingChart
-        v-if="formResults.length > 1 && choiceFlag !== false"
-        :values="formValues"
-        :results="formResults"
-        :key="chartKey"
-      />
-      <SimulationExplained
-        v-if="formResults.length > 1 && choiceFlag !== false"
-      />
-      <div class="row">
-        <div class="col-12 text-center my-2">
-          <button 
-            v-if="formResults.length > 1"
-            class="btn btn-outline-danger btn-lg"
-          >Generar PDF
-          </button>
-        </div>
-      </div>
+      
+    </div>
+    <div>
+      <p>Filtracion Values: {{ getFiltracionValues }}</p>
     </div>
   </div>
 </template>
 <style scoped>
-.form-title {
+#formTitle {
   font-size: 2rem;
   font-weight: bold;
   color: #50d890;
 }
 </style>
 <script>
-import GenericAlert from "@/components/GenericAlert.vue";
-import SimulationForm from "@/components/SimulationForm.vue";
-import CalculatingResults from "@/components/CalculatingResults.vue";
-import SimulationResults from "@/components/SimulationResults.vue";
-import ProgressingChart from "@/components/ProgressingChart.vue";
-import SimulationExplained from "@/components/SimulationExplained.vue";
 import AwarenessSimulationSection from "@/components/AwarenessSimulationSection.vue";
-import { mapActions, mapGetters } from "vuex";
+import FiltracionForm from "@/components/FiltracionForm.vue";
+import FiltracionResults from "@/components/FiltracionResults.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "FiltracionView",
   components: {
-    GenericAlert,
-    SimulationForm,
-    CalculatingResults,
-    SimulationResults,
-    ProgressingChart,
-    SimulationExplained,
     AwarenessSimulationSection,
+    FiltracionForm,
+    FiltracionResults,
   },
-  data() {
-    return {
-      formValues: [null, null, null, null],
-      formResults: [],
-      defaultFormValues: [1000, 30, 12, 34.55],
-      chartKey: 0,
-      alertChoice: false,
-      choiceFlag: false,
-    };
-  },
-  methods: {
-    handleValuesUpdated(values) {
-      // Recibe los valores del componente del formulario
-      this.formValues = values;
+  computed: {
+    ...mapGetters(['getFiltracionValues']),
+    microplastic() {
+      return this.getFiltracionValues[0];
     },
-    handleResultsUpdated(results) {
-      // Recibe los resultados calculados del componente SimulationForm.
-      this.formResults = results;
-      this.chartKey++;
+    residue() {
+      return this.getFiltracionValues[1];
     },
-    handleChoiceMade(choice) {
-      this.alertChoice = choice;
-      this.choiceFlag = true;
-      if (this.alertChoice === false) {
-        this.formValues = this.defaultFormValues.slice();
-      }
+    treatment() {
+      return this.getFiltracionValues[2];
     },
-  },
+  },  
 };
 </script>

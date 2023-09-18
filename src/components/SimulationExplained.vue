@@ -16,7 +16,7 @@
       <p v-if="!alertChoice">
         Los valores por defecto, corresponden a una cantidad inicial de 1000 microplásticos, para que sea
         fácilmente visualizado el porcentaje de limpieza, de 34.55%, proveniente de la cepa B. carbonipphilus;
-        sobre mineral Agar. El tiempo considerado es de 12 bimestros, equivalentes a dos años, mientras que
+        sobre mineral Agar. El tiempo considerado es de 12 bimestres, equivalentes a dos años, mientras que
         la temperatura a la que se sometieron los microplásticos es de 30°C.
       </p>
     </div>
