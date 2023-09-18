@@ -21,11 +21,11 @@
           aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
-          v-if="selectedOptionInitial !== ''"
+          v-if="selectedOptionInitial['option'] !== ''"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav" v-if="selectedOptionInitial !== ''">
+        <div class="collapse navbar-collapse" id="navbarNav" v-if="selectedOptionInitial['option'] !== ''">
           <div class="navbar-nav text-center">
             <router-link
               class="nav-link"
@@ -41,6 +41,11 @@
               class="nav-link"
               to="/bacillus"
               >Degradación por bacterias Bacillus</router-link
+            >
+            <router-link
+              class="nav-link"
+              to="/graficas"
+              >Graficas</router-link
             >
           </div>
         </div>

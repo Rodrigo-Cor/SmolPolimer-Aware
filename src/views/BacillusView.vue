@@ -13,7 +13,7 @@
         :alertText="'Ve a la simulación con valores por defecto o asígnalos por medio del formulario.'"
         :alertIcon="'question'"
         :alertConfirmButton="'Formulario'"
-        :alertToDenyButton= true
+        :alertToDenyButton="true"
         @choice-made="handleChoiceMade"
       />
       <SimulationForm
@@ -40,13 +40,38 @@
       />
       <div class="row">
         <div class="col-12 text-center my-2">
-          <button 
+          <button
             v-if="formResults.length > 1"
             class="btn btn-outline-danger btn-lg"
-          >Generar PDF
+          >
+            Generar PDF
           </button>
         </div>
       </div>
+      <InfoReferences
+        :references="[
+          {
+            authors: ['J. K. Shrestha'],
+            title:
+              'Isolation and Identification of Low-Density Polyethylene (LDPE) Degrading Bacillus spp. from a Soil of Landfill Site',
+            vol: '',
+            pages: '30-34',
+            yearPublication: '2019',
+            link: 'https://www.researchgate.net/publication/331702789_Isolation_and_Identification_of_Low_Density_Polyethylene_LDPE_Degrading_Bacillus_spp_from_a_Soil_of_Landfill_Site',
+            dateAccess: '17-07-2023',
+          },
+          {
+            authors: ['H. Hidayaturrahman', 'T. Lee'],
+            title:
+              'A study on characteristics of microplastic in wastewater of South Korea: Identification, quantification, and fate of microplastics during treatment process',
+            vol: '146',
+            pages: '696-702',
+            yearPublication: '2019',
+            link: 'https://doi.org/10.1016/j.marpolbul.2019.06.071',
+            dateAccess: '17-07-2023',
+          },
+        ]"
+      />
     </div>
   </div>
 </template>
@@ -64,6 +89,8 @@ import CalculatingResults from "@/components/CalculatingResults.vue";
 import SimulationResults from "@/components/SimulationResults.vue";
 import ProgressingChart from "@/components/ProgressingChart.vue";
 import SimulationExplained from "@/components/SimulationExplained.vue";
+import InfoReferences from "@/components/InfoReferences.vue";
+
 export default {
   name: "BacillusView",
   components: {
@@ -73,6 +100,7 @@ export default {
     SimulationResults,
     ProgressingChart,
     SimulationExplained,
+    InfoReferences,
   },
   data() {
     return {

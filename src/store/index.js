@@ -12,8 +12,8 @@ export default createStore({
           numberQuestion: 0,
         },
         selectedOption: {
-          initial: "",
-          final: "",
+          initial: { option: "", value: -1 },
+          final: { option: "", value: -1 },
         },
         isDisabled: false,
       },
@@ -100,8 +100,6 @@ export default createStore({
         },
       },
     },
-    formValues: {
-
-    },
+    formValues: {},
   },
 });
