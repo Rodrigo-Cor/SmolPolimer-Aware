@@ -5,7 +5,6 @@ import HomeView from "@/views/HomeView.vue";
 import Bacillus from "@/views/BacillusView.vue";
 import FiltracionGranular from "@/views/FiltracionView.vue";
 import Efectos from "@/views/EffectsView.vue";
-import Graficas from "@/views/GraficasView.vue";
 
 const routes = [
   {
@@ -32,11 +31,6 @@ const routes = [
         name: "Bacillus",
         component: Bacillus,
       },
-      {
-        path: "/graficas",
-        name: "Graficas",
-        component: Graficas,
-      }
     ],
   },
 ];

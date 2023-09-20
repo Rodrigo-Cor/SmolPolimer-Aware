@@ -8,13 +8,13 @@
     <!-- Renglón para inputs -->
     <div class="row justify-content-center my-1">
       <div class="col-sm-12 col-md-4 my-1 text-center">
-        <button class="custom-button">
-          <i class="bi bi-question-circle"></i>
-        </button>
-        <br>        
         <label for="values[0]">Cantidad</label>
         <span v-if="values[0] == 1">: {{ values[0] }} microplástico</span>
         <span v-else>: {{ values[0] }} microplásticos</span>
+        <button @click="handleQuestionButton" class="custom-button">
+          <i class="bi bi-question-circle"></i>
+        </button>
+        
         <br>
         <input
           v-model="values[0]"
@@ -25,12 +25,11 @@
         <p id= "myMsg" v-if="!isInputValid[0]">{{ msg[0] }}</p>
       </div>
       <div class="col-dm-12 col-md-4 my-1 text-center">
-        <button class="custom-button">
-          <i class="bi bi-question-circle"></i>
-        </button>
-        <br>
         <label for="values[1]">Temperatura</label>
         <span>: {{ values[1] }}°C</span>
+        <button @click="handleQuestionButton" class="custom-button">
+          <i class="bi bi-question-circle"></i>
+        </button>
         <br>
         <select
           class="form-select mx-auto"
@@ -45,13 +44,12 @@
         <p id= "myMsg" v-if="!isInputValid[1]">{{ msg[1] }}</p>
       </div>
       <div class="col-sm-12 col-md-4 my-1 text-center">
-        <button class="custom-button">
-          <i class="bi bi-question-circle"></i>
-        </button>
-        <br>
         <label for="values[2]">Tiempo</label>
         <span v-if= "values[2] == 1">: {{ values[2] }} bimestre</span>
         <span v-else>: {{ values[2] }} bimestres</span>
+        <button @click="handleQuestionButton" class="custom-button">
+          <i class="bi bi-question-circle"></i>
+        </button>
         <br>
         <input
           v-model="values[2]"
@@ -67,7 +65,7 @@
         <span>
           Selecciona un material
         </span>
-        <button class="custom-button">
+        <button @click="handleButton" class="custom-button">
           <i class="bi bi-question-circle"></i>
         </button>
       </div>
@@ -88,12 +86,11 @@
     <!-- Renglón para input de Porcentaje de degradación -->
     <div class="row justify-content-center my-1">
       <div v-if="this.buttonPressed" class="col-12 my-2 text-center">
-        <button class="custom-button">
-          <i class="bi bi-question-circle"></i>
-        </button>
-        <br>
         <label for="values[3]">Porcentaje de degradación</label>
         <span>: {{ values[3] }}%</span>
+        <button @click="handleQuestionButton" class="custom-button">
+          <i class="bi bi-question-circle"></i>
+        </button>
         <br>
         <select
           class="form-select mx-auto"
@@ -115,7 +112,7 @@
     <!-- Renglón para botón para enviar-->
     <div class="row justify-content-center my-2">
       <div class="col-12 text-center my-2">
-        <button @click="handleButton" class="btn btn-info">
+        <button @click="handleButton" class="btn btn-primary btn-lg">
           Enviar
         </button>
         <GenericAlert
@@ -185,7 +182,7 @@ export default {
     },
     /* Valida el porcentaje de degradación */
     validateDegradationPercentage() {
-      this.isInputValid[3] = this.values[3] >= 1 && this.values[3] <= 100;
+      this.isInputValid[3] = this.values[3] >= 1 && this.values[3] <= 100;;
     },
     validateKeyPress(event) {
       if (
@@ -224,7 +221,7 @@ export default {
 #d2704d rojo
 */
 h2{
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #50d890;
 }
@@ -239,8 +236,8 @@ label{
   color: #4f98ca;
 }
 input{
-  width: 8rem;
-  padding: 0.2rem;
+  width: 10rem;
+  padding: 1rem;
   border: 0.2rem solid #4f98ca;
   border-radius: 0.8rem;
   transition: 0.5s;
@@ -250,25 +247,24 @@ input:focus{
   color: #effffb;
   font-weight: bold;
   border: 0.2rem solid #50d890;
-  background-color: #50d890;  
+  background-color: #50d890;
 }
 .custom-button {
-  border: none;
   background-color: transparent;
+  border: transparent;
 }
 
 .form-select{
-  width: 13rem;
-  padding: 0.2rem;
   border: 0.2rem solid #4f98ca;
+  width: 10rem;
+  padding: 1rem;
   border-radius: 0.8rem;
-  transition: 0.5s;
   outline: none;
 }
 #myMsg{
+  margin: 1rem;
   color: #50d890; 
   font-size: 0.85rem;
   font-weight: bold;
 }
 </style>
-

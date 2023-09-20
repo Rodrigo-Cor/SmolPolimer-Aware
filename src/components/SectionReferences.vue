@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div
-      class="container-fluid text-size border border-info pt-2 bg-success bg-opacity-50 bg-gradient"
-    >
+    <div class="container-fluid text-size border border-info pt-2 bg-success bg-opacity-50 bg-gradient">
       ¿Quieres conocer más? Selecciona el tema de tu interés
       <div class="row">
         <div class="col">
@@ -10,8 +8,7 @@
             v-bind:class="{
               btn: true,
               'btn-outline-primary': !buttonStates['water care'],
-              'btn-secondary':
-                buttonStates['water care'] && referencesData.length > 0,
+              'btn-secondary': buttonStates['water care'] && referencesData.length > 0,
             }"
             type="button"
             @click="navigate('water care')"
@@ -25,15 +22,11 @@
             v-bind:class="{
               btn: true,
               'btn-outline-primary': !buttonStates['microplastics water'],
-              'btn-secondary':
-                buttonStates['microplastics water'] &&
-                referencesData.length > 0,
+              'btn-secondary': buttonStates['microplastics water'] && referencesData.length > 0,
             }"
             type="button"
             @click="navigate('microplastics water')"
-            :disabled="
-              buttonStates['microplastics water'] && referencesData.length > 0
-            "
+            :disabled="buttonStates['microplastics water'] && referencesData.length > 0"
           >
             Microplásticos en el agua
           </button>
@@ -43,15 +36,11 @@
             v-bind:class="{
               btn: true,
               'btn-outline-primary': !buttonStates['microplastic effects'],
-              'btn-secondary':
-                buttonStates['microplastic effects'] &&
-                referencesData.length > 0,
+              'btn-secondary': buttonStates['microplastic effects'] && referencesData.length > 0,
             }"
             type="button"
             @click="navigate('microplastic effects')"
-            :disabled="
-              buttonStates['microplastic effects'] && referencesData.length > 0
-            "
+            :disabled="buttonStates['microplastic effects'] && referencesData.length > 0"
           >
             Efectos de los microplásticos
           </button>
