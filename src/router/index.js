@@ -41,10 +41,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  //console.log("Abandonando la ruta: " + from.path);
-  //console.log("Entrando a la ruta: " + to.path);
-
-  if (from.path === "/home") {
+  if (from.path === "/home" && to.path !== "/home") {
     store.commit("setIsDisabled", true);
   }
   next();
