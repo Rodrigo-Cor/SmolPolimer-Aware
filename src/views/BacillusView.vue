@@ -1,105 +1,124 @@
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-12 my-4 text-center">
-        <h1 class="form-title">
-          Degradación por Bacterias Bacillus (Simulación)
-        </h1>
+      <div class="col-12 text-center">
+        <h1 id="myTitle">Degradación por bacterias Bacillus</h1>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12 text-center">
+        <button @click="handleButton" class="btn btn-info">
+          Simulación
+        </button>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <hr>
       </div>
     </div>
     <div>
-      <GenericAlert
-        :alertTitle="'¿Usar valores por defecto?'"
-        :alertText="'Ve a la simulación con valores por defecto o asígnalos por medio del formulario.'"
-        :alertIcon="'question'"
-        :alertConfirmButton="'Formulario'"
-        :alertToDenyButton= true
-        @choice-made="handleChoiceMade"
-      />
-      <SimulationForm
-        v-if="alertChoice === true"
-        @values-updated="handleValuesUpdated"
-      />
-      <CalculatingResults
-        v-if="choiceFlag !== false"
-        :values="formValues"
-        @results-updated="handleResultsUpdated"
-      />
-      <SimulationResults
-        v-if="formResults.length > 1 && choiceFlag !== false"
-        :results="formResults"
-      />
-      <ProgressingChart
-        v-if="formResults.length > 1 && choiceFlag !== false"
-        :values="formValues"
-        :results="formResults"
-        :key="chartKey"
-      />
-      <SimulationExplained
-        v-if="formResults.length > 1 && choiceFlag !== false"
-      />
-      <div class="row">
-        <div class="col-12 text-center my-2">
-          <button 
-            v-if="formResults.length > 1"
-            class="btn btn-outline-danger btn-lg"
-          >Generar PDF
-          </button>
-        </div>
-      </div>
+      <BacillusForm v-if="choice"/>
+      <BacillusResults v-if="quantity && temperature && bimester && percentage && mineral && choiceIsMade" />
+      <BacillusSimulation v-if="degradatedValues.length > 0"/>
+      <BacillusExplained v-if="degradatedValues.length > 0"/>
     </div>
   </div>
 </template>
 <style scoped>
-.form-title {
+#myTitle {
   font-size: 2rem;
   font-weight: bold;
   color: #50d890;
 }
 </style>
 <script>
-import GenericAlert from "@/components/GenericAlert.vue";
-import SimulationForm from "@/components/SimulationForm.vue";
-import CalculatingResults from "@/components/CalculatingResults.vue";
-import SimulationResults from "@/components/SimulationResults.vue";
-import ProgressingChart from "@/components/ProgressingChart.vue";
-import SimulationExplained from "@/components/SimulationExplained.vue";
+import BacillusForm from "@/components/BacillusComponents/BacillusForm.vue";
+import BacillusResults from "@/components/BacillusComponents/BacillusResults.vue";
+import BacillusSimulation from "@/components/BacillusComponents/BacillusSimulation.vue";
+import BacillusExplained from "@/components/BacillusComponents/BacillusExplained.vue";
+import Swal from "sweetalert2";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "BacillusView",
   components: {
-    GenericAlert,
-    SimulationForm,
-    CalculatingResults,
-    SimulationResults,
-    ProgressingChart,
-    SimulationExplained,
+    BacillusForm,
+    BacillusResults,
+    BacillusSimulation,
+    BacillusExplained,
   },
   data() {
     return {
-      formValues: [null, null, null, null],
-      formResults: [],
-      defaultFormValues: [1000, 30, 12, 34.55],
-      chartKey: 0,
-      alertChoice: false,
-      choiceFlag: false,
+      choiceIsMade: false,
+      choice: null,
+      defaultQuantity: 1000,
+      defaultTemperature: 30,
+      defaultBimester: 12,
+      defaultPercentage: 34.55,
+      defaultMineral: "Agar",
     };
   },
+  computed: {
+    ...mapGetters(['getBacillusValues','getDegradatedValues']),
+    ...mapMutations(['setBacillusValues']),
+    quantity() {
+      return this.getBacillusValues[0];
+    },
+    temperature() {
+      return this.getBacillusValues[1];
+    },
+    bimester() {
+      return this.getBacillusValues[2];
+    },
+    percentage() {
+      return this.getBacillusValues[3];
+    },
+    mineral() {
+      return this.getBacillusValues[4];
+    },
+    degradatedValues() {
+      return this.getDegradatedValues;
+    }
+  },
   methods: {
-    handleValuesUpdated(values) {
-      // Recibe los valores del componente del formulario
-      this.formValues = values;
-    },
-    handleResultsUpdated(results) {
-      // Recibe los resultados calculados del componente SimulationForm.
-      this.formResults = results;
-      this.chartKey++;
-    },
-    handleChoiceMade(choice) {
-      this.alertChoice = choice;
-      this.choiceFlag = true;
-      if (this.alertChoice === false) {
-        this.formValues = this.defaultFormValues.slice();
-      }
+    handleButton () {
+      Swal.fire({
+        title: "¿Usar valores por defecto?",
+        text: "Ve a la simulación con valores por defecto o asígnalos por medio del formulario.",
+        background: "#1e1e1e",
+        color: "#effffb",
+        icon: "question",
+        position: "center",
+
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+        stopKeydownPropagation: false,
+
+        showConfirmButton: true,
+        confirmButtonText: "Formulario",
+        confirmButtonColor: "#50d890",
+        confirmButtonAriaLabel: "Confirmar",
+
+        showDenyButton: true,
+        denyButtonText: "Por defecto",
+        confirmButtonColor: "#4f98ca",
+        confirmButtonAriaLabel: "Denegar",
+
+        showCancelButton: false,
+        cancelButtonText: "Cancelar",
+        cancelButtonAriaLabel: "Cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.choice = true;
+          this.$store.commit('setBacillusValues', [])
+        } 
+        else if (result.isDenied) {
+          this.choice = false;
+          this.$store.commit('setBacillusValues', [this.defaultQuantity, this.defaultTemperature, this.defaultBimester, this.defaultPercentage, this.defaultMineral])
+        }
+      });
+      this.choiceIsMade = true;
     },
   },
 };
