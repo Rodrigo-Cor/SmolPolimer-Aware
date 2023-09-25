@@ -100,5 +100,46 @@ export default createStore({
         },
       },
     },
+    formValues: {
+      state: {
+        filtracionValues: [],
+        bacillusValues: [],
+      },
+      getters: {
+        getFiltracionValues: state => state.filtracionValues,
+        getBacillusValues: state => state.bacillusValues,
+      },
+      mutations: {
+        setFiltracionValues(state, values) {
+          state.filtracionValues = values;
+        },
+        setBacillusValues(state, values) {
+          state.bacillusValues = values;
+        }
+      },
+    },
+    simulationResults: {
+      state: {
+        onFilterValues: [],
+        releasedValues: [],
+        degradatedValues: [],
+      },
+      getters: {
+        getOnFilterValues: state => state.onFilterValues,
+        getReleasedValues: state => state.releasedValues,
+        getDegradatedValues: state => state.degradatedValues, 
+      },
+      mutations: {
+        setOnFilterValues(state, values) {
+          state.onFilterValues = values;
+        },
+        setReleasedValues(state, values) {
+          state.releasedValues = values;
+        },
+        setDegradatedValues(state, values) {
+          state.degradatedValues = values;
+        },
+      },
+    },
   },
 });
