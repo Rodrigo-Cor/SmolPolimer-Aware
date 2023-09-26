@@ -1,109 +1,128 @@
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-12 my-4 text-center">
-        <h1 class="form-title">Filtración Granular Rápida (Simulación)</h1>
+      <div class="col-12 text-center">
+        <h1 id="myTitle">Filtración granular rápida</h1>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12 text-center">
+        <button @click="handleButton" class="btn btn-info">
+          Simulación
+        </button>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <hr>
       </div>
     </div>
     <div>
       <AwarenessSimulationSection />
-      <GenericAlert
-        :alertTitle="'¿Usar valores por defecto?'"
-        :alertText="'Ve a la simulación con valores por defecto o asígnalos por medio del formulario.'"
-        :alertIcon="'question'"
-        :alertConfirmButton="'Formulario'"
-        :alertToDenyButton= true
-        @choice-made="handleChoiceMade"
-      />
-      <SimulationForm
-        v-if="alertChoice === true"
-        @values-updated="handleValuesUpdated"
-      />
-      <CalculatingResults
-        v-if="choiceFlag !== false"
-        :values="formValues"
-        @results-updated="handleResultsUpdated"
-      />
-      <SimulationResults
-        v-if="formResults.length > 1 && choiceFlag !== false"
-        :results="formResults"
-      />
-      <ProgressingChart
-        v-if="formResults.length > 1 && choiceFlag !== false"
-        :values="formValues"
-        :results="formResults"
-        :key="chartKey"
-      />
-      <SimulationExplained
-        v-if="formResults.length > 1 && choiceFlag !== false"
-      />
-      <div class="row">
-        <div class="col-12 text-center my-2">
-          <button 
-            v-if="formResults.length > 1"
-            class="btn btn-outline-danger btn-lg"
-          >Generar PDF
-          </button>
-        </div>
-      </div>
+      <FiltracionForm v-if="choice"/>
+      <FiltracionResults v-if="microplastic && residue && treatment && choiceIsMade" />
+      <FiltracionSimulation v-if="onFilterValues.length > 0 && releasedValues.length > 0"/>
+      <FiltracionExplained v-if="onFilterValues.length > 0 && releasedValues.length > 0"/>
     </div>
   </div>
 </template>
 <style scoped>
-.form-title {
+#myTitle {
   font-size: 2rem;
   font-weight: bold;
   color: #50d890;
 }
 </style>
 <script>
-import GenericAlert from "@/components/GenericAlert.vue";
-import SimulationForm from "@/components/SimulationForm.vue";
-import CalculatingResults from "@/components/CalculatingResults.vue";
-import SimulationResults from "@/components/SimulationResults.vue";
-import ProgressingChart from "@/components/ProgressingChart.vue";
-import SimulationExplained from "@/components/SimulationExplained.vue";
 import AwarenessSimulationSection from "@/components/AwarenessSimulationSection.vue";
-import { mapActions, mapGetters } from "vuex";
+import FiltracionForm from "@/components/FiltracionComponents/FiltracionForm.vue";
+import FiltracionResults from "@/components/FiltracionComponents/FiltracionResults.vue";
+import FiltracionSimulation from "@/components/FiltracionComponents/FiltracionSimulation.vue";
+import FiltracionExplained from '@/components/FiltracionComponents/FiltracionExplained.vue';
+import Swal from "sweetalert2";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "FiltracionView",
   components: {
-    GenericAlert,
-    SimulationForm,
-    CalculatingResults,
-    SimulationResults,
-    ProgressingChart,
-    SimulationExplained,
     AwarenessSimulationSection,
+    FiltracionForm,
+    FiltracionResults,
+    FiltracionSimulation,
+    FiltracionExplained,
   },
-  data() {
+  data () {
     return {
-      formValues: [null, null, null, null],
-      formResults: [],
-      defaultFormValues: [1000, 30, 12, 34.55],
-      chartKey: 0,
-      alertChoice: false,
-      choiceFlag: false,
+      choiceIsMade: false,
+      choice: null,
+      defaultMicroplastic: 29,
+      defaultResidue: 5,
+      defaultTreatment: 9,
     };
   },
+
+  computed: {
+    ...mapGetters(['getFiltracionValues', 'getOnFilterValues', 'getReleasedValues']),
+    ...mapMutations(['setFiltracionValues', 'setROnFilterValues', 'setReleasedValues']),
+      microplastic() {
+        return this.getFiltracionValues[0];
+      },
+      residue() {
+        return this.getFiltracionValues[1];
+      },
+      treatment() {
+        return this.getFiltracionValues[2];
+      },
+      onFilterValues() {
+        return this.getOnFilterValues;
+      },
+      releasedValues() {
+        return this.getReleasedValues;
+      },
+    },
+
   methods: {
-    handleValuesUpdated(values) {
-      // Recibe los valores del componente del formulario
-      this.formValues = values;
+    handleButton () {
+      Swal.fire({
+        title: "¿Usar valores por defecto?",
+        text: "Ve a la simulación con valores por defecto o asígnalos por medio del formulario.",
+        background: "#1e1e1e",
+        color: "#effffb",
+        icon: "question",
+        position: "center",
+
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+        stopKeydownPropagation: false,
+
+        showConfirmButton: true,
+        confirmButtonText: "Formulario",
+        confirmButtonColor: "#50d890",
+        confirmButtonAriaLabel: "Confirmar",
+
+        showDenyButton: true,
+        denyButtonText: "Por defecto",
+        confirmButtonColor: "#4f98ca",
+        confirmButtonAriaLabel: "Denegar",
+
+        showCancelButton: false,
+        cancelButtonText: "Cancelar",
+        cancelButtonAriaLabel: "Cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.choice = true;
+          this.$store.commit('setFiltracionValues', [])
+          this.$store.commit('setOnFilterValues', [])
+          this.$store.commit('setReleasedValues', [])
+        } 
+        else if (result.isDenied) {
+          this.choice = false;
+          this.$store.commit('setFiltracionValues', [this.defaultMicroplastic, this.defaultResidue, this.defaultTreatment])
+        }
+      });
+      this.choiceIsMade = true;
     },
-    handleResultsUpdated(results) {
-      // Recibe los resultados calculados del componente SimulationForm.
-      this.formResults = results;
-      this.chartKey++;
-    },
-    handleChoiceMade(choice) {
-      this.alertChoice = choice;
-      this.choiceFlag = true;
-      if (this.alertChoice === false) {
-        this.formValues = this.defaultFormValues.slice();
-      }
-    },
-  },
-};
+   },
+ };
 </script>
