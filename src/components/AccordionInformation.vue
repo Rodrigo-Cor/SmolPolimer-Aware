@@ -11,15 +11,15 @@
           class="accordion-button"
           type="button"
           data-bs-toggle="collapse"
-          :data-bs-target="'#collapse' + index"
+          :data-bs-target="'#collapse' + titleAccordion + index"
           :aria-expanded="index === 0 ? 'true' : 'false'"
-          :aria-controls="'collapse' + index"
+          :aria-controls="'collapse' + titleAccordion + index"
         >
           {{ titleAccordion }} {{ index + 1 }}
         </button>
       </h2>
       <div
-        :id="'collapse' + index"
+        :id="'collapse' + titleAccordion + index"
         v-bind:class="{
           'accordion-collapse collapse show': index === 0,
           'accordion-collapse collapse': index !== 0,
@@ -55,10 +55,10 @@ export default {
       type: String,
       required: true,
     },
-    titleAccordion:{
+    titleAccordion: {
       type: String,
       required: true,
-    }
+    },
   },
 };
 </script>

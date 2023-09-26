@@ -1,27 +1,11 @@
 <template>
   <div class="container-fluid">
-    <div class="my-4">
+    <HelpParagraph
+      :text="questions[numberQuestion].help"
+      v-if="typeQuestion === 'start'"
+    />
+    <div class="my-2">
       <span class="py-3 me-3">{{ questions[numberQuestion].question }}</span>
-      <Popper
-        :content="questions[numberQuestion].recomendation"
-        placement="right"
-      >
-        <span
-          @mouseover="changeButton(true)"
-          @mouseleave="changeButton(false)"
-          v-bind:class="{
-            'bg-warning text-dark bg-opacity-50 p-1': isHovered,
-            'bg-white text-dark text-dark p-1': !isHovered,
-          }"
-        >
-          <i
-            v-bind:class="{
-              'bi bi-lightbulb-fill': isHovered,
-              'bi bi-lightbulb': !isHovered,
-            }"
-          ></i>
-        </span>
-      </Popper>
     </div>
     <form @submit.prevent>
       <template v-if="questions[numberQuestion].options.length > 2">
@@ -89,11 +73,13 @@
 import { mapActions, mapGetters } from "vuex";
 import axios from "axios";
 import Popper from "vue3-popper";
+import HelpParagraph from "./HelpParagraph.vue";
 
 export default {
   name: "AwarenessForm",
   components: {
     Popper,
+    HelpParagraph,
   },
   props: {
     questions: {
@@ -150,10 +136,6 @@ export default {
     },
     changeButton(value) {
       this.isHovered = value;
-    },
-    handleButtonClick(event) {
-      const valorPersonalizado = event.target.dataset.value;
-      console.log("Valor personalizado:", valorPersonalizado);
     },
   },
   watch: {

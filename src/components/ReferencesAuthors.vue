@@ -1,7 +1,7 @@
 <template>
   <figure>
     <div class="d-flex justify-content-center">
-      <img :src="img" class="img-thumbnail img-info" alt="Imagen" />
+      <img :src="img" class="img-thumbnail" alt="Imagen" />
     </div>
     <figcaption class="text-center fst-italic">
       <template v-for="(credit, index) in credits" :key="index">
@@ -29,7 +29,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-</style>
