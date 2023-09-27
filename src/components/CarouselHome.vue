@@ -36,13 +36,18 @@
             alt="..."
           />
           <div class="carousel-caption top-0 mt-4">
-            <p class="mt-5 mb-3 fs-4 text-uppercase">
+            <p class="mt-5 mb-3 text-uppercase text-size">
               Los plásticos se degradan con el tiempo, erosionándose y
               descomponiéndose
             </p>
             <p class="position-absolute bottom-0 end-0 p-3 fs-6 fst-italic">
-              <a href="https://www.rawpixel.com/image/2318943">Image</a> by
-              <a href="https://www.rawpixel.com/">rawpixel.com</a>
+              <a target="_blank" href="https://www.rawpixel.com/image/2318943"
+                >Image</a
+              >
+              by
+              <a target="_blank" href="https://www.rawpixel.com/"
+                >rawpixel.com</a
+              >
             </p>
           </div>
         </div>
@@ -53,12 +58,17 @@
             alt="..."
           />
           <div class="carousel-caption top-0 mt-4">
-            <p class="mt-5 mb-3 fs-4 text-uppercase">
+            <p class="mt-5 mb-3 text-uppercase text-size">
               Aumento preocupante de plásticos de un solo uso desde 2016
             </p>
             <p class="position-absolute bottom-0 end-0 p-3 fs-6 fst-italic">
-              <a href="https://www.rawpixel.com/image/2904065">Image</a> by
-              <a href="https://www.rawpixel.com/">rawpixel.com</a>
+              <a target="_blank" href="https://www.rawpixel.com/image/2904065"
+                >Image</a
+              >
+              by
+              <a target="_blank" href="https://www.rawpixel.com/"
+                >rawpixel.com</a
+              >
             </p>
           </div>
         </div>
@@ -69,14 +79,13 @@
             alt="Pez con microplásticos"
           />
           <div class="carousel-caption top-0 mt-4">
-            <p class="mt-5 mb-3 fs-4 text-uppercase">
+            <p class="mt-5 mb-3 text-uppercase text-size">
               El 59% de los peces en costas mexicanas tiene microplásticos en
               sus estómagos
             </p>
             <p class="position-absolute bottom-0 end-0 p-3 fs-6 fst-italic">
               Image Courtesy of
-              <a
-                href="https://www.5gyres.org/publications"
+              <a target="_blank" href="https://www.5gyres.org/publications"
                 >THE 5 GYRES INSTITUTE</a
               >
             </p>

@@ -1,8 +1,26 @@
 <template>
   <div class="container-fluid mt-4">
     <template v-for="(informationPage, index) in informationPages" :key="index">
-      <div v-if="currentPage === index + 1">
-        <p>{{ informationPage }}</p>
+      <div v-if="currentPage === index + 1" class="my-2">
+        <InfoSection
+          :img="
+            require('@/assets/naja-bertolt-jensen-FxnqdmKBJps-unsplash.jpg')
+          "
+          :sideImage="true"
+          :credits="[
+            { 'Foto de ': '' },
+            {
+              'Naja Bertolt Jensen ':
+                'https://unsplash.com/es/@naja_bertolt_jensen?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
+            },
+            { 'en ': '' },
+            {
+              Unsplash:
+                'https://unsplash.com/es/fotos/FxnqdmKBJps?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
+            },
+          ]"
+          :arrayText="[informationPage.paragraph]"
+        />
       </div>
     </template>
 
@@ -37,13 +55,21 @@
 
 <script>
 //Bacterias
-
+import InformationPages from "./InformationPages.vue";
+import ReferencesAuthors from "./ReferencesAuthors.vue";
+import InfoSection from "./InfoSection.vue";
 export default {
   name: "InformationPages",
+  components: {
+    InformationPages,
+    ReferencesAuthors,
+    InfoSection,
+  },
   data() {
     return {
       currentPage: 1,
       totalPages: this.informationPages.length,
+      totalCards: 3,
     };
   },
   props: {
