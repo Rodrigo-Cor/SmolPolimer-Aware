@@ -1,37 +1,73 @@
 <template>
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-12 text-center">
+    <div class="col-12 text-center mt-3">
       <h2 id="myTitle">Resultados</h2>
     </div>
   </div>
-  <div class="row justify-content-start">
-    <div 
-      v-for="(item, index) in degradatedValues"
-      v-bind:key="index"
-      class="col-md-3 col-sm-4 col-xs-12"
-      id="myGrid"
-    >
-    C(t{{ index }}) = {{ item.toFixed(2) }}
+  <div class="row justify-content-center">
+    <div class="col-12 text-center">
+      <p class="my-paragraph">
+        En la siguiente lista se encuentra el resumen de los datos introducidos al simulador,
+        mientras que después en la tabla, se encuentran los resultados: cómo disminuyen los 
+        microplásticos conforme pasan los bimestres.
+      </p>
+    </div>
+  </div> 
+  <div class="row">
+    <div class="col my-2">
+      <h3 id="mySubtitle">Resumen de datos de entrada</h3>
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Cantidad: {{ quantity }} microplásticos</li>
+        <li class="list-group-item list-group-item-success">Temperatura: {{ temperature }}°C</li>
+        <li class="list-group-item list-group-item-success">Bimestres: {{ bimester }}</li>
+        <li class="list-group-item list-group-item-success">Porcentaje de degradación: {{ percentage }}%</li>
+        <li class="list-group-item list-group-item-success">Mineral: {{ mineral }}</li>
+        <li class="list-group-item list-group-item-success">Cepa: {{ strain }}</li>
+      </ul>
     </div>
   </div>
   <div class="row">
     <div class="col-12">
-      <hr>
+      <table class="table table-success table-striped-columns">
+        <thead>
+          <tr>
+            <th scope="col">Bimestre</th>
+            <th scope="col">Microplasticos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in degradatedValues" :key="index">
+            <td>{{ index }}</td>
+            <td>{{ item.toFixed(2) }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
 </template>
 <style scoped>
 #myTitle{
+  border-style: solid;
+  border-color: #4f98ca;
+  border-radius: 1rem;
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #4f98ca;
+}
+#mySubtitle{
   font-size: 1.5rem;
   font-weight: bold;
-  color: #50d890;
+  color: #272727;
 }
-#myGrid{
-  border-right: 0.1rem solid #4f98ca;
-  border-bottom: 0.1rem solid #4f98ca;
-  
+.my-paragraph{
+  text-align: justify;
+  color: #1e1e1e;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+  margin-left: 0.8rem;
+  margin-right: 0.8rem;
 }
 </style>
 <script>
@@ -66,9 +102,15 @@ export default {
     percentage() {
       return this.getBacillusValues[3];
     },
+    mineral() {
+      return this.getBacillusValues[4];
+    },
+    strain() {
+      return this.getBacillusValues[5];
+    },
     degradatedValues() {
         return this.getDegradatedValues;
-      },
+    },
   },
   methods: {
     calculateCleansing() {

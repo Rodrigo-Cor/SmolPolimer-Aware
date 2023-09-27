@@ -6,34 +6,34 @@
     </div>
   </div>
   <div class="row justify-content-center">
+    <div class="col-md-6 col-sm-12 text-center">
+      <span id="myFilter">Microplásticos en filtro -----</span>
+    </div>
+    <div class="col-md-6 col-sm-12 text-center">
+      <span id="myReleased">Microplásticos sueltos en el río -----</span>
+    </div>
+  </div>  
+  <div class="row justify-content-center">
     <div class="col-12 text-center my-2">
       <div ref="containerRef"></div>
       <div id="chart-container"></div>
-    </div>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-12">
-      <p id="myFilter">Microplásticos en filtro -----</p>
-      <p id="myReleased">Microplásticos sueltos -----</p>
-    </div>
-  </div>  
-  <div class="row">
-    <div class="col-12">
-      <hr>
     </div>
   </div>
 </div>    
 </template>
 <style scoped>
 #myTitle{
+    border-style: solid;
+    border-color: #4f98ca;
+    border-radius: 1rem;
     font-size: 1.7rem;
     font-weight: bold;
-    color: #50d890;
+    color: #4f98ca;
 }
 #myFilter{
     font-size: 1rem;
     font-weight: bold;
-    color: #4f98ca;
+    color: #4f98ca; 
 }
 #myReleased{
     font-size: 1rem;
@@ -189,9 +189,9 @@ export default {
         svg
           .append("text")
           .attr("x", width / 2)
-          .attr("y", height + margin.bottom)
+          .attr("y", height + margin.bottom - 25)
           .attr("text-anchor", "middle")
-          .text("Tratamientos");
+          .text("Días");
 
         svg
           .append("text")
@@ -222,5 +222,4 @@ export default {
     },
   },  
 };
-  
 </script>
