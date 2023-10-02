@@ -4,16 +4,19 @@
         "route": "/"
       },
       {
-        "route": "/home"
+        "route": "/tecnicas"
       },
       {
-        "route": "/efectos"
+        "route": "/presencia"
       },
       {
-        "route": "/filtracion"
+        "route": "/contaminacion"
       },
       {
-        "route": "/bacillus"
+        "route": "/tecnicas/filtracion"
+      },
+      {
+        "route": "/tecnicas/bacillus"
       }
     ],
     "navigationFallback": {

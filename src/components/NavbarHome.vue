@@ -30,15 +30,15 @@
         v-if="selectedOptionInitial['option'] !== ''"
       >
         <div class="navbar-nav text-center">
-          <router-link class="nav-link" to="/efectos"
-            >Los microplásticos
+          <router-link class="nav-link" to="/presencia"
+            >Presencia en México</router-link
+          >
+          <router-link class="nav-link" to="/contaminacion"
+            >Combatir contra la contaminación</router-link
+          >
+          <router-link class="nav-link" to="/tecnicas"
+            >Técnicas de limpieza
           </router-link>
-          <router-link class="nav-link" to="/filtracion"
-            >Filtración granular rápida</router-link
-          >
-          <router-link class="nav-link" to="/bacillus"
-            >Degradación por bacterias Bacillus</router-link
-          >
         </div>
       </div>
     </div>

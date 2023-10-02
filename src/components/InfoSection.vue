@@ -1,22 +1,22 @@
 <template>
   <div class="container p-3">
     <div class="row">
-      <div class="col align-self-center">
+      <div class="col-md-6 col-12 align-self-center">
         <template v-if="sideImage">
           <ReferencesAuthors :img="img" :credits="credits" />
         </template>
         <template v-else>
           <div v-for="paragraph in arrayText" :key="paragraph">
-            <p class="text-center text-size">
+            <p class="text-justify-custom">
               {{ paragraph }}
             </p>
           </div>
         </template>
       </div>
-      <div class="col align-self-center">
+      <div class="col-md-6 col-12 align-self-center">
         <template v-if="sideImage">
           <div v-for="paragraph in arrayText" :key="paragraph">
-            <p class="text-center text-size">
+            <p class="text-justify-custom">
               {{ paragraph }}
             </p>
           </div>
@@ -39,7 +39,7 @@ export default {
   },
   props: {
     img: {
-      type: String,
+      type: Object,
       required: true,
     },
     sideImage: {
@@ -47,7 +47,7 @@ export default {
       required: true,
     },
     credits: {
-      type: Array,
+      type: Object,
       required: true,
     },
     arrayText: {

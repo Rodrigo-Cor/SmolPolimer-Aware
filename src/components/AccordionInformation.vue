@@ -5,7 +5,7 @@
     v-for="(info, index) in informationAccordion"
     :key="index"
   >
-    <div class="accordion-item m-4">
+    <div class="accordion-item m-2">
       <h2 class="accordion-header">
         <button
           class="accordion-button"
@@ -26,17 +26,19 @@
         }"
         :data-bs-parent="'#accordion' + typeAccordion"
       >
-        <div class="accordion-body menu-body">
+        <div class="accordion-body card-body">
           <p>{{ info.title }}</p>
-          <template v-if="typeAccordion === 'references'">
-            <p class="text-body-secondary">Autores: {{ info.author }}</p>
-            <a target="_blank" :href="info.link" class="btn btn-dark"
-              >Ir al articulo</a
-            >
-          </template>
-          <template v-else>
-            <p>{{ info.paragraph }}</p>
-          </template>
+          <section v-bind:class="{'text-card': typeAccordion === 'references'}">
+            <template v-if="typeAccordion === 'references'">
+              <p class="text-body-secondary">Autores: {{ info.author }}</p>
+              <a target="_blank" :href="info.link" class="btn btn-dark"
+                >Ir al articulo</a
+              >
+            </template>
+            <template v-else>
+              <p>{{ info.paragraph }}</p>
+            </template>
+          </section>
         </div>
       </div>
     </div>
@@ -65,10 +67,6 @@ export default {
 
 <style scoped>
 .card-body {
-  background-image: linear-gradient(to bottom, #4f98ca, #50d890);
-}
-
-.menu-body {
-  background-image: linear-gradient(to bottom, #effffb, #4f98ca);
+  background-image: linear-gradient(to bottom, #50d890, #4f98ca);
 }
 </style>

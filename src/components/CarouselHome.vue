@@ -40,7 +40,7 @@
               Los plásticos se degradan con el tiempo, erosionándose y
               descomponiéndose
             </p>
-            <p class="position-absolute bottom-0 end-0 p-3 fs-6 fst-italic">
+            <p class="position-absolute bottom-0 end-0 p-3 text-credits fst-italic">
               <a target="_blank" href="https://www.rawpixel.com/image/2318943"
                 >Image</a
               >
@@ -61,7 +61,7 @@
             <p class="mt-5 mb-3 text-uppercase text-size">
               Aumento preocupante de plásticos de un solo uso desde 2016
             </p>
-            <p class="position-absolute bottom-0 end-0 p-3 fs-6 fst-italic">
+            <p class="position-absolute bottom-0 end-0 p-3 text-credits fst-italic">
               <a target="_blank" href="https://www.rawpixel.com/image/2904065"
                 >Image</a
               >
@@ -83,7 +83,7 @@
               El 59% de los peces en costas mexicanas tiene microplásticos en
               sus estómagos
             </p>
-            <p class="position-absolute bottom-0 end-0 p-3 fs-6 fst-italic">
+            <p class="position-absolute bottom-0 end-0 p-3 fst-italic text-credits">
               Image Courtesy of
               <a target="_blank" href="https://www.5gyres.org/publications"
                 >THE 5 GYRES INSTITUTE</a

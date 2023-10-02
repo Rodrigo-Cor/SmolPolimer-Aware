@@ -128,11 +128,11 @@ export default {
         {
           question: "¿Con qué nivel de frecuencia utiliza productos plásticos?",
           options: [
-            { option: "Nunca", value: 0 },
-            { option: "Rara vez", value: 1 },
+            { option: "Nunca", value: 4 },
+            { option: "Rara vez", value: 3 },
             { option: "Ocasionalmente", value: 2 },
-            { option: "Moderadamente", value: 3 },
-            { option: "Excesivamente", value: 4 },
+            { option: "Moderadamente", value: 1 },
+            { option: "Excesivamente", value: 0 },
           ],
           help: {
             "Actualmente, la industria del ": { value: "", meaning: "" },
@@ -147,7 +147,7 @@ export default {
         },
         {
           question:
-            "Si tuvieras que decir ¿Qué tan consciente estas de la contaminación por microplásticos en México? ¿Cuál se adecuaría en este momento?",
+            "¿Qué tan consciente estas de la contaminación por microplásticos en el agua?",
           options: [
             { option: "No del todo consciente", value: 0 },
             { option: "Ligeramente consciente", value: 1 },

@@ -1,6 +1,6 @@
 <template>
   <div class="mt-4 text-justify-custom">
-    <template v-for="(value, key, index) in text" :key="index">
+    <template v-for="(value, key) in text" :key="key">
       <span
         >{{ value.value === "" ? key : "" }}
         <button
@@ -20,25 +20,16 @@
         </button>
       </span>
     </template>
-    <table class="table" v-if="concept.value !== '' || concept.meaning !== ''">
-      <thead>
-        <tr>
-          <th scope="col">Concepto</th>
-          <th scope="col">Definición</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td scope="row">{{ concept.value }}</td>
-          <td>{{ concept.meaning }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <TableInformation
+      v-if="concept.value !== '' || concept.meaning !== ''"
+      :information="[{ type: concept.value, description: concept.meaning }]"
+      :headers="['Concepto', 'Definición']"
+    />
   </div>
 </template>
 
 <script>
-import MeaningTable from "./MeaningTable.vue";
+import TableInformation from "./TableInformation.vue";
 export default {
   name: "HelpParagraph",
   data() {
@@ -67,7 +58,7 @@ export default {
     },
   },
   components: {
-    MeaningTable,
+    TableInformation,
   },
 };
 </script>

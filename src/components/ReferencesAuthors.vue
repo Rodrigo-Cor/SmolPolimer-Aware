@@ -1,14 +1,16 @@
 <template>
   <figure>
     <div class="d-flex justify-content-center">
-      <img :src="img" class="img-thumbnail" alt="Imagen" />
+      <img
+        :src="img.src"
+        class="w-50 h-50"
+        :alt="img.alt"
+      />
     </div>
-    <figcaption class="text-center fst-italic">
-      <template v-for="(credit, index) in credits" :key="index">
-        <template v-for="(value, key) in credit">
-          <a target="_blank" :href="value" v-if="value !== ''">{{ key }}</a>
-          <template v-else>{{ key }}</template>
-        </template>
+    <figcaption class="text-center fst-italic text-credits">
+      <template v-for="(value, key) in credits">
+        <a target="_blank" :href="value" v-if="value !== ''">{{ key }}</a>
+        <template v-else>{{ key }}</template>
       </template>
     </figcaption>
   </figure>
@@ -19,11 +21,11 @@ export default {
   name: "ReferencesAuthors",
   props: {
     img: {
-      type: String,
+      type: Object,
       required: true,
     },
     credits: {
-      type: Array,
+      type: Object,
       required: true,
     },
   },

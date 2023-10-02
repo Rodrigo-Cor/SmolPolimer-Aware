@@ -128,7 +128,6 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex';
 import Swal from "sweetalert2";
-import { Popover } from "bootstrap";
 export default {
   name: "FiltracionForm",
   data() {
@@ -138,16 +137,6 @@ export default {
       treatment: null,
       sendButtonPressed: false,
     };
-  },
-  mounted() {
-    this.$nextTick(() => {
-      const popoverTriggerList = [].slice.call(
-        document.querySelectorAll('[data-bs-toggle="popover"]')
-      );
-      popoverTriggerList.map(function (popoverTriggerEl) {
-        return new Popover(popoverTriggerEl);
-      });
-    });
   },
   computed: {
     ...mapGetters(['getFiltracionValues']),

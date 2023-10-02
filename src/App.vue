@@ -9,11 +9,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.navbar-brand a {
-  font-weight: bold;
-  color: red;
-}
-
 nav a.router-link-exact-active.nav-link,
 nav a.router-link-exact-active.navbar-brand {
   color: #50d890;
@@ -45,4 +40,25 @@ nav a.router-link-exact-active.navbar-brand {
     width: 50%;
   }
 }
+
+.text-justify-custom {
+  text-align: justify;
+}
+
+.text-card {
+  font-size: 0.8rem;
+}
+
+.text-credits {
+  font-size: 0.6rem;
+}
+
+.img-height {
+  height: 15rem;
+}
+
+.text-button{
+  font-size: 0.8rem;
+}
+
 </style>
