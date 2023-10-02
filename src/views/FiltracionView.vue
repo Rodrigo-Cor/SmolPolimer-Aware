@@ -1,20 +1,27 @@
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-12 text-center">
+      <div class="col-12 text-center my-3">
         <h1 id="myTitle">Filtración granular rápida</h1>
       </div>
     </div>
     <div class="row justify-content-center">
       <div class="col-12 text-center">
-        <button @click="handleButton" class="btn btn-info">
-          Simulación
-        </button>
+        <p class="my-paragraph">
+          En la siguiente lista se encuentran los valores por defecto, que servirán como entrada para
+          la simulación. Haz clic en el botón de simulación y podrás escoger si quieres esos valores, 
+          o cambiarlos por otros por medio de un formulario.
+        </p>
       </div>
-    </div>
-    <div class="row justify-content-center">
-      <div class="col-12">
-        <hr>
+    </div> 
+    <div class="row">
+      <div class="col my-2">
+        <h3 id="mySubtitle">Valores por defecto para la simulación</h3>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-info">Cantidad: {{ defaultMicroplastic }} microplásticos</li>
+          <li class="list-group-item list-group-item-info">Residuos: {{ defaultResidue }} micrplásticos</li>
+          <li class="list-group-item list-group-item-info">Días: {{ defaultTreatment }}</li>
+        </ul>
       </div>
     </div>
     <div>
@@ -24,13 +31,42 @@
       <FiltracionSimulation v-if="onFilterValues.length > 0 && releasedValues.length > 0"/>
       <FiltracionExplained v-if="onFilterValues.length > 0 && releasedValues.length > 0"/>
     </div>
+    <div class="row justify-content-center">
+      <div class="col-12 text-center my-2">
+        <button @click="handleButton" class="btn btn-outline-success btn-lg">
+          Simulación
+        </button>
+      </div>
+    </div>
+    <div v-if="onFilterValues.length > 0 && releasedValues.length > 0" class="row justify-content-center">
+      <div class="col-12 text-center my-2">
+        <button class="btn btn-outline-danger btn-lg">Generar PDF</button>
+      </div>
+    </div>
   </div>
 </template>
 <style scoped>
 #myTitle {
-  font-size: 2rem;
+  border-style: solid;
+  border-color: #50d890;
+  border-radius: 1rem;
+  background-color: #272727;
+  font-size: 2.0rem;
   font-weight: bold;
   color: #50d890;
+}
+#mySubtitle{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #272727;
+}
+.my-paragraph{
+  text-align: justify;
+  color: #1e1e1e;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+  margin-left: 0.8rem;
+  margin-right: 0.8rem;
 }
 </style>
 <script>
@@ -106,15 +142,15 @@ export default {
         confirmButtonColor: "#4f98ca",
         confirmButtonAriaLabel: "Denegar",
 
-        showCancelButton: false,
+        showCancelButton: true,
         cancelButtonText: "Cancelar",
         cancelButtonAriaLabel: "Cancelar",
       }).then((result) => {
         if (result.isConfirmed) {
           this.choice = true;
-          this.$store.commit('setFiltracionValues', [])
-          this.$store.commit('setOnFilterValues', [])
-          this.$store.commit('setReleasedValues', [])
+          this.$store.commit("setFiltracionValues", []);
+          this.$store.commit("setOnFilterValues", []);
+          this.$store.commit("setReleasedValues", []);
         } 
         else if (result.isDenied) {
           this.choice = false;

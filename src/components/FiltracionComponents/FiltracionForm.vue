@@ -1,20 +1,20 @@
 <template>
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-12 text-center">
+    <div class="col-12 text-center mt-3">
       <h2 id="myTitle">Formulario</h2>
     </div>
   </div>
   <div class="row justify-content-center">
     <div class="col-sm-12 col-md-4 text-center my-1">
-      <button
-        type="button"
-        class="btn btn-info"
-        data-bs-toggle="popover"
-        data-bs-content="Introduce una cantidad inicial de microplásticos a filtrar, máximo 70."
-      >
-        <i class="bi bi-lightbulb-fill"></i>
-      </button>
+      <Popper 
+          arrow 
+          content="Introduce una cantidad de microplasticos a filtrar"
+          placement="top"
+          hover
+        >
+        <button class="btn btn-outline-warning btn-sm"><i class= "bi bi-lightbulb"></i></button>
+      </Popper>
       <br>
       <label class="my-label" for="microplasticInput">Microplásticos</label>
       <br>
@@ -30,14 +30,14 @@
       <span id="myAlert"  v-if="microplastic > 70 || (!microplastic && sendButtonPressed)">Mínimo 1, máximo 70</span>
     </div>
     <div class="col-sm-12 col-md-4 text-center my-1">
-      <button
-        type="button"
-        class="btn btn-info"
-        data-bs-toggle="popover"
-        data-bs-content="Introduce una cantidad de microplásticos extra a filtrar, máximo 20."
-      >
-        <i class="bi bi-lightbulb-fill"></i>
-      </button>
+      <Popper 
+          arrow 
+          content="Introduce una cantidad de microplasticos extra"
+          placement="top"
+          hover
+        >
+        <button class="btn btn-outline-warning btn-sm"><i class= "bi bi-lightbulb"></i></button>
+      </Popper>
       <br>
       <label class="my-label" for="residueInput">Residuos</label>
       <br>
@@ -53,16 +53,16 @@
       <span id="myAlert" v-if="residue > 20 || (!residue && sendButtonPressed)">Mínimo 1, máximo 20</span>
     </div>
     <div class="col-sm-12 col-md-4 text-center my-1">
-      <button
-        type="button"
-        class="btn btn-info"
-        data-bs-toggle="popover"
-        data-bs-content="Introduce cuántas veces se estará pasando por el filtro a los microplásticos, máximo 24."
-      >
-        <i class="bi bi-lightbulb-fill"></i>
-      </button>
+      <Popper 
+          arrow 
+          content="Introduce cuántos días se van a pasar por el filtro los microplásticos"
+          placement="top"
+          hover
+        >
+        <button class="btn btn-outline-warning btn-sm"><i class= "bi bi-lightbulb"></i></button>
+      </Popper>
       <br>
-      <label class="my-label" for="treatmentInput">Tratamientos</label>
+      <label class="my-label" for="treatmentInput">Días</label>
       <br>
       <input
         class="my-input"
@@ -83,22 +83,25 @@
       </button>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12">
-      <hr>
-    </div>
-  </div>
 </div>
 </template>
 <style scoped>
 #myTitle{
+  border-style: solid;
+  border-color: #4f98ca;
+  border-radius: 1rem;
   font-size: 1.7rem;
   font-weight: bold;
-  color: #50d890;
+  color: #4f98ca;
 }
 #myIconButton{
   border: none;
   background-color: transparent;
+}
+#myAlert{
+  color: #50d890; 
+  font-size: 0.85rem;
+  font-weight: bold;
 }
 .my-label {
   font-size: 1rem;
@@ -113,23 +116,40 @@
   transition: 0.5s;
   outline: none;
 }
-#myAlert{
-  color: #50d890; 
-  font-size: 0.85rem;
-  font-weight: bold;
-}
 .my-input:focus{
   color: #effffb;
   font-weight: bold;
   border: 0.2rem solid #50d890;
   background-color: #50d890;  
 }
+.btn-outline-warning{
+  --bs-btn-border-radius: 1rem;
+  --bs-btn-border-color: #272727;
+  --bs-btn-bg: #272727;
+}
+:deep(.popper) {
+    background: #272727;
+    padding: 1rem;
+    border-radius: 1rem;
+    color: #effffb;
+    font-weight: bold;
+}
+:deep(.popper #arrow::before) {
+    background: #272727;
+}
 </style>
 <script>
 import { mapGetters, mapMutations } from 'vuex';
 import Swal from "sweetalert2";
+<<<<<<< HEAD
+=======
+import Popper from "vue3-popper";
+>>>>>>> 8c5468d669c1a042e0cf5cfaaff71a953cc6bec8
 export default {
   name: "FiltracionForm",
+  components : {
+    Popper
+  },
   data() {
     return {
       microplastic: null,
@@ -195,4 +215,3 @@ export default {
   },
 }
 </script>
-    

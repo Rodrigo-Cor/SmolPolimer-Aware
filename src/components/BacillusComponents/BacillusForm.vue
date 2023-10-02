@@ -1,20 +1,20 @@
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-12 text-center">
+      <div class="col-12 text-center mt-3">
         <h2 id="myTitle">Formulario</h2>
       </div>
     </div>
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-3 text-center my-1">
-        <button
-          type="button"
-          class="btn btn-info"
-          data-bs-toggle="popover"
-          data-bs-content="Introduce una cantidad inicial de microplásticos a degradar, máximo 9,999."
+        <Popper 
+          arrow 
+          content="Introduce una cantidad de microplasticos a degradar"
+          placement="top"
+          hover
         >
-          <i class="bi bi-lightbulb-fill"></i>
-        </button>
+        <button class="btn btn-outline-warning btn-sm"><i class= "bi bi-lightbulb"></i></button>
+        </Popper>
         <br>
         <label class= "my-label" for="quantityInput">Microplásticos:</label>
         <br>
@@ -30,14 +30,14 @@
         <span id= "myAlert" v-if="quantity > 10000 || (!quantity && sendButtonPressed)">Mínimo 1, máximo 10000</span>
       </div>
       <div class="col-sm-12 col-md-3 text-center my-1">
-        <button
-          type="button"
-          class="btn btn-info"
-          data-bs-toggle="popover"
-          data-bs-content="Escoge entre una temperatura de 15°C y 30°C"
+        <Popper 
+          arrow 
+          content="Selecciona una temperatura en la que se someterán los microplásticos"
+          placement="top"
+          hover
         >
-          <i class="bi bi-lightbulb-fill"></i>
-        </button>
+        <button class="btn btn-outline-warning btn-sm"><i class= "bi bi-lightbulb"></i></button>
+        </Popper>
         <br>
         <label class="my-label" for="temperatureInput">Temperatura: °C</label>
         <br>
@@ -55,14 +55,14 @@
         <span id= "myAlert" v-if="!temperature && sendButtonPressed">Selecciona una temperatura</span>
       </div>
       <div class="col-sm-12 col-md-3 text-center my-1">
-        <button
-          type="button"
-          class="btn btn-info"
-          data-bs-toggle="popover"
-          data-bs-content="Introduce una cantidad de bimestres, mínimo 1, máximo 12."
+        <Popper 
+          arrow 
+          content="Introduce cuántos bimestres van a estar degradándose los microplásticos"
+          placement="top"
+          hover
         >
-          <i class="bi bi-lightbulb-fill"></i>
-        </button>
+        <button class="btn btn-outline-warning btn-sm"><i class= "bi bi-lightbulb"></i></button>
+        </Popper>
         <br>
         <label class="my-label" for="bimestersInput">Bimestres:</label>
         <br>
@@ -78,23 +78,24 @@
         <span id= "myAlert" v-if="bimester > 12 || (!bimester && sendButtonPressed)">Mínimo 1, máximo 12</span>
       </div>
       <div class="col-sm-12 col-md-3 text-center my-1">
-        <button
-          type="button"
-          class="btn btn-info"
-          data-bs-toggle="popover"
-          data-bs-content="Selecciona el material, para escoger el porcentaje de degradación."
+        <Popper 
+          arrow 
+          content="Selecciona el material para escoger los porcentajes de degradación"
+          placement="top"
+          hover
         >
-          <i class="bi bi-lightbulb-fill"></i>
-        </button>
+        <button class="btn btn-outline-warning btn-sm"><i class= "bi bi-lightbulb"></i></button>
+        </Popper>
         <br>
         <label class="my-label" for="mineralInput">Mineral:</label>
         <br>
-        <select @change="handleMaterialSelect"
+        <select 
           class="my-select mx-auto"
           v-model="mineral"
           aria-label="Select de mineral"
           id="mineralInput"
           name="mineralInput"
+          @change="handleMaterialSelect"
         >
           <option :value="'Agar'">Agar</option>
           <option :value="'Broth'">Broth</option>
@@ -105,14 +106,14 @@
     </div>
     <div v-if="this.buttonPressed" class="row justify-content-center">
       <div class="col-12 text-center my-1">
-        <button
-          type="button"
-          class="btn btn-info"
-          data-bs-toggle="popover"
-          data-bs-content="Selecciona una cepa de bacterias para definir el porcentaje de limpieza"
+        <Popper 
+          arrow 
+          content="Selecciona la cepa de la bacteria, de ella dependerá el porcentaje de degradación"
+          placement="top"
+          hover
         >
-          <i class="bi bi-lightbulb-fill"></i>
-        </button>
+        <button class="btn btn-outline-warning btn-sm"><i class= "bi bi-lightbulb"></i></button>
+        </Popper>
         <br>
         <label class="my-label" for="percentageInput">Porcentaje de degradación</label>
         <span>: {{ percentage }}%</span>
@@ -123,6 +124,7 @@
           aria-label="Select de Porcentaje"
           id="percentageInput"
           name="percentageInput"
+          @change = "setBacillusStrain"
         >
           <option :value="percentageOptions[0]">B. carbonipphilus</option>
           <option :value="percentageOptions[1]" >B. sporothermodurans</option>
@@ -142,24 +144,28 @@
         </button>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12">
-        <hr>
-      </div>
-    </div>
   </div> 
 </template>
 <style scoped>
 
 #myTitle{
+  border-style: solid;
+  border-color: #4f98ca;
+  border-radius: 1rem;
   font-size: 1.7rem;
   font-weight: bold;
-  color: #50d890;
+  color: #4f98ca;
 }
 #myP{
   font-size: 1rem;
   font-weight: bold;
   color: #4f98ca;
+}
+#myAlert{
+  margin: 1rem;
+  color: #50d890; 
+  font-size: 0.85rem;
+  font-weight: bold;
 }
 .my-label{
   font-size: 1rem;
@@ -196,19 +202,31 @@
   border: 0.2rem solid #50d890;
   background-color: #50d890;
 }
-#myAlert{
-  margin: 1rem;
-  color: #50d890; 
-  font-size: 0.85rem;
-  font-weight: bold;
+.btn-outline-warning{
+  --bs-btn-border-radius: 1rem;
+  --bs-btn-border-color: #272727;
+  --bs-btn-bg: #272727;
+}
+:deep(.popper) {
+    background: #272727;
+    padding: 1rem;
+    border-radius: 1rem;
+    color: #effffb;
+    font-weight: bold;
+}
+:deep(.popper #arrow::before) {
+    background: #272727;
 }
 </style>
 <script>
 import { mapGetters, mapMutations } from 'vuex';
 import Swal from "sweetalert2";
-import { Popover } from "bootstrap";
+import Popper from "vue3-popper";
 export default {
   name: "BacillusForm",
+  components : {
+    Popper
+  },
   data() {
     return {
       quantity: null,
@@ -216,6 +234,7 @@ export default {
       bimester: null,
       percentage: null,
       mineral: null,
+      strain: null,
 
       mineralAgarValues: [34.55, 36.54, 18.37, 36.07, 16.40, 34.48],
       mineralBrothValues: [25.00, 21.00, 16.00, 14.00, 8.00, 21.00],
@@ -267,17 +286,34 @@ export default {
       this.buttonPressed = true;
       this.percentage = null;
     },
+    setBacillusStrain(event) {
+      const selectedValue = parseFloat(event.target.value);
+      if(selectedValue === this.percentageOptions[0]) {
+        this.strain = "B. carbonipphilus";
+      } else if (selectedValue === this.percentageOptions[1]) {
+        this.strain = "B. sporothermodurans";
+      } else if (selectedValue === this.percentageOptions[2]) {
+        this.strain = "B. coagulans";
+      } else if (selectedValue === this.percentageOptions[3]) {
+        this.strain = "B. neidei";
+      } else if(selectedValue === this.percentageOptions[4]) {
+        this.strain = "smithii";
+      } else if(selectedValue === this.percentageOptions[5]) {
+        this.strain = "B. megaterium";
+      }
+      console.log(this.strain)
+    },
     handleSendButton() {
       this.sendButtonPressed = true;
       const isValid = [
-        this.quantity >= 1 && this.quantity <= 9999,
+        this.quantity >= 1 && this.quantity <= 10000,
         this.temperature,
         this.bimester >= 1 && this.bimester <= 12,
         this.percentage,
-        this.mineral
+        this.mineral,
       ];
       if (isValid.every(element => element)) {
-        this.$store.commit('setBacillusValues', [this.quantity, this.temperature, this.bimester, this.percentage, this.mineral]);
+        this.$store.commit('setBacillusValues', [this.quantity, this.temperature, this.bimester, this.percentage, this.mineral, this.strain]);
       } else {
         Swal.fire({
           title: "Campos sin llenar o valores inválidos",
