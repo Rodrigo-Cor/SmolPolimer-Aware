@@ -52,12 +52,12 @@ router.beforeEach((to, from, next) => {
   if (from.path === "/" && to.path !== "/") {
     store.commit("setIsDisabled", true);
   }
-  if (from.path === "/filtracion" && to.path !== "/filtracion") {
+  if (from.path === "/tecnicas/filtracion" && to.path !== "/tecnicas/filtracion") {
     store.commit("setFiltracionValues", []);
     store.commit("setOnFilterValues", []);
     store.commit("setReleasedValues", []);
   }
-  if(from.path === "/bacillus" && to.path !== "/bacillus") {
+  if(from.path === "/tecnicas//bacillus" && to.path !== "/tecnicas//bacillus") {
     store.commit("setBacillusValues", []);
     store.commit("setDegradatedValues", []);
   }

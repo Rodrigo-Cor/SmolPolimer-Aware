@@ -141,10 +141,7 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex';
 import Swal from "sweetalert2";
-<<<<<<< HEAD
-=======
 import Popper from "vue3-popper";
->>>>>>> 8c5468d669c1a042e0cf5cfaaff71a953cc6bec8
 export default {
   name: "FiltracionForm",
   components : {
