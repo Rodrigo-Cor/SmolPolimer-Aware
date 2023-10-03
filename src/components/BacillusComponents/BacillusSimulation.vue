@@ -131,41 +131,47 @@ export default {
         .attr("stroke-dashoffset", totalLengthDegradated)
         .transition()
         .duration(2000)
-        .attr("stroke-dashoffset", 0);
+        .attr("stroke-dashoffset", 0)
+        .on("end", () => {
+          const svgElement = document.querySelector("#chart-container svg");
+          const svgData = new XMLSerializer().serializeToString(svgElement);
+          /* const svgDataURL = `data:image/svg+xml,${encodeURIComponent(svgData)}`; */
+          this.$emit('chart-obtained', svgData)
+        });
 
-        svg.append("g")
-          .attr("class", "grid")
-          .attr("transform", `translate(0,${height})`)
-          .attr("stroke", "#1e1e1e")
-          .attr("stroke-width", .5)
-          .call(d3.axisBottom(x)
-            .tickSize(-height)
-            .tickFormat("")
-          );
+      svg.append("g")
+        .attr("class", "grid")
+        .attr("transform", `translate(0,${height})`)
+        .attr("stroke", "#1e1e1e")
+        .attr("stroke-width", .5)
+        .call(d3.axisBottom(x)
+          .tickSize(-height)
+          .tickFormat("")
+        );
 
-        svg.append("g")
-          .attr("class", "grid")
-          .attr("stroke", "#1e1e1e")
-          .attr("stroke-width", .5)
-          .call(d3.axisLeft(y)
-            .tickSize(-width)
-            .tickFormat("")
-          );
-        
-        svg
-          .append("text")
-          .attr("x", width / 2)
-          .attr("y", height + margin.bottom - 25)
-          .attr("text-anchor", "middle")
-          .text("Bimestres");
+      svg.append("g")
+        .attr("class", "grid")
+        .attr("stroke", "#1e1e1e")
+        .attr("stroke-width", .5)
+        .call(d3.axisLeft(y)
+          .tickSize(-width)
+          .tickFormat("")
+        );
+      
+      svg
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", height + margin.bottom - 25)
+        .attr("text-anchor", "middle")
+        .text("Bimestres");
 
-        svg
-          .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("x", - height / 2)
-          .attr("y", (margin.left / 2) - 75)
-          .attr("text-anchor", "middle")
-          .text("Microplásticos");
+      svg
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("x", - height / 2)
+        .attr("y", (margin.left / 2) - 75)
+        .attr("text-anchor", "middle")
+        .text("Microplásticos");
     },
     observeContainerResize() {
       const container = this.$refs.containerRef;

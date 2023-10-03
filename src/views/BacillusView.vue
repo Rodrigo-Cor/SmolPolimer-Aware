@@ -30,7 +30,7 @@
     <div>
       <BacillusForm v-if="choice"/>
       <BacillusResults v-if="quantity && temperature && bimester && percentage && mineral && choiceIsMade" />
-      <BacillusSimulation v-if="degradatedValues.length > 0"/>
+      <BacillusSimulation @chart-obtained="obtainSVG" v-if="degradatedValues.length > 0"/>
       <BacillusExplained v-if="degradatedValues.length > 0"/>
     </div>
     <div class="row justify-content-center">
@@ -42,7 +42,7 @@
     </div>
     <div v-if="degradatedValues.length > 0" class="row justify-content-center">
       <div class="col-12 text-center my-2">
-        <button class="btn btn-outline-danger btn-lg">Generar PDF</button>
+        <button v-if="svgData" @click="downloadPDF" class="btn btn-outline-danger btn-lg">Generar PDF</button>
       </div>
     </div>
   </div>
@@ -78,6 +78,8 @@ import BacillusSimulation from "@/components/BacillusComponents/BacillusSimulati
 import BacillusExplained from "@/components/BacillusComponents/BacillusExplained.vue";
 import Swal from "sweetalert2";
 import { mapGetters, mapMutations } from "vuex";
+import jsPDF from 'jspdf';
+
 export default {
   name: "BacillusView",
   components: {
@@ -95,7 +97,8 @@ export default {
       defaultBimester: 12,
       defaultPercentage: 34.55,
       defaultMineral: "Agar",
-      defaultStrain: "B. carbonipphilus"
+      defaultStrain: "B. carbonipphilus",
+      svgData: null,
     };
   },
   computed: {
@@ -163,6 +166,26 @@ export default {
         }
       });
       this.choiceIsMade = true;
+    },
+    obtainSVG(svg) {
+      this.svgData = svg;
+    },
+    downloadPDF() {
+      const pdf = new jsPDF();
+      const img = new Image();
+
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        const svgSize = document.getElementById("chart-container");
+        canvas.width = svgSize.offsetWidth;
+        canvas.height = svgSize.offsetHeight;
+        const context = canvas.getContext('2d');
+        context.drawImage(img, 0, 0);
+        const imgData = canvas.toDataURL('image/png');
+        pdf.addImage(imgData, 'PNG', 10, 10, 180, 90);
+        pdf.save('chart.pdf');
+      };
+      img.src = 'data:image/svg+xml,' + encodeURIComponent(this.svgData);
     },
   },
 };

@@ -19,7 +19,7 @@
         <h3 id="mySubtitle">Valores por defecto para la simulación</h3>
         <ul class="list-group">
           <li class="list-group-item list-group-item-info">Cantidad: {{ defaultMicroplastic }} microplásticos</li>
-          <li class="list-group-item list-group-item-info">Residuos: {{ defaultResidue }} micrplásticos</li>
+          <li class="list-group-item list-group-item-info">Residuos: {{ defaultResidue }} microplásticos</li>
           <li class="list-group-item list-group-item-info">Días: {{ defaultTreatment }}</li>
         </ul>
       </div>
@@ -28,7 +28,7 @@
       <AwarenessSimulationSection />
       <FiltracionForm v-if="choice"/>
       <FiltracionResults v-if="microplastic && residue && treatment && choiceIsMade" />
-      <FiltracionSimulation v-if="onFilterValues.length > 0 && releasedValues.length > 0"/>
+      <FiltracionSimulation @chart-obtained="obtainSVG" v-if="onFilterValues.length > 0 && releasedValues.length > 0"/>
       <FiltracionExplained v-if="onFilterValues.length > 0 && releasedValues.length > 0"/>
     </div>
     <div class="row justify-content-center">
@@ -40,7 +40,7 @@
     </div>
     <div v-if="onFilterValues.length > 0 && releasedValues.length > 0" class="row justify-content-center">
       <div class="col-12 text-center my-2">
-        <button class="btn btn-outline-danger btn-lg">Generar PDF</button>
+        <button v-if="svgData" @click="downloadPDF" class="btn btn-outline-danger btn-lg">Generar PDF</button>
       </div>
     </div>
   </div>
@@ -77,6 +77,7 @@ import FiltracionSimulation from "@/components/FiltracionComponents/FiltracionSi
 import FiltracionExplained from '@/components/FiltracionComponents/FiltracionExplained.vue';
 import Swal from "sweetalert2";
 import { mapGetters, mapMutations } from "vuex";
+import jsPDF from 'jspdf';
 
 export default {
   name: "FiltracionView",
@@ -94,6 +95,7 @@ export default {
       defaultMicroplastic: 29,
       defaultResidue: 5,
       defaultTreatment: 9,
+      svgData: null,
     };
   },
 
@@ -159,6 +161,26 @@ export default {
       });
       this.choiceIsMade = true;
     },
-   },
- };
+    obtainSVG(svg) {
+      this.svgData = svg;
+    },
+    downloadPDF() {
+      const pdf = new jsPDF();
+      const img = new Image();
+
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        const svgSize = document.getElementById("chart-container");
+        canvas.width = svgSize.offsetWidth;
+        canvas.height = svgSize.offsetHeight;
+        const context = canvas.getContext('2d');
+        context.drawImage(img, 0, 0);
+        const imgData = canvas.toDataURL('image/png');
+        pdf.addImage(imgData, 'PNG', 10, 10, 180, 90);
+        pdf.save('chart.pdf');
+      };
+      img.src = 'data:image/svg+xml,' + encodeURIComponent(this.svgData);
+    },
+  },
+};
 </script>

@@ -7,9 +7,10 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-3 text-center my-1">
-        <Popper 
-          arrow 
-          content="Introduce una cantidad de microplasticos a degradar"
+        <Popper
+          class="popper-box"
+          arrow
+          content="Cantidad de microplasticos a degradar"
           placement="top"
           hover
         >
@@ -30,9 +31,10 @@
         <span id= "myAlert" v-if="quantity > 10000 || (!quantity && sendButtonPressed)">Mínimo 1, máximo 10000</span>
       </div>
       <div class="col-sm-12 col-md-3 text-center my-1">
-        <Popper 
-          arrow 
-          content="Selecciona una temperatura en la que se someterán los microplásticos"
+        <Popper
+          class="popper-box"
+          arrow
+          content="La temperatura en la que se someterán los microplásticos"
           placement="top"
           hover
         >
@@ -55,9 +57,10 @@
         <span id= "myAlert" v-if="!temperature && sendButtonPressed">Selecciona una temperatura</span>
       </div>
       <div class="col-sm-12 col-md-3 text-center my-1">
-        <Popper 
+        <Popper
+          class="popper-box" 
           arrow 
-          content="Introduce cuántos bimestres van a estar degradándose los microplásticos"
+          content="Cuántos bimestres van a estar degradándose"
           placement="top"
           hover
         >
@@ -78,9 +81,10 @@
         <span id= "myAlert" v-if="bimester > 12 || (!bimester && sendButtonPressed)">Mínimo 1, máximo 12</span>
       </div>
       <div class="col-sm-12 col-md-3 text-center my-1">
-        <Popper 
-          arrow 
-          content="Selecciona el material para escoger los porcentajes de degradación"
+        <Popper
+          class="popper-box"
+          arrow
+          content="Escoge un material para escoger el porcentaje"
           placement="top"
           hover
         >
@@ -106,9 +110,10 @@
     </div>
     <div v-if="this.buttonPressed" class="row justify-content-center">
       <div class="col-12 text-center my-1">
-        <Popper 
+        <Popper
+          class="popper-box" 
           arrow 
-          content="Selecciona la cepa de la bacteria, de ella dependerá el porcentaje de degradación"
+          content="Cada cepa de bacteria tiene su porcentaje"
           placement="top"
           hover
         >
@@ -207,16 +212,16 @@
   --bs-btn-border-color: #272727;
   --bs-btn-bg: #272727;
 }
-:deep(.popper) {
-    background: #272727;
-    padding: 1rem;
-    border-radius: 1rem;
-    color: #effffb;
-    font-weight: bold;
-}
-:deep(.popper #arrow::before) {
-    background: #272727;
-}
+.popper-box {
+    --popper-theme-background-color: #272727;
+    --popper-theme-background-color-hover: #272727;
+    --popper-theme-text-color: #effffb;
+    --popper-theme-border-width: 0rem;
+    --popper-theme-border-style: solid;
+    --popper-theme-border-radius: 1rem;
+    --popper-theme-padding: 0.8rem;
+    --popper-theme-box-shadow: 0 0.375rem 1.875rem -0.375rem rgba(39, 39, 39, 0.25);
+  }
 </style>
 <script>
 import { mapGetters, mapMutations } from 'vuex';
