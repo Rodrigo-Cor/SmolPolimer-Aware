@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="background-color: #bcffee; border-radius: 0.2rem;">
     <div class="row justify-content-center">
       <div class="col-12 text-center mt-3">
         <h2 id="myTitle">Formulario</h2>
@@ -14,7 +14,7 @@
             placement="top"
             hover
           >
-          <button class="btn btn-outline-warning btn-sm"><i class= "bi bi-lightbulb"></i></button>
+          <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
         <label class="my-label" for="microplasticInput">Microplásticos</label>
@@ -38,7 +38,7 @@
             placement="top"
             hover
           >
-          <button class="btn btn-outline-warning btn-sm"><i class= "bi bi-lightbulb"></i></button>
+          <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
         <label class="my-label" for="residueInput">Residuos</label>
@@ -62,7 +62,7 @@
             placement="top"
             hover
           >
-          <button class="btn btn-outline-warning btn-sm"><i class= "bi bi-lightbulb"></i></button>
+          <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
         <label class="my-label" for="treatmentInput">Días</label>
@@ -90,16 +90,12 @@
   </template>
   <style scoped>
   #myTitle{
-    border-style: solid;
-    border-color: #4f98ca;
-    border-radius: 1rem;
     font-size: 1.7rem;
     font-weight: bold;
-    color: #4f98ca;
-  }
-  #myIconButton{
-    border: none;
-    background-color: transparent;
+    background-image: linear-gradient(to bottom, #50d8d4, #4f5bca);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
   }
   #myAlert{
     color: #50d890; 
@@ -113,9 +109,11 @@
   }
   .my-input{
     width: 8rem;
+    height: 2rem;
     padding: 0.2rem;
     border: 0.2rem solid #4f98ca;
     border-radius: 0.8rem;
+    background-color:#effffb;
     transition: 0.5s;
     outline: none;
   }
@@ -125,7 +123,7 @@
     border: 0.2rem solid #50d890;
     background-color: #50d890;  
   }
-  .btn-outline-warning{
+  .btn-outline-info{
     --bs-btn-border-radius: 1rem;
     --bs-btn-border-color: #272727;
     --bs-btn-bg: #272727;

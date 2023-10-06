@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="background-color: #bcffee; border-radius: 0.2rem;">
     <div class="row justify-content-center">
       <div class="col-12 text-center mt-3">
         <h2 id="myTitle">Formulario</h2>
@@ -14,7 +14,7 @@
           placement="top"
           hover
         >
-        <button class="btn btn-outline-warning btn-sm"><i class= "bi bi-lightbulb"></i></button>
+        <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
         <label class= "my-label" for="quantityInput">Microplásticos:</label>
@@ -38,7 +38,7 @@
           placement="top"
           hover
         >
-        <button class="btn btn-outline-warning btn-sm"><i class= "bi bi-lightbulb"></i></button>
+        <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
         <label class="my-label" for="temperatureInput">Temperatura: °C</label>
@@ -64,7 +64,7 @@
           placement="top"
           hover
         >
-        <button class="btn btn-outline-warning btn-sm"><i class= "bi bi-lightbulb"></i></button>
+        <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
         <label class="my-label" for="bimestersInput">Bimestres:</label>
@@ -88,7 +88,7 @@
           placement="top"
           hover
         >
-        <button class="btn btn-outline-warning btn-sm"><i class= "bi bi-lightbulb"></i></button>
+        <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
         <label class="my-label" for="mineralInput">Mineral:</label>
@@ -117,7 +117,7 @@
           placement="top"
           hover
         >
-        <button class="btn btn-outline-warning btn-sm"><i class= "bi bi-lightbulb"></i></button>
+        <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
         <label class="my-label" for="percentageInput">Porcentaje de degradación</label>
@@ -154,12 +154,12 @@
 <style scoped>
 
 #myTitle{
-  border-style: solid;
-  border-color: #4f98ca;
-  border-radius: 1rem;
   font-size: 1.7rem;
   font-weight: bold;
-  color: #4f98ca;
+  background-image: linear-gradient(to bottom, #50d8d4, #4f5bca);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 #myP{
   font-size: 1rem;
@@ -179,25 +179,31 @@
 }
 .my-input{
   width: 8rem;
+  height: 2rem;
   padding: 0.2rem;
   border: 0.2rem solid #4f98ca;
   border-radius: 0.8rem;
+  background-color:#effffb;
   transition: 0.5s;
   outline: none;
 }
 .my-select {
   width: 8rem;
+  height: 2rem;
   padding: 0.2rem;
   border: 0.2rem solid #4f98ca;
   border-radius: 0.8rem;
+  background-color:#effffb;
   transition: 0.5s;
   outline: none;
 }
 .my-bacteria {
+  height: 2rem;
   width: 14rem;
   padding: 0.2rem;
   border: 0.2rem solid #4f98ca;
   border-radius: 0.8rem;
+  background-color:#effffb;
   transition: 0.5s;
   outline: none;
 }
@@ -207,7 +213,7 @@
   border: 0.2rem solid #50d890;
   background-color: #50d890;
 }
-.btn-outline-warning{
+.btn-outline-info{
   --bs-btn-border-radius: 1rem;
   --bs-btn-border-color: #272727;
   --bs-btn-bg: #272727;
@@ -306,7 +312,6 @@ export default {
       } else if(selectedValue === this.percentageOptions[5]) {
         this.strain = "B. megaterium";
       }
-      console.log(this.strain)
     },
     handleSendButton() {
       this.sendButtonPressed = true;

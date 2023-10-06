@@ -14,22 +14,28 @@
       </p>
     </div>
   </div> 
-  <div class="row">
-    <div class="col my-2">
+  <div class="row justify-content-center">
+    <div class="col text-center my-2">
       <h3 id="mySubtitle">Resumen de datos de entrada</h3>
       <ul class="list-group">
-        <li class="list-group-item list-group-item-success">Cantidad: {{ quantity }} microplásticos</li>
-        <li class="list-group-item list-group-item-success">Temperatura: {{ temperature }}°C</li>
-        <li class="list-group-item list-group-item-success">Bimestres: {{ bimester }}</li>
-        <li class="list-group-item list-group-item-success">Porcentaje de degradación: {{ percentage }}%</li>
-        <li class="list-group-item list-group-item-success">Mineral: {{ mineral }}</li>
-        <li class="list-group-item list-group-item-success">Cepa: {{ strain }}</li>
-      </ul>
+          <li class="list-group-item custom-list-item">
+            Cantidad: <span class="badge bg-dark pill">{{ quantity }} microplásticos</span></li>
+          <li class="list-group-item custom-list-item">
+            Temperatura: <span class="badge bg-dark pill">{{ temperature }}°C</span></li>
+          <li class="list-group-item custom-list-item">
+            Bimestres: <span class="badge bg-dark pill">{{ bimester }}</span></li>
+          <li class="list-group-item custom-list-item">
+            Porcentaje de degradación: <span class="badge bg-dark pill">{{ percentage }}%</span></li>
+          <li class="list-group-item custom-list-item">
+            Mineral: <span class="badge bg-dark pill">{{ mineral }}</span></li>
+          <li class="list-group-item custom-list-item">
+            Cepa: <span class="badge bg-dark pill">{{ strain }}</span></li>
+        </ul>
     </div>
   </div>
   <div class="row">
     <div class="col-12">
-      <table class="table table-success table-striped-columns">
+      <table class="table table-info table-striped-columns">
         <thead>
           <tr>
             <th scope="col">Bimestre</th>
@@ -49,25 +55,36 @@
 </template>
 <style scoped>
 #myTitle{
-  border-style: solid;
-  border-color: #4f98ca;
-  border-radius: 1rem;
   font-size: 1.7rem;
   font-weight: bold;
-  color: #4f98ca;
+  background-image: linear-gradient(to bottom, #50d8d4, #4f5bca);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 #mySubtitle{
   font-size: 1.5rem;
   font-weight: bold;
-  color: #272727;
+  background-image: linear-gradient(to bottom, #4fcabe, #272727);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 .my-paragraph{
+  background-color: rgba(80, 216, 144, 0.25);
   text-align: justify;
-  color: #1e1e1e;
+  color: #272727;
   margin-top: 0.8rem;
   margin-bottom: 0.8rem;
   margin-left: 0.8rem;
   margin-right: 0.8rem;
+}
+.custom-list-item {
+  width: auto;
+  background-color: rgba(80, 216, 212, 0.25);
+  border: 0.1rem solid rgba(80, 216, 212, 0.25);
+  border-radius: 0.5rem;
+  margin: 0 auto;
 }
 </style>
 <script>

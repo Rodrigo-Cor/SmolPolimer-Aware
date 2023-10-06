@@ -57,7 +57,7 @@ router.beforeEach((to, from, next) => {
     store.commit("setOnFilterValues", []);
     store.commit("setReleasedValues", []);
   }
-  if(from.path === "/tecnicas//bacillus" && to.path !== "/tecnicas//bacillus") {
+  if(from.path === "/tecnicas/bacillus" && to.path !== "/tecnicas/bacillus") {
     store.commit("setBacillusValues", []);
     store.commit("setDegradatedValues", []);
   }

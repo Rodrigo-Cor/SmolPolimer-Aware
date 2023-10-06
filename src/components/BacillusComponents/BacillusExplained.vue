@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-12 text-center">
+      <div class="col-12 text-center mt-2">
         <h2 id="myTitle">Explicación</h2>
       </div>
     </div>
@@ -25,16 +25,17 @@
 </template>
 <style scoped>
 #myTitle{
-  border-style: solid;
-  border-color: #4f98ca;
-  border-radius: 1rem;
   font-size: 1.7rem;
   font-weight: bold;
-  color: #4f98ca;
+  background-image: linear-gradient(to bottom, #50d8d4, #4f5bca);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
   }
 .my-paragraph{
+  background-color: rgba(80, 216, 144, 0.25);
   text-align: justify;
-  color: #1e1e1e;
+  color: #272727;
   margin-top: 0.8rem;
   margin-bottom: 0.8rem;
   margin-left: 0.8rem;
