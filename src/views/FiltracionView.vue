@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="background-color: #effffb">
     <div class="row justify-content-center">
       <div class="col-12 text-center my-3">
         <h1 id="myTitle">Filtración granular rápida</h1>
@@ -14,13 +14,16 @@
         </p>
       </div>
     </div> 
-    <div class="row">
-      <div class="col my-2">
+    <div class="row justify-content-center">
+      <div class="col text-center my-2">
         <h3 id="mySubtitle">Valores por defecto para la simulación</h3>
         <ul class="list-group">
-          <li class="list-group-item list-group-item-info">Cantidad: {{ defaultMicroplastic }} microplásticos</li>
-          <li class="list-group-item list-group-item-info">Residuos: {{ defaultResidue }} micrplásticos</li>
-          <li class="list-group-item list-group-item-info">Días: {{ defaultTreatment }}</li>
+          <li class="list-group-item custom-list-item">
+            Cantidad: <span class="badge bg-dark pill">{{ defaultMicroplastic }} microplásticos</span></li>
+          <li class="list-group-item custom-list-item">
+            Residuos: <span class="badge bg-dark pill">{{ defaultResidue }}°C</span></li>
+          <li class="list-group-item custom-list-item">
+            Días: <span class="badge bg-dark pill">{{ defaultTreatment }}</span></li>
         </ul>
       </div>
     </div>
@@ -28,45 +31,55 @@
       <AwarenessSimulationSection />
       <FiltracionForm v-if="choice"/>
       <FiltracionResults v-if="microplastic && residue && treatment && choiceIsMade" />
-      <FiltracionSimulation v-if="onFilterValues.length > 0 && releasedValues.length > 0"/>
+      <FiltracionSimulation @chart-obtained="obtainSVG" v-if="onFilterValues.length > 0 && releasedValues.length > 0"/>
       <FiltracionExplained v-if="onFilterValues.length > 0 && releasedValues.length > 0"/>
     </div>
     <div class="row justify-content-center">
       <div class="col-12 text-center my-2">
         <button @click="handleButton" class="btn btn-outline-success btn-lg">
-          Simulación
+          {{ choiceIsMade ? (choice ? 'Simulación con valores por defecto' : 'Simulación con formulario' ) : 'Simulación' }}
         </button>
       </div>
     </div>
     <div v-if="onFilterValues.length > 0 && releasedValues.length > 0" class="row justify-content-center">
       <div class="col-12 text-center my-2">
-        <button class="btn btn-outline-danger btn-lg">Generar PDF</button>
+        <button v-if="svgData" @click="downloadPDF" class="btn btn-outline-danger btn-lg">Generar PDF</button>
       </div>
     </div>
   </div>
 </template>
 <style scoped>
 #myTitle {
-  border-style: solid;
-  border-color: #50d890;
-  border-radius: 1rem;
-  background-color: #272727;
-  font-size: 2.0rem;
+  font-size: 2rem;
   font-weight: bold;
-  color: #50d890;
+  background-image: linear-gradient(to left, #50d890, #50d8d4);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 #mySubtitle{
   font-size: 1.5rem;
   font-weight: bold;
-  color: #272727;
+  background-image: linear-gradient(to bottom, #4fcabe, #272727);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 .my-paragraph{
+  background-color: rgba(80, 216, 144, 0.25);
   text-align: justify;
-  color: #1e1e1e;
+  color: #272727;
   margin-top: 0.8rem;
   margin-bottom: 0.8rem;
   margin-left: 0.8rem;
   margin-right: 0.8rem;
+}
+.custom-list-item {
+  width: auto;
+  background-color: rgba(80, 216, 212, 0.25);
+  border: 0.1rem solid rgba(80, 216, 212, 0.25);
+  border-radius: 0.5rem;
+  margin: 0 auto;
 }
 </style>
 <script>
@@ -77,6 +90,7 @@ import FiltracionSimulation from "@/components/FiltracionComponents/FiltracionSi
 import FiltracionExplained from '@/components/FiltracionComponents/FiltracionExplained.vue';
 import Swal from "sweetalert2";
 import { mapGetters, mapMutations } from "vuex";
+import jsPDF from 'jspdf';
 
 export default {
   name: "FiltracionView",
@@ -94,6 +108,7 @@ export default {
       defaultMicroplastic: 29,
       defaultResidue: 5,
       defaultTreatment: 9,
+      svgData: null,
     };
   },
 
@@ -120,7 +135,7 @@ export default {
   methods: {
     handleButton () {
       Swal.fire({
-        title: "¿Usar valores por defecto?",
+        title: "¿Valores por defecto o Formulario?",
         text: "Ve a la simulación con valores por defecto o asígnalos por medio del formulario.",
         background: "#1e1e1e",
         color: "#effffb",
@@ -159,6 +174,37 @@ export default {
       });
       this.choiceIsMade = true;
     },
-   },
- };
+    obtainSVG(svg) {
+      this.svgData = svg;
+    },
+    downloadPDF() {
+      const pdf = new jsPDF();
+      const img = new Image();
+
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        const canvasWidth = 672;
+        const canvasHeight = 403.2;
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+        const context = canvas.getContext('2d');
+        context.drawImage(img, 0, 0);
+        const imgData = canvas.toDataURL('image/png');
+        
+        /* const downloadLink = document.createElement('a');
+        downloadLink.href = imgData;
+        downloadLink.download = 'chart.svg';
+        
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+
+        document.body.removeChild(downloadLink); */
+        
+        pdf.addImage(imgData, 'PNG', 10, 10, 200, 120); //aspect ratio de 5:3
+        pdf.save('Filtracion.pdf');
+      };
+      img.src = 'data:image/svg+xml,' + encodeURIComponent(this.svgData);
+    },
+  },
+};
 </script>

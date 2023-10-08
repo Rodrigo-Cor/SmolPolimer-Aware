@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="background-color: white; border-radius: 0.2rem;" >
     <div class="row justify-content-center">
       <div class="col-12 text-center my-2">
         <h2 id="myTitle">Simulación</h2>
@@ -14,18 +14,19 @@
       <div class="col-12 text-center my-2">
         <div ref="containerRef"></div>
         <div id="chart-container"></div>
+        <div id="chartPDF-container"></div>
       </div>
     </div>
   </div>    
 </template>
 <style scoped>
 #myTitle{
-  border-style: solid;
-  border-color: #4f98ca;
-  border-radius: 1rem;
   font-size: 1.7rem;
   font-weight: bold;
-  color: #4f98ca;
+  background-image: linear-gradient(to bottom, #50d8d4, #4f5bca);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 #myReleased{
     font-size: 1rem;
@@ -112,7 +113,8 @@ export default {
         .call(d3.axisBottom(x));
 
       svg.append("g")
-        .call(d3.axisLeft(y))
+        .call(d3.axisLeft(y));
+        
       var lineDegradated = d3.line()
         .x((d, i) => x(i))
         .y(d => y(d));
@@ -132,6 +134,81 @@ export default {
         .transition()
         .duration(2000)
         .attr("stroke-dashoffset", 0);
+
+      svg.append("g")
+        .attr("class", "grid")
+        .attr("transform", `translate(0,${height})`)
+        .attr("stroke", "#1e1e1e")
+        .attr("stroke-width", .5)
+        .call(d3.axisBottom(x)
+          .tickSize(-height)
+          .tickFormat("")
+        );
+
+      svg.append("g")
+        .attr("class", "grid")
+        .attr("stroke", "#1e1e1e")
+        .attr("stroke-width", .5)
+        .call(d3.axisLeft(y)
+          .tickSize(-width)
+          .tickFormat("")
+        );
+      
+      svg
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", height + margin.bottom - 25)
+        .attr("text-anchor", "middle")
+        .text("Bimestres");
+
+      svg
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("x", - height / 2)
+        .attr("y", (margin.left / 2) - 75)
+        .attr("text-anchor", "middle")
+        .text("Microplásticos");
+
+        this.createChartForPDF();
+    },
+    createChartForPDF() {
+        d3.select("#chartPDF-container").select("svg").remove();
+        var margin = { top: 20, right: 75, bottom: 75, left: 75 };
+        const width = 522;
+        const height = 308.2;
+
+        var x = d3.scaleLinear()
+          .range([0, width]);
+        var y = d3.scaleLinear()
+          .range([height, 0]);
+        
+        var svg = d3.select("#chartPDF-container")/* var svg = d3.create("svg") */
+        .append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+          .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        x.domain([0, this.degradatedValues.length - 1]);
+        y.domain([d3.min(this.degradatedValues), d3.max(this.degradatedValues)]);
+        
+        svg.append("g")
+          .attr("transform", `translate(0,${height})`)
+          .call(d3.axisBottom(x));
+
+        svg.append("g")
+          .call(d3.axisLeft(y));
+
+        var lineDegradated = d3.line()
+        .x((d, i) => x(i))
+        .y(d => y(d));
+      
+        svg.append("path")
+          .datum(this.degradatedValues)
+          .attr("fill", "none")
+          .attr("stroke", "#4f98ca")
+          .attr("stroke-width", 2)
+          .attr("d", lineDegradated);
 
         svg.append("g")
           .attr("class", "grid")
@@ -166,7 +243,12 @@ export default {
           .attr("y", (margin.left / 2) - 75)
           .attr("text-anchor", "middle")
           .text("Microplásticos");
-    },
+
+        const svgElement = document.querySelector("#chartPDF-container svg")
+        const svgString = new XMLSerializer().serializeToString(svgElement/* svg.node() */);
+        this.$emit('chart-obtained', svgString);
+        d3.select("#chartPDF-container").select("svg").remove();
+      },
     observeContainerResize() {
       const container = this.$refs.containerRef;
       this.resizeObserver = new ResizeObserver(() => {

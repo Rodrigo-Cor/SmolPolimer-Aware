@@ -1,69 +1,87 @@
 <template>
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-12 text-center mt-3">
-          <h2 id="myTitle">Resultados</h2>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-12 text-center">
-          <p class="my-paragraph">
-            En la siguiente lista se encuentra el resumen de los datos introducidos al simulador,
-            mientras que después en la tabla, se encuentran los resultados: se indican los días y
-            el porcentaje de microplásticos acumulados ya sea en el filtro, o que fueron liberados
-            en el río.
-          </p>
-        </div>
-      </div> 
-      <div class="row">
-        <div class="col my-2">
-          <h3 id="mySubtitle">Resumen de datos de entrada</h3>
-          <ul class="list-group">
-            <li class="list-group-item list-group-item-success">Cantidad: {{ microplastic }} microplásticos</li>
-            <li class="list-group-item list-group-item-success">Residuos: {{ residue }} microplásticos</li>
-            <li class="list-group-item list-group-item-success">Días: {{ treatment }}</li>
-          </ul>
-        </div>
-      </div>      
-      <div class="row">
-        <div id="table-container" class="col-12 my-2">
-          <table class="table table-success table-striped-columns">
-            <thead>
-              <tr>
-                <th scope="col">Días</th>
-                <th scope="col">% MP en filtro</th>
-                <th scope="col">% de MP en el río</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(item, index) in onFilterValues" :key="index">
-                <td>{{ index + 1 }}</td>
-                <td>{{ item.toFixed(2) }}%</td>
-                <td>{{ releasedValues[index].toFixed(2) }}%</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 text-center mt-3">
+        <h2 id="myTitle">Resultados</h2>
       </div>
     </div>
-  </template>
-  <style scoped>
-  #myTitle{
-    border-style: solid;
-    border-color: #4f98ca;
-    border-radius: 1rem;
-    font-size: 1.7rem;
-    font-weight: bold;
-    color: #4f98ca;
-  }
+    <div class="row justify-content-center">
+      <div class="col-12 text-center">
+        <p class="my-paragraph">
+          En la siguiente lista se encuentra el resumen de los datos introducidos al simulador,
+          mientras que después en la tabla, se encuentran los resultados: se indican los días y
+          el porcentaje de microplásticos acumulados ya sea en el filtro, o que fueron liberados
+          en el río.
+        </p>
+      </div>
+    </div> 
+    <div class="row justify-content-center">
+      <div class="col text-center my-2">
+        <h3 id="mySubtitle">Resumen de datos de entrada</h3>
+        <ul class="list-group">
+          <li class="list-group-item custom-list-item">
+            Cantidad: <span class="badge bg-dark pill">{{ microplastic }} microplásticos</span></li>
+          <li class="list-group-item custom-list-item">
+            Residuos: <span class="badge bg-dark pill">{{ residue }}°C</span></li>
+          <li class="list-group-item custom-list-item">
+            Días: <span class="badge bg-dark pill">{{ treatment }}</span></li>
+        </ul>
+      </div>
+    </div>      
+    <div class="row">
+      <div class="col-12 my-2">
+        <table class="table table-info table-striped-columns">
+          <thead>
+            <tr>
+              <th scope="col">Días</th>
+              <th scope="col">% MP en filtro</th>
+              <th scope="col">% de MP en el río</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in onFilterValues" :key="index">
+              <td>{{ index + 1 }}</td>
+              <td>{{ item.toFixed(2) }}%</td>
+              <td>{{ releasedValues[index].toFixed(2) }}%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</template>
+<style scoped>
+#myTitle{
+  font-size: 1.7rem;
+  font-weight: bold;
+  background-image: linear-gradient(to bottom, #50d8d4, #4f5bca);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
 #mySubtitle{
   font-size: 1.5rem;
   font-weight: bold;
-  color: #272727;
+  background-image: linear-gradient(to bottom, #4fcabe, #272727);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
-#myTableContainer {
-  max-height: 10rem;
-  overflow-y: auto;
+.my-paragraph{
+  background-color: rgba(80, 216, 144, 0.25);
+  text-align: justify;
+  color: #272727;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+  margin-left: 0.8rem;
+  margin-right: 0.8rem;
+}
+.custom-list-item {
+  width: auto;
+  background-color: rgba(80, 216, 212, 0.25);
+  border: 0.1rem solid rgba(80, 216, 212, 0.25);
+  border-radius: 0.5rem;
+  margin: 0 auto;
 }
   </style>
   <script>
