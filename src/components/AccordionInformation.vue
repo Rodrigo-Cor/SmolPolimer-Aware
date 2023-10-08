@@ -27,16 +27,22 @@
         :data-bs-parent="'#accordion' + typeAccordion"
       >
         <div class="accordion-body card-body">
-          <p>{{ info.title }}</p>
-          <section v-bind:class="{'text-card': typeAccordion === 'references'}">
+          <p
+            class="fw-bolder text-title"
+          >
+            {{ info.title }}
+          </p>
+          <section
+            v-bind:class="{ 'text-card': typeAccordion === 'references' }"
+          >
             <template v-if="typeAccordion === 'references'">
-              <p class="text-body-secondary">Autores: {{ info.author }}</p>
+              <p class="text-body-secondary fs-6">Autores: {{ info.author }}</p>
               <a target="_blank" :href="info.link" class="btn btn-dark"
                 >Ir al articulo</a
               >
             </template>
             <template v-else>
-              <p>{{ info.paragraph }}</p>
+              <p class="text-body-secondary fs-6">{{ info.paragraph }}</p>
             </template>
           </section>
         </div>
@@ -46,6 +52,8 @@
 </template>
 
 <script>
+import { generateColor } from "@/globalFunctions";
+
 export default {
   name: "AccordionInformation",
   props: {
@@ -62,11 +70,25 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      color: [],
+    };
+  },
+  methods: {
+    showColor(color, luminisity, count) {
+      this.color = generateColor(color, luminisity, count);
+    },
+  },
 };
 </script>
 
 <style scoped>
 .card-body {
   background-image: linear-gradient(to bottom, #50d890, #4f98ca);
+}
+
+.text-title{
+  color: #160c7f;
 }
 </style>

@@ -1,5 +1,5 @@
-<template>
-  <div class="container-fluid pt-2">
+<template>  
+  <div class="text-justify-custom pt-2">
     ¿Quieres conocer más? Selecciona el tema de tu interés
     <div class="row">
       <div
@@ -15,7 +15,7 @@
               !stateRequest &&
               referencesData.length === 0 &&
               buttonStates[key] !== false,
-            'btn btn-outline-primary': !buttonStates[key],
+            'btn btn-outline-dark': !buttonStates[key],
             'btn btn-secondary':
               buttonStates[key] && referencesData.length !== 0,
           }"

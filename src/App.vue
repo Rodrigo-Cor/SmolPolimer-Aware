@@ -13,13 +13,20 @@ nav a.router-link-exact-active.nav-link,
 nav a.router-link-exact-active.navbar-brand {
   color: #50d890;
 }
+.color-home {
+  background-color: #5cd2e655;
+}
+
+.section-title {
+  background-image: linear-gradient(to bottom, #02787c, #4f98ca);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
 @media (max-width: 576px) {
   .text-size {
     font-size: 1rem;
-  }
-  .img-info {
-    width: 100%;
   }
 }
 
@@ -27,17 +34,11 @@ nav a.router-link-exact-active.navbar-brand {
   .text-size {
     font-size: 1.15rem;
   }
-  .img-info {
-    width: 75%;
-  }
 }
 
 @media (min-width: 992px) {
   .text-size {
     font-size: 1.3rem;
-  }
-  .img-info {
-    width: 50%;
   }
 }
 
@@ -53,12 +54,7 @@ nav a.router-link-exact-active.navbar-brand {
   font-size: 0.6rem;
 }
 
-.img-height {
-  height: 15rem;
-}
-
-.text-button{
+.text-button {
   font-size: 0.8rem;
 }
-
 </style>

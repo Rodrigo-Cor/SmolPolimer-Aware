@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import store from "@/store";
 
+import AppLayout from "@/views/AppLayout.vue";
 import HomeView from "@/views/HomeView.vue";
 import Bacillus from "@/views/BacillusView.vue";
 import FiltracionGranular from "@/views/FiltracionView.vue";
@@ -11,9 +12,12 @@ import FightPollution from "@/views/FightPollutionView.vue";
 const routes = [
   {
     path: "/",
-    name: "HomeView",
-    component: HomeView,
+    component: AppLayout,
     children: [
+      {
+        path: "",
+        component: HomeView,
+      },
       {
         path: "/tecnicas",
         name: "Tecnicas",
@@ -52,12 +56,15 @@ router.beforeEach((to, from, next) => {
   if (from.path === "/" && to.path !== "/") {
     store.commit("setIsDisabled", true);
   }
-  if (from.path === "/tecnicas/filtracion" && to.path !== "/tecnicas/filtracion") {
+  if (
+    from.path === "/tecnicas/filtracion" &&
+    to.path !== "/tecnicas/filtracion"
+  ) {
     store.commit("setFiltracionValues", []);
     store.commit("setOnFilterValues", []);
     store.commit("setReleasedValues", []);
   }
-  if(from.path === "/tecnicas//bacillus" && to.path !== "/tecnicas//bacillus") {
+  if (from.path === "/tecnicas/bacillus" && to.path !== "/tecnicas//bacillus") {
     store.commit("setBacillusValues", []);
     store.commit("setDegradatedValues", []);
   }

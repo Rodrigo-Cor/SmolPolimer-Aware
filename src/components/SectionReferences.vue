@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid my-2">
+  <div class="my-2">
     <button
       @click="() => (showReferences = !showReferences)"
       class="btn btn-dark"

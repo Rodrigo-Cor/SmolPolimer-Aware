@@ -1,7 +1,6 @@
 import { createStore } from "vuex";
 import axios from "axios";
 import Swal from "sweetalert2";
-const { v4: uuidv4 } = require("uuid");
 
 export default createStore({
   modules: {
@@ -9,7 +8,7 @@ export default createStore({
       state: {
         initialData: {
           idUser: "",
-          numberQuestion: 0,
+          numberQuestion: -1,
         },
         selectedOption: {
           initial: { option: "", value: -1 },
@@ -28,9 +27,19 @@ export default createStore({
         setInitialData(state, { idUser, numberQuestion }) {
           state.initialData.idUser = idUser;
           state.initialData.numberQuestion = numberQuestion;
+          localStorage.setItem("idUser", idUser);
+          localStorage.setItem("numberQuestion", numberQuestion);
         },
         setSelectedOptionInitial(state, selectedOptionInitial) {
           state.selectedOption.initial = selectedOptionInitial;
+          localStorage.setItem(
+            "selectedOptionInitialOption",
+            selectedOptionInitial["option"]
+          );
+          localStorage.setItem(
+            "selectedOptionInitialValue",
+            selectedOptionInitial["value"]
+          );
         },
         setSelectedOptionFinal(state, selectedOptionFinal) {
           state.selectedOption.final = selectedOptionFinal;
@@ -40,9 +49,9 @@ export default createStore({
         },
       },
       actions: {
-        modifyData({ commit }, numberQuestion) {
+        modifyData({ commit }, { idUser, numberQuestion }) {
           commit("setInitialData", {
-            idUser: uuidv4(),
+            idUser: idUser,
             numberQuestion: numberQuestion,
           });
         },
@@ -106,8 +115,8 @@ export default createStore({
         bacillusValues: [],
       },
       getters: {
-        getFiltracionValues: state => state.filtracionValues,
-        getBacillusValues: state => state.bacillusValues,
+        getFiltracionValues: (state) => state.filtracionValues,
+        getBacillusValues: (state) => state.bacillusValues,
       },
       mutations: {
         setFiltracionValues(state, values) {
@@ -115,7 +124,7 @@ export default createStore({
         },
         setBacillusValues(state, values) {
           state.bacillusValues = values;
-        }
+        },
       },
     },
     simulationResults: {
@@ -125,9 +134,9 @@ export default createStore({
         degradatedValues: [],
       },
       getters: {
-        getOnFilterValues: state => state.onFilterValues,
-        getReleasedValues: state => state.releasedValues,
-        getDegradatedValues: state => state.degradatedValues, 
+        getOnFilterValues: (state) => state.onFilterValues,
+        getReleasedValues: (state) => state.releasedValues,
+        getDegradatedValues: (state) => state.degradatedValues,
       },
       mutations: {
         setOnFilterValues(state, values) {

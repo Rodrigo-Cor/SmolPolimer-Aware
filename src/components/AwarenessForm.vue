@@ -1,55 +1,29 @@
 <template>
-  <div class="container-fluid">
+  <div>
     <HelpParagraph
       :text="questions[numberQuestion].help"
       v-if="typeQuestion === 'start'"
     />
     <div class="my-2">
-      <span class="py-3 me-3">{{ questions[numberQuestion].question }}</span>
+      <span class="py-3">{{ questions[numberQuestion].question }}</span>
     </div>
     <form @submit.prevent>
-      <template v-if="questions[numberQuestion].options.length > 2">
-        <div class="col-lg-6">
-          <select
-            class="form-select"
-            v-model="localSelectedOption"
-            :disabled="typeQuestion === 'start' ? isDisabled : disabledFinal"
-            :aria-label="typeQuestion + 'Question'"
-          >
-            <option value="" disabled>Selecciona una opción</option>
-            <template
-              v-for="radio in questions[numberQuestion].options"
-              :key="radio['value']"
-            >
-              <option :value="radio['option']">{{ radio["option"] }}</option>
-            </template>
-          </select>
-        </div>
-      </template>
-      <template v-else>
-        <div
-          v-for="(radio, index) in questions[numberQuestion].options"
-          :key="radio['value']"
+      <div class="col-md-6 col-12">
+        <select
+          class="form-select"
+          v-model="localSelectedOption"
+          :disabled="typeQuestion === 'start' ? isDisabled : disabledFinal"
+          :aria-label="typeQuestion + 'Question'"
         >
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              :id="'option' + typeQuestion + index"
-              :value="radio['option']"
-              :name="'question' + typeQuestion + index"
-              v-model="localSelectedOption"
-              :disabled="typeQuestion === 'start' ? isDisabled : disabledFinal"
-            />
-            <label
-              class="form-check-label"
-              :for="'option' + typeQuestion + index"
-            >
-              {{ radio["option"] }}
-            </label>
-          </div>
-        </div>
-      </template>
+          <option value="" disabled>Selecciona una opción</option>
+          <template
+            v-for="radio in questions[numberQuestion].options"
+            :key="radio['value']"
+          >
+            <option :value="radio['option']">{{ radio["option"] }}</option>
+          </template>
+        </select>
+      </div>
       <button
         v-if="typeQuestion === 'final'"
         type="submit"
@@ -72,13 +46,11 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import axios from "axios";
-import Popper from "vue3-popper";
 import HelpParagraph from "./HelpParagraph.vue";
 
 export default {
   name: "AwarenessForm",
   components: {
-    Popper,
     HelpParagraph,
   },
   props: {

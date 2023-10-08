@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-4 text-justify-custom">
+  <div class="my-1 text-justify-custom">
     <template v-for="(value, key) in text" :key="key">
       <span
         >{{ value.value === "" ? key : "" }}
@@ -13,7 +13,6 @@
                 meaning: text[key].meaning,
               })
           "
-          @blur="concept = { value: '', meaning: '' }"
           class="btn btn-link p-0 m-0 fst-italic"
         >
           {{ value.value }}
@@ -30,6 +29,8 @@
 
 <script>
 import TableInformation from "./TableInformation.vue";
+import { generateColor } from "@/globalFunctions.js";
+
 export default {
   name: "HelpParagraph",
   data() {
@@ -38,6 +39,7 @@ export default {
         value: "",
         meaning: "",
       },
+      color: [],
     };
   },
   computed: {
@@ -59,6 +61,11 @@ export default {
   },
   components: {
     TableInformation,
+  },
+  methods: {
+    showColor(color, luminisity, count) {
+      this.color = generateColor(color, luminisity, count);
+    },
   },
 };
 </script>

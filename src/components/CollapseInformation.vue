@@ -1,30 +1,40 @@
 <template>
-  <div class="container-fluid text-justify-custom mt-2">
-    <div class="d-flex justify-content-between">
-      <div v-for="(paragraph, index) in informationCollapse" :key="index">
-        <button
-          class="btn btn-info btn-sm mb-2"
-          @click="toggleCollapse(index)"
-          @blur="toggleCollapse(index)"
-          :class="{
-            'active btn btn-warning': arrayCollapse[index].isOpen,
-          }"
-        >
-          {{ paragraph.title }}
-        </button>
+  <div class="container-fluid my-2">
+    <div class="d-flex justify-content-center">
+      <div class="btn-group" role="group" aria-label="groupButtonCollapse">
+        <div v-for="(paragraph, index) in informationCollapse" :key="index">
+          <button
+            type="button"
+            class="btn btn-sm m-1"
+            @click="toggleCollapse(index)"
+            @blur="closeCollapse(index)"
+            v-bind:style="{
+              backgroundColor: arrayCollapse[index].isOpen
+                ? '#ffc107'
+                : colorButton[index],
+            }"
+            :class="{
+              active: arrayCollapse[index].isOpen,
+            }"
+          >
+            {{ paragraph.title }}
+          </button>
+        </div>
       </div>
     </div>
-    <div class="row">
+    <div class="d-flex justify-content-center">
       <div
-        class="col-12 col-md-3 mt-2"
+        class="my-2"
         v-for="(paragraph, index) in informationCollapse"
         :key="index"
       >
-        <div
-          :class="{ collapse: true, show: arrayCollapse[index].isOpen }"
-          :id="'collapse' + typeCollapse + (index + 1)"
-        >
-          <div class="card card-body">
+        <div :class="{ collapse: true, show: arrayCollapse[index].isOpen }">
+          <div
+            class="card card-body"
+            v-bind:style="{
+              backgroundColor: colorButton[index] + '7F',
+            }"
+          >
             {{ paragraph.information }}
           </div>
         </div>
@@ -34,6 +44,7 @@
 </template>
 
 <script>
+import { generateColor } from "@/globalFunctions";
 export default {
   name: "CollapseInformation",
   props: {
@@ -41,14 +52,11 @@ export default {
       type: Array,
       required: true,
     },
-    typeCollapse: {
-      type: String,
-      required: true,
-    },
   },
   data() {
     return {
       arrayCollapse: this.informationCollapse,
+      colorButton: [],
     };
   },
   methods: {
@@ -58,6 +66,15 @@ export default {
         return paragraph;
       });
     },
+    closeCollapse(index){
+      this.arrayCollapse[index].isOpen = false;
+    },
+    showColor(color, luminisity, count) {
+      return generateColor(color, luminisity, count);
+    },
+  },
+  mounted() {
+    this.colorButton = [...this.showColor("blue", "light", 4)];
   },
 };
 </script>

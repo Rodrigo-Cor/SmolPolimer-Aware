@@ -1,5 +1,5 @@
 <template>
-  <table class="table">
+  <table class="table table-success table-striped-columns">
     <thead>
       <tr>
         <template v-for="header in headers" :key="header">
@@ -9,7 +9,7 @@
     </thead>
     <tbody>
       <tr v-for="(value, key) in information" :key="key">
-        <th scope="row">{{ value.type }}</th>
+        <th class="text-start" scope="row">{{ value.type }}</th>
         <td>
           <div class="row">
             <div

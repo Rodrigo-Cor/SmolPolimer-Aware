@@ -1,234 +1,285 @@
 <template>
-  <div class="home">
-    <NavbarHome />
-    <router-view v-if="isHomeView">
-      <CarouselHome />
-      <AwarenessHomeSection />
+  <CarouselHome />
+  <!--
+  <div class="container-fluid">
+    <p>Color: {{ color[0] }}</p>
+    <button class="btn" @click="showColor('blue', 'light', 1)">
+      Generar colores
+    </button>
+  </div>
+   -->
+  <div class="color-home">
+    <AwarenessHomeSection />
+    <div class="container-fluid text-justify-custom">
+      <div class="row">
+        <div class="my-2 col-md-6 col-12">
+          El uso excesivo de productos plásticos ha brindado múltiples
+          beneficios en la vida cotidiana, pero también ha llevado a
+          consecuencias no deseadas. Uno de los más grandes problemas es la
+          formación de microplásticos, los cuales representan una amenaza global
+          debido a su persistencia y amplia distribución en la vida silvestre y
+          los seres humanos.
+          <ReferencesAuthors
+            :img="{
+              src: require('@/assets/image-from-rawpixel-id-5901973-jpeg.jpg'),
+              alt: 'Botella flotando en el mar',
+            }"
+            :credits="{
+              'Image ':
+                'https://www.rawpixel.com/image/5901973/photo-image-cloud-public-domain-blue',
+              'by ': '',
+              rawpixel: 'https://www.rawpixel.com/',
+            }"
+          />
+        </div>
+        <div class="col-md-6 col-12">
+          <CollapseInformation
+            :informationCollapse="[
+              {
+                information:
+                  'Desde el año 2016, se ha registrado un alarmante aumento en el uso de plásticos en la sociedad.',
+                title: 'Causa',
+                isOpen: false,
+              },
+              {
+                information:
+                  'Diversos factores físicos y químicos provocan que los plásticos se fragmentes, resultando así los microplásticos.',
+                title: 'Consecuencia',
+                isOpen: false,
+              },
+              {
+                information:
+                  'Los microplásticos son partículas sólidas sintéticas con un rango de tamaño que comprende de 1 µm hasta 5 mm.',
+                title: 'Definición',
+                isOpen: false,
+              },
+              {
+                information:
+                  'Se identifican como esferas, fragmentos irregulares, fibras, gránulos, microperlas y películas.',
+                title: 'Formas',
+                isOpen: false,
+              },
+            ]"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid text-justify-custom">
+      <span
+        >En cuanto a su origen, se pueden clasificar en primarios y
+        secundarios.</span
+      >
+      <TableInformation
+        :information="[
+          {
+            type: 'Primarios',
+            description:
+              'Son los fabricados intencionalmente para artículos como cosméticos, pinturas, exfoliantes, pasta de dientes, junto con productos de limpieza.',
+            imgData: {
+              src: require('@/assets/robert-laursoo-m-cTm7EWlGI-unsplash.jpg'),
+              alt: 'Microplásticos primarios',
+            },
+            credits: {
+              'Foto de ': '',
+              'Robert Laursoo  ':
+                'https://unsplash.com/es/@robineero?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
+              'en ': '',
+              Unsplash:
+                'https://unsplash.com/es/fotos/m-cTm7EWlGI?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
+            },
+          },
+          {
+            type: 'Secundarios',
+            description:
+              'Son derivados de procesos como la fragmentación, significando acciones mecánicas y fricciones con el ambiente. El otro proceso es la degradación, implicando la pérdida de peso molecular mediante cinco diferentes mecanismos: biodegradación, fotodegradación, degradación oxidativa, degradación térmica e hidrólisis.',
+            imgData: {
+              src: require('@/assets/brian-yurasits-2W603t4Q76M-unsplash.jpg'),
+              alt: 'Gaviota con microplásticos en su pico',
+            },
+            credits: {
+              'Foto de ': '',
+              'Brian Yurasits ':
+                'https://unsplash.com/es/@brian_yuri?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
+              'en ': '',
+              Unsplash:
+                'https://unsplash.com/es/fotos/2W603t4Q76M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
+            },
+          },
+        ]"
+        :headers="['Tipo', 'Características']"
+        :img="true"
+      />
+    </div>
 
-      <div class="container-fluid text-justify-custom">
-        El uso excesivo de productos plásticos ha brindado múltiples beneficios
-        en la vida cotidiana, pero también ha llevado a consecuencias no
-        deseadas. Uno de los más grandes problemas es la formación de
-        microplásticos, los cuales representan una amenaza global debido a su
-        persistencia y amplia distribución en la vida silvestre y los seres
-        humanos.
-        <CollapseInformation
-          :typeCollapse="'caracteristicas'"
-          :informationCollapse="[
-            {
-              information:
-                'Desde el año 2016, se ha registrado un alarmante aumento en el uso de plásticos en la sociedad.',
-              title: 'Causa',
-              isOpen: false,
+    <div class="container-fluid text-justify-custom">
+      <h3 class="text-center fw-semibold section-title">
+        Curiosidades de los microplásticos
+      </h3>
+      <InfoSection
+        :img="{
+          src: require('@/assets/fly-d-NXyXNl5LTqM-unsplash.jpg'),
+          alt: 'Popotes de plástico',
+        }"
+        :sideImage="false"
+        :arrayText="[
+          `Estas partículas provienen de muchas partes, en especial de objetos de uso
+        cotidiano y con el paso del tiempo se van degastando, ocasionando un
+        desprendimiento de fibras que van directamente al agua. Esto significa una
+        gran fuente de contaminación, pero como todo problema ambiental, siempre
+        tiene sus datos curiosos, en cuanto a propiedades, su descubrimiento y donde
+        más se han encontrado.`,
+        ]"
+        :credits="{
+          'Foto de ': '',
+          'FLY:D ':
+            'https://unsplash.com/es/@flyd2069?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
+          'en ': '',
+          Unsplash:
+            'https://unsplash.com/es/fotos/NXyXNl5LTqM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
+        }"
+      />
+      <CollapseInformation
+        :informationCollapse="[
+          {
+            information:
+              'Al tener diversas densidades significando que su propagación sobre el ecosistema acuático es mucho mayor.',
+            title: 'Densidad',
+            isOpen: false,
+          },
+          {
+            information:
+              'En el 2008 fue la primera vez que se estableció un tamaño límite de los microplásticos, durante el evento de la Primera Jornada Internacional sobre la Aparición, Efectos y Destino de los desechos marinos de microplásticos.',
+            title: 'Hallazgo',
+            isOpen: false,
+          },
+          {
+            information:
+              'Los microplásticos pueden adsorber y transferir contaminantes orgánicos debido a su capacidad por repeler el agua.',
+            title: 'Propiedades',
+            isOpen: false,
+          },
+          {
+            information:
+              'Se han encontrado cantidades considerables de microplásticos, gracias a los procesos de envasado.',
+            title: 'Agua embotellada',
+            isOpen: false,
+          },
+        ]"
+      />
+    </div>
+    <div class="container-fluid text-justify-custom">
+      <h3 class="text-center fw-semibold section-title">
+        Efectos de los microplásticos en organismos
+      </h3>
+      Los microplásticos son un problema en crecimiento a nivel global que tiene
+      como característica principal el diminuto tamaño de los plásticos,
+      provocando así una probabilidad demasiado alta de ingesta en organismo
+      acuáticos, afectando su biología. Al igual que, afectar la calidad de
+      recursos hídricos y alimentos de consumo humano, ya que su propagación se
+      puede dar cualquier cuerpo de agua.
+      <InformationPages
+        :infoComponent="[
+          {
+            img: {
+              src: require('@/assets/tim-mossholder-qq-8dpdlBsY-unsplash.jpg'),
+              alt: 'Gaviota con microplásticos en su pico',
             },
-            {
-              information:
-                'Diversos factores físicos y químicos provocan que los plásticos se fragmentes, resultando así los microplásticos.',
-              title: 'Consecuencia',
-              isOpen: false,
+            sideImage: true,
+            credits: {
+              'Foto de ': '',
+              'Tim Mossholder ':
+                'https://unsplash.com/es/@timmossholder?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
+              'en ': '',
+              Unsplash:
+                'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
             },
-            {
-              information:
-                'Los microplásticos son partículas sólidas sintéticas con un rango de tamaño que comprende de 1 µm hasta 5 mm.',
-              title: 'Definición',
-              isOpen: false,
+            arrayText: [
+              `Los microplásticos representan una amenaza física y química para los ecosistemas y organismos, puesto que, se pueden llegar a confundir con alimento por diferentes especies como mariscos, peces, aves marinas, tortugas marinas y mamíferos.`,
+            ],
+          },
+          {
+            img: {
+              src: require('@/assets/tim-mossholder-qq-8dpdlBsY-unsplash.jpg'),
+              alt: 'Gaviota con microplásticos en su pico',
             },
-            {
-              information:
-                'Se identifican como esferas, fragmentos irregulares, fibras, gránulos, microperlas y películas.',
-              title: 'Formas',
-              isOpen: false,
+            sideImage: true,
+            credits: {
+              'Foto de ': '',
+              'Tim Mossholder ':
+                'https://unsplash.com/es/@timmossholder?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
+              'en ': '',
+              Unsplash:
+                'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
             },
-          ]"
-        />
-      </div>
-      <div class="container-fluid text-justify-custom">
-        En cuanto a su origen, se pueden clasificar en primarios y secundarios.
-        <TableInformation
-          :information="[
-            {
-              type: 'Primarios',
-              description:
-                'Son los fabricados intencionalmente para artículos como cosméticos, pinturas, exfoliantes, pasta de dientes, junto con productos de limpieza.',
-              imgData: {
-                src: require('@/assets/robert-laursoo-m-cTm7EWlGI-unsplash.jpg'),
-                alt: 'Microplásticos primarios',
-              },
-              credits: {
-                'Imagen de ': '',
-                'Robert Laursoo  ':
-                  'https://unsplash.com/es/@robineero?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
-                'en ': '',
-                Unsplash:
-                  'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
-              },
+            arrayText: [
+              `Una vez que los ingieren, el primer gran efecto en organismos acuáticos son las obstrucciones intestinales, ocurriendo en el tracto digestivo, en el cual, puede tener dos desenlaces, el primero es que sean expulsados, o bien, retenidas.`,
+            ],
+          },
+          {
+            img: {
+              src: require('@/assets/tim-mossholder-qq-8dpdlBsY-unsplash.jpg'),
+              alt: 'Gaviota con microplásticos en su pico',
             },
-            {
-              type: 'Secundarios',
-              description:
-                'Son derivados de procesos como la fragmentación, significando acciones mecánicas y fricciones con el ambiente. El otro proceso es la degradación, implicando la pérdida de peso molecular mediante cinco diferentes mecanismos: biodegradación, fotodegradación, degradación oxidativa, degradación térmica e hidrólisis.',
-              imgData: {
-                src: require('@/assets/brian-yurasits-2W603t4Q76M-unsplash.jpg'),
-                alt: 'Gaviota con microplásticos en su pico',
-              },
-              credits: {
-                'Imagen de ': '',
-                'Brian Yurasits ':
-                  'https://unsplash.com/es/@brian_yuri?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
-                'en ': '',
-                Unsplash:
-                  'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
-              },
+            sideImage: true,
+            credits: {
+              'Foto de ': '',
+              'Tim Mossholder ':
+                'https://unsplash.com/es/@timmossholder?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
+              'en ': '',
+              Unsplash:
+                'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
             },
-          ]"
-          :headers="['Tipo', 'Características']"
-          :img="true"
-        />
-      </div>
-
-      <div class="container-fluid text-justify-custom">
-        <h3 class="text-center">Curiosidades de los microplásticos</h3>
-        Estas partículas provienen de muchas partes, en especial de objetos de
-        uso cotidiano y con el paso del tiempo se van degastando, ocasionando un
-        desprendimiento de fibras que van directamente al agua. Esto significa
-        una gran fuente de contaminación, pero como todo problema ambiental,
-        siempre tiene sus datos curiosos, en cuanto a propiedades, su
-        descubrimiento y donde más se han encontrado.
-        <CollapseInformation
-          :typeCollapse="'curiosidades'"
-          :informationCollapse="[
-            {
-              information:
-                'Al tener diversas densidades significando que su propagación sobre el ecosistema acuático es mucho mayor.',
-              title: 'Densidad',
-              isOpen: false,
+            arrayText: [
+              `El segundo grande efecto es la disminución de la ingesta de nutrientes, afectando las tasas de crecimiento, junto a la reproducción. Teniendo un riesgo de desequilibrio en la cadena alimenticia acuática.`,
+            ],
+          },
+          {
+            img: {
+              src: require('@/assets/tim-mossholder-qq-8dpdlBsY-unsplash.jpg'),
+              alt: 'Gaviota con microplásticos en su pico',
             },
-            {
-              information:
-                'En el 2008 fue la primera vez que se estableció un tamaño límite de los microplásticos, durante el evento de la Primera Jornada Internacional sobre la Aparición, Efectos y Destino de los desechos marinos de microplásticos.',
-              title: 'Hallazgo',
-              isOpen: false,
+            sideImage: true,
+            credits: {
+              'Foto de ': '',
+              'Tim Mossholder ':
+                'https://unsplash.com/es/@timmossholder?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
+              'en ': '',
+              Unsplash:
+                'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
             },
-            {
-              information:
-                'Los microplásticos pueden adsorber y transferir contaminantes orgánicos debido a su capacidad por repeler el agua.',
-              title: 'Propiedades',
-              isOpen: false,
+            arrayText: [
+              `Aunado a lo anterior, también existen afectaciones graves en su proceso de reproducción, a causa de que los microplásticos pueden simular ser hormonas repercutiendo en la etapa de gestación e inicios de desarrollo.`,
+            ],
+          },
+          {
+            img: {
+              src: require('@/assets/tim-mossholder-qq-8dpdlBsY-unsplash.jpg'),
+              alt: 'Gaviota con microplásticos en su pico',
             },
-            {
-              information:
-                'Se han encontrado cantidades considerables de microplásticos, gracias a los procesos de envasado.',
-              title: 'Agua embotellada',
-              isOpen: false,
+            sideImage: true,
+            credits: {
+              'Foto de ': '',
+              'Tim Mossholder ':
+                'https://unsplash.com/es/@timmossholder?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
+              'en ': '',
+              Unsplash:
+                'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
             },
-          ]"
-        />
-      </div>
-      <div class="container-fluid text-justify-custom">
-        <h3 class="text-center">Efectos de los microplásticos en organismos</h3>
-        Los microplásticos son un problema en crecimiento a nivel global que
-        tiene como característica principal el diminuto tamaño de los plásticos,
-        provocando así una probabilidad demasiado alta de ingesta en organismo
-        acuáticos, afectando su biología. Al igual que, afectar la calidad de
-        recursos hídricos y alimentos de consumo humano, ya que su propagación
-        se puede dar cualquier cuerpo de agua.
-        <InformationPages
-          :infoComponent="[
-            {
-              img: {
-                src: require('@/assets/naja-bertolt-jensen-BJUoZu0mpt0-unsplash.jpg'),
-                alt: 'Plástico en el mar',
-              },
-              sideImage: true,
-              credits: {
-                'Imagen de ': '',
-                'Naja Bertolt Jensen ':
-                  'https://unsplash.com/es/@naja_bertolt_jensen?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
-                'en ': '',
-                Unsplash:
-                  'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
-              },
-              arrayText: [
-                `Los microplásticos representan una amenaza física y química para los ecosistemas y organismos, puesto que, se pueden llegar a confundir con alimento por diferentes especies como mariscos, peces, aves marinas, tortugas marinas y mamíferos.`,
-              ],
-            },
-            {
-              img: {
-                src: require('@/assets/tim-mossholder-qq-8dpdlBsY-unsplash.jpg'),
-                alt: 'Gaviota con microplásticos en su pico',
-              },
-              sideImage: true,
-              credits: {
-                'Imagen de ': '',
-                'Tim Mossholder ':
-                  'https://unsplash.com/es/@timmossholder?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
-                'en ': '',
-                Unsplash:
-                  'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
-              },
-              arrayText: [
-                `Una vez que los ingieren, el primer gran efecto en organismos acuáticos son las obstrucciones intestinales, ocurriendo en el tracto digestivo, en el cual, puede tener dos desenlaces, el primero es que sean expulsados, o bien, retenidas.`,
-              ],
-            },
-            {
-              img: {
-                src: require('@/assets/sebastian-pena-lambarri-YV593oyMKmo-unsplash.jpg'),
-                alt: 'Multitud de peces',
-              },
-              sideImage: true,
-              credits: {
-                'Imagen de ': '',
-                'Sebastian Pena Lambarri ':
-                  'https://unsplash.com/es/@sebaspenalambarri?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
-                'en ': '',
-                Unsplash:
-                  'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
-              },
-              arrayText: [
-                `El segundo grande efecto es la disminución de la ingesta de nutrientes, afectando las tasas de crecimiento, junto a la reproducción. Teniendo un riesgo de desequilibrio en la cadena alimenticia acuática.`,
-              ],
-            },
-            {
-              img: {
-                src: require('@/assets/naja-bertolt-jensen-4cLzLiILddg-unsplash.jpg'),
-                alt: 'Peces con microplásticos en su interior',
-              },
-              sideImage: true,
-              credits: {
-                'Imagen de ': '',
-                'Naja Bertolt Jensen ':
-                  'https://unsplash.com/es/@naja_bertolt_jensen?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
-                'en ': '',
-                Unsplash:
-                  'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
-              },
-              arrayText: [
-                `Aunado a lo anterior, también existen afectaciones graves en su proceso de reproducción, a causa de que los microplásticos pueden simular ser hormonas repercutiendo en la etapa de gestación e inicios de desarrollo.`,
-              ],
-            },
-            {
-              img: {
-                src: require('@/assets/naja-bertolt-jensen-V8EdKmpj974-unsplash.jpg'),
-                alt: 'Ropa flotando en el mar',
-              },
-              sideImage: true,
-              credits: {
-                'Imagen de ': '',
-                'Naja Bertolt Jensen ':
-                  'https://unsplash.com/es/@naja_bertolt_jensen?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
-                'en ': '',
-                Unsplash:
-                  'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText',
-              },
-              arrayText: [
-                `Finalmente, existe una especifica interacción entre los microplásticos y los seres humanos, siendo el consumo de mariscos y pescados. Sin embargo, el tracto digestivo no es común ingerirlo, por lo que la posibilidad de comer microplásticos es baja.`,
-              ],
-            },
-          ]"
-        />
-      </div>
-
+            arrayText: [
+              `Finalmente, existe una especifica interacción entre los microplásticos y los seres humanos, siendo el consumo de mariscos y pescados. Sin embargo, el tracto digestivo no es común ingerirlo, por lo que la posibilidad de comer microplásticos es baja.`,
+            ],
+          },
+        ]"
+      />
+    </div>
+    <article class="container-fluid section-recomendation m-0">
       <SectionRecomendation />
+    </article>
+
+    <article class="container-fluid text-justify-custom mt-2">
+      <section class="fw-bold">
+        Toda la información presentada se utilizaron las siguientes referencias
+      </section>
 
       <SectionReferences
         :references="[
@@ -286,8 +337,7 @@
           },
           {
             authors: ['D. Aldana', 'M. Enríquez', 'V. Castillo'],
-            title:
-              'El Caribe y su contaminación por microplásticos',
+            title: 'El Caribe y su contaminación por microplásticos',
             editorial: 'ciencia',
             vol: '73',
             no: '2',
@@ -358,234 +408,51 @@
           },
         ]"
       />
-
-      <!--
-      <AccordionInformation
-        :informationAccordion="[
-          {
-            title: '',
-            paragraph:
-              '',
-          },
-          {
-            title: '',
-            paragraph:
-              '',
-          },
-          {
-            title: '',
-            paragraph:
-              '',
-          },
-        ]"
-        :typeAccordion="''"
-        :titleAccordion="''"
-      />
-      -->
-
-      <!--
-    
-    <p>References de Bacillus para la simulación</p>
-    <InformationReference
-      :references="[
-        {
-          authors: [
-            'J. K. Shrestha',
-            'Joshi, P. Regmi',
-            'P. Regmi',
-            'G. Badahit',
-          ],
-          title:
-            'Isolation and Identification of Low-Density Polyethylene (LDPE) Degrading Bacillus spp. from a Soil of Landfill Site',
-          editorial: 'Acta Sci. Microbiol',
-          vol: '2',
-          no: '4',
-          pages: ['30', '34'],
-          yearPublication: '2019',
-          link: 'https://www.researchgate.net/publication/331702789_Isolation_and_Identification_of_Low_Density_Polyethylene_LDPE_Degrading_Bacillus_spp_from_a_Soil_of_Landfill_Site',
-          dateAccess: '17-07-2023',
-        },
-        {
-          authors: ['H. Salehizadeh', 'M. Vossoughi', 'I. Alemzadeh'],
-          title: 'Some investigations on bioflocculant producing bacteria',
-          editorial: 'Biochem. Eng. J',
-          vol: '5',
-          no: '1',
-          pages: ['39', '44'],
-          yearPublication: '2000',
-          link: 'https://doi.org/10.1016/S1369-703X(99)00066-2',
-          dateAccess: '10-07-2023',
-        },
-        {
-          authors: ['S. Saeed', 'A. Iqbal', 'F. Deeba'],
-          title:
-            'Biodegradation study of Polyethylene and PVC using naturally occurring plastic degrading microbes',
-          editorial: 'Arch. Microbiol.',
-          vol: '204',
-          no: '8',
-          pages: ['497'],
-          yearPublication: '2022',
-          link: 'https://doi.org/10.1007/s00203-022-03081-8 ',
-          dateAccess: '10-07-2023',
-        },
-        {
-          authors: ['A. Tarafdar', 'et al.'],
-          title:
-            'Biofilm development of Bacillus siamensis ATKU1 on pristine short chain low-density polyethylene: A case study on microbe-microplastics interaction',
-          editorial: 'J. Hazard. Mater.',
-          vol: '409',
-          no: '124516',
-          pages: [],
-          yearPublication: '2021',
-          link: 'https://doi.org/10.1016/j.jhazmat.2020.124516',
-          dateAccess: '10-07-2023',
-        },
-        {
-          authors: [
-            'S. D. Khandare',
-            'D. Agrawal',
-            'N. Mehru',
-            'D. R. Chaundhary',
-          ],
-          title:
-            'Marine bacterial based enzymatic degradation of low-density polyethylene (LDPE) plastic',
-          editorial: 'J. Environ. Chem. Eng.',
-          vol: '10',
-          no: '3',
-          pages: ['107437'],
-          yearPublication: '2022',
-          link: 'https://doi.org/10.1016/j.jece.2022.107437 ',
-          dateAccess: '10-07-2023',
-        },
-        {
-          authors: ['J. Sharma', 'P. Agnihotri', 'K. Nandy ', 'A. K. Mitra'],
-          title:
-            'Isolation and Characterization of Plastic Degrading Bacteria from Soil Collected from the Dumping Grounds of an Industrial Area',
-          editorial: 'Int. J. Adv. Innov Res.',
-          vol: '3',
-          no: '3',
-          pages: ['225', '232'],
-          yearPublication: '2014',
-          link: 'https://www.researchgate.net/publication/279024937_Isolation_and_Characterization_of_Plastic_Degrading_Bacteria_from_Soil_Collected_from_the_Dumping_Grounds_of_an_Industrial_Area',
-          dateAccess: '10-07-2023',
-        },
-        {
-          authors: ['T. C. Ha Dang', 'et al.'],
-          title:
-            'Plastic degradation by thermophilic Bacillus sp. BCBT21 isolated from composting agricultural residual in Vietnam',
-          editorial: 'Adv. Nat. Sci.: Nanosci. Nanotechnol.',
-          vol: '9',
-          no: '1',
-          pages: ['11'],
-          yearPublication: '2018',
-          link: 'https://iopscience.iop.org/article/10.1088/2043-6254/aaabaf/meta',
-          dateAccess: '10-07-2023',
-        },
-      ]"
-    />
-    
-    <p>References de filtración granular rápida para la simulación</p>
-    <InformationReference
-      :references="[
-        {
-          authors: ['H. Hidayaturrahman', 'T. Lee'],
-          title:
-            'A study on characteristics of microplastic in wastewater of South Korea: Identification, quantification, and fate of microplastics during treatment process',
-          editorial: 'Mar. Pollut. Bull.',
-          vol: '146',
-          no: '71',
-          pages: ['696', '702'],
-          yearPublication: '2019',
-          link: 'https://doi.org/10.1016/j.marpolbul.2019.06.071',
-          dateAccess: '24-07-2023',
-        },
-        {
-          authors: ['Z. Wang', 'M. Sedighi', 'A. Lea-Langton'],
-          title:
-            'Filtration of microplastic spheres by biochar: removal efficiency and immobilisation mechanisms',
-          editorial: 'Water Res.',
-          vol: '184',
-          no: '116165',
-          pages: ['116165'],
-          yearPublication: '2020',
-          link: 'https://doi.org/10.1016/j.watres.2020.116165',
-          dateAccess: '19-07-2023',
-        },
-        {
-          authors: ['J. Bayo', 'J. López-Castellanos', 'S. Olmos'],
-          title:
-            'Membrane bioreactor and rapid sand filtration for the removal of microplastics in an urban wastewater treatment plant',
-          editorial: 'Mar. Pollut. Bull.',
-          vol: '156',
-          no: '111211',
-          pages: [],
-          yearPublication: '2020',
-          link: 'https://doi.org/10.1016/j.marpolbul.2020.111211',
-          dateAccess: '19-07-2023',
-        },
-        {
-          authors: ['J. Talvitie', 'A. Mikola', 'A. Koistinen', 'O. Setälä'],
-          title:
-            'Solutions to microplastic pollution -Removal of microplastics from wastewater effluent with advanced wastewater treatment technologies',
-          editorial: 'Water Res.',
-          vol: '123',
-          no: '5',
-          pages: ['401', '407'],
-          yearPublication: '2017',
-          link: 'https://doi.org/10.1016/j.watres.2017.07.005',
-          dateAccess: '20-07-2023',
-        },
-      ]"
-    />
-    -->
-    </router-view>
-    <router-view v-else />
-
-    <FooterHome />
+    </article>
   </div>
 </template>
 
+<style scoped>
+.section-recomendation {
+  background-color: #faf2d3;
+}
+</style>
+
 <script>
-import NavbarHome from "@/components/NavbarHome.vue";
 import CarouselHome from "@/components/CarouselHome.vue";
 import SectionRecomendation from "@/components/SectionRecomendation.vue";
 import AwarenessHomeSection from "@/components/AwarenessHomeSection.vue";
 import SectionReferences from "@/components/SectionReferences.vue";
-import AccordionInformation from "@/components/AccordionInformation.vue";
-import InfoSection from "@/components/InfoSection.vue";
 import InformationPages from "@/components/InformationPages.vue";
 import CollapseInformation from "@/components/CollapseInformation.vue";
-import ForumText from "@/components/ForumText.vue";
-import FooterHome from "@/components/FooterHome.vue";
 import TableInformation from "@/components/TableInformation.vue";
+import InfoSection from "@/components/InfoSection.vue";
+import ReferencesAuthors from "@/components/ReferencesAuthors.vue";
+
+import { generateColor } from "@/globalFunctions.js";
+
 export default {
-  name: "HomeView",
+  name: "Home",
+  data() {
+    return {
+      color: [],
+    };
+  },
   components: {
-    NavbarHome,
     CarouselHome,
     SectionRecomendation,
     AwarenessHomeSection,
-    InfoSection,
     InformationPages,
     CollapseInformation,
     SectionReferences,
-    AccordionInformation,
-    ForumText,
     TableInformation,
-    FooterHome,
+    InfoSection,
+    ReferencesAuthors,
   },
-  computed: {
-    isHomeView() {
-      return this.$route.name === "HomeView";
+  methods: {
+    showColor(color, luminisity, count) {
+      this.color = generateColor(color, luminisity, count);
     },
   },
 };
 </script>
-
-<style scoped>
-.home {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-</style>
