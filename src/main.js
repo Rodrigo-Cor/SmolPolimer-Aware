@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-/*
+
 const idUser = localStorage.getItem("idUser");
 const numberQuestion = localStorage.getItem("numberQuestion");
 const selectedOptionInitialOption = localStorage.getItem(
@@ -31,6 +31,6 @@ if (selectedOptionInitialOption !== null && selectedOptionInitialValue != -1) {
     value: selectedOptionInitialValue,
   });
 }
-*/
+
 
 createApp(App).use(store).use(router).mount("#app");

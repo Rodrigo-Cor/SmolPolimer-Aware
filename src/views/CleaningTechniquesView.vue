@@ -26,7 +26,7 @@
         </h4>
         <InfoSection
           :img="{
-            src: require('@/assets/ivan-bandura-Ac97OqAWDvg-unsplash.jpg'),
+            src: '',
             alt: 'Agua con filtro granular rápido',
           }"
           :sideImage="true"
@@ -50,7 +50,7 @@
         </h4>
         <InfoSection
           :img="{
-            src: require('@/assets/ivan-bandura-8QvN0G-zff0-unsplash.jpg'),
+            src: '',
             alt: 'Filtración por disco',
           }"
           :sideImage="false"
@@ -74,7 +74,7 @@
         </h4>
         <InfoSection
           :img="{
-            src: require('@/assets/filtracion_membrana.jpg'),
+            src: '',
             alt: 'Filtración por membrana',
           }"
           :sideImage="true"
@@ -93,7 +93,7 @@
         </h4>
         <InfoSection
           :img="{
-            src: require('@/assets/DAF.jpg'),
+            src: '',
             alt: 'Filtra por flotación por aire disuelto',
           }"
           :sideImage="false"
@@ -196,12 +196,7 @@
         Estos ingredientes son como el "alimento" de nuestras bacterias y
         afectarán su capacidad de degradación en un periodo de dos meses.
       </section>
-      <router-link
-        to="/tecnicas/bacillus"
-        class="btn btn-info my-2"
-        role="button"
-        ><i class="bi bi-graph-down"></i> Ir al simulador</router-link
-      >
+      
     </article>
 
     <article class="container-fluid text-justify-custom mt-2">
@@ -316,7 +311,7 @@
 
 <style scoped>
 .color-techniques {
-  background-color: #ff80803f;
+  background-color: #DFCCFB3f;
 }
 
 .section-subtitle {

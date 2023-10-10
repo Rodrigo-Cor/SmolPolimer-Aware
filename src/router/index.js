@@ -19,17 +19,12 @@ const routes = [
         component: HomeView,
       },
       {
-        path: "/tecnicas",
-        name: "Tecnicas",
-        component: CleaningTechniques,
-      },
-      {
-        path: "/tecnicas/filtracion",
+        path: "/filtracion",
         name: "Filtracion",
         component: FiltracionGranular,
       },
       {
-        path: "/tecnicas/bacillus",
+        path: "/bacillus",
         name: "Bacillus",
         component: Bacillus,
       },
@@ -56,15 +51,12 @@ router.beforeEach((to, from, next) => {
   if (from.path === "/" && to.path !== "/") {
     store.commit("setIsDisabled", true);
   }
-  if (
-    from.path === "/tecnicas/filtracion" &&
-    to.path !== "/tecnicas/filtracion"
-  ) {
+  if (from.path === "/filtracion" && to.path !== "/filtracion") {
     store.commit("setFiltracionValues", []);
     store.commit("setOnFilterValues", []);
     store.commit("setReleasedValues", []);
   }
-  if(from.path === "/tecnicas/bacillus" && to.path !== "/tecnicas/bacillus") {
+  if (from.path === "/bacillus" && to.path !== "/bacillus") {
     store.commit("setBacillusValues", []);
     store.commit("setDegradatedValues", []);
   }

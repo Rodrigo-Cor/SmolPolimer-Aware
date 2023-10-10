@@ -31,7 +31,7 @@
 
 <style scoped>
 .information{
-  background-color: #B0D9B17f;
+  background-color: #50d8903F !important;
 }
 
 </style>

@@ -47,7 +47,7 @@
       />
     </div>
 
-    <div class="container-fluid text-justify-custom color-section-2 mt-2">
+    <div class="container-fluid text-justify-custom mt-2">
       <h3 class="fw-semibold text-center section-title">
         Plastic Oceans International
       </h3>

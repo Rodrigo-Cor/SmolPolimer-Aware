@@ -30,15 +30,19 @@
         v-if="selectedOptionInitial['option'] !== ''"
       >
         <div class="navbar-nav text-center">
-          <router-link class="nav-link" to="/presencia"
+          <router-link class="nav-link navegacion" to="/presencia"
             >Presencia en México</router-link
           >
-          <router-link class="nav-link" to="/contaminacion"
+          <router-link class="nav-link navegacion" to="/contaminacion"
             >Combatir contra la contaminación</router-link
           >
-          <router-link class="nav-link" to="/tecnicas"
-            >Técnicas de limpieza
+          <router-link class="nav-link navegacion" to="/filtracion"
+            ><i class="bi bi-graph-up"></i> Filtración granular rápida
           </router-link>
+          <router-link to="/bacillus" class="nav-link navegacion"
+            ><i class="bi bi-graph-down"></i> Degradación por bacterias
+            <i>Bacillus</i></router-link
+          >
         </div>
       </div>
     </div>
@@ -57,3 +61,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.navegacion:hover {
+  color: #4f98ca;
+}
+</style>

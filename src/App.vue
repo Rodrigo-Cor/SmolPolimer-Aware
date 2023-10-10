@@ -14,7 +14,7 @@ nav a.router-link-exact-active.navbar-brand {
   color: #50d890;
 }
 .color-home {
-  background-color: #5cd2e655;
+  background-color: #effffb;
 }
 
 .section-title {

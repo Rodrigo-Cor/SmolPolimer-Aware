@@ -95,6 +95,7 @@ export default createStore({
               data,
               config
             );
+            
             commit("setReferences", await response.data);
           } catch (error) {
             Swal.fire({
