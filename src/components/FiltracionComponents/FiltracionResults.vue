@@ -30,7 +30,7 @@
     </div>      
     <div class="row">
       <div class="col-12 my-2">
-        <table class="table table-info table-striped-columns">
+        <table class="table table-info table-striped-columns" id="tableResults">
           <thead>
             <tr>
               <th scope="col">Días</th>

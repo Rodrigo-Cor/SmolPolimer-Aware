@@ -7,12 +7,11 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-12 text-center">
-        <p class="my-paragraph">
+        <p class="my-paragraph" id="explanation">
           En la simulación gráfica, se ve reflejada la correspondencia entre la cantidad de microplásticos
           y el tiempo, bajo la fórmula: C(t) = n * (1 - p)^t, donde t son los bimestres, p es el porcentaje de
           limpieza y n es el número de microplásticos.
-        </p>
-        <p class="my-paragraph">
+
           Se introdujeron {{ quantity }} microplásticos como cantidad inicial, reflejados en la gráfica
           como el primer valor, en el bimestre 0, que irán degradándose hasta terminar los {{ bimester }}
           bimestres especificados. La temperatura a la que se sometieron los microplásticos es de 

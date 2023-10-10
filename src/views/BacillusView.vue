@@ -8,37 +8,14 @@
     <div class="row justify-content-center">
       <div class="col-12 text-center">
         <p class="my-paragraph">
-          En la siguiente lista se encuentran los valores por defecto, que servirán como entrada para
-          la simulación. Se trata de la cantidad de microplásticos a degradar, la temperatura a la que
-          se encontrarán las bacterias, para degradar los microplásticos; el porcentaje de
-          degradación está dado por la cepa de Bacillus que se utilice, así como la sustancia en donde
-          estarán: Mineral Agar o Mineral Broth.
+          Los valores de entrada que se ocuparán para la simulación incluyen la cantidad de microplásticos a degradar, la temperatura a la que se encontrarán las bacterias, para degradar los microplásticos; el porcentaje de degradación está dado por la cepa de Bacillus que se utilice, así como la sustancia en donde estarán: Mineral Agar o Mineral Broth.
         </p>
         <p class="my-paragraph" style="font-weight: bold">
-          Haz clic en el botón de simulación y podrás escoger si quieres esos valores, 
+          Haz clic en el botón de simulación y podrás escoger si quieres valores por defecto, 
           o cambiarlos por otros por medio de un formulario.
         </p>
       </div>
     </div> 
-    <div class="row justify-content-center">
-      <div class="col text-center my-2">
-        <h3 id="mySubtitle">Valores por defecto para la simulación</h3>
-        <ul class="list-group">
-          <li class="list-group-item custom-list-item">
-            Cantidad: <span class="badge bg-dark pill">{{ defaultQuantity }} microplásticos</span></li>
-          <li class="list-group-item custom-list-item">
-            Temperatura: <span class="badge bg-dark pill">{{ defaultTemperature }}°C</span></li>
-          <li class="list-group-item custom-list-item">
-            Bimestres: <span class="badge bg-dark pill">{{ defaultBimester }}</span></li>
-          <li class="list-group-item custom-list-item">
-            Porcentaje de degradación: <span class="badge bg-dark pill">{{ defaultPercentage }}%</span></li>
-          <li class="list-group-item custom-list-item">
-            Mineral: <span class="badge bg-dark pill">{{ defaultMineral }}</span></li>
-          <li class="list-group-item custom-list-item">
-            Cepa: <span class="badge bg-dark pill">{{ defaultStrain }}</span></li>
-        </ul>
-      </div>
-    </div>
     <div>
       <BacillusForm v-if="choice"/>
       <BacillusResults v-if="quantity && temperature && bimester && percentage && mineral && choiceIsMade" />
@@ -101,6 +78,7 @@ import BacillusExplained from "@/components/BacillusComponents/BacillusExplained
 import Swal from "sweetalert2";
 import { mapGetters, mapMutations } from "vuex";
 import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable'
 
 export default {
   name: "BacillusView",
@@ -195,8 +173,56 @@ export default {
     downloadPDF() {
       const pdf = new jsPDF();
       const img = new Image();
+      const self = this;
 
       img.onload = function() {
+
+        var pageWidth = pdf.internal.pageSize.getWidth();
+        var pageHeight = pdf.internal.pageSize.getHeight();
+
+        var left = 10;
+        var top = 10;
+        var right = 10;
+        var bottom = 10;
+
+        pdf.setDrawColor("50d890");
+        pdf.setLineWidth(0.5);
+        
+        pdf.line(left, top, pageWidth - right, top);
+        pdf.line(left, pageHeight - bottom, pageWidth - right, pageHeight - bottom);
+        pdf.line(left, top, left, pageHeight - bottom);
+        pdf.line(pageWidth - right, top, pageWidth - right, pageHeight - bottom);
+
+        pdf.setFontSize(24);
+        pdf.setTextColor("#50d890");
+        pdf.setFont("Helvetica", "bold");
+        pdf.text("Reporte de resultados", 20, 20);
+
+        pdf.setFontSize(12);
+        pdf.setTextColor("#272727");
+        pdf.setFont("Courier", "normal");
+        pdf.text("Técnica de limpieza: Degradación por bacterias Bacillus.", 20, 30);
+
+        pdf.setFontSize(18);
+        pdf.setTextColor("#4f98ca");
+        pdf.setFont("Helvetica", "bold");
+        pdf.text("Datos de entrada", 20, 40);
+
+        pdf.setFontSize(12);
+        pdf.setTextColor("#272727");
+        pdf.setFont("Courier", "normal");
+        pdf.text("\t\u2022  Cantidad inicial: " + self.quantity.toString() + " microplásticos", 20, 50);
+        pdf.text("\t\u2022  Temperatura: " + self.temperature.toString() + "°C", 20, 60);
+        pdf.text("\t\u2022  Tiempo: " + self.bimester.toString() + " bimestres", 20, 70);
+        pdf.text("\t\u2022  Porcentaje de degradación: " + self.percentage.toString() + "%", 20, 80);
+        pdf.text("\t\u2022  Sustancia: Mineral " + self.mineral, 20, 90);
+        pdf.text("\t\u2022  Cepa: " + self.strain, 20, 100);
+
+        pdf.setFontSize(18);
+        pdf.setTextColor("#4f98ca");
+        pdf.setFont("Helvetica", "bold");
+        pdf.text("Simulación Gráfica", 20, 110);
+
         const canvas = document.createElement('canvas');
         const canvasWidth = 672;
         const canvasHeight = 403.2;
@@ -205,8 +231,38 @@ export default {
         const context = canvas.getContext('2d');
         context.drawImage(img, 0, 0);
         const imgData = canvas.toDataURL('image/png');
-        pdf.addImage(imgData, 'PNG', 10, 10, 180, 90);
-        pdf.save('Bacillus.pdf');
+        pdf.addImage(imgData, 'PNG', 20, 120, 150, 90);
+  
+        pdf.setFontSize(18);
+        pdf.setTextColor("#4f98ca");
+        pdf.setFont("Helvetica", "bold");
+        pdf.text("Explicación", 20, 220);
+
+        const explanation = document.querySelector("#explanation");
+
+        const textLines = pdf.setFontSize(12)
+          .setTextColor("#272727")
+          .setFont("Courier", "normal")
+          .splitTextToSize(explanation.innerText, pageWidth - left - right - 20);
+        pdf.text(textLines, 20, 230);
+
+        pdf.addPage();
+
+        pdf.line(left, top, pageWidth - right, top);
+        pdf.line(left, pageHeight - bottom, pageWidth - right, pageHeight - bottom);
+        pdf.line(left, top, left, pageHeight - bottom);
+        pdf.line(pageWidth - right, top, pageWidth - right, pageHeight - bottom);
+
+        pdf.setFontSize(18);
+        pdf.setTextColor("#4f98ca");
+        pdf.setFont("Helvetica", "bold");
+        pdf.text("Tabla de resultados", 20, 20);
+
+        autoTable(pdf, {
+          html: '#tableResults',
+          startY: 30,
+        });
+        pdf.save("ReporteBacillus.pdf");
       };
       img.src = 'data:image/svg+xml,' + encodeURIComponent(this.svgData);
     },
