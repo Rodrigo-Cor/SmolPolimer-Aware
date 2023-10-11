@@ -7,16 +7,8 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-12 text-center">
-        <p class="my-paragraph" id="explanation">
-          En la simulación gráfica, se ve reflejada la correspondencia entre la cantidad de microplásticos
-          y el tiempo, bajo la fórmula: C(t) = n * (1 - p)^t, donde t son los bimestres, p es el porcentaje de
-          limpieza y n es el número de microplásticos.
-
-          Se introdujeron {{ quantity }} microplásticos como cantidad inicial, reflejados en la gráfica
-          como el primer valor, en el bimestre 0, que irán degradándose hasta terminar los {{ bimester }}
-          bimestres especificados. La temperatura a la que se sometieron los microplásticos es de 
-          {{ temperature }}°C en mineral {{ mineral }}, dando una cantidad de microplásticos final de
-          {{ degradatedValues.toFixed(2) }} microplásticos. Se escogió la cepa {{ strain }}.
+        <p class="text-justify-custom" id="explanation">
+          En la simulación gráfica, se ve reflejada la fórmula: C(t) = n * (1 - p)^t, donde t son los bimestres, p es el porcentaje de limpieza y n es el número de microplásticos. Se introdujeron {{ quantity }} microplásticos como cantidad inicial, reflejados en la gráfica como el primer valor, en el bimestre 0, que irán degradándose hasta terminar la cantidad especificada de bimestres de {{ bimester }}. La temperatura a la que se sometieron los microplásticos es de {{ temperature }}°C en la sustancia mineral {{ mineral }}, dando una cantidad de microplásticos final de {{ degradatedValues.toFixed(2) }} microplásticos. Se escogió la cepa <i>{{ strain }}</i>.
         </p>
       </div>
     </div>    
@@ -30,15 +22,6 @@
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
-  }
-.my-paragraph{
-  background-color: rgba(80, 216, 144, 0.25);
-  text-align: justify;
-  color: #272727;
-  margin-top: 0.8rem;
-  margin-bottom: 0.8rem;
-  margin-left: 0.8rem;
-  margin-right: 0.8rem;
 }
 </style>
 <script>

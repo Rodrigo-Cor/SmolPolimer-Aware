@@ -7,7 +7,7 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-12 text-center">
-      <p class="my-paragraph">
+      <p class="text-justify-custom">
         En la siguiente lista se encuentra el resumen de los datos introducidos al simulador,
         mientras que después en la tabla, se encuentran los resultados: cómo disminuyen los 
         microplásticos conforme pasan los bimestres.

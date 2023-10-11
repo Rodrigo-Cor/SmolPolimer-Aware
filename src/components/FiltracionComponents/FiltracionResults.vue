@@ -7,7 +7,7 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-12 text-center">
-        <p class="my-paragraph">
+        <p class="text-justify-custom">
           En la siguiente lista se encuentra el resumen de los datos introducidos al simulador,
           mientras que después en la tabla, se encuentran los resultados: se indican los días y
           el porcentaje de microplásticos acumulados ya sea en el filtro, o que fueron liberados
