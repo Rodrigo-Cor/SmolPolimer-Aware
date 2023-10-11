@@ -1,5 +1,5 @@
 <template>
-  <div class="my-1 text-justify-custom">
+  <div class="my-1">
     <template v-for="(value, key) in text" :key="key">
       <span
         >{{ value.value === "" ? key : "" }}

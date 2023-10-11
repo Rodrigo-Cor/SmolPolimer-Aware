@@ -1,6 +1,6 @@
 <template>
   <div
-    class="accordion text-size"
+    class="accordion p-1"
     :id="'accordion' + typeAccordion"
     v-for="(info, index) in informationAccordion"
     :key="index"
@@ -26,7 +26,7 @@
         }"
         :data-bs-parent="'#accordion' + typeAccordion"
       >
-        <div class="accordion-body card-body">
+        <div class="accordion-body color-home">
           <p
             class="fw-bolder text-title"
           >
@@ -84,9 +84,6 @@ export default {
 </script>
 
 <style scoped>
-.card-body {
-  background-image: linear-gradient(to bottom, #50d890, #4f98ca);
-}
 
 .text-title{
   color: #160c7f;

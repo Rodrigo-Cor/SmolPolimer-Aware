@@ -5,9 +5,18 @@ import AppLayout from "@/views/AppLayout.vue";
 import HomeView from "@/views/HomeView.vue";
 import Bacillus from "@/views/BacillusView.vue";
 import FiltracionGranular from "@/views/FiltracionView.vue";
-import CleaningTechniques from "@/views/CleaningTechniquesView.vue";
 import PresenceMexico from "@/views/PresenceMexicoView.vue";
 import FightPollution from "@/views/FightPollutionView.vue";
+import AnswerQuestionView from "@/views/AnswerQuestionView.vue";
+
+const questionGuard = (to, from, next) => {
+  const optionInitial = store.getters.getSelectedOptionInitial.option;
+  if (optionInitial !== "") {
+    next();
+  } else {
+    next("/question");
+  }
+};
 
 const routes = [
   {
@@ -22,21 +31,30 @@ const routes = [
         path: "/filtracion",
         name: "Filtracion",
         component: FiltracionGranular,
+        beforeEnter: questionGuard,
       },
       {
         path: "/bacillus",
         name: "Bacillus",
         component: Bacillus,
+        beforeEnter: questionGuard,
       },
       {
         path: "/presencia",
         name: "Presencia",
         component: PresenceMexico,
+        beforeEnter: questionGuard,
       },
       {
         path: "/contaminacion",
         name: "Contaminacion",
         component: FightPollution,
+        beforeEnter: questionGuard,
+      },
+      {
+        path: "/question",
+        name: "Question",
+        component: AnswerQuestionView,
       },
     ],
   },
@@ -48,8 +66,9 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (from.path === "/" && to.path !== "/") {
-    store.commit("setIsDisabled", true);
+  const optionInitial = store.getters.getSelectedOptionInitial.option;
+  if (optionInitial !== "") {
+    store.commit("setIsDisabledInitial", true);
   }
   if (from.path === "/filtracion" && to.path !== "/filtracion") {
     store.commit("setFiltracionValues", []);
@@ -59,6 +78,13 @@ router.beforeEach((to, from, next) => {
   if (from.path === "/bacillus" && to.path !== "/bacillus") {
     store.commit("setBacillusValues", []);
     store.commit("setDegradatedValues", []);
+  }
+
+  if (from.path === "/filtracion" || from.path === "/bacillus") {
+    const disabledFinal = store.getters.getIsDisabledFinal;
+    if (disabledFinal) {
+      store.commit("setIsAnswered", true);
+    }
   }
   next();
 });

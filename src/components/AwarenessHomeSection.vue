@@ -1,26 +1,11 @@
 <template>
-  <div
-    class="container-fluid mb-1 py-2 questions"
-  >
-    <span class="fw-bold"
-      >Contesta la siguiente pregunta con la mayor sinceridad posible, por
-      favor.</span
-    >
+  <article class="mb-1 py-2">
     <AwarenessForm :questions="startQuestions" :typeQuestion="'start'" />
-  </div>
+  </article>
 </template>
-
-<style>
-.questions{
-  background-color: #D0E7D2;
-}
-</style>
-
 
 <script>
 import AwarenessForm from "@/components/AwarenessForm.vue";
-
-import { generateColor } from "@/globalFunctions.js";
 
 import { mapGetters, mapActions } from "vuex";
 
@@ -48,13 +33,9 @@ export default {
     ...mapActions({
       modifyData: "modifyData",
     }),
-    showColor(color, luminisity, count) {
-      this.color = generateColor(color, luminisity, count);
-    },
   },
   data() {
     return {
-      color: [],
       startQuestions: [
         {
           question: '¿Has escuchado el término "microplásticos"?',

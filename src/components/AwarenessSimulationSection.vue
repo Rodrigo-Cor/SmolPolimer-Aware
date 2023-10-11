@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <AwarenessForm :questions="finalQuestions" :typeQuestion="'final'" />
-  </div>
+  <AwarenessForm :questions="finalQuestions" :typeQuestion="'final'" />
 </template>
 
 <script>
@@ -17,73 +15,89 @@ export default {
       finalQuestions: [
         {
           question:
-            "Después de haber utilizado la aplicación, ¿Qué nivel de familiaridad consideras que obtuviste con el término microplásticos?",
+            "¿Qué tan frecuentemente has escuchado este término de microplásticos?",
           options: [
             { option: "Nada", value: 0 },
-            { option: "Ligeramente", value: 1 },
-            { option: "Moderadamente", value: 2 },
-            { option: "Mucho", value: 3 },
+            { option: "Un poco", value: 1 },
+            { option: "Algo", value: 2 },
+            { option: "Moderadamente", value: 3 },
             { option: "Extremadamente", value: 4 },
           ],
         },
         {
           question:
-            "Después de revisar la aplicación ¿Cómo ha cambiado tu percepción sobre el impacto de estas partículas sobre ecosistemas acuáticos? ",
+            "¿Cómo ha cambiado tu nivel de prioridad sobre el impacto de estas partículas sobre ecosistemas acuáticos?",
           options: [
-            { option: "No del todo cambio", value: 0 },
-            { option: "Ligeramente cambio", value: 1 },
-            { option: "Moderamente cambio", value: 2 },
-            { option: "Considerablemente cambio", value: 3 },
-            { option: "Extremadamente cambio", value: 4 },
+            { option: "Nada", value: 0 },
+            { option: "Un poco", value: 1 },
+            { option: "Algo", value: 2 },
+            { option: "Moderadamente", value: 3 },
+            { option: "Extremadamente", value: 4 },
           ],
         },
         {
           question:
-            "Después de utilizar la aplicación ¿Qué nivel de preocupación consideras los efectos que pueden producir los microplásticos en los seres acuáticos?",
+            "¿Qué nivel de preocupación consideras los efectos que pueden producir los microplásticos en los seres acuáticos?",
           options: [
-            { option: "No del todo preocupante", value: 0 },
-            { option: "Ligeramente preocupante", value: 1 },
-            { option: "Moderadamente preocupante", value: 2 },
-            { option: "Muy preocupante", value: 3 },
-            { option: "Extremadamente preocupante", value: 4 },
+            { option: "Nada", value: 0 },
+            { option: "Un poco", value: 1 },
+            { option: "Algo", value: 2 },
+            { option: "Moderadamente", value: 3 },
+            { option: "Extremadamente", value: 4 },
           ],
         },
         {
           question:
-            "Una vez que terminó de revisar la aplicación ¿Qué tan probable es que reduzca su consumo de productos plásticos?",
+            "¿En qué nivel has reducido tu frecuencia en la compra de productos de plástico?",
           options: [
-            { option: "No probable ", value: 0 },
-            { option: "Algo improbable", value: 1 },
-            { option: "Neutral", value: 2 },
-            { option: "Algo probable", value: 3 },
-            { option: "Muy probable", value: 4 },
+            { option: "Nada", value: 0 },
+            { option: "Un poco", value: 1 },
+            { option: "Algo", value: 2 },
+            { option: "Moderadamente", value: 3 },
+            { option: "Extremadamente", value: 4 },
           ],
         },
         {
           question:
-            "Después de haber utilizado la aplicación ¿Qué nivel de conciencia tienes sobre este la presencia de este problema de contaminación mundial?",
+            "¿Qué tanto cambio tu nivel de conciencia sobre la contaminación por microplásticos en México?",
           options: [
-            { option: "No del todo consciente", value: 0 },
-            { option: "Ligeramente consciente", value: 1 },
-            { option: "Algo consciente", value: 2 },
-            { option: "Moderadamente consciente", value: 3 },
-            { option: "Extremadamente consciente", value: 4 },
+            { option: "Nada", value: 0 },
+            { option: "Un poco", value: 1 },
+            { option: "Algo", value: 2 },
+            { option: "Moderadamente", value: 3 },
+            { option: "Extremadamente", value: 4 },
+          ],
+        },
+        {
+          question: "¿Ya te disté cuenta de que consumiste microplásticos?",
+          options: [
+            { option: "Nada", value: 0 },
+            { option: "Un poco", value: 1 },
+            { option: "Algo", value: 2 },
+            { option: "Moderadamente", value: 3 },
+            { option: "Extremadamente", value: 4 },
           ],
         },
         {
           question:
-            "Después de revisar la información presentada en la aplicación ¿Cambiarías tus hábitos como consumidor para reducir el uso de artículos compuesto por polímeros?",
+            "¿Identificaste alguna técnica de limpieza de microplásticos en el agua?",
           options: [
-            { option: "No", value: 0 },
-            { option: "Si", value: 1 },
+            { option: "Nada", value: 0 },
+            { option: "Un poco", value: 1 },
+            { option: "Algo", value: 2 },
+            { option: "Moderadamente", value: 3 },
+            { option: "Extremadamente", value: 4 },
           ],
         },
         {
           question:
-            "Después de haber utilizado la aplicación ¿Estaría dispuesto a compartir la información que aprendió con otros para tomar conciencia sobre la contaminación por microplásticos?",
+            "¿La información te sirvió para crearte hábitos de reducción de consumo de productos plásticos?",
           options: [
-            { option: "No", value: 0 },
-            { option: "Si", value: 1 },
+            { option: "Nada", value: 0 },
+            { option: "Un poco", value: 1 },
+            { option: "Algo", value: 2 },
+            { option: "Moderadamente", value: 3 },
+            { option: "Extremadamente", value: 4 },
           ],
         },
       ],

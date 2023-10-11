@@ -14,14 +14,20 @@ export default createStore({
           initial: { option: "", value: -1 },
           final: { option: "", value: -1 },
         },
-        isDisabled: false,
+        isDisabled: {
+          initial: false,
+          final: false,
+        },
+        isAnswered: false,
       },
       getters: {
         getUserId: (state) => state.initialData.idUser,
         getNumberQuestion: (state) => state.initialData.numberQuestion,
         getSelectedOptionInitial: (state) => state.selectedOption.initial,
         getSelectedOptionFinal: (state) => state.selectedOption.final,
-        getIsDisabled: (state) => state.isDisabled,
+        getIsDisabledInitial: (state) => state.isDisabled.initial,
+        getIsDisabledFinal: (state) => state.isDisabled.final,
+        getIsAnswered: (state) => state.isAnswered,
       },
       mutations: {
         setInitialData(state, { idUser, numberQuestion }) {
@@ -44,8 +50,14 @@ export default createStore({
         setSelectedOptionFinal(state, selectedOptionFinal) {
           state.selectedOption.final = selectedOptionFinal;
         },
-        setIsDisabled(state, isDisabled) {
-          state.isDisabled = isDisabled;
+        setIsDisabledInitial(state, isDisabled) {
+          state.isDisabled.initial = isDisabled;
+        },
+        setIsDisabledFinal(state, isDisabled) {
+          state.isDisabled.final = isDisabled;
+        },
+        setIsAnswered(state, isAnswered) {
+          state.isAnswered = isAnswered;
         },
       },
       actions: {
@@ -60,6 +72,12 @@ export default createStore({
         },
         modifySelectedOptionFinal({ commit }, selectedOptionFinal) {
           commit("setSelectedOptionFinal", selectedOptionFinal);
+        },
+        modifyisDisabledInitial({ commit }, isDisabledInitial) {
+          commit("setIsDisabledInitial", isDisabledInitial);
+        },
+        modifyisDisabledFinal({ commit }, isDisabledFinal) {
+          commit("setIsDisabledFinal", isDisabledFinal);
         },
       },
     },
@@ -88,15 +106,16 @@ export default createStore({
             },
           };
           try {
-            console.log(data);
             commit("setStateRequest", true);
             const response = await axios.post(
               "https://microplasticosapi.azurewebsites.net/api/GetIDArticles?code=TF6d-H1Lk5DlgNk-hn7sEthaqCD-rN4m6LR_w9Ca-Q3eAzFudmQ1kA==",
               data,
               config
             );
-            
-            commit("setReferences", await response.data);
+            const references = response.data.filter(
+              (element) => !element.title.startsWith("{")
+            );
+            commit("setReferences", references);
           } catch (error) {
             Swal.fire({
               icon: "error",
@@ -104,6 +123,7 @@ export default createStore({
               text: "Ocurrió un problema con la obtención de las referencias. Vuelve a intentarlo.",
               allowOutsideClick: false,
             });
+            commit("setReferences", []);
           } finally {
             commit("setStateRequest", false);
           }

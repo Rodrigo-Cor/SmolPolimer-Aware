@@ -1,9 +1,17 @@
 <template>
-  <div>
-    <HelpParagraph
-      :text="questions[numberQuestion].help"
-      v-if="typeQuestion === 'start'"
-    />
+  <article class="row" v-if="typeQuestion === 'start'">
+    <section class="col-md-9 col-12">
+      <HelpParagraph :text="questions[numberQuestion].help" />
+    </section>
+    <section class="col-md-3 col-12 d-flex justify-content-center">
+      <img src="@/assets/meme-gato.jpg" class="img-fluid" alt="Meme gato" />
+    </section>
+  </article>
+
+  <article>
+    <section class="fw-bold text-justify-custom">
+      Contesta la siguiente pregunta con la mayor sinceridad posible, por favor.
+    </section>
     <div class="my-2">
       <span class="py-3">{{ questions[numberQuestion].question }}</span>
     </div>
@@ -12,7 +20,7 @@
         <select
           class="form-select"
           v-model="localSelectedOption"
-          :disabled="typeQuestion === 'start' ? isDisabled : disabledFinal"
+          :disabled="typeQuestion === 'start' ? disabledInitial : disabledFinal"
           :aria-label="typeQuestion + 'Question'"
         >
           <option value="" disabled>Selecciona una opción</option>
@@ -40,7 +48,7 @@
         }}
       </button>
     </form>
-  </div>
+  </article>
 </template>
 
 <script>
@@ -65,8 +73,6 @@ export default {
     return {
       localSelectedOption: "",
       stateRequestResult: false,
-      disabledFinal: false,
-      isHovered: false,
     };
   },
   computed: {
@@ -75,27 +81,31 @@ export default {
       numberQuestion: "getNumberQuestion",
       selectedOptionInitial: "getSelectedOptionInitial",
       selectedOptionFinal: "getSelectedOptionFinal",
-      isDisabled: "getIsDisabled",
+      disabledInitial: "getIsDisabledInitial",
+      disabledFinal: "getIsDisabledFinal",
     }),
   },
   methods: {
     ...mapActions({
       modifySelectedOptionInitial: "modifySelectedOptionInitial",
       modifySelectedOptionFinal: "modifySelectedOptionFinal",
+      modifyisDisabledFinal: "modifyisDisabledFinal",
     }),
     async saveResults() {
       try {
         this.stateRequestResult = true;
-        await axios.post("http://localhost:7071/api/SaveAnswers", {
-          id: this.id,
-          initialAnswer: this.selectedOptionInitial,
-          finalAnswer: this.selectedOptionFinal,
-          numberQuestion: this.numberQuestion,
-        });
-        this.disabledFinal = true;
+        await axios.post(
+          "https://microplasticosapi.azurewebsites.net/api/SaveAnswers?code=iEZGgmGIU5jakAdX9WSpZtSHAIIBgUdrX4SiushAxtv-AzFumowKCg==",
+          {
+            id: this.id,
+            initialAnswer: this.selectedOptionInitial,
+            finalAnswer: this.selectedOptionFinal,
+            numberQuestion: this.numberQuestion,
+          }
+        );
+        this.modifyisDisabledFinal(true);
       } catch (error) {
-        console.log(error);
-        this.disabledFinal = false;
+        this.modifyisDisabledFinal(false);
       } finally {
         this.stateRequestResult = false;
       }
@@ -105,9 +115,6 @@ export default {
         (option) => option.option === value
       );
       return { option: foundOption["option"], value: foundOption["value"] };
-    },
-    changeButton(value) {
-      this.isHovered = value;
     },
   },
   watch: {

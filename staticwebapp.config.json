@@ -14,10 +14,13 @@
       },
       {
         "route": "/bacillus"
+      },
+      {
+        "route": "/question"
       }
     ],
     "navigationFallback": {
       "rewrite": "/index.html",
       "exclude": ["*.{css,scss,js,jpg,png,gif,ico,svg}"]
     }
-  }
+}

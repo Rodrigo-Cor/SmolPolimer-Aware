@@ -1,6 +1,8 @@
 <template>
   <div class="container" style="background-color: #effffb">
-    <h3 class="fw-semibold text-center section-title">Filtración granular rápida</h3>
+    <h3 class="fw-semibold text-center section-title">
+      Filtración granular rápida
+    </h3>
     <section class="mt-2">
       Se han desarrollado diversos procesos para la limpieza, los cuales pueden
       ser clasificados en dos tipos: procesos de separación y procesos de
@@ -51,7 +53,7 @@
     </section>
 
     <div>
-      <AwarenessSimulationSection />
+      <AwarenessSimulationSection v-if="!getIsAnswered"/>
       <FiltracionForm v-if="choice" />
       <FiltracionResults
         v-if="microplastic && residue && treatment && choiceIsMade"
@@ -94,7 +96,6 @@
   </div>
 </template>
 <style scoped>
-
 .my-paragraph {
   background-color: rgba(80, 216, 144, 0.25);
 }
@@ -102,7 +103,6 @@
 .color-techniques {
   background-color: #ff80803f;
 }
-
 </style>
 <script>
 import AwarenessSimulationSection from "@/components/AwarenessSimulationSection.vue";
@@ -143,6 +143,7 @@ export default {
       "getFiltracionValues",
       "getOnFilterValues",
       "getReleasedValues",
+      "getIsAnswered",
     ]),
     ...mapMutations([
       "setFiltracionValues",

@@ -5,14 +5,9 @@
         <div v-for="(paragraph, index) in informationCollapse" :key="index">
           <button
             type="button"
-            class="btn btn-sm m-1"
+            class="btn btn-light btn-outline-dark btn-sm m-1"
             @click="toggleCollapse(index)"
             @blur="closeCollapse(index)"
-            v-bind:style="{
-              backgroundColor: arrayCollapse[index].isOpen
-                ? '#ffc107'
-                : colorButton[index],
-            }"
             :class="{
               active: arrayCollapse[index].isOpen,
             }"
@@ -32,7 +27,7 @@
           <div
             class="card card-body"
             v-bind:style="{
-              backgroundColor: colorButton[index] + '7F',
+              backgroundColor: colorButton[0] + '7F',
             }"
           >
             {{ paragraph.information }}
@@ -66,7 +61,7 @@ export default {
         return paragraph;
       });
     },
-    closeCollapse(index){
+    closeCollapse(index) {
       this.arrayCollapse[index].isOpen = false;
     },
     showColor(color, luminisity, count) {
@@ -74,7 +69,7 @@ export default {
     },
   },
   mounted() {
-    this.colorButton = [...this.showColor("blue", "light", 4)];
+    this.colorButton = [...this.showColor("blue", "light", 1)];
   },
 };
 </script>

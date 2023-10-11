@@ -1,5 +1,4 @@
 <template>
-  <CarouselHome />
   <!--
   <div class="container-fluid">
     <p>Color: {{ color[0] }}</p>
@@ -8,63 +7,66 @@
     </button>
   </div>
    -->
-  <div class="color-home">
-    <AwarenessHomeSection />
-    <div class="container-fluid text-justify-custom">
-      <div class="row">
-        <div class="my-2 col-md-6 col-12">
-          El uso excesivo de productos plásticos ha brindado múltiples
-          beneficios en la vida cotidiana, pero también ha llevado a
-          consecuencias no deseadas. Uno de los más grandes problemas es la
-          formación de microplásticos, los cuales representan una amenaza global
-          debido a su persistencia y amplia distribución en la vida silvestre y
-          los seres humanos.
-          <ReferencesAuthors
-            :img="{
-              src: require('@/assets/image-from-rawpixel-id-5901973-jpeg.jpg'),
-              alt: 'Botella flotando en el mar',
-            }"
-            :credits="{
-              'Image ':
-                'https://www.rawpixel.com/image/5901973/photo-image-cloud-public-domain-blue',
-              'by ': '',
-              rawpixel: 'https://www.rawpixel.com/',
-            }"
-          />
-        </div>
-        <div class="col-md-6 col-12">
-          <CollapseInformation
-            :informationCollapse="[
-              {
-                information:
-                  'Desde el año 2016, se ha registrado un alarmante aumento en el uso de plásticos en la sociedad.',
-                title: 'Causa',
-                isOpen: false,
-              },
-              {
-                information:
-                  'Diversos factores físicos y químicos provocan que los plásticos se fragmentes, resultando así los microplásticos.',
-                title: 'Consecuencia',
-                isOpen: false,
-              },
-              {
-                information:
-                  'Los microplásticos son partículas sólidas sintéticas con un rango de tamaño que comprende de 1 µm hasta 5 mm.',
-                title: 'Definición',
-                isOpen: false,
-              },
-              {
-                information:
-                  'Se identifican como esferas, fragmentos irregulares, fibras, gránulos, microperlas y películas.',
-                title: 'Formas',
-                isOpen: false,
-              },
-            ]"
-          />
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid text-justify-custom">
+
+  <CarouselHome />
+  <main class="container-fluid text-justify-custom color-home">
+    <article id="section-question">
+      <AwarenessHomeSection />
+    </article>
+    <article class="row">
+      <section class="my-2 col-md-6 col-12">
+        El uso excesivo de productos plásticos ha brindado múltiples beneficios
+        en la vida cotidiana, pero también ha llevado a consecuencias no
+        deseadas. Uno de los más grandes problemas es la formación de
+        microplásticos, los cuales representan una amenaza global debido a su
+        persistencia y amplia distribución en la vida silvestre y los seres
+        humanos.
+        <ReferencesAuthors
+          :img="{
+            src: require('@/assets/image-from-rawpixel-id-5901973-jpeg.jpg'),
+            alt: 'Botella flotando en el mar',
+          }"
+          :credits="{
+            'Image ':
+              'https://www.rawpixel.com/image/5901973/photo-image-cloud-public-domain-blue',
+            'by ': '',
+            rawpixel: 'https://www.rawpixel.com/',
+          }"
+        />
+      </section>
+      <section class="col-md-6 col-12">
+        <CollapseInformation
+          :informationCollapse="[
+            {
+              information:
+                'Desde el año 2016, se ha registrado un alarmante aumento en el uso de plásticos en la sociedad.',
+              title: 'Causa',
+              isOpen: false,
+            },
+            {
+              information:
+                'Diversos factores físicos y químicos provocan que los plásticos se fragmentes, resultando así los microplásticos.',
+              title: 'Consecuencia',
+              isOpen: false,
+            },
+            {
+              information:
+                'Los microplásticos son partículas sólidas sintéticas con un rango de tamaño que comprende de 1 µm hasta 5 mm.',
+              title: 'Definición',
+              isOpen: false,
+            },
+            {
+              information:
+                'Se identifican como esferas, fragmentos irregulares, fibras, gránulos, microperlas y películas.',
+              title: 'Formas',
+              isOpen: false,
+            },
+          ]"
+        />
+      </section>
+    </article>
+
+    <article>
       <span
         >En cuanto a su origen, se pueden clasificar en primarios y
         secundarios.</span
@@ -109,9 +111,9 @@
         :headers="['Tipo', 'Características']"
         :img="true"
       />
-    </div>
+    </article>
 
-    <div class="container-fluid text-justify-custom">
+    <article>
       <h3 class="text-center fw-semibold section-title">
         Curiosidades de los microplásticos
       </h3>
@@ -166,9 +168,10 @@
           },
         ]"
       />
-    </div>
-    <div class="container-fluid text-justify-custom">
-      <h3 class="text-center fw-semibold section-title">
+    </article>
+
+    <article>
+      <h3 class="text-center fw-semibold section-title animate__bounce">
         Efectos de los microplásticos en organismos
       </h3>
       Los microplásticos son un problema en crecimiento a nivel global que tiene
@@ -271,12 +274,13 @@
           },
         ]"
       />
-    </div>
-    <article class="container-fluid section-recomendation m-0">
+    </article>
+
+    <article>
       <SectionRecomendation />
     </article>
 
-    <article class="container-fluid text-justify-custom mt-2">
+    <article class="mt-2">
       <section class="fw-bold">
         Toda la información presentada se utilizaron las siguientes referencias
       </section>
@@ -409,14 +413,8 @@
         ]"
       />
     </article>
-  </div>
+  </main>
 </template>
-
-<style scoped>
-.section-recomendation {
-  background-color: #faf2d3;
-}
-</style>
 
 <script>
 import CarouselHome from "@/components/CarouselHome.vue";
@@ -429,15 +427,8 @@ import TableInformation from "@/components/TableInformation.vue";
 import InfoSection from "@/components/InfoSection.vue";
 import ReferencesAuthors from "@/components/ReferencesAuthors.vue";
 
-import { generateColor } from "@/globalFunctions.js";
-
 export default {
-  name: "Home",
-  data() {
-    return {
-      color: [],
-    };
-  },
+  name: "HomeView",
   components: {
     CarouselHome,
     SectionRecomendation,
@@ -448,11 +439,6 @@ export default {
     TableInformation,
     InfoSection,
     ReferencesAuthors,
-  },
-  methods: {
-    showColor(color, luminisity, count) {
-      this.color = generateColor(color, luminisity, count);
-    },
   },
 };
 </script>
