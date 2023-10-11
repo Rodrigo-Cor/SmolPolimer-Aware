@@ -7,7 +7,7 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-12 text-center">
-      <p class="my-paragraph" id="explanation">
+      <p class="text-justify-custom" id="explanation">
         Se introdujeron {{ microplastic }} microplásticos como cantidad inicial, mientras un total de {{ residue }} 
         como residuo, que irán filtrándose hasta terminar los {{ treatment }} días especificados. Dando una
         cantidad de microplásticos en el filtro de {{ onFilterValues.toFixed(2) }}, mientras que {{ releasedValues.toFixed(2) }}
