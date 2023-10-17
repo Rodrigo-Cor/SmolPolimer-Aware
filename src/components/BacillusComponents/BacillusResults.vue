@@ -2,12 +2,12 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 text-center mt-3">
-      <h2 id="myTitle">Resultados</h2>
+      <h2 id="myTitle" class="animate__animated animate__fadeIn">Resultados</h2>
     </div>
   </div>
   <div class="row justify-content-center">
     <div class="col-12 text-center">
-      <p class="text-justify-custom">
+      <p class="text-blue-box animate__animated animate__fadeIn">
         En la siguiente lista se encuentra el resumen de los datos introducidos al simulador,
         mientras que después en la tabla, se encuentran los resultados: cómo disminuyen los 
         microplásticos conforme pasan los bimestres.
@@ -15,9 +15,9 @@
     </div>
   </div> 
   <div class="row justify-content-center">
-    <div class="col text-center my-2">
+    <div class="col text-center my-2 animate__animated animate__fadeIn animate__delay-1s">
       <h3 id="mySubtitle">Resumen de datos de entrada</h3>
-      <ul class="list-group">
+      <ul class="list-group custom-list">
           <li class="list-group-item custom-list-item">
             Cantidad: <span class="badge bg-dark pill">{{ quantity }} microplásticos</span></li>
           <li class="list-group-item custom-list-item">
@@ -33,9 +33,14 @@
         </ul>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12">
-      <table class="table table-info table-striped-columns" id="tableResults">
+  <div class="row animate__animated animate__fadeIn animate__delay-2s">
+    <div id="mySubtitle" class="col text-center">
+      Tabla de resultados
+    </div>
+  </div>
+  <div class="row animate__animated animate__fadeIn animate__delay-2s">
+    <div class="col text-center">
+      <table class="table table-info table-striped-columns custom-table my-2" id="tableResults">
         <thead>
           <tr>
             <th scope="col">Bimestre</th>
@@ -70,21 +75,23 @@
   background-clip: text;
   -webkit-background-clip: text;
 }
-.my-paragraph{
-  background-color: rgba(80, 216, 144, 0.25);
-  text-align: justify;
-  color: #272727;
-  margin-top: 0.8rem;
-  margin-bottom: 0.8rem;
-  margin-left: 0.8rem;
-  margin-right: 0.8rem;
+.custom-list {
+  min-width: min-content;
+  max-width: max-content;
+  background-color: #50d8903f;
+  border: 0.1rem solid #50d8903f;
+  border-radius: 0.5rem;
+  margin: auto;
 }
 .custom-list-item {
-  width: auto;
-  background-color: rgba(80, 216, 212, 0.25);
-  border: 0.1rem solid rgba(80, 216, 212, 0.25);
-  border-radius: 0.5rem;
-  margin: 0 auto;
+  background-color: #50d8903f;
+  border: 0.1rem solid #50d8903f;
+  text-align: justify;
+}
+.custom-table {
+  min-width: min-content;
+  max-width: fit-content; 
+  margin: auto;
 }
 </style>
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="background-color: #bcffee; border-radius: 0.2rem;">
+  <div class="container animate__animated animate__bounceIn" style="background-color: #4f98ca1a; border-radius: 1rem;">
     <div class="row justify-content-center">
       <div class="col-12 text-center mt-3">
         <h2 id="myTitle">Formulario</h2>

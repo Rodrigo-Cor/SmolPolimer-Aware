@@ -65,4 +65,16 @@ nav a.router-link-exact-active.navbar-brand {
 .text-button {
   font-size: 0.8rem;
 }
+.text-green-box {
+  text-align: justify;
+  border-radius: 1rem;
+  background-color: #50d8901a;
+  padding: 0.6rem;
+}
+.text-blue-box {
+  text-align: justify;
+  border-radius: 1rem;
+  background-color: #4f98ca1a;
+  padding: 0.6rem;
+}
 </style>

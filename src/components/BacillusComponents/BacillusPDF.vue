@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-center my-2">
+  <div class="d-flex justify-content-center my-2 animate__animated animate__bounceIn animate__delay-2s">
     <button
       @click="generatePDF"
       class="btn btn-outline-danger btn-lg"
@@ -98,6 +98,11 @@ export default {
         textWidth = pdf.getStringUnitWidth("Simulación gráfica") * pdf.internal.getFontSize() / pdf.internal.scaleFactor;
         xCoordinate = (pageWidth - textWidth) / 2;
         pdf.text("Simulación gráfica", xCoordinate, 110);
+
+        pdf.setFontSize(12);
+        pdf.setTextColor("#4f98ca");
+        pdf.setFont("Courier", "bold");
+        pdf.text("Microplásticos -----", 20, 115);
 
         const canvas = document.createElement("canvas");
         const canvasWidth = 672;

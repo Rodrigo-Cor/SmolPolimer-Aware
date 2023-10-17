@@ -7,7 +7,7 @@
         </template>
         <template v-else>
           <div v-for="paragraph in arrayText" :key="paragraph" class="rounded p-2 mb-md-0 mb-2">
-            <p class="text-justify-custom">
+            <p class="text-blue-box">
               {{ paragraph }}
             </p>
           </div>
@@ -16,7 +16,7 @@
       <div class="col-md-6 col-12 align-self-center">
         <template v-if="sideImage">
           <div v-for="paragraph in arrayText" :key="paragraph" class="rounded p-2 mb-md-0 mb-2">
-            <p class="text-justify-custom">
+            <p class="text-blue-box">
               {{ paragraph }}
             </p>
           </div>
@@ -28,13 +28,6 @@
     </div>
   </div>
 </template>
-
-<style scoped>
-.information{
-  background-color: #50d8903F !important;
-}
-
-</style>
 
 <script>
 import ReferencesAuthors from "./ReferencesAuthors.vue";

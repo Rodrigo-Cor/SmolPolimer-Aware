@@ -2,16 +2,21 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 text-center mt-2">
-      <h2 id="myTitle">Explicación</h2>
+      <h2 id="myTitle" class="animate__animated animate__zoomIn animate__delay-1s">Explicación</h2>
     </div>
   </div>
   <div class="row justify-content-center">
-    <div class="col-12 text-center">
-      <p class="text-justify-custom" id="explanation">
-        Se introdujeron {{ microplastic }} microplásticos como cantidad inicial, mientras un total de {{ residue }} 
-        como residuo, que irán filtrándose hasta terminar los {{ treatment }} días especificados. Dando una
-        cantidad de microplásticos en el filtro de {{ onFilterValues.toFixed(2) }}, mientras que {{ releasedValues.toFixed(2) }}
-        microplásticos fueron liberados en el ambiente.
+    <div class="col-12 animate__animated animate__zoomIn animate__delay-1s">
+      <p class="text-green-box" id="explanation">
+        En la simulación, se puede observar que las líneas llevan una tendencia ascendente, debido a que cada una
+        representa el porcentaje acumulado de microplásticos que son, o atrapados en el filtro (azul) o sueltos en
+        un cuerpo de agua (verde). Para el primer día, por ejemplo, si se suma el porcentaje en el filtro con el del río, dará
+        como resultado el 100%; para días posteriores son valores que suman el 200%, 300% y así, sucesivamente. <br> <br> 
+        Se introdujo una cantidad inicial de microplásticos de {{ microplastic }}, a la vez que {{ residue }} 
+        como residuo, cantidades que se irán pasando por el filtro diariamente hasta terminar los {{ treatment }} días especificados. Dando como
+        resultado el día {{ treatment }}, un porcentaje acumulado en el filtro de {{ onFilterValues.toFixed(2) }}%, 
+        a la par que {{ releasedValues.toFixed(2) }}% en el cuerpo de agua, en este caso, un río. A
+        continuación, la tabla de resultados con la que es graficada la simulación.
       </p>
     </div>
   </div>    

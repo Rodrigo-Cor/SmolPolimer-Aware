@@ -1,11 +1,11 @@
 <template>
   <div class="container" style="background-color: white; border-radius: 0.2rem;">
     <div class="row justify-content-center">
-      <div class="col-12 text-center my-2">
+      <div class="col-12 text-center my-2 animate__animated animate__zoomIn">
         <h2 id="myTitle">Simulación</h2>
       </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center animate__animated animate__zoomIn">
       <div class="col-md-6 col-sm-12 text-center">
         <span id="myFilter">Microplásticos en filtro -----</span>
       </div>
@@ -14,7 +14,7 @@
       </div>
     </div>  
     <div class="row justify-content-center">
-      <div class="col-12 text-center my-2">
+      <div class="col-12 text-center my-2 animate__animated animate__zoomIn">
         <div ref="containerRef"></div>
         <div id="chart-container"></div>
         <div id="chartPDF-container"></div>

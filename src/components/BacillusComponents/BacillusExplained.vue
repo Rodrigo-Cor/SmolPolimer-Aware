@@ -1,14 +1,14 @@
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-12 text-center mt-2">
+      <div class="col text-center mt-2 animate__animated animate__zoomIn animate__delay-1s">
         <h2 id="myTitle">Explicación</h2>
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-12 text-center">
-        <p class="text-justify-custom" id="explanation">
-          En la simulación gráfica, se ve reflejada la fórmula: C(t) = n * (1 - p)^t, donde t son los bimestres, p es el porcentaje de limpieza y n es el número de microplásticos. Se introdujeron {{ quantity }} microplásticos como cantidad inicial, reflejados en la gráfica como el primer valor, en el bimestre 0, que irán degradándose hasta terminar la cantidad especificada de bimestres de {{ bimester }}. La temperatura a la que se sometieron los microplásticos es de {{ temperature }}°C en la sustancia mineral {{ mineral }}, dando una cantidad de microplásticos final de {{ degradatedValues.toFixed(2) }} microplásticos. Se escogió la cepa <i>{{ strain }}</i>.
+      <div class="col animate__animated animate__zoomIn animate__delay-1s">
+        <p class="text-green-box" id="explanation">
+          En la simulación gráfica, se ve reflejada la fórmula: C(t) = n * (1 - p)^t, donde t son los bimestres, p es el porcentaje de limpieza y n es el número de microplásticos. Se introdujeron {{ quantity }} microplásticos como cantidad inicial, reflejados en la gráfica como el primer valor, en el bimestre 0, que irán degradándose hasta terminar la cantidad especificada de bimestres de {{ bimester }}. La temperatura a la que se sometieron los microplásticos es de {{ temperature }}°C, alimentando a las bacterias de la cepa <i>{{ strain }}</i> con mineral {{ mineral }}, dando una cantidad de microplásticos final de {{ degradatedValues.toFixed(2) }} microplásticos. En la siguiente tabla, se encuentran los valores con los que fue graficada la simulación.
         </p>
       </div>
     </div>    

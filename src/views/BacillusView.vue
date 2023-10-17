@@ -1,17 +1,18 @@
 <template>
   <div class="container" style="background-color: #effffb">
-    <h3 class="fw-semibold text-center section-title">
+    <h3 class="fw-semibold text-center section-title animate__animated animate__zoomIn">
       Degradación por bacterias Bacillus
     </h3>
-    <article class="text-justify-custom">
-      En los procesos de degradación, se da por medio de la tecnología
+    <article>
+      <section class="text-green-box my-2 animate__animated animate__zoomIn animate__delay-1s">
+        En los procesos de degradación, se da por medio de la tecnología
       <i>biofloc</i> que presentan géneros de bacterias heterótrofas tales como
       <i
         >Bacillus, Enterobacter, Pseudomonas, Staphylococcus, Klebsiella,
         Flavobacterium, Rhodococcus y Nocardia</i
       >.
-
-      <section class="p-2 mb-4 rounded color-techniques">
+      </section>
+      <section class="p-2 mb-4 rounded color-techniques animate__animated animate__zoomIn animate__delay-1s">
         <InfoSection
           :img="{
             src: require('@/assets/cdc-6s2oTaFpPE4-unsplash.jpg'),
@@ -32,25 +33,26 @@
         />
       </section>
     </article>
-    <article class="text-justify-custom">
+    <article class="text-green-box animate__animated animate__zoomIn animate__delay-1s">
       <section>
         En esta simulación, tendrás la oportunidad de explorar la degradación
         con diferentes cepas de la bacteria Bacillus. Cada una de las seis cepas
         que se presentan tiene su propia capacidad de degradación única, todo
         gracias a los ingredientes especiales conocidos como caldo mineral
-        (Mineral Broth, en inglés) y agar mineral (Mineral Agar, en inglés).
+        (mineral broth, en inglés) y agar mineral.
         Estos ingredientes son como el "alimento" de nuestras bacterias y
         afectarán su capacidad de degradación en un periodo de dos meses. Los
         valores de entrada que se ocuparán para la simulación incluyen la
         cantidad de microplásticos a degradar, la temperatura a la que se
-        encontrarán las bacterias, para degradar los microplásticos; el
-        porcentaje de degradación está dado por la cepa de Bacillus que se
-        utilice.
+        encontrarán las bacterias y el porcentaje de degradación, que está dado por la 
+        cepa de Bacillus que se utilice, una vez seleccionada la sustancia (agar o broth).
       </section>
     </article>
 
     <div>
-      <AwarenessSimulationSection v-if="!getIsAnswered" />
+      <div class="text-blue-box my-2 animate__animated animate__zoomIn animate__delay-2s">
+        <AwarenessSimulationSection v-if="!getIsAnswered" />
+      </div>
       <BacillusForm v-if="choice" />
       <BacillusResults
         v-if="
@@ -85,17 +87,6 @@
           choiceIsMade
         " />
     </div>
-    <div class="d-flex justify-content-center my-2">
-      <button @click="handleButton" class="btn btn-outline-success btn-lg">
-        {{
-          choiceIsMade
-            ? choice
-              ? "Valores por defecto"
-              : "Formulario"
-            : "Simulación"
-        }}
-      </button>
-    </div>
     <BacillusPDF :svgData="svgData"
       v-if="
         degradatedValues.length > 0 && 
@@ -109,6 +100,17 @@
       "
     />
   </div>
+  <div class="d-flex justify-content-center my-2 animate__animated animate__bounceIn animate__delay-2s">
+      <button @click="handleButton" class="btn btn-outline-success btn-lg">
+        {{
+          choiceIsMade
+            ? choice
+              ? "Valores por defecto"
+              : "Formulario"
+            : "Simulación"
+        }}
+      </button>
+    </div>
 </template>
 <style scoped>
 .color-techniques {
