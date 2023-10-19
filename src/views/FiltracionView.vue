@@ -1,17 +1,17 @@
 <template>
-  <div class="container" style="background-color: #effffb">
-    <h3 class="fw-semibold text-center section-title">
+  <div class="container-fluid" style="background-color: #effffb;">
+    <h1 class="fw-semibold text-center section-title animate__animated animate__zoomIn">
       Filtración granular rápida
-    </h3>
-    <section class="mt-2">
+    </h1>
+    <section class="text-green-box my-2 animate__animated animate__zoomIn animate__delay-1s">
       Se han desarrollado diversos procesos para la limpieza, los cuales pueden
       ser clasificados en dos tipos: procesos de separación y procesos de
       degradación. En los procesos de separación, se incluyen técnicas como la
       filtración granular rápida, la filtración de disco, la filtración por
-      membrana y la flotación por aire disuelto, todo éstos pueden eliminar al
+      membrana y la flotación por aire disuelto, todo estos pueden eliminar al
       menos el 90% de microplásticos presentes en el agua.
     </section>
-    <section class="p-2 mb-4 rounded color-techniques">
+    <section class="p-2 my-2 rounded color-techniques animate__animated animate__zoomIn animate__delay-1s">
       <InfoSection
         :img="{
           src: require('@/assets/ivan-bandura-Ac97OqAWDvg-unsplash.jpg'),
@@ -31,7 +31,7 @@
         }"
       />
     </section>
-    <section class="text-justify-custom">
+    <section class="text-green-box my-2 animate__animated animate__zoomIn animate__delay-1s">
       En esta simulación, tendrás la oportunidad de controlar la cantidad de
       microplásticos que pasarán a través del filtro. El filtro está diseñado
       para capturar una cierta cantidad de microplásticos, que se mostrará en
@@ -40,20 +40,21 @@
       significa que algunos de ellos aún podrían llegar al cuerpo de agua. El
       objetivo ideal es asegurarse de que la cantidad de microplásticos que
       quedan en el cuerpo de agua sea menor que la cantidad atrapada por el
-      filtro. Simplemente haz clic en el botón a continuación y comencemos la
-      simulación.
+      filtro.
     </section>
-
-    <section class="text-justify-custom my-2">
+    <section class="text-green-box my-2 animate__animated animate__zoomIn animate__delay-1s">
       Para la simulación se reciben como datos de entrada: una cantidad inicial
-      de microplásticos, otra que termina de residuo y el número de días por el
-      que se estará pasando esa cantidad de microplásticos por el filtro. Haz
-      clic en el botón de simulación y podrás escoger entre valores por defecto,
-      o cambiarlos por otros por medio de un formulario.
+      de microplásticos, otra que termina de residuo y el número de días por el 
+      que se estará pasando esa cantidad inicial de microplásticos por el filtro.
+      Si ya has respondido a la pregunta, simplemente haz clic en el botón que 
+      dice "Simulación" a continuación y comencemos la simulación.
     </section>
 
     <div>
-      <AwarenessSimulationSection />
+      <div class="text-blue-box my-2 animate__animated animate__zoomIn animate__delay-2s">
+        <AwarenessSimulationSection v-if="!getIsAnswered" />
+      </div>
+      
       <FiltracionForm v-if="choice" />
       <FiltracionResults
         v-if="
@@ -84,7 +85,48 @@
         "
       />
     </div>
-    <div class="d-flex justify-content-center my-2">
+    <FiltracionForm v-if="choice"/>
+    <FiltracionResults
+      v-if="
+        microplastics &&
+        residues &&
+        timeUnits &&
+        choiceIsMade
+      "
+    />
+    <FiltracionSimulation
+      @chart-obtained="obtainSVG"
+      v-if="
+        onFilterValues.length > 0 &&
+        releasedValues.length > 0 &&
+        microplastics &&
+        residues &&
+        timeUnits &&
+        choiceIsMade          
+      "
+    />
+    <FiltracionExplained
+      v-if="
+        onFilterValues.length > 0 &&
+        releasedValues.length > 0 &&
+        microplastics &&
+        residues &&
+        timeUnits &&
+        choiceIsMade
+      "
+    />
+    <FiltracionPDF :svgData ="svgData"
+      v-if="
+        onFilterValues.length > 0 &&
+        releasedValues.length > 0 &&
+        microplastics &&
+        residues &&
+        timeUnits &&
+        svgData &&
+        choiceIsMade
+      "
+    />
+    <div class="d-flex justify-content-center my-2 animate__animated animate__bounceIn animate__delay-2s">
       <button @click="handleButton" class="btn btn-outline-success btn-lg">
         {{
           choiceIsMade
@@ -95,24 +137,9 @@
         }}
       </button>
     </div>
-    <FiltracionPDF :svgData ="svgData"
-      v-if="
-        onFilterValues.length > 0 &&
-        releasedValues.length > 0 &&
-        microplastic &&
-        residue &&
-        treatment &&
-        svgData &&
-        choiceIsMade
-      "
-    />
   </div>
 </template>
 <style scoped>
-.my-paragraph {
-  background-color: rgba(80, 216, 144, 0.25);
-}
-
 .color-techniques {
   background-color: #ff80803f;
 }
@@ -127,7 +154,7 @@ import AwarenessSimulationSection from "@/components/AwarenessSimulationSection.
 import InfoSection from "@/components/InfoSection.vue";
 import Swal from "sweetalert2";
 import { mapGetters, mapMutations } from "vuex";
-
+import 'animate.css';
 export default {
   name: "FiltracionView",
   components: {
@@ -143,32 +170,36 @@ export default {
     return {
       choiceIsMade: false,
       choice: null,
-      defaultMicroplastic: 29,
-      defaultResidue: 5,
-      defaultTreatment: 9,
+      defaultMicroplastics: 29,
+      defaultResidues: 5,
+      defaultTimeUnits: 9,
       svgData: null,
     };
   },
-
   computed: {
     ...mapGetters([
-      "getFiltracionValues",
+      "getMicroplastics",
+      "getResidues",
+      "getTimeUnits",
       "getOnFilterValues",
       "getReleasedValues",
+      "getIsAnswered",
     ]),
     ...mapMutations([
-      "setFiltracionValues",
-      "setROnFilterValues",
+      "setMicroplastics",
+      "setResidues",
+      "setTimeUnits",
+      "setOnFilterValues",
       "setReleasedValues",
     ]),
-    microplastic() {
-      return this.getFiltracionValues[0];
+    microplastics() {
+      return this.getMicroplastics;
     },
-    residue() {
-      return this.getFiltracionValues[1];
+    residues() {
+      return this.getResidues;
     },
-    treatment() {
-      return this.getFiltracionValues[2];
+    timeUnits() {
+      return this.getTimeUnits;
     },
     onFilterValues() {
       return this.getOnFilterValues;
@@ -209,17 +240,17 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           this.choice = true;
-          this.$store.commit("setFiltracionValues", []);
+          this.$store.commit("setMicroplastics", "");
+          this.$store.commit("setResidues", "");
+          this.$store.commit("setTimeUnits", "");
           this.$store.commit("setOnFilterValues", []);
           this.$store.commit("setReleasedValues", []);
           this.choiceIsMade = true;
         } else if (result.isDenied) {
           this.choice = false;
-          this.$store.commit("setFiltracionValues", [
-            this.defaultMicroplastic,
-            this.defaultResidue,
-            this.defaultTreatment,
-          ]);
+          this.$store.commit('setMicroplastics', this.defaultMicroplastics);
+          this.$store.commit('setTimeUnits', this.defaultTimeUnits);
+          this.$store.commit('setResidues', this.defaultResidues);
           this.choiceIsMade = true;
         } else if (result.isDismissed) {
           this.choice = this.choice;

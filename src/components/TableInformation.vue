@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-light table-striped-columns">
+  <table class="table table-info table-striped-columns">
     <thead>
       <tr>
         <template v-for="header in headers" :key="header">

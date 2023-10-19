@@ -1,321 +1,302 @@
 <template>
-  <div class="container" style="background-color: white; border-radius: 0.2rem;">
-    <div class="row justify-content-center">
-      <div class="col-12 text-center my-2">
-        <h2 id="myTitle">Simulación</h2>
-      </div>
+  <div class="container-fluid animate__animated animate__zoomIn" style="background-color: white; border-radius: 0.2rem;">
+    <h2 class="section-subtitle text-center my-2">Simulación</h2>
+    <p class="filteredTag text-center">Microplásticos en filtro -----</p>
+    <p class="releasedTag text-center">Microplásticos sueltos en el río -----</p>
+    <div ref="containerRef"></div>
+    <div id="chart-container"></div>
+    <div id="chartPDF-container"></div>
+    <div class="d-flex justify-content-center my-2">
+      <button class="btn btn-outline-info btn-sm my-2" @click="this.createChart"><i class="bi bi-brush"></i> Redibujar simulación</button>
     </div>
-    <div class="row justify-content-center">
-      <div class="col-md-6 col-sm-12 text-center">
-        <span id="myFilter">Microplásticos en filtro -----</span>
-      </div>
-      <div class="col-md-6 col-sm-12 text-center">
-        <span id="myReleased">Microplásticos sueltos en el río -----</span>
-      </div>
-    </div>  
-    <div class="row justify-content-center">
-      <div class="col-12 text-center my-2">
-        <div ref="containerRef"></div>
-        <div id="chart-container"></div>
-        <div id="chartPDF-container"></div>
-      </div>
-    </div>
-  </div>    
-  </template>
-  <style scoped>
-  #myTitle{
-    font-size: 1.7rem;
+  </div>
+</template>
+<style scoped>
+.filteredTag{
+    font-size: 1rem;
     font-weight: bold;
-    background-image: linear-gradient(to bottom, #50d8d4, #4f5bca);
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-  }
-  #myFilter{
-      font-size: 1rem;
-      font-weight: bold;
-      color: #4f98ca; 
-  }
-  #myReleased{
-      font-size: 1rem;
-      font-weight: bold;
-      color: #50d890;
-  }
-  </style>
-  <script>
-  import * as d3 from "d3";
-  import { mapGetters} from 'vuex';
-  export default {
-    name: "FiltracionSimulation",
-    data () {
-      return {
-        isFullscreen : false,
-      };
+    color: #4f98ca; 
+}
+.releasedTag{
+    font-size: 1rem;
+    font-weight: bold;
+    color: #50d890;
+}
+</style>
+<script>
+import * as d3 from "d3";
+import { mapGetters} from 'vuex';
+export default {
+  name: "FiltracionSimulation",
+  data () {
+    return {
+      isFullscreen : false,
+    };
+  },
+  mounted () {
+    if (this.$refs.containerRef) {
+      this.createChart();
+    };
+    this.observeContainerResize();
+    document.addEventListener("fullscreenchange", this.handleFullscreenChange);
+  },
+  beforeUnmount() {
+    this.unobserveContainerResize();
+    document.removeEventListener(
+      "fullscreenchange",
+      this.handleFullscreenChange
+    );
+  },
+  watch: {
+    getOnFilterValues() {
+      this.createChart();
     },
-    mounted () {
-      if (this.$refs.containerRef) {
-        this.createChart();
-      };
-      this.observeContainerResize();
-      document.addEventListener("fullscreenchange", this.handleFullscreenChange);
+    getReleasedValues() {
+      this.createChart();
     },
-    beforeUnmount() {
-      this.unobserveContainerResize();
-      document.removeEventListener(
-        "fullscreenchange",
-        this.handleFullscreenChange
-      );
+  },
+  computed: {
+    ...mapGetters(['getOnFilterValues', 'getReleasedValues']),
+    onFilterValues() {
+      return this.getOnFilterValues;
     },
-    watch: {
-      getOnFilterValues() {
-        this.createChart();
-      },
-      getReleasedValues() {
-        this.createChart();
-      },
+    releasedValues() {
+      return this.getReleasedValues;
     },
-    computed: {
-      ...mapGetters(['getOnFilterValues', 'getReleasedValues']),
-      onFilterValues() {
-        return this.getOnFilterValues;
-      },
-      releasedValues() {
-        return this.getReleasedValues;
-      },
-    },
-    methods: {
-      createChart() {
-        d3.select("#chart-container").select("svg").remove();
-  
-        var container = this.$refs.containerRef;
-        var containerWidth = container.clientWidth;
-        var containerHeight = containerWidth * 0.6;
-  
-        container.HTML = "";
-        var margin = { top: 20, right: 75, bottom: 75, left: 75 };
-        const fullscreenWidth = window.innerWidth;
-        const fullscreenHeight = window.innerHeight;
-        const isFullscreen =
-          containerWidth === fullscreenWidth &&
-          containerHeight === fullscreenHeight;
-        this.isFullscreen = isFullscreen;
-  
-        const width = isFullscreen
-            ? fullscreenWidth - margin.left - margin.right
-            : containerWidth - margin.left - margin.right;
-        const height = isFullscreen
-            ? fullscreenHeight - margin.top - margin.bottom
-            : containerHeight - margin.top - margin.bottom;
-        var x = d3.scaleLinear()
-          .range([0, width]);
-        var y = d3.scaleLinear()
-          .range([height, 0]);
-  
-        var svg = d3.select("#chart-container")
-          .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-          .append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
-  
-        x.domain([1, this.onFilterValues.length]);
-        y.domain([d3.min(this.onFilterValues.concat(this.releasedValues)), d3.max(this.onFilterValues.concat(this.releasedValues))]);
-  
-        svg.append("g")
-          .attr("transform", `translate(0,${height})`)
-          .call(d3.axisBottom(x));
-  
-        svg.append("g")
-          .call(d3.axisLeft(y));
-        var lineFilter = d3.line()
-          .x((d, i) => x(i + 1))
-          .y(d => y(d));
-        
-        var lineReleased = d3.line()
-          .x((d, i) => x(i + 1))
-          .y(d => y(d));
-  
-        var pathFilter = svg.append("path")
-          .datum(this.onFilterValues)
-          .attr("fill", "none")
-          .attr("stroke", "#4f98ca")
-          .attr("stroke-width", 2)
-          .attr("d", lineFilter);
-  
-        var totalLengthFilter = pathFilter.node().getTotalLength();
-  
-        pathFilter
-          .attr("stroke-dasharray", totalLengthFilter + " " + totalLengthFilter)
-          .attr("stroke-dashoffset", totalLengthFilter)
-          .transition()
-          .duration(2000)
-          .attr("stroke-dashoffset", 0);
-          /* .on("end", () => {
-            const svgElement = document.querySelector("#chart-container svg");
-            const svgData = new XMLSerializer().serializeToString(svgElement);
-            this.$emit('chart-obtained', svgData);
-          }); */
-  
-        var pathReleased = svg.append("path")
-          .datum(this.releasedValues)
-          .attr("fill", "none")
-          .attr("stroke", "#50d890")
-          .attr("stroke-width", 2)
-          .attr("d", lineReleased);
-  
-        var totalLengthReleased = pathReleased.node().getTotalLength();
-  
-        pathReleased
-          .attr("stroke-dasharray", totalLengthReleased + " " + totalLengthReleased)
-          .attr("stroke-dashoffset", totalLengthReleased)
-          .transition()
-          .duration(2000)
-          .attr("stroke-dashoffset", 0);
-        
-        svg.append("g")
-          .attr("class", "grid")
-          .attr("transform", `translate(0,${height})`)
-          .attr("stroke", "#1e1e1e")
-          .attr("stroke-width", .5)
-            .call(d3.axisBottom(x)
-              .tickSize(-height)
-              .tickFormat("")
-            );
-  
-        svg.append("g")
-          .attr("class", "grid")
-          .attr("stroke", "#1e1e1e")
-          .attr("stroke-width", .5)
-          .call(d3.axisLeft(y)
-            .tickSize(-width)
-            .tickFormat("")
-          );
-        
-        svg
-          .append("text")
-          .attr("x", width / 2)
-          .attr("y", height + margin.bottom - 25)
-          .attr("text-anchor", "middle")
-          .text("Días");
-  
-        svg
-          .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("x", - height / 2)
-          .attr("y", (margin.left / 2) - 75)
-          .attr("text-anchor", "middle")
-          .text("% de Microplásticos");
-          
-        this.createChartForPDF();
-      },
-      createChartForPDF() {
-        d3.select("#chartPDF-container").select("svg").remove();
-        var margin = { top: 20, right: 75, bottom: 75, left: 75 };
-        const width = 522;
-        const height = 308.2;
+  },
+  methods: {
+    createChart() {
+      d3.select("#chart-container").select("svg").remove();
 
-        var x = d3.scaleLinear()
-          .range([0, width]);
-        var y = d3.scaleLinear()
-          .range([height, 0]);
-        
-        var svg = d3.select("#chartPDF-container")/* var svg = d3.create("svg") */
+      var container = this.$refs.containerRef;
+      var containerWidth = container.clientWidth;
+      var containerHeight = containerWidth * 0.6;
+
+      container.HTML = "";
+      var margin = { top: 20, right: 75, bottom: 75, left: 75 };
+      const fullscreenWidth = window.innerWidth;
+      const fullscreenHeight = window.innerHeight;
+      const isFullscreen =
+        containerWidth === fullscreenWidth &&
+        containerHeight === fullscreenHeight;
+      this.isFullscreen = isFullscreen;
+
+      const width = isFullscreen
+          ? fullscreenWidth - margin.left - margin.right
+          : containerWidth - margin.left - margin.right;
+      const height = isFullscreen
+          ? fullscreenHeight - margin.top - margin.bottom
+          : containerHeight - margin.top - margin.bottom;
+      var x = d3.scaleLinear()
+        .range([0, width]);
+      var y = d3.scaleLinear()
+        .range([height, 0]);
+
+      var svg = d3.select("#chart-container")
         .append("svg")
           .attr("width", width + margin.left + margin.right)
           .attr("height", height + margin.top + margin.bottom)
         .append("g")
           .attr("transform", `translate(${margin.left},${margin.top})`);
 
-        x.domain([1, this.onFilterValues.length]);
-        y.domain([d3.min(this.onFilterValues.concat(this.releasedValues)), d3.max(this.onFilterValues.concat(this.releasedValues))]);
-        
-        svg.append("g")
-          .attr("transform", `translate(0,${height})`)
-          .call(d3.axisBottom(x));
+      x.domain([1, this.onFilterValues.length]);
+      y.domain([d3.min(this.onFilterValues.concat(this.releasedValues)), d3.max(this.onFilterValues.concat(this.releasedValues))]);
 
-        svg.append("g")
-          .call(d3.axisLeft(y));
+      svg.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x));
 
-        var lineFilter = d3.line()
-          .x((d, i) => x(i + 1))
-          .y(d => y(d));
-        
-        var lineReleased = d3.line()
-          .x((d, i) => x(i + 1))
-          .y(d => y(d));
-  
-        svg.append("path")
-          .datum(this.onFilterValues)
-          .attr("fill", "none")
-          .attr("stroke", "#4f98ca")
-          .attr("stroke-width", 2)
-          .attr("d", lineFilter);
+      svg.append("g")
+        .call(d3.axisLeft(y));
+      var lineFilter = d3.line()
+        .x((d, i) => x(i + 1))
+        .y(d => y(d));
+      
+      var lineReleased = d3.line()
+        .x((d, i) => x(i + 1))
+        .y(d => y(d));
 
-        svg.append("path")
-          .datum(this.releasedValues)
-          .attr("fill", "none")
-          .attr("stroke", "#50d890")
-          .attr("stroke-width", 2)
-          .attr("d", lineReleased);
+      var pathFilter = svg.append("path")
+        .datum(this.onFilterValues)
+        .attr("fill", "none")
+        .attr("stroke", "#4f98ca")
+        .attr("stroke-width", 2)
+        .attr("d", lineFilter);
 
-        svg.append("g")
-          .attr("class", "grid")
-          .attr("transform", `translate(0,${height})`)
-          .attr("stroke", "#1e1e1e")
-          .attr("stroke-width", .5)
-            .call(d3.axisBottom(x)
-              .tickSize(-height)
-              .tickFormat("")
-            );
-            
-        svg.append("g")
-          .attr("class", "grid")
-          .attr("stroke", "#1e1e1e")
-          .attr("stroke-width", .5)
-          .call(d3.axisLeft(y)
-            .tickSize(-width)
+      var totalLengthFilter = pathFilter.node().getTotalLength();
+
+      pathFilter
+        .attr("stroke-dasharray", totalLengthFilter + " " + totalLengthFilter)
+        .attr("stroke-dashoffset", totalLengthFilter)
+        .transition()
+        .duration(2000)
+        .attr("stroke-dashoffset", 0);
+        /* .on("end", () => {
+          const svgElement = document.querySelector("#chart-container svg");
+          const svgData = new XMLSerializer().serializeToString(svgElement);
+          this.$emit('chart-obtained', svgData);
+        }); */
+
+      var pathReleased = svg.append("path")
+        .datum(this.releasedValues)
+        .attr("fill", "none")
+        .attr("stroke", "#50d890")
+        .attr("stroke-width", 2)
+        .attr("d", lineReleased);
+
+      var totalLengthReleased = pathReleased.node().getTotalLength();
+
+      pathReleased
+        .attr("stroke-dasharray", totalLengthReleased + " " + totalLengthReleased)
+        .attr("stroke-dashoffset", totalLengthReleased)
+        .transition()
+        .duration(2000)
+        .attr("stroke-dashoffset", 0);
+      
+      svg.append("g")
+        .attr("class", "grid")
+        .attr("transform", `translate(0,${height})`)
+        .attr("stroke", "#1e1e1e")
+        .attr("stroke-width", .5)
+          .call(d3.axisBottom(x)
+            .tickSize(-height)
             .tickFormat("")
           );
+
+      svg.append("g")
+        .attr("class", "grid")
+        .attr("stroke", "#1e1e1e")
+        .attr("stroke-width", .5)
+        .call(d3.axisLeft(y)
+          .tickSize(-width)
+          .tickFormat("")
+        );
+      
+      svg
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", height + margin.bottom - 25)
+        .attr("text-anchor", "middle")
+        .text("Días");
+
+      svg
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("x", - height / 2)
+        .attr("y", (margin.left / 2) - 75)
+        .attr("text-anchor", "middle")
+        .text("% de Microplásticos");
         
-        svg
-          .append("text")
-          .attr("x", width / 2)
-          .attr("y", height + margin.bottom - 25)
-          .attr("text-anchor", "middle")
-          .text("Días");
-
-        svg
-          .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("x", - height / 2)
-          .attr("y", (margin.left / 2) - 75)
-          .attr("text-anchor", "middle")
-          .text("% de Microplásticos");
-
-        const svgElement = document.querySelector("#chartPDF-container svg")
-        const svgString = new XMLSerializer().serializeToString(svgElement/* svg.node() */);
-        this.$emit('chart-obtained', svgString);
-        d3.select("#chartPDF-container").select("svg").remove();
-      },
-      observeContainerResize() {
-        const container = this.$refs.containerRef;
-        this.resizeObserver = new ResizeObserver(() => {
-          this.createChart();
-        });
-        this.resizeObserver.observe(container);
-      },
-      unobserveContainerResize() {
-        if (this.resizeObserver) {
-          this.resizeObserver.disconnect();
-          this.resizeObserver = null;
-        }
-      },
-      handleFullscreenChange() {
-        if (!document.fullscreenElement) {
-          this.isFullscreen = false;
-          this.createChart();
-        }
-      },
+      this.createChartForPDF();
     },
-  };
-  </script>
+    createChartForPDF() {
+      d3.select("#chartPDF-container").select("svg").remove();
+      var margin = { top: 20, right: 75, bottom: 75, left: 75 };
+      const width = 522;
+      const height = 308.2;
+
+      var x = d3.scaleLinear()
+        .range([0, width]);
+      var y = d3.scaleLinear()
+        .range([height, 0]);
+      
+      var svg = d3.select("#chartPDF-container")/* var svg = d3.create("svg") */
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+      x.domain([1, this.onFilterValues.length]);
+      y.domain([d3.min(this.onFilterValues.concat(this.releasedValues)), d3.max(this.onFilterValues.concat(this.releasedValues))]);
+      
+      svg.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x));
+
+      svg.append("g")
+        .call(d3.axisLeft(y));
+
+      var lineFilter = d3.line()
+        .x((d, i) => x(i + 1))
+        .y(d => y(d));
+      
+      var lineReleased = d3.line()
+        .x((d, i) => x(i + 1))
+        .y(d => y(d));
+
+      svg.append("path")
+        .datum(this.onFilterValues)
+        .attr("fill", "none")
+        .attr("stroke", "#4f98ca")
+        .attr("stroke-width", 2)
+        .attr("d", lineFilter);
+
+      svg.append("path")
+        .datum(this.releasedValues)
+        .attr("fill", "none")
+        .attr("stroke", "#50d890")
+        .attr("stroke-width", 2)
+        .attr("d", lineReleased);
+
+      svg.append("g")
+        .attr("class", "grid")
+        .attr("transform", `translate(0,${height})`)
+        .attr("stroke", "#1e1e1e")
+        .attr("stroke-width", .5)
+          .call(d3.axisBottom(x)
+            .tickSize(-height)
+            .tickFormat("")
+          );
+          
+      svg.append("g")
+        .attr("class", "grid")
+        .attr("stroke", "#1e1e1e")
+        .attr("stroke-width", .5)
+        .call(d3.axisLeft(y)
+          .tickSize(-width)
+          .tickFormat("")
+        );
+      
+      svg
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", height + margin.bottom - 25)
+        .attr("text-anchor", "middle")
+        .text("Días");
+
+      svg
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("x", - height / 2)
+        .attr("y", (margin.left / 2) - 75)
+        .attr("text-anchor", "middle")
+        .text("% de Microplásticos");
+
+      const svgElement = document.querySelector("#chartPDF-container svg")
+      const svgString = new XMLSerializer().serializeToString(svgElement/* svg.node() */);
+      this.$emit('chart-obtained', svgString);
+      d3.select("#chartPDF-container").select("svg").remove();
+    },
+    observeContainerResize() {
+      const container = this.$refs.containerRef;
+      this.resizeObserver = new ResizeObserver(() => {
+        this.createChart();
+      });
+      this.resizeObserver.observe(container);
+    },
+    unobserveContainerResize() {
+      if (this.resizeObserver) {
+        this.resizeObserver.disconnect();
+        this.resizeObserver = null;
+      }
+    },
+    handleFullscreenChange() {
+      if (!document.fullscreenElement) {
+        this.isFullscreen = false;
+        this.createChart();
+      }
+    },
+  },
+};
+</script>

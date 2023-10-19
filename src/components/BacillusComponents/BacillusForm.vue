@@ -1,10 +1,6 @@
 <template>
-  <div class="container" style="background-color: #bcffee; border-radius: 0.2rem;">
-    <div class="row justify-content-center">
-      <div class="col-12 text-center mt-3">
-        <h2 id="myTitle">Formulario</h2>
-      </div>
-    </div>
+  <div class="container-fluid animate__animated animate__bounceIn" style="background-color: #4f98ca1a; border-radius: 1rem;">
+    <h2 class="section-subtitle text-center">Formulario</h2>
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-3 text-center my-1">
         <Popper
@@ -28,33 +24,7 @@
           @keypress= "validateKeyPress"
         />
         <br>
-        <span id= "myAlert" v-if="quantity > 10000 || (!quantity && sendButtonPressed)">Mínimo 1, máximo 10000</span>
-      </div>
-      <div class="col-sm-12 col-md-3 text-center my-1">
-        <Popper
-          class="popper-box"
-          arrow
-          content="La temperatura en la que se someterán los microplásticos"
-          placement="top"
-          hover
-        >
-        <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
-        </Popper>
-        <br>
-        <label class="my-label" for="temperatureInput">Temperatura: °C</label>
-        <br>
-        <select
-          class="my-select mx-auto"
-          aria-label="Select de temperatura"
-          v-model="temperature"
-          id="temperatureInput"
-          name="temperatureInput"
-        >
-          <option :value="15">15°C</option>
-          <option :value="30">30°C</option>
-        </select>
-        <br>
-        <span id= "myAlert" v-if="!temperature && sendButtonPressed">Selecciona una temperatura</span>
+        <span class= "myAlert" v-if="quantity > 10000 || (!quantity && sendButtonPressed)">Mínimo 1, máximo 10000</span>
       </div>
       <div class="col-sm-12 col-md-3 text-center my-1">
         <Popper
@@ -78,42 +48,40 @@
           @keypress= "validateKeyPress"
         />
         <br>
-        <span id= "myAlert" v-if="bimester > 12 || (!bimester && sendButtonPressed)">Mínimo 1, máximo 12</span>
+        <span class= "myAlert" v-if="bimester > 12 || (!bimester && sendButtonPressed)">Mínimo 1, máximo 12</span>
       </div>
       <div class="col-sm-12 col-md-3 text-center my-1">
         <Popper
           class="popper-box"
           arrow
-          content="Escoge un material para escoger el porcentaje"
+          content="Alimento para las bacterias, determina el porcentaje de degradación."
           placement="top"
           hover
         >
         <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
-        <label class="my-label" for="mineralInput">Mineral:</label>
+        <label class="my-label" for="mineralInput">Medio de cultivo:</label>
         <br>
         <select 
-          class="my-select mx-auto"
+          class="my-select"
           v-model="mineral"
           aria-label="Select de mineral"
           id="mineralInput"
           name="mineralInput"
           @change="handleMaterialSelect"
         >
-          <option :value="'Agar'">Agar</option>
-          <option :value="'Broth'">Broth</option>
+          <option :value="'mineral agar'">mineral agar</option>
+          <option :value="'mineral broth'">mineral broth</option>
         </select>
         <br>
-        <span id= "myAlert" v-if="!mineral && sendButtonPressed">Selecciona un mineral</span>
+        <span class= "myAlert" v-if="!mineral && sendButtonPressed">Selecciona un medio de cultivo</span>
       </div>
-    </div>
-    <div v-if="this.buttonPressed" class="row justify-content-center">
-      <div class="col-12 text-center my-1">
+      <div v-show="this.buttonPressed" class="col-sm-12 col-md-3 text-center my-1">
         <Popper
           class="popper-box" 
           arrow 
-          content="Cada cepa de bacteria tiene su porcentaje"
+          content="La cepa define el porcentaje de degradación"
           placement="top"
           hover
         >
@@ -139,34 +107,18 @@
           <option :value="percentageOptions[5]" >B. megaterium</option>
         </select>
         <br>
-        <span id= "myAlert" v-if="!percentage && sendButtonPressed">Selecciona una cepa de bacteria</span>
+        <span class= "myAlert" v-if="!percentage && sendButtonPressed">Selecciona una cepa de bacteria</span>
       </div>
     </div>
-    <div class="row justify-content-center my">
-      <div class="col-12 text-center my-4">
-        <button @click="handleSendButton" class="btn btn-info">
-          Enviar
-        </button>
-      </div>
+    <div class="d-flex justify-content-center my-4">
+      <button @click="handleSendButton" class="btn btn-info">
+        Enviar
+      </button>
     </div>
   </div> 
 </template>
 <style scoped>
-
-#myTitle{
-  font-size: 1.7rem;
-  font-weight: bold;
-  background-image: linear-gradient(to bottom, #50d8d4, #4f5bca);
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-}
-#myP{
-  font-size: 1rem;
-  font-weight: bold;
-  color: #4f98ca;
-}
-#myAlert{
+.myAlert{
   margin: 1rem;
   color: #50d890; 
   font-size: 0.85rem;
@@ -199,7 +151,7 @@
 }
 .my-bacteria {
   height: 2rem;
-  width: 14rem;
+  width: 13rem;
   padding: 0.2rem;
   border: 0.2rem solid #4f98ca;
   border-radius: 0.8rem;
@@ -230,7 +182,7 @@
   }
 </style>
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapMutations } from 'vuex';
 import Swal from "sweetalert2";
 import Popper from "vue3-popper";
 export default {
@@ -241,7 +193,6 @@ export default {
   data() {
     return {
       quantity: null,
-      temperature: null,
       bimester: null,
       percentage: null,
       mineral: null,
@@ -265,8 +216,14 @@ export default {
     });
   },
   computed: {
-    ...mapGetters(['getBacillusValues']),
-    ...mapMutations(['setBacillusValues']),
+    ...mapMutations([
+      "setBacillusValues",
+      "setMicroplastics",
+      "setTimeUnits",
+      "setGrowthMedium",
+      "setStrain",
+      "setPercentage",
+    ]),
   },
   methods: {
     validateKeyPress(event) {
@@ -287,12 +244,12 @@ export default {
     handleMaterialSelect(event) {
       this.mineral = null;
       const selectedValue = event.target.value;
-      if (selectedValue === 'Agar') {
+      if (selectedValue === 'mineral agar') {
         this.percentageOptions = this.mineralAgarValues.slice();
-        this.mineral = "Agar";
-      } else if (selectedValue === 'Broth') {
+        this.mineral = "mineral agar";
+      } else if (selectedValue === 'mineral broth') {
         this.percentageOptions = this.mineralBrothValues.slice();
-        this.mineral = "Broth";
+        this.mineral = "mineral broth";
       }
       this.buttonPressed = true;
       this.percentage = null;
@@ -317,13 +274,16 @@ export default {
       this.sendButtonPressed = true;
       const isValid = [
         this.quantity >= 1 && this.quantity <= 10000,
-        this.temperature,
         this.bimester >= 1 && this.bimester <= 12,
         this.percentage,
         this.mineral,
       ];
       if (isValid.every(element => element)) {
-        this.$store.commit('setBacillusValues', [this.quantity, this.temperature, this.bimester, this.percentage, this.mineral, this.strain]);
+        this.$store.commit('setMicroplastics', this.quantity);
+        this.$store.commit('setTimeUnits', this.bimester);
+        this.$store.commit('setGrowthMedium', this.mineral);
+        this.$store.commit('setStrain', this.strain);
+        this.$store.commit('setPercentage', this.percentage);
       } else {
         Swal.fire({
           title: "Campos sin llenar o valores inválidos",

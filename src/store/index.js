@@ -132,19 +132,39 @@ export default createStore({
     },
     formValues: {
       state: {
-        filtracionValues: [],
-        bacillusValues: [],
+        microplastics: "",
+        timeUnits: "",
+        growthMedium: "",
+        strain: "",
+        percentage: "",
+        residues: "",
       },
       getters: {
-        getFiltracionValues: (state) => state.filtracionValues,
-        getBacillusValues: (state) => state.bacillusValues,
+        getMicroplastics: (state) => state.microplastics,
+        getTimeUnits: (state) => state.timeUnits,
+        getGrowthMedium: (state) => state.growthMedium,
+        getStrain: (state) => state.strain,
+        getPercentage: (state) => state.percentage,
+        getResidues: (state) => state.residues,
       },
       mutations: {
-        setFiltracionValues(state, values) {
-          state.filtracionValues = values;
+        setMicroplastics(state, microplastics) {
+          state.microplastics = microplastics;
         },
-        setBacillusValues(state, values) {
-          state.bacillusValues = values;
+        setTimeUnits(state, timeUnits) {
+          state.timeUnits = timeUnits;
+        },
+        setGrowthMedium(state, growthMedium) {
+          state.growthMedium = growthMedium;
+        },
+        setStrain(state, strain) {
+          state.strain = strain;
+        },
+        setPercentage(state, percentage) {
+          state.percentage = percentage;
+        },
+        setResidues(state, residues) {
+          state.residues = residues;
         },
       },
     },

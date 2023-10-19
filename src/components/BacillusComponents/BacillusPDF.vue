@@ -1,11 +1,18 @@
 <template>
-  <div class="d-flex justify-content-center my-2">
+  <div class="d-flex justify-content-center my-2 animate__animated animate__bounceIn animate__delay-2s">
     <button
       @click="generatePDF"
-      class="btn btn-outline-danger btn-lg"
+      class="
+        btn 
+        btn-outline-danger 
+        btn-lg 
+        animate__animated 
+        animate__bounceIn 
+        animate__delay-2s
+      "
     >Generar PDF
     </button>
-  </div>
+  </div> 
 </template>
 <script>
 import jsPDF from "jspdf";
@@ -20,25 +27,15 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getBacillusValues", "getDegradatedValues"]),
-    quantity() {
-      return this.getBacillusValues[0];
-    },
-    temperature() {
-      return this.getBacillusValues[1];
-    },
-    bimester() {
-      return this.getBacillusValues[2];
-    },
-    percentage() {
-      return this.getBacillusValues[3];
-    },
-    mineral() {
-      return this.getBacillusValues[4];
-    },
-    strain() {
-      return this.getBacillusValues[5];
-    },
+    ...mapGetters(
+      {
+        microplastics: "getMicroplastics",
+        timeUnits: "getTimeUnits",
+        growthMedium: "getGrowthMedium",
+        strain: "getStrain",
+        percentage: "getPercentage",
+      },
+    ),
   },
   methods: {
     generatePDF() {
@@ -85,19 +82,26 @@ export default {
         pdf.setFontSize(12);
         pdf.setTextColor("#272727");
         pdf.setFont("Courier", "normal");
-        pdf.text("\u2022  Cantidad inicial: " + self.quantity.toString() + " microplásticos", 20, 50);
-        pdf.text("\u2022  Temperatura: " + self.temperature.toString() + "°C", 20, 60);
-        pdf.text("\u2022  Tiempo: " + self.bimester.toString() + " bimestres", 20, 70);
-        pdf.text("\u2022  Porcentaje de degradación: " + self.percentage.toString() + "%", 20, 80);
-        pdf.text("\u2022  Sustancia: Mineral " + self.mineral, 20, 90);
-        pdf.text("\u2022  Cepa: " + self.strain, 20, 100);
+        pdf.text("\u2022  Microplásticos: " + self.microplastics.toString() + " microplásticos", 20, 50);
+        pdf.text("\u2022  Bimestres: " + self.timeUnits.toString() + " bimestres", 20, 60);
+        pdf.text("\u2022  Porcentaje de degradación: " + self.percentage.toString() + "%", 20, 70);
+        pdf.text("\u2022  Cepa de la bacteria: ", 20, 80);
+        pdf.setFont("Courier", "italic");
+        pdf.text(self.strain, 80, 80);
+        pdf.setFont("Courier", "normal");
+        pdf.text("\u2022  Medio de cultivo: " + self.growthMedium, 20, 90);
 
         pdf.setFontSize(18);
         pdf.setTextColor("#4f98ca");
         pdf.setFont("Helvetica", "bold");
         textWidth = pdf.getStringUnitWidth("Simulación gráfica") * pdf.internal.getFontSize() / pdf.internal.scaleFactor;
         xCoordinate = (pageWidth - textWidth) / 2;
-        pdf.text("Simulación gráfica", xCoordinate, 110);
+        pdf.text("Simulación gráfica", xCoordinate, 100);
+
+        pdf.setFontSize(8);
+        pdf.setTextColor("#4f98ca");
+        pdf.setFont("Courier", "bold");
+        pdf.text("Microplásticos -----", 20, 105);
 
         const canvas = document.createElement("canvas");
         const canvasWidth = 672;
@@ -108,17 +112,16 @@ export default {
         context.drawImage(img, 0, 0);
         const imgData = canvas.toDataURL("image/png");
         xCoordinate = (pageWidth - 150) / 2;
-        pdf.addImage(imgData, "PNG", xCoordinate, 120, 150, 90);
+        pdf.addImage(imgData, "PNG", xCoordinate, 110, 150, 90);
 
         pdf.setFontSize(18);
         pdf.setTextColor("#4f98ca");
         pdf.setFont("Helvetica", "bold");
         textWidth = pdf.getStringUnitWidth("Explicación") * pdf.internal.getFontSize() / pdf.internal.scaleFactor;
         xCoordinate = (pageWidth - textWidth) / 2;
-        pdf.text("Explicación", xCoordinate, 220);
+        pdf.text("Explicación", xCoordinate, 210);
 
         const explanation = document.querySelector("#explanation");
-
         const textLines = pdf
           .setFontSize(12)
           .setTextColor("#272727")
@@ -127,7 +130,7 @@ export default {
             explanation.innerText,
             pageWidth - left - right - 20
           );
-        pdf.text(textLines, 20, 230);
+        pdf.text(textLines, 20, 220);
 
         pdf.addPage();
 

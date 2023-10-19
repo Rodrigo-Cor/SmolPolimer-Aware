@@ -1,17 +1,18 @@
 <template>
-  <div class="container" style="background-color: #effffb">
-    <h3 class="fw-semibold text-center section-title">
+  <div class="container-fluid" style="background-color: #effffb">
+    <h1 class="fw-semibold text-center section-title animate__animated animate__zoomIn">
       Degradación por bacterias Bacillus
-    </h3>
-    <article class="text-justify-custom">
-      En los procesos de degradación, se da por medio de la tecnología
+    </h1>
+    <article>
+      <section class="text-green-box my-2 animate__animated animate__zoomIn animate__delay-1s">
+        En los procesos de degradación, se da por medio de la tecnología
       <i>biofloc</i> que presentan géneros de bacterias heterótrofas tales como
       <i
         >Bacillus, Enterobacter, Pseudomonas, Staphylococcus, Klebsiella,
         Flavobacterium, Rhodococcus y Nocardia</i
       >.
-
-      <section class="p-2 mb-4 rounded color-techniques">
+      </section>
+      <section class="p-2 mb-4 rounded color-techniques animate__animated animate__zoomIn animate__delay-1s">
         <InfoSection
           :img="{
             src: require('@/assets/cdc-6s2oTaFpPE4-unsplash.jpg'),
@@ -32,60 +33,66 @@
         />
       </section>
     </article>
-    <article class="text-justify-custom">
+    <article class="text-green-box animate__animated animate__zoomIn animate__delay-1s">
       <section>
         En esta simulación, tendrás la oportunidad de explorar la degradación
         con diferentes cepas de la bacteria Bacillus. Cada una de las seis cepas
         que se presentan tiene su propia capacidad de degradación única, todo
         gracias a los ingredientes especiales conocidos como caldo mineral
-        (Mineral Broth, en inglés) y agar mineral (Mineral Agar, en inglés).
-        Estos ingredientes son como el "alimento" de nuestras bacterias y
-        afectarán su capacidad de degradación en un periodo de dos meses. Los
-        valores de entrada que se ocuparán para la simulación incluyen la
-        cantidad de microplásticos a degradar, la temperatura a la que se
-        encontrarán las bacterias, para degradar los microplásticos; el
-        porcentaje de degradación está dado por la cepa de Bacillus que se
-        utilice.
+        (mineral broth, en inglés) y agar  mineral (mineral agar, en inglés). Estos ingredientes son como el
+        "alimento" de nuestras bacterias y afectarán su capacidad de degradación en
+        un periodo de dos meses. Los valores de entrada que se ocuparán para la 
+        simulación incluyen la cantidad de microplásticos a degradar, sumado al porcentaje
+        de degradación, que está dado por la cepa de Bacillus que se utilice, una vez
+        seleccionada la sustancia (agar o broth).
       </section>
     </article>
-
-    <div>
+    <div class="text-blue-box my-2 animate__animated animate__zoomIn animate__delay-2s">
       <AwarenessSimulationSection />
-      <BacillusForm v-if="choice" />
-      <BacillusResults
-        v-if="
-          quantity &&
-          temperature &&
-          bimester &&
-          percentage &&
-          mineral &&
-          choiceIsMade
-        "
-      />
-      <BacillusSimulation
-        @chart-obtained="obtainSVG"
-        v-if="
-          degradatedValues.length > 0 &&
-          quantity &&
-          temperature &&
-          bimester &&
-          percentage &&
-          mineral &&
-          choiceIsMade
-        "
-      />
-      <BacillusExplained 
-        v-if="
-          degradatedValues.length > 0 &&
-          quantity &&
-          temperature &&
-          bimester &&
-          percentage &&
-          mineral &&
-          choiceIsMade
-        " />
     </div>
-    <div class="d-flex justify-content-center my-2">
+    <BacillusForm v-if="choice" />
+    <BacillusResults
+      v-if="
+        microplastics &&
+        timeUnits &&
+        percentage &&
+        growthMedium &&
+        choiceIsMade
+      "
+    />
+    <BacillusSimulation
+      @chart-obtained="obtainSVG"
+      v-if="
+        degradatedValues.length > 0 &&
+        microplastics &&
+        timeUnits &&
+        percentage &&
+        growthMedium &&
+        choiceIsMade
+      "
+    />
+    <BacillusExplained 
+      v-if="
+        degradatedValues.length > 0 &&
+        microplastics &&
+        timeUnits &&
+        percentage &&
+        growthMedium &&
+        choiceIsMade
+      " 
+    />
+    <BacillusPDF :svgData="svgData"
+      v-if="
+        degradatedValues.length > 0 && 
+        microplastics &&
+        timeUnits &&
+        percentage &&
+        growthMedium &&
+        svgData &&
+        choiceIsMade  
+      "
+    />
+    <div class="d-flex justify-content-center my-2 animate__animated animate__bounceIn animate__delay-2s">
       <button @click="handleButton" class="btn btn-outline-success btn-lg">
         {{
           choiceIsMade
@@ -96,18 +103,6 @@
         }}
       </button>
     </div>
-    <BacillusPDF :svgData="svgData"
-      v-if="
-        degradatedValues.length > 0 && 
-        quantity &&
-        temperature &&
-        bimester &&
-        percentage &&
-        mineral &&
-        svgData &&
-        choiceIsMade  
-      "
-    />
   </div>
 </template>
 <style scoped>
@@ -143,37 +138,41 @@ export default {
     return {
       choiceIsMade: false,
       choice: null,
-      defaultQuantity: 1000,
-      defaultTemperature: 30,
-      defaultBimester: 12,
+      defaultMicroplastics: 1000,
+      defaultTimeUnits: 12,
       defaultPercentage: 34.55,
-      defaultMineral: "Agar",
+      defaultGrowthMedium: "mineral agar",
       defaultStrain: "B. carbonipphilus",
       svgData: null,
     };
   },
   computed: {
     ...mapGetters(
-      ["getBacillusValues", "getDegradatedValues"],
+      [
+        "getDegradatedValues",
+        "getIsAnswered",
+        "getMicroplastics",
+        "getTimeUnits",
+        "getGrowthMedium",
+        "getStrain",
+        "getPercentage",
+      ],
     ),
-    ...mapMutations(["setBacillusValues"]),
-    quantity() {
-      return this.getBacillusValues[0];
+    ...mapMutations(["setMicroplastics", "setTimeUnits", "setGrowthMedium", "setStrain", "setPercentage" ]),
+    microplastics() {
+      return this.getMicroplastics;
     },
-    temperature() {
-      return this.getBacillusValues[1];
-    },
-    bimester() {
-      return this.getBacillusValues[2];
+    timeUnits() {
+      return this.getTimeUnits;
     },
     percentage() {
-      return this.getBacillusValues[3];
+      return this.getPercentage;
     },
-    mineral() {
-      return this.getBacillusValues[4];
+    growthMedium() {
+      return this.getGrowthMedium;
     },
     strain() {
-      return this.getBacillusValues[5];
+      return this.getStrain;
     },
     degradatedValues() {
       return this.getDegradatedValues;
@@ -210,26 +209,26 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           this.choice = true;
-          this.$store.commit("setBacillusValues", []);
+          this.$store.commit('setMicroplastics', "");
+          this.$store.commit('setTimeUnits', "");
+          this.$store.commit('setGrowthMedium', "");
+          this.$store.commit('setStrain', "");
+          this.$store.commit('setPercentage', "");  
           this.$store.commit("setDegradatedValues", []);
           this.choiceIsMade = true;
         } else if (result.isDenied) {
           this.choice = false;
-          this.$store.commit("setBacillusValues", [
-            this.defaultQuantity,
-            this.defaultTemperature,
-            this.defaultBimester,
-            this.defaultPercentage,
-            this.defaultMineral,
-            this.defaultStrain,
-          ]);
+          this.$store.commit('setMicroplastics', this.defaultMicroplastics);
+          this.$store.commit('setTimeUnits', this.defaultTimeUnits);
+          this.$store.commit('setGrowthMedium', this.defaultGrowthMedium);
+          this.$store.commit('setStrain', this.defaultStrain);
+          this.$store.commit('setPercentage', this.defaultPercentage);  
+          this.$store.commit("setDegradatedValues", []);
           this.choiceIsMade = true;
         } else if (result.isDismissed) {
           this.choiceIsMade = this.choiceIsMade;
           this.choice = this.choice;
         }
-        console.log("choice: " + this.choice);
-        console.log("choiceIsMade: a" + this.choiceIsMade);
       });
     },
     obtainSVG(svg) {

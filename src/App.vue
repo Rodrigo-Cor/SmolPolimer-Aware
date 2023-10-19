@@ -21,6 +21,23 @@ nav a.router-link-exact-active.navbar-brand {
   color: transparent;
 }
 
+.section-subtitle {
+  background-image: linear-gradient(to bottom, #50d8d4, #4f5bca);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 1.7rem;
+  color: transparent;
+  font-weight: bold;
+}
+.section-sub-subtitle{
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-image: linear-gradient(to bottom, #4fcabe, #272727);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
 @media (max-width: 576px) {
   .text-size {
     font-size: 1rem;
@@ -53,5 +70,17 @@ nav a.router-link-exact-active.navbar-brand {
 
 .text-button {
   font-size: 0.8rem;
+}
+.text-green-box {
+  text-align: justify;
+  border-radius: 1rem;
+  background-color: #50d8901a;
+  padding: 0.6rem;
+}
+.text-blue-box {
+  text-align: justify;
+  border-radius: 1rem;
+  background-color: #4f98ca1a;
+  padding: 0.6rem;
 }
 </style>

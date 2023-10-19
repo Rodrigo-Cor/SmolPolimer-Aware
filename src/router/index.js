@@ -71,12 +71,18 @@ router.beforeEach((to, from, next) => {
     store.commit("setIsDisabledInitial", true);
   }
   if (from.path === "/filtracion" && to.path !== "/filtracion") {
-    store.commit("setFiltracionValues", []);
+    store.commit('setMicroplastics', "");
+    store.commit('setResidues', "");
+    store.commit('setTimeUnits', "");
     store.commit("setOnFilterValues", []);
     store.commit("setReleasedValues", []);
   }
   if (from.path === "/bacillus" && to.path !== "/bacillus") {
-    store.commit("setBacillusValues", []);
+    store.commit('setMicroplastics', "");
+    store.commit('setTimeUnits', "");
+    store.commit('setGrowthMedium', "");
+    store.commit('setStrain', "");
+    store.commit('setPercentage', "");
     store.commit("setDegradatedValues", []);
   }
 
