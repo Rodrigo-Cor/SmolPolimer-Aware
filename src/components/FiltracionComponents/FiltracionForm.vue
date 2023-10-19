@@ -1,10 +1,6 @@
 <template>
-  <div class="container animate__animated animate__bounceIn" style="background-color: #4f98ca1a; border-radius: 1rem;">
-    <div class="row justify-content-center">
-      <div class="col-12 text-center mt-3">
-        <h2 id="myTitle">Formulario</h2>
-      </div>
-    </div>
+  <div class="container-fluid animate__animated animate__bounceIn" style="background-color: #4f98ca1a; border-radius: 1rem;">
+    <h2 class="section-subtitle text-center">Formulario</h2>
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-4 text-center my-1">
         <Popper
@@ -28,7 +24,7 @@
           @keypress = "validateKeyPress"
         />
         <br>
-        <span id="myAlert"  v-if="microplastic > 70 || (!microplastic && sendButtonPressed)">Mínimo 1, máximo 70</span>
+        <span class="myAlert"  v-if="microplastic > 70 || (!microplastic && sendButtonPressed)">Mínimo 1, máximo 70</span>
       </div>
       <div class="col-sm-12 col-md-4 text-center my-1">
         <Popper
@@ -52,7 +48,7 @@
           @keypress = "validateKeyPress"
         />
         <br>
-        <span id="myAlert" v-if="residue > 20 || (!residue && sendButtonPressed)">Mínimo 1, máximo 20</span>
+        <span class="myAlert" v-if="residue > 20 || (!residue && sendButtonPressed)">Mínimo 1, máximo 20</span>
       </div>
       <div class="col-sm-12 col-md-4 text-center my-1">
         <Popper
@@ -74,30 +70,20 @@
           id="treatmentInput"
           name="treatmentInput"
           @keypress = "validateKeyPress"
-            />
+        />
         <br>
-        <span id="myAlert"  v-if="treatment > 24 || (!treatment && sendButtonPressed)">Mínimo 1, máximo 24</span>
+        <span class="myAlert"  v-if="treatment > 24 || (!treatment && sendButtonPressed)">Mínimo 1, máximo 24</span>
       </div>
     </div>
-    <div class="row justify-content-center">
-      <div class="col-12 text-center my-4">
-        <button @click="handleSendButton" class="btn btn-info">
-          Enviar
-        </button>
-      </div>
+    <div class="d-flex justify-content-center my-4">
+      <button @click="handleSendButton" class="btn btn-info">
+        Enviar
+      </button>
     </div>
   </div>
   </template>
   <style scoped>
-  #myTitle{
-    font-size: 1.7rem;
-    font-weight: bold;
-    background-image: linear-gradient(to bottom, #50d8d4, #4f5bca);
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-  }
-  #myAlert{
+  .myAlert{
     color: #50d890; 
     font-size: 1rem;
     font-weight: bold;
@@ -137,10 +123,10 @@
       --popper-theme-border-radius: 1rem;
       --popper-theme-padding: 0.8rem;
       --popper-theme-box-shadow: 0 0.375rem 1.875rem -0.375rem rgba(39, 39, 39, 0.25);
-    }
-  </style>
-  <script>
-  import { mapGetters, mapMutations } from 'vuex';
+  }
+</style>
+<script>
+  import { mapMutations } from 'vuex';
   import Swal from "sweetalert2";
   import Popper from "vue3-popper";
   export default {
@@ -167,8 +153,11 @@
       });
     },
     computed: {
-      ...mapGetters(['getFiltracionValues']),
-      ...mapMutations(['setFiltracionValues']),
+      ...mapMutations([
+      "setMicroplastics",
+      "setTimeUnits",
+      "setResidues",
+    ]),
     },
     methods: {
       handleSendButton() {
@@ -179,7 +168,9 @@
           this.treatment >= 1 && this.treatment <= 24,
         ];
         if (isValid.every(element => element)) {
-          this.$store.commit('setFiltracionValues', [this.microplastic, this.residue, this.treatment]);
+        this.$store.commit('setMicroplastics', this.microplastic);
+        this.$store.commit('setResidues', this.residue);
+        this.$store.commit('setTimeUnits', this.treatment);
         } else {
           Swal.fire({
             title: "Campos sin llenar o valores inválidos",
@@ -222,5 +213,4 @@
       },
     },
   }
-  </script>
-  
+</script>

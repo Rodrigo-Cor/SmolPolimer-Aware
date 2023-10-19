@@ -20,16 +20,13 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getFiltracionValues"]),
-    microplastic() {
-      return this.getFiltracionValues[0];
-    },
-    residue() {
-      return this.getFiltracionValues[1];
-    },
-    treatment() {
-      return this.getFiltracionValues[2];
-    },
+    ...mapGetters(
+      {
+        microplastics: "getMicroplastics",
+        residues: "getResidues",
+        timeUnits: "getTimeUnits",
+      },
+    ),
   },
   methods: {
     generatePDF() {
@@ -76,9 +73,9 @@ export default {
         pdf.setFontSize(12);
         pdf.setTextColor("#272727");
         pdf.setFont("Courier", "normal");
-        pdf.text("\u2022  Cantidad: " + self.microplastic.toString() + " microplásticos", 20, 50);
-        pdf.text("\u2022  Residuos: " + self.residue.toString() + " microplásticos", 20, 60);
-        pdf.text("\u2022  Tiempo: " + self.treatment.toString() + " días", 20, 70);
+        pdf.text("\u2022  Microplásticos: " + self.microplastics.toString() + " microplásticos", 20, 50);
+        pdf.text("\u2022  Residuos: " + self.residues.toString() + " microplásticos", 20, 60);
+        pdf.text("\u2022  Días: " + self.timeUnits.toString() + " días", 20, 70);
 
         pdf.setFontSize(18);
         pdf.setTextColor("#4f98ca");
@@ -87,12 +84,12 @@ export default {
         xCoordinate = (pageWidth - textWidth) / 2;
         pdf.text("Simulación gráfica", xCoordinate, 80);
 
-        pdf.setFontSize(12);
+        pdf.setFontSize(8);
         pdf.setTextColor("#4f98ca");
         pdf.setFont("Courier", "bold");
         pdf.text("Microplásticos en filtro -----", 20, 85);
 
-        pdf.setFontSize(12);
+        pdf.setFontSize(8);
         pdf.setTextColor("#50d890");
         pdf.setFont("Courier", "bold");
         pdf.text("Microplásticos sueltos en el río -----", 20, 89);
@@ -114,7 +111,7 @@ export default {
         textWidth = pdf.getStringUnitWidth("Explicación") * pdf.internal.getFontSize() / pdf.internal.scaleFactor;
         xCoordinate = (pageWidth - textWidth) / 2;
         pdf.text("Explicación", xCoordinate, 190);
-
+        
         const explanation = document.querySelector("#explanation");
 
         const textLines = pdf

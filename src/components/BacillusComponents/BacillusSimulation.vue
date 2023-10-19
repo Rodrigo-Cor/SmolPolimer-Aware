@@ -1,34 +1,17 @@
 <template>
-  <div class="container" style="background-color: white; border-radius: 0.2rem;" >
-    <div class="row justify-content-center">
-      <div class="col-12 text-center my-2 animate__animated animate__zoomIn">
-        <h2 id="myTitle">Simulación</h2>
-      </div>
+  <div class="container-fluid animate__animated animate__zoomIn" style="background-color: white; border-radius: 0.2rem;" >
+    <h2 class="section-subtitle text-center my-2">Simulación</h2>
+    <p class="degradatedTag text-center">Microplásticos -----</p>
+    <div ref="containerRef"></div>
+    <div id="chart-container"></div>
+    <div id="chartPDF-container"></div>
+    <div class="d-flex justify-content-center my-2">
+      <button class="btn btn-outline-info btn-sm my-2" @click="this.createChart"><i class="bi bi-brush"></i> Redibujar simulación</button>
     </div>
-    <div class="row justify-content-center">
-      <div class="col-12 animate__animated animate__zoomIn">
-        <p id="myReleased">Microplásticos -----</p>
-      </div>
-    </div>  
-    <div class="row justify-content-center">
-      <div class="col-12 text-center my-2 animate__animated animate__zoomIn">
-        <div ref="containerRef"></div>
-        <div id="chart-container"></div>
-        <div id="chartPDF-container"></div>
-      </div>
-    </div>
-  </div>    
+  </div>
 </template>
 <style scoped>
-#myTitle{
-  font-size: 1.7rem;
-  font-weight: bold;
-  background-image: linear-gradient(to bottom, #50d8d4, #4f5bca);
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-}
-#myReleased{
+.degradatedTag{
     font-size: 1rem;
     font-weight: bold;
     color: #4f98ca;
