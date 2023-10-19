@@ -5,7 +5,7 @@
         <div v-for="(paragraph, index) in informationCollapse" :key="index">
           <button
             type="button"
-            class="btn btn-light btn-outline-dark btn-sm m-1"
+            class="btn btn-light btn-outline-dark btn-sm m-1 fw-semibold"
             @click="toggleCollapse(index)"
             @blur="closeCollapse(index)"
             :class="{
@@ -25,7 +25,7 @@
       >
         <div :class="{ collapse: true, show: arrayCollapse[index].isOpen }">
           <div
-            class="card card-body"
+            class="card card-body fs-5"
             v-bind:style="{
               backgroundColor: colorButton[0] + '7F',
             }"

@@ -1,21 +1,41 @@
 <template>
   <div class="container-fluid py-md-0 py-2">
     <div class="row">
-      <div class="col-md-6 col-12 align-self-center">
+      <div
+        class="align-self-center"
+        v-bind:class="{
+          'col-md-4 offset-md-1 col-12': sideImage,
+          'col-md-6 offset-md-1 col-12': !sideImage,
+        }"
+      >
         <template v-if="sideImage">
           <ReferencesAuthors :img="img" :credits="credits" />
         </template>
         <template v-else>
-          <div v-for="paragraph in arrayText" :key="paragraph" class="rounded p-2 mb-md-0 mb-2">
+          <div
+            v-for="paragraph in arrayText"
+            :key="paragraph"
+            class="rounded p-2 mb-md-0 mb-2"
+          >
             <p class="text-justify-custom">
               {{ paragraph }}
             </p>
           </div>
         </template>
       </div>
-      <div class="col-md-6 col-12 align-self-center">
+      <div
+        class="align-self-center"
+        v-bind:class="{
+          'col-md-6 col-12': sideImage,
+          'col-md-4 col-12': !sideImage,
+        }"
+      >
         <template v-if="sideImage">
-          <div v-for="paragraph in arrayText" :key="paragraph" class="rounded p-2 mb-md-0 mb-2">
+          <div
+            v-for="paragraph in arrayText"
+            :key="paragraph"
+            class="rounded p-2 mb-md-0 mb-2"
+          >
             <p class="text-justify-custom">
               {{ paragraph }}
             </p>
@@ -28,13 +48,6 @@
     </div>
   </div>
 </template>
-
-<style scoped>
-.information{
-  background-color: #50d8903F !important;
-}
-
-</style>
 
 <script>
 import ReferencesAuthors from "./ReferencesAuthors.vue";

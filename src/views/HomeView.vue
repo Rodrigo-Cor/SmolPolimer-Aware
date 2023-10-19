@@ -9,12 +9,12 @@
    -->
 
   <CarouselHome />
-  <main class="container-fluid text-justify-custom color-home">
+  <main class="container-fluid text-justify-custom">
     <article id="section-question">
       <AwarenessHomeSection />
     </article>
     <article class="row">
-      <section class="my-2 col-md-6 col-12">
+      <section class="my-2 col-md-5 col-12">
         El uso excesivo de productos plásticos ha brindado múltiples beneficios
         en la vida cotidiana, pero también ha llevado a consecuencias no
         deseadas. Uno de los más grandes problemas es la formación de
@@ -34,7 +34,7 @@
           }"
         />
       </section>
-      <section class="col-md-6 col-12">
+      <section class="col-md-4 offset-md-2 col-12">
         <CollapseInformation
           :informationCollapse="[
             {
@@ -171,7 +171,7 @@
     </article>
 
     <article>
-      <h3 class="text-center fw-semibold section-title animate__bounce">
+      <h3 class="text-center fw-semibold section-title animate__animated animate__bounce">
         Efectos de los microplásticos en organismos
       </h3>
       Los microplásticos son un problema en crecimiento a nivel global que tiene

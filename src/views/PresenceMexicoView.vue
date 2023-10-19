@@ -1,7 +1,7 @@
 <template>
-  <main class="container-fluid text-justify-custom color-home">
+  <main class="container-fluid text-justify-custom">
     <article class="row">
-      <section class="my-2 col-md-6 col-12">
+      <section class="my-2 col-md-5 col-12">
         Este problema ambiental enfrenta una falta significativa tanto de
         divulgación como de cobertura científica en México. Por lo tanto, la
         escasez de información y conocimiento sobre este tema crucial limita la
@@ -22,7 +22,7 @@
           }"
         />
       </section>
-      <section class="my-2 col-md-6 col-12">
+      <section class="my-2 col-md-4 offset-md-2 col-12">
         <CollapseInformation
           :typeCollapse="'mexico'"
           :informationCollapse="[

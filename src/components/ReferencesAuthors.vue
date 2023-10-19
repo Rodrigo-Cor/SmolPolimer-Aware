@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-center">
       <img
         :src="img.src"
-        class="w-50 h-50"
+        class="img-fluid h-75"
         :alt="img.alt"
       />
     </div>

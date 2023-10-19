@@ -53,7 +53,7 @@
     </section>
 
     <div>
-      <AwarenessSimulationSection v-if="!getIsAnswered"/>
+      <AwarenessSimulationSection />
       <FiltracionForm v-if="choice" />
       <FiltracionResults
         v-if="
@@ -155,7 +155,6 @@ export default {
       "getFiltracionValues",
       "getOnFilterValues",
       "getReleasedValues",
-      "getIsAnswered",
     ]),
     ...mapMutations([
       "setFiltracionValues",

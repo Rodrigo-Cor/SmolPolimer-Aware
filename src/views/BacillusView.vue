@@ -50,7 +50,7 @@
     </article>
 
     <div>
-      <AwarenessSimulationSection v-if="!getIsAnswered" />
+      <AwarenessSimulationSection />
       <BacillusForm v-if="choice" />
       <BacillusResults
         v-if="
@@ -154,7 +154,7 @@ export default {
   },
   computed: {
     ...mapGetters(
-      ["getBacillusValues", "getDegradatedValues", "getIsAnswered"],
+      ["getBacillusValues", "getDegradatedValues"],
     ),
     ...mapMutations(["setBacillusValues"]),
     quantity() {

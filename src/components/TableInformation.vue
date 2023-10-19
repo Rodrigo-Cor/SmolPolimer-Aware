@@ -14,14 +14,14 @@
           <div class="row">
             <div
               v-bind:class="{
-                'col-md-6 col-12': img,
+                'col-md-8 col-12': img,
               }"
             >
               {{ value.description }}
             </div>
             <div
               v-bind:class="{
-                'col-md-6 col-12': img,
+                'col-md-4 col-12': img,
               }"
               v-if="img"
             >

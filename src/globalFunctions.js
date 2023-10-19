@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import randomColor from "randomcolor";
+
 export const genericAlert = (message, icon) => {
   Swal.fire({
     title: message,

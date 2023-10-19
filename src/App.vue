@@ -25,28 +25,17 @@ nav a.router-link-exact-active.navbar-brand {
   .text-size {
     font-size: 1rem;
   }
-  .img-size{
-    width: 100%;
-    height: 50%;
-  }
 }
 
 @media (min-width: 576px) {
   .text-size {
     font-size: 1.15rem;
-    .img-size{
-      width: 75%;
-    }
   }
 }
 
 @media (min-width: 992px) {
   .text-size {
     font-size: 1.3rem;
-  }
-  .img-size{
-    width: 50%;
-    height: auto;
   }
 }
 

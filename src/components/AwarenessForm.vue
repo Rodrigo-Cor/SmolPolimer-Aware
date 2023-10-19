@@ -8,7 +8,7 @@
     </section>
   </article>
 
-  <article>
+  <article v-if="!isAnswered">
     <section class="fw-bold text-justify-custom">
       Contesta la siguiente pregunta con la mayor sinceridad posible, por favor.
     </section>
@@ -83,6 +83,7 @@ export default {
       selectedOptionFinal: "getSelectedOptionFinal",
       disabledInitial: "getIsDisabledInitial",
       disabledFinal: "getIsDisabledFinal",
+      isAnswered: "getIsAnswered",
     }),
   },
   methods: {
