@@ -1,40 +1,46 @@
 <template>
-  <div class="container-fluid animate__animated animate__fadeIn">
-    <h2 class="section-subtitle text-center">Resultados</h2>
-    <p class="text-blue-box">
+  <div class="container-fluid">
+    <h2 class="section-subtitle text-center animate__animated animate__flash">Resultados</h2>
+    <section class="text-justify-custom my-2">
       En la siguiente lista se encuentra el resumen de los datos introducidos al simulador,
       mientras que después en la tabla, se encuentran los resultados: se indican los días y
       el porcentaje de microplásticos acumulados ya sea en el filtro, o que fueron liberados
       en el río.
-    </p>
-    <h3 class="section-sub-subtitle text-center">Resumen de datos de entrada</h3>
-    <ul class="list-group custom-list">
-      <li class="list-group-item custom-list-item">
-        Microplásticos: <span class="badge bg-dark pill">{{ microplastics }}</span></li>
-      <li class="list-group-item custom-list-item">
-        Residuos: <span class="badge bg-dark pill">{{ residues }}</span></li>
-      <li class="list-group-item custom-list-item">
-        Días: <span class="badge bg-dark pill">{{ timeUnits }}</span></li>
-    </ul>
-    <h3 class="section-sub-subtitle text-center">
-      Tabla de resultados
-    </h3>
-    <table class="table table-info table-striped-columns custom-table text-center my-2" id="tableResults">
-      <thead>
-        <tr>
-          <th scope="col">Días</th>
-          <th scope="col">% de MP en filtro</th>
-          <th scope="col">% de MP en el río</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) in onFilterValues" :key="index">
-          <td>{{ index + 1 }}</td>
-          <td>{{ item.toFixed(2) }}%</td>
-          <td>{{ releasedValues[index].toFixed(2) }}%</td>
-        </tr>
-      </tbody>
-    </table>
+    </section>
+    <div class="row">
+      <div class="col">
+        <h3 class="section-sub-subtitle text-center my-2 animate__animated animate__flash">Resumen de datos de entrada</h3>
+        <ul class="list-group custom-list">
+          <li class="list-group-item custom-list-item">
+            Microplásticos: <span class="badge bg-dark pill">{{ microplastics }}</span></li>
+          <li class="list-group-item custom-list-item">
+            Residuos: <span class="badge bg-dark pill">{{ residues }}</span></li>
+          <li class="list-group-item custom-list-item">
+            Días: <span class="badge bg-dark pill">{{ timeUnits }}</span></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3 class="section-sub-subtitle text-center animate__animated animate__flash">
+          Tabla de resultados
+        </h3>
+        <table class="table table-info table-striped-columns custom-table text-center my-2" id="tableResults">
+          <thead>
+            <tr>
+              <th scope="col">Días</th>
+              <th scope="col">% de MP en filtro</th>
+              <th scope="col">% de MP en el río</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in onFilterValues" :key="index">
+              <td>{{ index + 1 }}</td>
+              <td>{{ item.toFixed(2) }}%</td>
+              <td>{{ releasedValues[index].toFixed(2) }}%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
 <style scoped>

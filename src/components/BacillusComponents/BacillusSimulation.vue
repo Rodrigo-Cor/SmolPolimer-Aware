@@ -1,12 +1,12 @@
 <template>
-  <div class="container-fluid animate__animated animate__zoomIn" style="background-color: white; border-radius: 0.2rem;" >
-    <h2 class="section-subtitle text-center my-2">Simulación</h2>
+  <div class="container-fluid" style="background-color: white; border-radius: 1rem;" >
+    <h2 class="section-subtitle text-center my-2 animate__animated animate__heartBeat">Simulación</h2>
     <p class="degradatedTag text-center">Microplásticos -----</p>
     <div ref="containerRef"></div>
     <div id="chart-container"></div>
     <div id="chartPDF-container"></div>
     <div class="d-flex justify-content-center my-2">
-      <button class="btn btn-outline-info btn-sm my-2" @click="this.createChart"><i class="bi bi-brush"></i> Redibujar simulación</button>
+      <button class="btn btn-primary my-2" @click="this.createChart"><i class="bi bi-brush"></i> Redibujar simulación</button>
     </div>
   </div>
 </template>
@@ -15,6 +15,11 @@
     font-size: 1rem;
     font-weight: bold;
     color: #4f98ca;
+}
+.btn-primary{
+  --bs-btn-border-radius: 2rem;
+  --bs-btn-border-color: #50d890;
+  --bs-btn-bg: #50d890;
 }
 </style>
 <script>

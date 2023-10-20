@@ -1,6 +1,6 @@
 <template>
-  <div class="container-fluid animate__animated animate__bounceIn" style="background-color: #4f98ca1a; border-radius: 1rem;">
-    <h2 class="section-subtitle text-center">Formulario</h2>
+  <div class="container-fluid" style="background-color: #4f98ca1a; border-radius: 1rem;">
+    <h2 class="section-subtitle text-center animate__animated animate__heartBeat">Formulario</h2>
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-3 text-center my-1">
         <Popper
@@ -13,7 +13,7 @@
         <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
-        <label class= "my-label" for="quantityInput">Microplásticos:</label>
+        <label class="my-label" for="quantityInput">Microplásticos:</label>
         <br>
         <input
           class="my-input"
@@ -88,8 +88,8 @@
         <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
-        <label class="my-label" for="percentageInput">Porcentaje de degradación</label>
-        <span>: {{ percentage }}%</span>
+        <label class="my-label" for="percentageInput">Porcentaje de degradación:</label>
+        <span class="badge bg-dark pill">{{ percentage }}%</span>
         <br>
         <select
           class="my-bacteria mx-auto"
@@ -112,7 +112,7 @@
     </div>
     <div class="d-flex justify-content-center my-4">
       <button @click="handleSendButton" class="btn btn-info">
-        Enviar
+        <i class="bi bi-check-circle"></i> Aceptar
       </button>
     </div>
   </div> 
@@ -169,6 +169,11 @@
   --bs-btn-border-radius: 1rem;
   --bs-btn-border-color: #272727;
   --bs-btn-bg: #272727;
+}
+.btn-info{
+  --bs-btn-border-radius: 1rem;
+  --bs-btn-border-color: #4f98ca;
+  --bs-btn-bg: #4f98ca;
 }
 .popper-box {
     --popper-theme-background-color: #272727;

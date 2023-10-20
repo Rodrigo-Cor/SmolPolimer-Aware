@@ -1,12 +1,17 @@
 <template>
-  <div class="d-flex justify-content-center my-2 animate__animated animate__bounceIn animate__delay-2s">
+  <div class="d-flex justify-content-center my-2 animate__animated animate__heartBeat">
     <button
       @click="generatePDF"
-      class="btn btn-outline-danger btn-lg"
-    >Generar PDF
+      class="btn btn-outline-danger"
+    ><i class="bi bi-filetype-pdf"></i> Generar PDF
     </button>
   </div>
 </template>
+<style scoped>
+.btn-outline-danger{
+  --bs-btn-border-radius: 2rem;
+}
+</style>
 <script>
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";

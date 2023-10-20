@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid" style="background-color: #effffb">
-    <h1 class="fw-semibold text-center section-title animate__animated animate__zoomIn">
+    <h1 class="fw-semibold text-center section-title animate__animated animate__shakeX">
       Degradación por bacterias Bacillus
     </h1>
     <article>
-      <section class="text-green-box my-2 animate__animated animate__zoomIn animate__delay-1s">
+      <section class="text-justify-custom my-2">
         En los procesos de degradación, se da por medio de la tecnología
       <i>biofloc</i> que presentan géneros de bacterias heterótrofas tales como
       <i
@@ -12,7 +12,7 @@
         Flavobacterium, Rhodococcus y Nocardia</i
       >.
       </section>
-      <section class="p-2 mb-4 rounded color-techniques animate__animated animate__zoomIn animate__delay-1s">
+      <section class="p-2 mb-4 rounded color-techniques">
         <InfoSection
           :img="{
             src: require('@/assets/cdc-6s2oTaFpPE4-unsplash.jpg'),
@@ -33,7 +33,7 @@
         />
       </section>
     </article>
-    <article class="text-green-box animate__animated animate__zoomIn animate__delay-1s">
+    <article class="text-justify-custom">
       <section>
         En esta simulación, tendrás la oportunidad de explorar la degradación
         con diferentes cepas de la bacteria Bacillus. Cada una de las seis cepas
@@ -47,9 +47,6 @@
         seleccionada la sustancia (agar o broth).
       </section>
     </article>
-    <div class="text-blue-box my-2 animate__animated animate__zoomIn animate__delay-2s">
-      <AwarenessSimulationSection />
-    </div>
     <BacillusForm v-if="choice" />
     <BacillusResults
       v-if="
@@ -57,6 +54,7 @@
         timeUnits &&
         percentage &&
         growthMedium &&
+        strain &&
         choiceIsMade
       "
     />
@@ -68,6 +66,7 @@
         timeUnits &&
         percentage &&
         growthMedium &&
+        strain &&
         choiceIsMade
       "
     />
@@ -78,6 +77,7 @@
         timeUnits &&
         percentage &&
         growthMedium &&
+        strain &&
         choiceIsMade
       " 
     />
@@ -88,12 +88,14 @@
         timeUnits &&
         percentage &&
         growthMedium &&
+        strain &&
         svgData &&
         choiceIsMade  
       "
     />
-    <div class="d-flex justify-content-center my-2 animate__animated animate__bounceIn animate__delay-2s">
-      <button @click="handleButton" class="btn btn-outline-success btn-lg">
+    <div class="d-flex justify-content-center my-2">
+      <button @click="handleButton" class="btn btn-success">
+        <i class="bi bi-graph-down"></i> 
         {{
           choiceIsMade
             ? choice
@@ -103,11 +105,30 @@
         }}
       </button>
     </div>
+    <AwarenessSimulationSection
+      v-if="
+        !getIsAnswered &&
+        degradatedValues.length > 0 && 
+        microplastics &&
+        timeUnits &&
+        percentage &&
+        growthMedium &&
+        strain &&
+        svgData &&
+        choiceIsMade  
+      "
+    />
   </div>
 </template>
 <style scoped>
 .color-techniques {
   background-color: #610c9f3f;
+}
+
+.btn-success{
+  --bs-btn-border-radius: 2rem;
+  --bs-btn-border-color: #4f98ca;
+  --bs-btn-bg: #4f98ca;
 }
 </style>
 <script>
@@ -181,7 +202,7 @@ export default {
   methods: {
     handleButton() {
       Swal.fire({
-        title: "¿Valores por defecto o Formulario?",
+        title: "¿Valores por defecto o formulario?",
         text: "Ve a la simulación con valores por defecto o asígnalos por medio del formulario.",
         background: "#1e1e1e",
         color: "#effffb",

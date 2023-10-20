@@ -1,9 +1,9 @@
 <template>
   <div class="container-fluid" style="background-color: #effffb;">
-    <h1 class="fw-semibold text-center section-title animate__animated animate__zoomIn">
+    <h1 class="fw-semibold text-center section-title animate__animated animate__shakeX">
       Filtración granular rápida
     </h1>
-    <section class="text-green-box my-2 animate__animated animate__zoomIn animate__delay-1s">
+    <section class="text-justify-custom my-2">
       Se han desarrollado diversos procesos para la limpieza, los cuales pueden
       ser clasificados en dos tipos: procesos de separación y procesos de
       degradación. En los procesos de separación, se incluyen técnicas como la
@@ -11,7 +11,7 @@
       membrana y la flotación por aire disuelto, todo estos pueden eliminar al
       menos el 90% de microplásticos presentes en el agua.
     </section>
-    <section class="p-2 my-2 rounded color-techniques animate__animated animate__zoomIn animate__delay-1s">
+    <section class="p-2 my-2 rounded color-techniques">
       <InfoSection
         :img="{
           src: require('@/assets/ivan-bandura-Ac97OqAWDvg-unsplash.jpg'),
@@ -31,7 +31,7 @@
         }"
       />
     </section>
-    <section class="text-green-box my-2 animate__animated animate__zoomIn animate__delay-1s">
+    <section class="text-justify-custom my-2">
       En esta simulación, tendrás la oportunidad de controlar la cantidad de
       microplásticos que pasarán a través del filtro. El filtro está diseñado
       para capturar una cierta cantidad de microplásticos, que se mostrará en
@@ -42,49 +42,13 @@
       quedan en el cuerpo de agua sea menor que la cantidad atrapada por el
       filtro.
     </section>
-    <section class="text-green-box my-2 animate__animated animate__zoomIn animate__delay-1s">
+    <section class="text-justify-custom my-2">
       Para la simulación se reciben como datos de entrada: una cantidad inicial
       de microplásticos, otra que termina de residuo y el número de días por el 
       que se estará pasando esa cantidad inicial de microplásticos por el filtro.
-      Si ya has respondido a la pregunta, simplemente haz clic en el botón que 
-      dice "Simulación" a continuación y comencemos la simulación.
+      Simplemente haz clic en el botón que dice "Simulación" a continuación y 
+      comencemos con la simulación.
     </section>
-
-    <div>
-      <div class="text-blue-box my-2 animate__animated animate__zoomIn animate__delay-2s">
-        <AwarenessSimulationSection v-if="!getIsAnswered" />
-      </div>
-      
-      <FiltracionForm v-if="choice" />
-      <FiltracionResults
-        v-if="
-          microplastic &&
-          residue &&
-          treatment &&
-          choiceIsMade"
-      />
-      <FiltracionSimulation
-        @chart-obtained="obtainSVG"
-        v-if="
-          onFilterValues.length > 0 &&
-          releasedValues.length > 0 &&
-          microplastic &&
-          residue &&
-          treatment &&
-          choiceIsMade          
-        "
-      />
-      <FiltracionExplained
-        v-if="
-          onFilterValues.length > 0 &&
-          releasedValues.length > 0 &&
-          microplastic &&
-          residue &&
-          treatment &&
-          choiceIsMade
-        "
-      />
-    </div>
     <FiltracionForm v-if="choice"/>
     <FiltracionResults
       v-if="
@@ -126,8 +90,9 @@
         choiceIsMade
       "
     />
-    <div class="d-flex justify-content-center my-2 animate__animated animate__bounceIn animate__delay-2s">
-      <button @click="handleButton" class="btn btn-outline-success btn-lg">
+    <div class="d-flex justify-content-center my-2">
+      <button @click="handleButton" class="btn btn-success">
+        <i class="bi bi-graph-up"></i> 
         {{
           choiceIsMade
             ? choice
@@ -137,11 +102,28 @@
         }}
       </button>
     </div>
+    <AwarenessSimulationSection
+      v-if="
+        !getIsAnswered &&
+        onFilterValues.length > 0 &&
+        releasedValues.length > 0 &&
+        microplastics &&
+        residues &&
+        timeUnits &&
+        svgData &&
+        choiceIsMade
+      "
+    />
   </div>
 </template>
 <style scoped>
 .color-techniques {
   background-color: #ff80803f;
+}
+.btn-success{
+  --bs-btn-border-radius: 2rem;
+  --bs-btn-border-color: #4f98ca;
+  --bs-btn-bg: #4f98ca;
 }
 </style>
 <script>
@@ -212,7 +194,7 @@ export default {
   methods: {
     handleButton() {
       Swal.fire({
-        title: "¿Valores por defecto o Formulario?",
+        title: "¿Valores por defecto o formulario?",
         text: "Ve a la simulación con valores por defecto o asígnalos por medio del formulario.",
         background: "#1e1e1e",
         color: "#effffb",

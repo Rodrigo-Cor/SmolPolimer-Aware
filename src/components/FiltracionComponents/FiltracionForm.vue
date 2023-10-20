@@ -1,16 +1,16 @@
 <template>
-  <div class="container-fluid animate__animated animate__bounceIn" style="background-color: #4f98ca1a; border-radius: 1rem;">
-    <h2 class="section-subtitle text-center">Formulario</h2>
+  <div class="container-fluid" style="background-color: #4f98ca1a; border-radius: 1rem;">
+    <h2 class="section-subtitle text-center animate__animated animate__heartBeat">Formulario</h2>
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-4 text-center my-1">
         <Popper
-            class="popper-box" 
-            arrow 
-            content="Cantidad de microplasticos a filtrar"
-            placement="top"
-            hover
-          >
-          <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
+          class="popper-box" 
+          arrow 
+          content="Cantidad de microplasticos a filtrar"
+          placement="top"
+          hover
+        >
+        <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
         <label class="my-label" for="microplasticInput">Microplásticos</label>
@@ -77,7 +77,7 @@
     </div>
     <div class="d-flex justify-content-center my-4">
       <button @click="handleSendButton" class="btn btn-info">
-        Enviar
+        <i class="bi bi-check-circle"></i> Enviar
       </button>
     </div>
   </div>
@@ -114,6 +114,11 @@
     --bs-btn-border-color: #272727;
     --bs-btn-bg: #272727;
   }
+  .btn-info{
+  --bs-btn-border-radius: 1rem;
+  --bs-btn-border-color: #4f98ca;
+  --bs-btn-bg: #4f98ca;
+}
   .popper-box {
       --popper-theme-background-color: #272727;
       --popper-theme-background-color-hover: #272727;
