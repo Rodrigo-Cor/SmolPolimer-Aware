@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid" style="background-color: #4f98ca1a; border-radius: 1rem;">
+  <div class="container-fluid">
     <h2 class="section-subtitle text-center animate__animated animate__heartBeat">Formulario</h2>
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-3 text-center my-1">
@@ -10,7 +10,7 @@
           placement="top"
           hover
         >
-        <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
+        <button class="btn btn-bd-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
         <label class="my-label" for="quantityInput">Microplásticos:</label>
@@ -34,7 +34,7 @@
           placement="top"
           hover
         >
-        <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
+        <button class="btn btn-bd-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
         <label class="my-label" for="bimestersInput">Bimestres:</label>
@@ -58,7 +58,7 @@
           placement="top"
           hover
         >
-        <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
+        <button class="btn btn-bd-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
         <label class="my-label" for="mineralInput">Medio de cultivo:</label>
@@ -85,11 +85,11 @@
           placement="top"
           hover
         >
-        <button class="btn btn-outline-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
+        <button class="btn btn-bd-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
         <label class="my-label" for="percentageInput">Porcentaje de degradación:</label>
-        <span class="badge bg-dark pill">{{ percentage }}%</span>
+        <span>{{ percentage }}%</span>
         <br>
         <select
           class="my-bacteria mx-auto"
@@ -111,8 +111,8 @@
       </div>
     </div>
     <div class="d-flex justify-content-center my-4">
-      <button @click="handleSendButton" class="btn btn-info">
-        <i class="bi bi-check-circle"></i> Aceptar
+      <button @click="handleSendButton" class="btn btn-bd-primary">
+        <i class="bi bi-check-circle"></i> Calcular
       </button>
     </div>
   </div> 
@@ -165,15 +165,30 @@
   border: 0.2rem solid #50d890;
   background-color: #50d890;
 }
-.btn-outline-info{
-  --bs-btn-border-radius: 1rem;
-  --bs-btn-border-color: #272727;
+.btn-bd-info{
+  --bs-btn-border-radius: 2rem;
+  --bs-btn-color: #50d890;
   --bs-btn-bg: #272727;
+  --bs-btn-border-color: #272727;
+  --bs-btn-hover-color: #272727;;
+  --bs-btn-hover-bg: #50d890;
+  --bs-btn-hover-border-color: #50d890;
+  --bs-btn-active-color: #272727;
+  --bs-btn-active-bg: #50d890;
+  --bs-btn-active-border-color: #50d890;
 }
-.btn-info{
-  --bs-btn-border-radius: 1rem;
-  --bs-btn-border-color: #4f98ca;
+.btn-bd-primary {
+  --bs-btn-border-radius: 2rem;
+  --bs-btn-font-weight: bold;
+  --bs-btn-color: #effffb;
   --bs-btn-bg: #4f98ca;
+  --bs-btn-border-color: #4f98ca;
+  --bs-btn-hover-color: #effffb;;
+  --bs-btn-hover-bg: #50d890;
+  --bs-btn-hover-border-color: #50d890;
+  --bs-btn-active-color: #effffb;
+  --bs-btn-active-bg: #50d890;
+  --bs-btn-active-border-color: #50d890;
 }
 .popper-box {
     --popper-theme-background-color: #272727;

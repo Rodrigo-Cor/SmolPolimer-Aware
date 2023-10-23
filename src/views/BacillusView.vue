@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid" style="background-color: #effffb">
-    <h1 class="fw-semibold text-center section-title animate__animated animate__shakeX">
+    <h1 class="fw-semibold text-center section-title animate__animated animate__heartBeat">
       Degradación por bacterias Bacillus
     </h1>
     <article>
@@ -39,12 +39,14 @@
         con diferentes cepas de la bacteria Bacillus. Cada una de las seis cepas
         que se presentan tiene su propia capacidad de degradación única, todo
         gracias a los ingredientes especiales conocidos como caldo mineral
-        (mineral broth, en inglés) y agar  mineral (mineral agar, en inglés). Estos ingredientes son como el
-        "alimento" de nuestras bacterias y afectarán su capacidad de degradación en
-        un periodo de dos meses. Los valores de entrada que se ocuparán para la 
-        simulación incluyen la cantidad de microplásticos a degradar, sumado al porcentaje
-        de degradación, que está dado por la cepa de Bacillus que se utilice, una vez
-        seleccionada la sustancia (agar o broth).
+        (mineral broth, en inglés) y agar  mineral (mineral agar, en inglés). Estos 
+        ingredientes son como el "alimento" de nuestras bacterias y afectarán su 
+        capacidad de degradación en un periodo de dos meses. Los valores de entrada
+        que se ocuparán para la simulación incluyen la cantidad de microplásticos a
+        degradar, el número de bimestres en los que se estará degradando, la cepa de 
+        Bacillus a utilizar, que dependiendo de el medio de cultivo (agar o broth)
+        seleccionado, determinará el porcentaje de degradación. Simplemente haz clic
+        en el botón que dice "Simulación" a continuación y comencemos con la simulación. 
       </section>
     </article>
     <BacillusForm v-if="choice" />
@@ -94,7 +96,7 @@
       "
     />
     <div class="d-flex justify-content-center my-2">
-      <button @click="handleButton" class="btn btn-success">
+      <button @click="handleButton" class="btn btn-bd-primary">
         <i class="bi bi-graph-down"></i> 
         {{
           choiceIsMade
@@ -124,11 +126,18 @@
 .color-techniques {
   background-color: #610c9f3f;
 }
-
-.btn-success{
+.btn-bd-primary {
   --bs-btn-border-radius: 2rem;
-  --bs-btn-border-color: #4f98ca;
-  --bs-btn-bg: #4f98ca;
+  --bs-btn-font-weight: bold;
+  --bs-btn-color: #50d890;
+  --bs-btn-bg: #effffb;
+  --bs-btn-border-color: #50d890;
+  --bs-btn-hover-color: #effffb;;
+  --bs-btn-hover-bg: #50d890;
+  --bs-btn-hover-border-color: #50d890;
+  --bs-btn-active-color: #effffb;
+  --bs-btn-active-bg: #50d890;
+  --bs-btn-active-border-color: #50d890;
 }
 </style>
 <script>

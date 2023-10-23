@@ -8,8 +8,7 @@
     Se introdujo una cantidad inicial de microplásticos de {{ microplastics }}, a la vez que {{ residues }} 
     como residuo, cantidades que se irán pasando por el filtro diariamente hasta terminar los {{ timeUnits }} días especificados. Dando como
     resultado el día {{ timeUnits }}, un porcentaje acumulado en el filtro de {{ lastOnFilterValue.toFixed(2) }}%, 
-    a la par que {{ lastReleasedValue.toFixed(2) }}% en el cuerpo de agua, en este caso, un río. A
-    continuación, la tabla de resultados con la que es graficada la simulación.
+    a la par que {{ lastReleasedValue.toFixed(2) }}% en el cuerpo de agua, en este caso, un río.
   </section>
 </template>
 <script>

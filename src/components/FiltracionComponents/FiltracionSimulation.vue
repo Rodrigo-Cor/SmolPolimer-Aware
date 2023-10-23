@@ -7,7 +7,7 @@
     <div id="chart-container"></div>
     <div id="chartPDF-container"></div>
     <div class="d-flex justify-content-center my-2">
-      <button class="btn btn-primary my-2" @click="this.createChart"><i class="bi bi-brush"></i> Redibujar simulación</button>
+      <button class="btn btn-bd-primary my-2" @click="this.createChart"><i class="bi bi-brush"></i> Redibujar simulación</button>
     </div>
   </div>
 </template>
@@ -22,10 +22,18 @@
     font-weight: bold;
     color: #50d890;
 }
-.btn-primary{
+.btn-bd-primary {
   --bs-btn-border-radius: 2rem;
-  --bs-btn-border-color: #50d890;
-  --bs-btn-bg: #50d890;
+  --bs-btn-font-weight: bold;
+  --bs-btn-color: #4f98ca;
+  --bs-btn-bg: #ffffff;
+  --bs-btn-border-color: #4f98ca;
+  --bs-btn-hover-color: #ffffff;;
+  --bs-btn-hover-bg: #4f98ca;
+  --bs-btn-hover-border-color: #4f98ca;
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-active-bg: #4f98ca;
+  --bs-btn-active-border-color: #4f98ca;
 }
 </style>
 <script>

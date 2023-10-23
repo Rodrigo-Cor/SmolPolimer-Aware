@@ -1,8 +1,8 @@
 <template>
-  <div class="d-flex justify-content-center my-2 animate__animated animate__heartBeat">
+  <div class="d-flex justify-content-center my-2">
     <button
       @click="generatePDF"
-      class="btn btn-outline-danger"
+      class="btn btn-bd-primary"
     ><i class="bi bi-filetype-pdf"></i> Generar PDF
     </button>
   </div>
@@ -10,6 +10,19 @@
 <style scoped>
 .btn-outline-danger{
   --bs-btn-border-radius: 2rem;
+}
+.btn-bd-primary {
+  --bs-btn-border-radius: 2rem;
+  --bs-btn-font-weight: bold;
+  --bs-btn-color: #f41b35;
+  --bs-btn-bg: #effffb;
+  --bs-btn-border-color: #f41b35;
+  --bs-btn-hover-color: #effffb;;
+  --bs-btn-hover-bg: #f41b35;
+  --bs-btn-hover-border-color: #f41b35;
+  --bs-btn-active-color: #effffb;
+  --bs-btn-active-bg: #f41b35;
+  --bs-btn-active-border-color: #f41b35;
 }
 </style>
 <script>
@@ -142,10 +155,13 @@ export default {
         textWidth = pdf.getStringUnitWidth("Tabla de resultados") * pdf.internal.getFontSize() / pdf.internal.scaleFactor;
         xCoordinate = (pageWidth - textWidth) / 2;
         pdf.text("Tabla de resultados", xCoordinate, 20);
-
         autoTable(pdf, {
           html: "#tableResults",
           startY: 30,
+          tableWidth: "auto",
+          margin: 50,
+          headStyles: { halign: 'center', fillColor: "#50d890"},
+          bodyStyles: { halign: 'center'},
         });
         pdf.save("ReporteFiltracion.pdf");
       };

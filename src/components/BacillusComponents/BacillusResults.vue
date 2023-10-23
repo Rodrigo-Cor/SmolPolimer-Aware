@@ -8,25 +8,25 @@
     </section>
     <div class="row">
       <div class="col my-2">
-        <h3 class="section-sub-subtitle text-center my-2 animate__animated animate__flash">Resumen de datos de entrada</h3>
+        <h3 class="section-sub-subtitle text-center mb-4 animate__animated animate__flash">Resumen de datos de entrada</h3>
         <ul class="list-group custom-list">
           <li class="list-group-item custom-list-item">
-            Microplásticos: <span class="badge bg-dark pill">{{ microplastics }}</span></li>
+            <b>Microplásticos: </b>{{ microplastics }}</li>
           <li class="list-group-item custom-list-item">
-            Bimestres: <span class="badge bg-dark pill">{{ timeUnits }}</span></li>
+            <b>Bimestres: </b>{{ timeUnits }}</li>
           <li class="list-group-item custom-list-item">
-            Medio de cultivo: <span class="badge bg-dark pill">{{ growthMedium }}</span></li>
+            <b>Medio de cultivo: </b>{{ growthMedium }}</li>
           <li class="list-group-item custom-list-item">
-            Cepa de la bacteria: <span class="badge bg-dark pill">{{ strain }}</span></li>
+            <b>Cepa de la bacteria: </b><i>{{ strain }}</i></li>
           <li class="list-group-item custom-list-item">
-            Porcentaje de degradación: <span class="badge bg-dark pill">{{ percentage }}%</span></li>            
+            <b>Porcentaje de degradación: </b>{{ percentage }}%</li>            
         </ul>
       </div>
       <div class="col my-2">
-        <h3 class="section-sub-subtitle text-center my-2 animate__animated animate__flash">
+        <h3 class="section-sub-subtitle text-center mb-4 animate__animated animate__flash">
           Tabla de resultados
         </h3>
-        <table class="table table-info table-striped-columns custom-table text-center my-2" id="tableResults">
+        <table class="custom-table my-2" id="tableResults">
           <thead>
             <tr>
               <th scope="col">Bimestre</th>
@@ -46,23 +46,54 @@
 </template>
 <style scoped>
 .custom-list {
+  color: #272727;
   min-width: min-content;
   max-width: max-content;
-  background-color: #50d8903f;
-  border: 0.1rem solid #50d8903f;
   border-radius: 0.5rem;
   margin: auto;
+  text-align: justify;
+  box-shadow: 1rem 0 1rem #50d890;
 }
 .custom-list-item {
-  background-color: #50d8903f;
-  border: 0.1rem solid #50d8903f;
-  text-align: justify;
+  background-color: #50d8901a;
+  border: thin solid #50d890;
 }
 .custom-table {
+  color: #272727;
+  text-align: center;
+  border-collapse: collapse;
+  border-radius: 1rem 1rem 1rem 1rem;
+  overflow: hidden;
   min-width: min-content;
-  max-width: fit-content; 
+  max-width: max-content; 
   margin: auto;
+  box-shadow: 0 0 1rem #50d890;
 }
+.custom-table thead th{
+  text-align: center;
+  padding: 0.5rem;
+}
+.custom-table thead tr{
+  background-color: #50d890;
+}
+
+.custom-table td {
+  padding: 0.5rem;
+}
+.custom-table tbody tr {
+  border-bottom: thin solid #50d890;
+}
+.custom-table tbody tr:last-of-type {
+  border-bottom: 1rem solid #50d890;
+}
+.custom-table tbody td:nth-child(odd) {
+  border-right: thin solid #50d890;
+}
+.custom-table tbody tr:nth-child(odd) {
+  background: #50d8901a;
+}
+
+
 </style>
 <script>
 import { mapGetters, mapMutations } from 'vuex';

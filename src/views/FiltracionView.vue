@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid" style="background-color: #effffb;">
-    <h1 class="fw-semibold text-center section-title animate__animated animate__shakeX">
+    <h1 class="fw-semibold text-center section-title animate__animated animate__heartBeat">
       Filtración granular rápida
     </h1>
     <section class="text-justify-custom my-2">
@@ -91,7 +91,7 @@
       "
     />
     <div class="d-flex justify-content-center my-2">
-      <button @click="handleButton" class="btn btn-success">
+      <button @click="handleButton" class="btn btn-bd-primary">
         <i class="bi bi-graph-up"></i> 
         {{
           choiceIsMade
@@ -120,10 +120,18 @@
 .color-techniques {
   background-color: #ff80803f;
 }
-.btn-success{
+.btn-bd-primary {
   --bs-btn-border-radius: 2rem;
-  --bs-btn-border-color: #4f98ca;
-  --bs-btn-bg: #4f98ca;
+  --bs-btn-font-weight: bold;
+  --bs-btn-color: #50d890;
+  --bs-btn-bg: #effffb;
+  --bs-btn-border-color: #50d890;
+  --bs-btn-hover-color: #effffb;;
+  --bs-btn-hover-bg: #50d890;
+  --bs-btn-hover-border-color: #50d890;
+  --bs-btn-active-color: #effffb;
+  --bs-btn-active-bg: #50d890;
+  --bs-btn-active-border-color: #50d890;
 }
 </style>
 <script>
