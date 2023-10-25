@@ -1,11 +1,20 @@
 <template>
   <div class="container-fluid" style="background-color: white; border-radius: 1rem;">
-    <h2 class="section-subtitle text-center my-2 animate__animated animate__heartBeat">Simulación</h2>
+    <h2 class="section-subtitle text-center my-2 animate__animated animate__flash">Simulación</h2>
     <p class="filteredTag text-center">Microplásticos en filtro -----</p>
     <p class="releasedTag text-center">Microplásticos sueltos en el río -----</p>
-    <div ref="containerRef"></div>
-    <div id="chart-container"></div>
-    <div id="chartPDF-container"></div>
+    <div class="col-md-6 offset-md-3 col-12">
+      <div ref="containerRef"></div>
+      <div id="chart-container"></div>
+      <div id="chartPDF-container"></div>
+    </div>
+    <div class="d-flex justify-content-center my-2">
+      <label class="my-label" for="simulationTimeInput">Tiempo de simulación</label>
+      <span>: {{ simulationTime }} {{ simulationTime != 1 ? "segundos" : "segundo" }}</span>  
+    </div>
+    <div class="d-flex justify-content-center my-2">
+      <input v-model="simulationTime" type="range" min="1" max="10" class="slider" id="simulationTimeInput" name="simulationTimeInput">
+    </div>
     <div class="d-flex justify-content-center my-2">
       <button class="btn btn-bd-primary my-2" @click="this.createChart"><i class="bi bi-brush"></i> Redibujar simulación</button>
     </div>
@@ -35,6 +44,41 @@
   --bs-btn-active-bg: #4f98ca;
   --bs-btn-active-border-color: #4f98ca;
 }
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  border-radius: 1rem;
+  height: 1rem;
+  background: #272727;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .5s;
+  transition: opacity .5s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 1rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  background: #50d890;
+  cursor: pointer;
+}
+.slider::-moz-range-thumb {
+  width: 1.2rem;
+  height: 1.2rem;
+  background: #50d890;
+  cursor: pointer;
+}
+.my-label{
+  font-size: 1rem;
+  font-weight: bold;
+  color: #4f98ca;
+}
 </style>
 <script>
 import * as d3 from "d3";
@@ -44,6 +88,7 @@ export default {
   data () {
     return {
       isFullscreen : false,
+      simulationTime: 2,
     };
   },
   mounted () {
@@ -67,6 +112,9 @@ export default {
     getReleasedValues() {
       this.createChart();
     },
+    simulationTime() {
+      this.createChart();
+    }
   },
   computed: {
     ...mapGetters(['getOnFilterValues', 'getReleasedValues']),
@@ -111,6 +159,11 @@ export default {
           .attr("height", height + margin.top + margin.bottom)
         .append("g")
           .attr("transform", `translate(${margin.left},${margin.top})`);
+      
+      svg.append("rect")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("fill", "#272727");
 
       x.domain([1, this.onFilterValues.length]);
       y.domain([d3.min(this.onFilterValues.concat(this.releasedValues)), d3.max(this.onFilterValues.concat(this.releasedValues))]);
@@ -142,13 +195,8 @@ export default {
         .attr("stroke-dasharray", totalLengthFilter + " " + totalLengthFilter)
         .attr("stroke-dashoffset", totalLengthFilter)
         .transition()
-        .duration(2000)
+        .duration(this.simulationTime * 1000)
         .attr("stroke-dashoffset", 0);
-        /* .on("end", () => {
-          const svgElement = document.querySelector("#chart-container svg");
-          const svgData = new XMLSerializer().serializeToString(svgElement);
-          this.$emit('chart-obtained', svgData);
-        }); */
 
       var pathReleased = svg.append("path")
         .datum(this.releasedValues)
@@ -163,27 +211,8 @@ export default {
         .attr("stroke-dasharray", totalLengthReleased + " " + totalLengthReleased)
         .attr("stroke-dashoffset", totalLengthReleased)
         .transition()
-        .duration(2000)
+        .duration(this.simulationTime * 1000)
         .attr("stroke-dashoffset", 0);
-      
-      svg.append("g")
-        .attr("class", "grid")
-        .attr("transform", `translate(0,${height})`)
-        .attr("stroke", "#1e1e1e")
-        .attr("stroke-width", .5)
-          .call(d3.axisBottom(x)
-            .tickSize(-height)
-            .tickFormat("")
-          );
-
-      svg.append("g")
-        .attr("class", "grid")
-        .attr("stroke", "#1e1e1e")
-        .attr("stroke-width", .5)
-        .call(d3.axisLeft(y)
-          .tickSize(-width)
-          .tickFormat("")
-        );
       
       svg
         .append("text")
@@ -255,7 +284,7 @@ export default {
       svg.append("g")
         .attr("class", "grid")
         .attr("transform", `translate(0,${height})`)
-        .attr("stroke", "#1e1e1e")
+        .attr("stroke", "#272727")
         .attr("stroke-width", .5)
           .call(d3.axisBottom(x)
             .tickSize(-height)
@@ -264,7 +293,7 @@ export default {
           
       svg.append("g")
         .attr("class", "grid")
-        .attr("stroke", "#1e1e1e")
+        .attr("stroke", "#272727")
         .attr("stroke-width", .5)
         .call(d3.axisLeft(y)
           .tickSize(-width)

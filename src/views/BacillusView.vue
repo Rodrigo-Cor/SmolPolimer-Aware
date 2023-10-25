@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid" style="background-color: #effffb">
-    <h1 class="fw-semibold text-center section-title animate__animated animate__heartBeat">
-      Degradación por bacterias Bacillus
+    <h1 class="fw-semibold text-center section-title animate__animated animate__flash">
+      Degradación por bacterias <i>Bacillus</i>
     </h1>
     <article>
       <section class="text-justify-custom my-2">
@@ -36,7 +36,7 @@
     <article class="text-justify-custom">
       <section>
         En esta simulación, tendrás la oportunidad de explorar la degradación
-        con diferentes cepas de la bacteria Bacillus. Cada una de las seis cepas
+        con diferentes cepas de la bacteria <i>Bacillus</i>. Cada una de las seis cepas
         que se presentan tiene su propia capacidad de degradación única, todo
         gracias a los ingredientes especiales conocidos como caldo mineral
         (mineral broth, en inglés) y agar  mineral (mineral agar, en inglés). Estos 
@@ -44,7 +44,7 @@
         capacidad de degradación en un periodo de dos meses. Los valores de entrada
         que se ocuparán para la simulación incluyen la cantidad de microplásticos a
         degradar, el número de bimestres en los que se estará degradando, la cepa de 
-        Bacillus a utilizar, que dependiendo de el medio de cultivo (agar o broth)
+        <i>Bacillus</i> a utilizar, que dependiendo de el medio de cultivo (agar o broth)
         seleccionado, determinará el porcentaje de degradación. Simplemente haz clic
         en el botón que dice "Simulación" a continuación y comencemos con la simulación. 
       </section>
@@ -177,18 +177,23 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(
-      [
-        "getDegradatedValues",
-        "getIsAnswered",
-        "getMicroplastics",
-        "getTimeUnits",
-        "getGrowthMedium",
-        "getStrain",
-        "getPercentage",
-      ],
-    ),
-    ...mapMutations(["setMicroplastics", "setTimeUnits", "setGrowthMedium", "setStrain", "setPercentage" ]),
+    ...mapGetters([
+      "getDegradatedValues",
+      "getIsAnswered",
+      "getMicroplastics",
+      "getTimeUnits",
+      "getGrowthMedium",
+      "getStrain",
+      "getPercentage",
+    ]),
+    ...mapMutations([
+      "setMicroplastics",
+      "setTimeUnits",
+      "setGrowthMedium",
+      "setStrain",
+      "setPercentage",
+      "setDegradatedValues",
+    ]),
     microplastics() {
       return this.getMicroplastics;
     },
@@ -226,12 +231,12 @@ export default {
         showConfirmButton: true,
         confirmButtonText: "Formulario",
         confirmButtonColor: "#50d890",
-        confirmButtonAriaLabel: "Confirmar",
+        confirmButtonAriaLabel: "Formulario",
 
         showDenyButton: true,
-        denyButtonText: "Por defecto",
-        confirmButtonColor: "#4f98ca",
-        confirmButtonAriaLabel: "Denegar",
+        denyButtonText: "Valores por defecto",
+        denyButtonColor: "#4f98ca",
+        denyButtonAriaLabel: "Valores por defecto",
 
         showCancelButton: true,
         cancelButtonText: "Cancelar",
@@ -239,21 +244,20 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           this.choice = true;
-          this.$store.commit('setMicroplastics', "");
-          this.$store.commit('setTimeUnits', "");
-          this.$store.commit('setGrowthMedium', "");
-          this.$store.commit('setStrain', "");
-          this.$store.commit('setPercentage', "");  
+          this.$store.commit("setMicroplastics", "");
+          this.$store.commit("setTimeUnits", "");
+          this.$store.commit("setGrowthMedium", "");
+          this.$store.commit("setStrain", "");
+          this.$store.commit("setPercentage", "");  
           this.$store.commit("setDegradatedValues", []);
           this.choiceIsMade = true;
         } else if (result.isDenied) {
           this.choice = false;
-          this.$store.commit('setMicroplastics', this.defaultMicroplastics);
-          this.$store.commit('setTimeUnits', this.defaultTimeUnits);
-          this.$store.commit('setGrowthMedium', this.defaultGrowthMedium);
-          this.$store.commit('setStrain', this.defaultStrain);
-          this.$store.commit('setPercentage', this.defaultPercentage);  
-          this.$store.commit("setDegradatedValues", []);
+          this.$store.commit("setMicroplastics", this.defaultMicroplastics);
+          this.$store.commit("setTimeUnits", this.defaultTimeUnits);
+          this.$store.commit("setGrowthMedium", this.defaultGrowthMedium);
+          this.$store.commit("setStrain", this.defaultStrain);
+          this.$store.commit("setPercentage", this.defaultPercentage);  
           this.choiceIsMade = true;
         } else if (result.isDismissed) {
           this.choiceIsMade = this.choiceIsMade;

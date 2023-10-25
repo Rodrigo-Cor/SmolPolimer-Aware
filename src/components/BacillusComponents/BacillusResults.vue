@@ -4,14 +4,14 @@
     <section class="text-justify-custom my-2">
       En la siguiente lista se encuentra el resumen de los datos introducidos al simulador,
       mientras que después en la tabla, se encuentran los resultados: cómo disminuyen los
-      microplásticos conforme pasan los bimestres.
+      miligramos de microplásticos conforme pasan los bimestres.
     </section>
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col my-2">
         <h3 class="section-sub-subtitle text-center mb-4 animate__animated animate__flash">Resumen de datos de entrada</h3>
         <ul class="list-group custom-list">
           <li class="list-group-item custom-list-item">
-            <b>Microplásticos: </b>{{ microplastics }}</li>
+            <b>Microplásticos: </b>{{ microplastics }} mg</li>
           <li class="list-group-item custom-list-item">
             <b>Bimestres: </b>{{ timeUnits }}</li>
           <li class="list-group-item custom-list-item">
@@ -30,7 +30,7 @@
           <thead>
             <tr>
               <th scope="col">Bimestre</th>
-              <th scope="col">Microplásticos</th>
+              <th scope="col">Microplásticos (mg)</th>
             </tr>
           </thead>
           <tbody>
@@ -49,10 +49,10 @@
   color: #272727;
   min-width: min-content;
   max-width: max-content;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   margin: auto;
   text-align: justify;
-  box-shadow: 1rem 0 1rem #50d890;
+  box-shadow: 0 0 1rem #50d890;
 }
 .custom-list-item {
   background-color: #50d8901a;

@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <h2 class="section-subtitle text-center animate__animated animate__heartBeat">Formulario</h2>
+    <h2 class="section-subtitle text-center animate__animated animate__flash">Formulario</h2>
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-4 text-center my-1">
         <Popper

@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <h2 class="section-subtitle text-center animate__animated animate__heartBeat">Formulario</h2>
+    <h2 class="section-subtitle text-center animate__animated animate__flash">Formulario</h2>
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-3 text-center my-1">
         <Popper
@@ -13,7 +13,7 @@
         <button class="btn btn-bd-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
-        <label class="my-label" for="quantityInput">Microplásticos:</label>
+        <label class="my-label" for="quantityInput">Microplásticos</label>
         <br>
         <input
           class="my-input"
@@ -37,7 +37,7 @@
         <button class="btn btn-bd-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
-        <label class="my-label" for="bimestersInput">Bimestres:</label>
+        <label class="my-label" for="bimestersInput">Bimestres</label>
         <br>
         <input
           class="my-input"
@@ -61,7 +61,7 @@
         <button class="btn btn-bd-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
-        <label class="my-label" for="mineralInput">Medio de cultivo:</label>
+        <label class="my-label" for="mineralInput">Medio de cultivo</label>
         <br>
         <select 
           class="my-select"
@@ -88,8 +88,8 @@
         <button class="btn btn-bd-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
         </Popper>
         <br>
-        <label class="my-label" for="percentageInput">Porcentaje de degradación:</label>
-        <span>{{ percentage }}%</span>
+        <label class="my-label" for="percentageInput">Porcentaje de degradación</label>
+        <span>: {{ percentage }}%</span>
         <br>
         <select
           class="my-bacteria mx-auto"

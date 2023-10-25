@@ -1,5 +1,5 @@
 <template>
-  <h2 class="section-subtitle text-center my-2 animate__animated animate__heartBeat">Explicación</h2>
+  <h2 class="section-subtitle text-center my-2 animate__animated animate__flash">Explicación</h2>
   <section class="text-justify-custom my-2" id="explanation">
     En la simulación, se puede observar que las líneas llevan una tendencia ascendente, debido a que cada una
     representa el porcentaje acumulado de microplásticos que son, o atrapados en el filtro (azul) o sueltos en

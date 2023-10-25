@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid" style="background-color: #effffb;">
-    <h1 class="fw-semibold text-center section-title animate__animated animate__heartBeat">
+    <h1 class="fw-semibold text-center section-title animate__animated animate__flash">
       Filtración granular rápida
     </h1>
     <section class="text-justify-custom my-2">
@@ -144,7 +144,6 @@ import AwarenessSimulationSection from "@/components/AwarenessSimulationSection.
 import InfoSection from "@/components/InfoSection.vue";
 import Swal from "sweetalert2";
 import { mapGetters, mapMutations } from "vuex";
-import 'animate.css';
 export default {
   name: "FiltracionView",
   components: {
@@ -217,12 +216,12 @@ export default {
         showConfirmButton: true,
         confirmButtonText: "Formulario",
         confirmButtonColor: "#50d890",
-        confirmButtonAriaLabel: "Confirmar",
+        confirmButtonAriaLabel: "Formulario",
 
         showDenyButton: true,
-        denyButtonText: "Por defecto",
-        confirmButtonColor: "#4f98ca",
-        confirmButtonAriaLabel: "Denegar",
+        denyButtonText: "Valores por defecto",
+        denyButtonColor: "#4f98ca",
+        denyButtonAriaLabel: "Valores por defecto",
 
         showCancelButton: true,
         cancelButtonText: "Cancelar",
@@ -238,9 +237,9 @@ export default {
           this.choiceIsMade = true;
         } else if (result.isDenied) {
           this.choice = false;
-          this.$store.commit('setMicroplastics', this.defaultMicroplastics);
-          this.$store.commit('setTimeUnits', this.defaultTimeUnits);
-          this.$store.commit('setResidues', this.defaultResidues);
+          this.$store.commit("setMicroplastics", this.defaultMicroplastics);
+          this.$store.commit("setTimeUnits", this.defaultTimeUnits);
+          this.$store.commit("setResidues", this.defaultResidues);
           this.choiceIsMade = true;
         } else if (result.isDismissed) {
           this.choice = this.choice;
