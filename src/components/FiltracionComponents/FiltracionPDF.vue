@@ -43,8 +43,18 @@ export default {
         microplastics: "getMicroplastics",
         residues: "getResidues",
         timeUnits: "getTimeUnits",
+        onFilterValues: "getOnFilterValues",
+        releasedValues: "getReleasedValues",
       },
     ),
+    lastOnFilterValue() {
+      const lastOnFilter = this.onFilterValues[this.onFilterValues.length - 1]
+      return lastOnFilter;
+    },
+    lastReleasedValue() {
+      const lastReleased = this.releasedValues[this.releasedValues.length - 1]
+      return lastReleased;
+    },
   },
   methods: {
     generatePDF() {
@@ -105,12 +115,12 @@ export default {
         pdf.setFontSize(8);
         pdf.setTextColor("#4f98ca");
         pdf.setFont("Courier", "bold");
-        pdf.text("Microplásticos en filtro -----", 20, 85);
+        pdf.text("% microplásticos en filtro -----", 20, 85);
 
         pdf.setFontSize(8);
         pdf.setTextColor("#50d890");
         pdf.setFont("Courier", "bold");
-        pdf.text("Microplásticos sueltos en el río -----", 20, 89);
+        pdf.text("% microplásticos sueltos en el río -----", 20, 89);
         
         const canvas = document.createElement("canvas");
         const canvasWidth = 672;
@@ -130,17 +140,26 @@ export default {
         xCoordinate = (pageWidth - textWidth) / 2;
         pdf.text("Explicación", xCoordinate, 190);
         
-        const explanation = document.querySelector("#explanation");
+        pdf.setFontSize(12);
+        pdf.setTextColor("#272727");
+        pdf.setFont("Courier", "normal")
+        
+        pdf.text("Se pueden observar en la simulación dos líneas: cada una representa", 20, 200);
+        pdf.text("el  porcentaje acumulado de microplásticos; en el caso de la  línea", 20, 205);
+        pdf.text("azul,  aquellos que son contenidos por el filtro; mientras  que  la", 20, 210);
+        pdf.text("verde  corresponde a los que escapan y terminan en algún cuerpo  de", 20, 215);
+        pdf.text("agua, como lo puede ser un río, en este caso. Cada día, se pasa por", 20, 220);
+        pdf.text("el filtro la cantidad de microplásticos especificada de " + self.microplastics + ".", 20, 225);
+        pdf.text("Sumado a eso, pueden llegar a ocurrir fluctuaciones en los  valores", 20, 235);
+        pdf.text("cada día, por lo que se añade una cantidad de microplásticos  extra", 20, 240);
+        pdf.text("que  llamaremos 'residuos', que ayudará a simular esas  variaciones", 20, 245);
+        pdf.text("multiplicándola por un valor aleatorio por día, pero se tomará como", 20, 250);
+        pdf.text("base el valor introducido para los residuos de " + self.residues + ".", 20, 255);
 
-        const textLines = pdf
-          .setFontSize(12)
-          .setTextColor("#272727")
-          .setFont("Courier", "normal")
-          .splitTextToSize(
-            explanation.innerText,
-            pageWidth - left - right - 20
-          );
-        pdf.text(textLines, 20, 200);
+        pdf.text("De esa manera, el valor resultante de cada día corresponde a un por", 20, 265);
+        pdf.text("ciento:  ya que si se suman ambos porcentajes del mismo  día,  dará", 20, 270);
+        pdf.text("100%  para el primer día, 200% para el segundo y así  sucesivamente", 20, 275);
+        pdf.text("hasta el día " + self.timeUnits + " indicado.", 20, 280);
 
         pdf.addPage();
 
@@ -149,15 +168,20 @@ export default {
         pdf.line(left, top, left, pageHeight - bottom);
         pdf.line(pageWidth - right, top, pageWidth - right, pageHeight - bottom);
 
+        pdf.text("Generalmente, el porcentaje acumulado del filtro debe ser mayor  al", 20, 20);
+        pdf.text("del río, sin embargo, este comportamiento puede no darse en  algún ", 20, 25);
+        pdf.text("o algunos días. El porcentaje acumulado final para el filtro y para", 20, 30);
+        pdf.text("el río son " + self.lastOnFilterValue.toFixed(2) +"% y " + self.lastReleasedValue.toFixed(2) + "%, respectivamente.", 20, 35);
+
         pdf.setFontSize(18);
         pdf.setTextColor("#4f98ca");
         pdf.setFont("Helvetica", "bold");
         textWidth = pdf.getStringUnitWidth("Tabla de resultados") * pdf.internal.getFontSize() / pdf.internal.scaleFactor;
         xCoordinate = (pageWidth - textWidth) / 2;
-        pdf.text("Tabla de resultados", xCoordinate, 20);
+        pdf.text("Tabla de resultados", xCoordinate, 45);
         autoTable(pdf, {
           html: "#tableResults",
-          startY: 30,
+          startY: 55,
           tableWidth: "auto",
           margin: 50,
           headStyles: { halign: 'center', fillColor: "#50d890"},

@@ -1,14 +1,25 @@
 <template>
   <h2 class="section-subtitle text-center my-2 animate__animated animate__flash">Explicación</h2>
-  <section class="text-justify-custom my-2" id="explanation">
-    En la simulación, se puede observar que las líneas llevan una tendencia ascendente, debido a que cada una
-    representa el porcentaje acumulado de microplásticos que son, o atrapados en el filtro (azul) o sueltos en
-    un cuerpo de agua (verde). Para el primer día, por ejemplo, si se suma el porcentaje en el filtro con el del río, dará
-    como resultado el 100%; para días posteriores son valores que suman el 200%, 300% y así, sucesivamente. <br> <br> 
-    Se introdujo una cantidad inicial de microplásticos de {{ microplastics }}, a la vez que {{ residues }} 
-    como residuo, cantidades que se irán pasando por el filtro diariamente hasta terminar los {{ timeUnits }} días especificados. Dando como
-    resultado el día {{ timeUnits }}, un porcentaje acumulado en el filtro de {{ lastOnFilterValue.toFixed(2) }}%, 
-    a la par que {{ lastReleasedValue.toFixed(2) }}% en el cuerpo de agua, en este caso, un río.
+  <section class="text-justify-custom my-2">
+    Se pueden observar en la simulación dos líneas: cada una representa
+    el  porcentaje acumulado de microplásticos; en el caso de la  línea
+    azul,  aquellos que son contenidos por el filtro; mientras  que  la
+    verde  corresponde a los que escapan y terminan en algún cuerpo  de
+    agua, como lo puede ser un río, en este caso. Cada día, se pasa por
+    el filtro la cantidad de microplásticos especificada de {{ microplastics }}.
+    Sumado a eso, pueden llegar a ocurrir fluctuaciones en los  valores
+    cada día, por lo que se añade una cantidad de microplásticos  extra
+    que  llamaremos 'residuos', que ayudará a simular esas  variaciones
+    multiplicándola por un valor aleatorio por día, pero se tomará como
+    base el valor introducido para los residuos de {{ residues }}.
+    De esa manera, el valor resultante de cada día corresponde a un por
+    ciento:  ya que si se suman ambos porcentajes del mismo  día,  dará
+    100%  para el primer día, 200% para el segundo y así  sucesivamente
+    hasta el día {{ timeUnits }} indicado.
+    Generalmente, el porcentaje acumulado del filtro debe ser mayor  al
+    del río, sin embargo, este comportamiento puede no darse en  algún 
+    o algunos días. El porcentaje acumulado final para el filtro y para
+    el río son {{ lastOnFilterValue.toFixed(2) }}% y {{ lastReleasedValue.toFixed(2) }}%, respectivamente.
   </section>
 </template>
 <script>

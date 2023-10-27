@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid" style="background-color: white; border-radius: 1rem;">
     <h2 class="section-subtitle text-center my-2 animate__animated animate__flash">Simulación</h2>
-    <p class="filteredTag text-center">Microplásticos en filtro -----</p>
-    <p class="releasedTag text-center">Microplásticos sueltos en el río -----</p>
+    <p class="filteredTag text-center">% microplásticos en filtro -----</p>
+    <p class="releasedTag text-center">% microplásticos sueltos en el río -----</p>
     <div class="col-md-6 offset-md-3 col-12">
       <div ref="containerRef"></div>
       <div id="chart-container"></div>
@@ -14,9 +14,6 @@
     </div>
     <div class="d-flex justify-content-center my-2">
       <input v-model="simulationTime" type="range" min="1" max="10" class="slider" id="simulationTimeInput" name="simulationTimeInput">
-    </div>
-    <div class="d-flex justify-content-center my-2">
-      <button class="btn btn-bd-primary my-2" @click="this.createChart"><i class="bi bi-brush"></i> Redibujar simulación</button>
     </div>
   </div>
 </template>
@@ -225,9 +222,9 @@ export default {
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("x", - height / 2)
-        .attr("y", (margin.left / 2) - 75)
+        .attr("y", (margin.left / 2) - 90)
         .attr("text-anchor", "middle")
-        .text("% de Microplásticos");
+        .text("Porcentaje");
         
       this.createChartForPDF();
     },
@@ -311,9 +308,9 @@ export default {
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("x", - height / 2)
-        .attr("y", (margin.left / 2) - 75)
+        .attr("y", (margin.left / 2) - 90)
         .attr("text-anchor", "middle")
-        .text("% de Microplásticos");
+        .text("Porcentaje");
 
       const svgElement = document.querySelector("#chartPDF-container svg")
       const svgString = new XMLSerializer().serializeToString(svgElement/* svg.node() */);

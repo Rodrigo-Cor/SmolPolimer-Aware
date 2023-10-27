@@ -3,21 +3,18 @@
     <h2 class="section-subtitle text-center my-2 animate__animated animate__flash">Simulación</h2>
     <p class="degradatedTag text-center ">Microplásticos (mg)-----</p>
     <div class="row">
-    <div class="col-md-6 offset-md-3 col-12">
-      <div ref="containerRef"></div>
-      <div id="chart-container"></div>
-      <div id="chartPDF-container"></div>
+      <div class="col-md-6 offset-md-3 col-12">
+        <div ref="containerRef"></div>
+        <div id="chart-container"></div>
+        <div id="chartPDF-container"></div>
+      </div>
     </div>
-  </div>
-  <div class="d-flex justify-content-center my-2">
-    <label class="my-label" for="simulationTimeInput">Tiempo de simulación</label>
-    <span>: {{ simulationTime }} {{ simulationTime != 1 ? "segundos" : "segundo" }}</span>  
-  </div>
-  <div class="d-flex justify-content-center my-2">
-    <input v-model="simulationTime" type="range" min="1" max="10" class="slider" id="simulationTimeInput" name="simulationTimeInput">
-  </div>
     <div class="d-flex justify-content-center my-2">
-      <button class="btn btn-bd-primary my-2" @click="this.createChart"><i class="bi bi-brush"></i> Redibujar simulación</button>
+      <label class="my-label" for="simulationTimeInput">Tiempo de simulación</label>
+      <span>: {{ simulationTime }} {{ simulationTime != 1 ? "segundos" : "segundo" }}</span>  
+    </div>
+    <div class="d-flex justify-content-center my-2">
+      <input v-model="simulationTime" type="range" min="1" max="10" class="slider" id="simulationTimeInput" name="simulationTimeInput">
     </div>
   </div>
 </template>
@@ -197,9 +194,9 @@ export default {
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("x", - height / 2)
-        .attr("y", (margin.left / 2) - 75)
+        .attr("y", (margin.left / 2) - 90)
         .attr("text-anchor", "middle")
-        .text("Microplásticos (mg)");
+        .text("Miligramos");
 
         this.createChartForPDF();
     },
@@ -272,9 +269,9 @@ export default {
           .append("text")
           .attr("transform", "rotate(-90)")
           .attr("x", - height / 2)
-          .attr("y", (margin.left / 2) - 75)
+          .attr("y", (margin.left / 2) - 90)
           .attr("text-anchor", "middle")
-          .text("Microplásticos (mg)");
+          .text("Miligramos");
 
         const svgElement = document.querySelector("#chartPDF-container svg")
         const svgString = new XMLSerializer().serializeToString(svgElement/* svg.node() */);

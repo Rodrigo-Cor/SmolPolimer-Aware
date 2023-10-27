@@ -3,9 +3,8 @@
     <h2 class="section-subtitle text-center animate__animated animate__flash">Resultados</h2>
     <section class="text-justify-custom my-2">
       En la siguiente lista se encuentra el resumen de los datos introducidos al simulador,
-      mientras que después en la tabla, se encuentran los resultados: se indican los días y
-      el porcentaje de microplásticos acumulados ya sea en el filtro, o que fueron liberados
-      en el río.
+      mientras que en la tabla están los resultados donde se indican los días y el porcentaje
+      de microplásticos acumulado, ya sea en el filtro, o los que terminan en el río.
     </section>
     <div class="row">
       <div class="col my-2">
@@ -51,7 +50,7 @@
   border-radius: 0.5rem;
   margin: auto;
   text-align: justify;
-  box-shadow: 1rem 0 1rem #50d890;
+  box-shadow: 0 0 1rem #50d890;
 }
 .custom-list-item {
   background-color: #50d8901a;

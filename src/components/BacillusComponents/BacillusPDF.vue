@@ -100,7 +100,7 @@ export default {
         pdf.setTextColor("#272727");
         pdf.setFont("Courier", "normal");
         pdf.text("\u2022  Microplásticos: " + self.microplastics.toString() + " mg", 20, 50);
-        pdf.text("\u2022  Bimestres: " + self.timeUnits.toString() + " bimestres", 20, 60);
+        pdf.text("\u2022  Bimestres: " + self.timeUnits.toString(), 20, 60);
         pdf.text("\u2022  Porcentaje de degradación: " + self.percentage.toString() + "%", 20, 70);
         pdf.text("\u2022  Cepa de la bacteria: ", 20, 80);
         pdf.setFont("Courier", "italic");
@@ -118,7 +118,7 @@ export default {
         pdf.setFontSize(8);
         pdf.setTextColor("#4f98ca");
         pdf.setFont("Courier", "bold");
-        pdf.text("Microplásticos -----", 20, 105);
+        pdf.text("Microplásticos (mg)-----", 20, 105);
 
         const canvas = document.createElement("canvas");
         const canvasWidth = 672;
@@ -141,26 +141,22 @@ export default {
         pdf.setFontSize(12)
         pdf.setTextColor("#272727")
         pdf.setFont("Courier", "normal")
-        pdf.text("En la simulación gráfica, se ve reflejada la fórmula: C(t) = n *", 20, 220);
-        pdf.text("(1 - p)^t, donde t son los bimestres,  p  es  el  porcentaje  de", 20,225);
-        pdf.text("limpieza y n son los miligramos de microplásticos. Se  introdujo", 20, 230);
-        pdf.text("'" + self.microplastics + " mg'  de  cantidad inicial para  degradar, siendo el primer", 20, 235);
-        pdf.text("valor en el bimestre 0, la cual irá degradándose hasta  terminar", 20, 240);
-        pdf.text("la cantidad especificada de bimestres de " + self.timeUnits + ". La temperatura a la", 20, 245);
-        pdf.text("que se sometieron fue de 30°C, alimentando a las bacterias de la", 20, 250);
-        var text1= "cepa "
+        pdf.text("Se puede observar en la simulación gráfica una línea de color  azul", 20, 220);
+        pdf.text("que  representa la cantidad de microplásticos en miligramos que  se", 20,225);
+        var text1= "están degradando, con la cepa seleccionada ";
         var textWidth1 = pdf.getTextWidth(text1);
-        pdf.text(text1, 20, 255);
+        pdf.text(text1, 20, 230);
         pdf.setFont("Courier", "italic");
-        pdf.text(self.strain, 20 + textWidth1 + 1 , 255);
-        var textWidth2 = pdf.getTextWidth(self.strain)
-        pdf.setFont("Courier", "normal");
-        var text3 = " con "
-        pdf.text(text3, 20 + textWidth1 + 1 + textWidth2 + 1, 255);
-        var textWidth3 = pdf.getTextWidth(text3)
-        pdf.text(self.growthMedium + ", aportando un porcentaje", 20 + textWidth1 + 1 + textWidth2 + 1 + textWidth3 + 1, 255);
-        pdf.text("de " + self.percentage + "%  de efectividad por bimestre, dando " + self.lastDegradatedValue.toFixed(2).toString() + "  mg  finales. ", 20, 260);
-        
+        pdf.text(self.strain + ".", 20 + textWidth1 + 1 , 230);
+        pdf.setFont("Courier", "normal")
+        pdf.text("Cada bimestre se degrada el mismo porcentaje a la cantidad restante", 20, 240);
+        pdf.text("del anterior, este comportamiento es dado por la siguiente función:", 20, 245);
+        pdf.text("C(t) = n * (1 - p) ^ t; donde t son el número de bimestres, n sería", 20, 250);
+        pdf.text("la cantidad de microplásticos en mg y p representa al porcentaje de", 20, 255);
+        pdf.text("degradación, con n = " + self.microplastics + " y p = " + self.percentage + "%, de t = 0, hasta t = " + self.timeUnits +"." , 20, 260);
+        pdf.text("El porcentaje depende de la cepa y del medio de cultivo con el  que" , 20, 270);
+        pdf.text("se están alimentando las bacterias, que se hayan escogido, que  fue" , 20, 275);
+        pdf.text(self.growthMedium + ", dando al bimestre " + self.timeUnits +" la cantidad final de " + self.lastDegradatedValue.toFixed(2) +" mg." , 20, 280);
         pdf.addPage();
 
         pdf.line(left, top, pageWidth - right, top);

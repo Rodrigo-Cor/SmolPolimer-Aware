@@ -44,9 +44,9 @@
         capacidad de degradación en un periodo de dos meses. Los valores de entrada
         que se ocuparán para la simulación incluyen la cantidad de microplásticos a
         degradar, el número de bimestres en los que se estará degradando, la cepa de 
-        <i>Bacillus</i> a utilizar, que dependiendo de el medio de cultivo (agar o broth)
+        <i>Bacillus</i> a utilizar, que dependiendo del medio de cultivo (agar o broth)
         seleccionado, determinará el porcentaje de degradación. Simplemente haz clic
-        en el botón que dice "Simulación" a continuación y comencemos con la simulación. 
+        en el botón que dice "Simulación" a continuación y comencemos. 
       </section>
     </article>
     <BacillusForm v-if="choice" />
@@ -132,10 +132,10 @@
   --bs-btn-color: #50d890;
   --bs-btn-bg: #effffb;
   --bs-btn-border-color: #50d890;
-  --bs-btn-hover-color: #effffb;;
+  --bs-btn-hover-color: #272727;;
   --bs-btn-hover-bg: #50d890;
   --bs-btn-hover-border-color: #50d890;
-  --bs-btn-active-color: #effffb;
+  --bs-btn-active-color: #272727;
   --bs-btn-active-bg: #50d890;
   --bs-btn-active-border-color: #50d890;
 }
@@ -218,7 +218,7 @@ export default {
       Swal.fire({
         title: "¿Valores por defecto o formulario?",
         text: "Ve a la simulación con valores por defecto o asígnalos por medio del formulario.",
-        background: "#1e1e1e",
+        background: "#272727",
         color: "#effffb",
         icon: "question",
         position: "center",

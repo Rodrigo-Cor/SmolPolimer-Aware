@@ -3,7 +3,7 @@
     <h2 class="section-subtitle text-center animate__animated animate__flash">Resultados</h2>
     <section class="text-justify-custom my-2">
       En la siguiente lista se encuentra el resumen de los datos introducidos al simulador,
-      mientras que después en la tabla, se encuentran los resultados: cómo disminuyen los
+      mientras que en la tabla, están los resultados, que indican cómo disminuyen los
       miligramos de microplásticos conforme pasan los bimestres.
     </section>
     <div class="row justify-content-center">

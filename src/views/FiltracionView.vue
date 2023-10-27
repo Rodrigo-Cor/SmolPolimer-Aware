@@ -8,7 +8,7 @@
       ser clasificados en dos tipos: procesos de separación y procesos de
       degradación. En los procesos de separación, se incluyen técnicas como la
       filtración granular rápida, la filtración de disco, la filtración por
-      membrana y la flotación por aire disuelto, todo estos pueden eliminar al
+      membrana y la flotación por aire disuelto, todos estos pueden eliminar al
       menos el 90% de microplásticos presentes en el agua.
     </section>
     <section class="p-2 my-2 rounded color-techniques">
@@ -19,7 +19,7 @@
         }"
         :sideImage="true"
         :arrayText="[
-          `La filtración por medio de agentes granulares se da con el uso de la grava y la arena, son los filtros más económicos y eficientes para remover sólidos suspendidos. Funciona, una vez ingresada el agua, luego se limpia, pasando a través del medio granular utilizado en el proceso para obtener el agua filtrada de los sólidos suspendidos, éstos serán importantes para determinar la frecuencia con que se limpie el filtro.`,
+          `La filtración por medio de agentes granulares se da con el uso de la grava y la arena, son los filtros más económicos y eficientes para remover sólidos suspendidos. Funciona, una vez ingresada el agua, luego se limpia, pasando a través del medio granular utilizado en el proceso para obtener el agua filtrada de los sólidos suspendidos, estos serán importantes para determinar la frecuencia con que se limpie el filtro.`,
         ]"
         :credits="{
           'Foto de ': '',
@@ -47,7 +47,7 @@
       de microplásticos, otra que termina de residuo y el número de días por el 
       que se estará pasando esa cantidad inicial de microplásticos por el filtro.
       Simplemente haz clic en el botón que dice "Simulación" a continuación y 
-      comencemos con la simulación.
+      comencemos.
     </section>
     <FiltracionForm v-if="choice"/>
     <FiltracionResults
@@ -126,10 +126,10 @@
   --bs-btn-color: #50d890;
   --bs-btn-bg: #effffb;
   --bs-btn-border-color: #50d890;
-  --bs-btn-hover-color: #effffb;;
+  --bs-btn-hover-color: #272727;;
   --bs-btn-hover-bg: #50d890;
   --bs-btn-hover-border-color: #50d890;
-  --bs-btn-active-color: #effffb;
+  --bs-btn-active-color: #272727;
   --bs-btn-active-bg: #50d890;
   --bs-btn-active-border-color: #50d890;
 }
@@ -203,7 +203,7 @@ export default {
       Swal.fire({
         title: "¿Valores por defecto o formulario?",
         text: "Ve a la simulación con valores por defecto o asígnalos por medio del formulario.",
-        background: "#1e1e1e",
+        background: "#272727",
         color: "#effffb",
         icon: "question",
         position: "center",
