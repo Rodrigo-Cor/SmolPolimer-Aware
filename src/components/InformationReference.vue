@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid text-card">
+  <div class="text-card">
   <div class="row">
       <template v-for="(reference, index) in references">
         <div class="col-md-4 col-12">

@@ -1,16 +1,19 @@
 <template>
   <div class="container-fluid" style="background-color: #effffb">
-    <h1 class="fw-semibold text-center section-title animate__animated animate__flash">
+    <h1
+      class="fw-semibold text-center section-title animate__animated animate__flash"
+    >
       Degradación por bacterias <i>Bacillus</i>
     </h1>
     <article>
       <section class="text-justify-custom my-2">
         En los procesos de degradación, se da por medio de la tecnología
-      <i>biofloc</i> que presentan géneros de bacterias heterótrofas tales como
-      <i
-        >Bacillus, Enterobacter, Pseudomonas, Staphylococcus, Klebsiella,
-        Flavobacterium, Rhodococcus y Nocardia</i
-      >.
+        <i>biofloc</i> que presentan géneros de bacterias heterótrofas tales
+        como
+        <i
+          >Bacillus, Enterobacter, Pseudomonas, Staphylococcus, Klebsiella,
+          Flavobacterium, Rhodococcus y Nocardia</i
+        >.
       </section>
       <section class="p-2 mb-4 rounded color-techniques">
         <InfoSection
@@ -20,7 +23,16 @@
           }"
           :sideImage="false"
           :arrayText="[
-            `Considerada por ser el género de bacterias más benéfica en los sistemas acuícolas, por ser capaces de producir flóculos. Posee 6 cepas con notables porcentajes de degradación de polietileno de baja densidad, entre ellas se encuentran B. carbonipphilus, B. sporothermodurans, B. coagulans, B. neidei, B. smithii, B. megaterium con un porcentaje de 34.55%, 36.54 %, 18.37 %, 36.07 %, 16.0 % y 34.48%, respectivamente.`,
+            {
+              '': 'Considerada por ser el género de bacterias más benéfica en los sistemas acuícolas, por ser capaces de producir flóculos. Posee 6 cepas con notables porcentajes de degradación de polietileno de baja densidad, entre ellas se encuentran ',
+            },
+            {
+              italic:
+                'B. carbonipphilus, B. sporothermodurans, B. coagulans, B. neidei, B. smithii, B. megaterium',
+            },
+            {
+              '': ' con un porcentaje de 34.55%, 36.54 %, 18.37 %, 36.07 %, 16.0 % y 34.48%, respectivamente.',
+            },
           ]"
           :credits="{
             'Foto de ': '',
@@ -36,17 +48,18 @@
     <article class="text-justify-custom">
       <section>
         En esta simulación, tendrás la oportunidad de explorar la degradación
-        con diferentes cepas de la bacteria <i>Bacillus</i>. Cada una de las seis cepas
-        que se presentan tiene su propia capacidad de degradación única, todo
-        gracias a los ingredientes especiales conocidos como caldo mineral
-        (mineral broth, en inglés) y agar  mineral (mineral agar, en inglés). Estos 
-        ingredientes son como el "alimento" de nuestras bacterias y afectarán su 
-        capacidad de degradación en un periodo de dos meses. Los valores de entrada
-        que se ocuparán para la simulación incluyen la cantidad de microplásticos a
-        degradar, el número de bimestres en los que se estará degradando, la cepa de 
-        <i>Bacillus</i> a utilizar, que dependiendo del medio de cultivo (agar o broth)
-        seleccionado, determinará el porcentaje de degradación. Simplemente haz clic
-        en el botón que dice "Simulación" a continuación y comencemos. 
+        con diferentes cepas de la bacteria <i>Bacillus</i>. Cada una de las
+        seis cepas que se presentan tiene su propia capacidad de degradación
+        única, todo gracias a los ingredientes especiales conocidos como caldo
+        mineral (mineral broth, en inglés) y agar mineral (mineral agar, en
+        inglés). Estos ingredientes son como el "alimento" de nuestras bacterias
+        y afectarán su capacidad de degradación en un periodo de dos meses. Los
+        valores de entrada que se ocuparán para la simulación incluyen la
+        cantidad de microplásticos a degradar, el número de bimestres en los que
+        se estará degradando, la cepa de <i>Bacillus</i> a utilizar, que
+        dependiendo del medio de cultivo (agar o broth) seleccionado,
+        determinará el porcentaje de degradación. Simplemente haz clic en el
+        botón que dice "Simulación" a continuación y comencemos.
       </section>
     </article>
     <BacillusForm v-if="choice" />
@@ -72,7 +85,7 @@
         choiceIsMade
       "
     />
-    <BacillusExplained 
+    <BacillusExplained
       v-if="
         degradatedValues.length > 0 &&
         microplastics &&
@@ -81,23 +94,24 @@
         growthMedium &&
         strain &&
         choiceIsMade
-      " 
+      "
     />
-    <BacillusPDF :svgData="svgData"
+    <BacillusPDF
+      :svgData="svgData"
       v-if="
-        degradatedValues.length > 0 && 
+        degradatedValues.length > 0 &&
         microplastics &&
         timeUnits &&
         percentage &&
         growthMedium &&
         strain &&
         svgData &&
-        choiceIsMade  
+        choiceIsMade
       "
     />
     <div class="d-flex justify-content-center my-2">
       <button @click="handleButton" class="btn btn-bd-primary">
-        <i class="bi bi-graph-down"></i> 
+        <i class="bi bi-graph-down"></i>
         {{
           choiceIsMade
             ? choice
@@ -110,14 +124,14 @@
     <AwarenessSimulationSection
       v-if="
         !getIsAnswered &&
-        degradatedValues.length > 0 && 
+        degradatedValues.length > 0 &&
         microplastics &&
         timeUnits &&
         percentage &&
         growthMedium &&
         strain &&
         svgData &&
-        choiceIsMade  
+        choiceIsMade
       "
     />
   </div>
@@ -132,7 +146,7 @@
   --bs-btn-color: #50d890;
   --bs-btn-bg: #effffb;
   --bs-btn-border-color: #50d890;
-  --bs-btn-hover-color: #272727;;
+  --bs-btn-hover-color: #272727;
   --bs-btn-hover-bg: #50d890;
   --bs-btn-hover-border-color: #50d890;
   --bs-btn-active-color: #272727;
@@ -248,7 +262,7 @@ export default {
           this.$store.commit("setTimeUnits", "");
           this.$store.commit("setGrowthMedium", "");
           this.$store.commit("setStrain", "");
-          this.$store.commit("setPercentage", "");  
+          this.$store.commit("setPercentage", "");
           this.$store.commit("setDegradatedValues", []);
           this.choiceIsMade = true;
         } else if (result.isDenied) {
@@ -257,7 +271,7 @@ export default {
           this.$store.commit("setTimeUnits", this.defaultTimeUnits);
           this.$store.commit("setGrowthMedium", this.defaultGrowthMedium);
           this.$store.commit("setStrain", this.defaultStrain);
-          this.$store.commit("setPercentage", this.defaultPercentage);  
+          this.$store.commit("setPercentage", this.defaultPercentage);
           this.choiceIsMade = true;
         } else if (result.isDismissed) {
           this.choiceIsMade = this.choiceIsMade;

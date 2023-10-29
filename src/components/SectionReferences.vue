@@ -2,8 +2,15 @@
   <div class="my-2">
     <button
       @click="() => (showReferences = !showReferences)"
-      class="btn btn-dark"
+      v-bind:class="{
+        'btn btn-dark': isHovered,
+        'btn btn-outline-dark': !isHovered,
+      }"
+      @mouseenter="isHovered = true"
+      @mouseleave="isHovered = false"
     >
+      <i v-if="!showReferences" class="bi bi-eye-fill"></i>
+      <i v-else class="bi bi-eye-slash-fill"></i>
       {{ showReferences ? "Ocultar " : "Ver " }}referencias consultadas
     </button>
     <InformationReference v-if="showReferences" :references="references" />
@@ -21,6 +28,7 @@ export default {
   data() {
     return {
       showReferences: false,
+      isHovered: false,
     };
   },
   props: {

@@ -34,8 +34,7 @@
       </div>
       <button
         v-if="typeQuestion === 'final'"
-        type="submit"
-        class="btn btn-info my-3"
+        class="btn btn-info my-3 rounded-pill rounded-2"
         @click="saveResults"
         :disabled="disabledFinal"
       >
@@ -94,6 +93,8 @@ export default {
     }),
     async saveResults() {
       try {
+        if(this.selectedOptionFinal["option"] === '') return;
+
         this.stateRequestResult = true;
         await axios.post(
           "https://microplasticosapi.azurewebsites.net/api/SaveAnswers?code=rWbKwmRL0OtnOod3m5Cwr-h96SRzArY1558UmEdZBn9jAzFujOTK4g==",

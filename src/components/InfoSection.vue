@@ -12,15 +12,19 @@
           <ReferencesAuthors :img="img" :credits="credits" />
         </template>
         <template v-else>
-          <div
-            v-for="paragraph in arrayText"
-            :key="paragraph"
-            class="rounded p-2 mb-md-0 mb-2"
-          >
-            <p class="text-justify-custom">
-              {{ paragraph }}
-            </p>
-          </div>
+          <p class="text-justify-custom">
+            <template
+              v-for="paragraph in arrayText"
+              :key="paragraph"
+              class="rounded p-2 mb-md-0 mb-2"
+            >
+              <template v-for="(value, key) in paragraph" :key="value">
+                <span v-bind:class="{ 'fst-italic': key === 'italic' }">
+                  {{ value }}
+                </span>
+              </template>
+            </template>
+          </p>
         </template>
       </div>
       <div
@@ -31,15 +35,19 @@
         }"
       >
         <template v-if="sideImage">
-          <div
-            v-for="paragraph in arrayText"
-            :key="paragraph"
-            class="rounded p-2 mb-md-0 mb-2"
-          >
-            <p class="text-justify-custom">
-              {{ paragraph }}
-            </p>
-          </div>
+          <p class="text-justify-custom">
+            <template
+              v-for="paragraph in arrayText"
+              :key="paragraph"
+              class="rounded p-2 mb-md-0 mb-2"
+            >
+              <template v-for="(value, key) in paragraph" :key="value">
+                <span v-bind:class="{ 'fst-italic': key === 'italic' }">
+                  {{ value }}
+                </span>
+              </template>
+            </template>
+          </p>
         </template>
         <template v-else>
           <ReferencesAuthors :img="img" :credits="credits" />

@@ -86,7 +86,7 @@
         de partículas de microplásticos flotantes, sin embargo, la investigación
         sobre este tema en los mares de México es casi inexistente, destacando
         la necesidad de aumentar la investigación para generar conciencia sobre
-        este problema ambiental grave. A continuación, se presentan los estudios
+        este grave problema ambiental. A continuación, se presentan los estudios
         destacados y divulgados por parte del IMTA e INECC.
       </section>
       <section>
@@ -165,8 +165,12 @@
           }"
           :sideImage="true"
           :arrayText="[
-            `En los meses de julio y agosto del 2019, investigadores colaboradores del Centro Mexicano para la Producción Más Limpia y del Centro de Investigación y de Estudios Avanzados del Instituto Politécnico Nacional realizaron un estudio para evaluar la presencia de microplásticos en las fuentes públicas gratuitas de agua potable del Sistema de Transporte Colectivo de la Ciudad de México. Las estaciones seleccionadas para recolectar muestras de agua de un litro fueron San Lázaro, por su importancia como nodo de transporte público y Garibaldi, por su relevancia turística.`,
-            `Los resultados arrojaron un total de 770 partículas microplásticas, de las cuales se identificaron en su mayoría con forma de fragmentos irregulares y fibras. Con relación a los rangos de tamaño se encontraron menores a 500 μm, 0.5 a 1 mm, 1 a 2 mm y 3 a 5 mm, representando respectivamente un 50%, 25%, 22% y 3% de las partículas microplásticas captadas.`,
+            {
+              '': 'En los meses de julio y agosto del 2019, investigadores del Centro Mexicano para la Producción Más Limpia y del Centro de Investigación y de Estudios Avanzados del Instituto Politécnico Nacional realizaron un estudio para evaluar la presencia de microplásticos en las fuentes públicas gratuitas de agua potable del Sistema de Transporte Colectivo de la Ciudad de México. Las estaciones seleccionadas para recolectar muestras de agua de un litro fueron San Lázaro, por su importancia como nodo de transporte público y Garibaldi, por su relevancia turística.',
+            },
+            {
+              '': 'Los resultados arrojaron un total de 770 partículas microplásticas, de las cuales se identificaron en su mayoría con forma de fragmentos irregulares y fibras. Con relación a los rangos de tamaño se encontraron menores a 500 μm, 0.5 a 1 mm, 1 a 2 mm y 3 a 5 mm, representando respectivamente un 50%, 25%, 22% y 3% de las partículas microplásticas captadas.',
+            },
           ]"
           :credits="{
             'Foto de ': '',
@@ -180,9 +184,9 @@
       </section>
     </article>
 
-    <article class="container-fluid text-justify-custom mt-2">
+    <article class="text-justify-custom mt-2">
       <section class="fw-bold">
-        Toda la información presentada se utilizaron las siguientes referencias
+        Toda la información presentada se utilizaron las siguientes referencias.
       </section>
       <SectionReferences
         :references="[

@@ -124,12 +124,9 @@
         }"
         :sideImage="false"
         :arrayText="[
-          `Estas partículas provienen de muchas partes, en especial de objetos de uso
-        cotidiano y con el paso del tiempo se van degastando, ocasionando un
-        desprendimiento de fibras que van directamente al agua. Esto significa una
-        gran fuente de contaminación, pero como todo problema ambiental, siempre
-        tiene sus datos curiosos, en cuanto a propiedades, su descubrimiento y donde
-        más se han encontrado.`,
+          {
+            '': 'Estas partículas provienen de muchas partes, en especial de objetos de uso cotidiano y con el paso del tiempo se van degastando, ocasionando un desprendimiento de fibras que van directamente al agua. Esto significa una gran fuente de contaminación, pero como todo problema ambiental, siempre tiene sus datos curiosos, en cuanto a propiedades, su descubrimiento y dondemás se han encontrado.',
+          },
         ]"
         :credits="{
           'Foto de ': '',
@@ -171,7 +168,7 @@
     </article>
 
     <article>
-      <h3 class="text-center fw-semibold section-title animate__animated animate__bounce">
+      <h3 class="text-center fw-semibold section-title">
         Efectos de los microplásticos en organismos
       </h3>
       Los microplásticos son un problema en crecimiento a nivel global que tiene
@@ -179,7 +176,7 @@
       provocando así una probabilidad demasiado alta de ingesta en organismo
       acuáticos, afectando su biología. Al igual que, afectar la calidad de
       recursos hídricos y alimentos de consumo humano, ya que su propagación se
-      puede dar cualquier cuerpo de agua.
+      puede dar en cualquier cuerpo de agua.
       <InformationPages
         :infoComponent="[
           {
@@ -197,7 +194,9 @@
                 'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
             },
             arrayText: [
-              `Los microplásticos representan una amenaza física y química para los ecosistemas y organismos, puesto que, se pueden llegar a confundir con alimento por diferentes especies como mariscos, peces, aves marinas, tortugas marinas y mamíferos.`,
+              {
+                '': 'Los microplásticos representan una amenaza física y química para los ecosistemas y organismos, puesto que, se pueden llegar a confundir con alimento por diferentes especies como mariscos, peces, aves marinas, tortugas marinas y mamíferos.',
+              },
             ],
           },
           {
@@ -215,7 +214,9 @@
                 'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
             },
             arrayText: [
-              `Una vez que los ingieren, el primer gran efecto en organismos acuáticos son las obstrucciones intestinales, ocurriendo en el tracto digestivo, en el cual, puede tener dos desenlaces, el primero es que sean expulsados, o bien, retenidas.`,
+              {
+                '': 'Una vez que los ingieren, el primer gran efecto en organismos acuáticos son las obstrucciones intestinales, ocurriendo en el tracto digestivo, en el cual, puede tener dos desenlaces, el primero es que sean expulsados, o bien, retenidas.',
+              },
             ],
           },
           {
@@ -233,7 +234,9 @@
                 'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
             },
             arrayText: [
-              `El segundo grande efecto es la disminución de la ingesta de nutrientes, afectando las tasas de crecimiento, junto a la reproducción. Teniendo un riesgo de desequilibrio en la cadena alimenticia acuática.`,
+              {
+                '': 'El segundo grande efecto es la disminución de la ingesta de nutrientes, afectando las tasas de crecimiento, junto a la reproducción. Teniendo un riesgo de desequilibrio en la cadena alimenticia acuática.',
+              },
             ],
           },
           {
@@ -251,7 +254,9 @@
                 'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
             },
             arrayText: [
-              `Aunado a lo anterior, también existen afectaciones graves en su proceso de reproducción, a causa de que los microplásticos pueden simular ser hormonas repercutiendo en la etapa de gestación e inicios de desarrollo.`,
+              {
+                '': 'Aunado a lo anterior, también existen afectaciones graves en su proceso de reproducción, a causa de que los microplásticos pueden simular ser hormonas repercutiendo en la etapa de gestación e inicios de desarrollo.',
+              },
             ],
           },
           {
@@ -269,7 +274,9 @@
                 'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
             },
             arrayText: [
-              `Finalmente, existe una especifica interacción entre los microplásticos y los seres humanos, siendo el consumo de mariscos y pescados. Sin embargo, el tracto digestivo no es común ingerirlo, por lo que la posibilidad de comer microplásticos es baja.`,
+              {
+                '': 'Finalmente, existe una especifica interacción entre los microplásticos y los seres humanos, siendo el consumo de mariscos y pescados. Sin embargo, el tracto digestivo no es común ingerirlo, por lo que la posibilidad de comer microplásticos es baja.',
+              },
             ],
           },
         ]"
@@ -282,7 +289,7 @@
 
     <article class="mt-2">
       <section class="fw-bold">
-        Toda la información presentada se utilizaron las siguientes referencias
+        Toda la información presentada se utilizaron las siguientes referencias.
       </section>
 
       <SectionReferences

@@ -1,6 +1,8 @@
 <template>
-  <div class="container-fluid" style="background-color: #effffb;">
-    <h1 class="fw-semibold text-center section-title animate__animated animate__flash">
+  <div class="container-fluid" style="background-color: #effffb">
+    <h1
+      class="fw-semibold text-center section-title animate__animated animate__flash"
+    >
       Filtración granular rápida
     </h1>
     <section class="text-justify-custom my-2">
@@ -19,7 +21,9 @@
         }"
         :sideImage="true"
         :arrayText="[
-          `La filtración por medio de agentes granulares se da con el uso de la grava y la arena, son los filtros más económicos y eficientes para remover sólidos suspendidos. Funciona, una vez ingresada el agua, luego se limpia, pasando a través del medio granular utilizado en el proceso para obtener el agua filtrada de los sólidos suspendidos, estos serán importantes para determinar la frecuencia con que se limpie el filtro.`,
+          {
+            '': 'La filtración por medio de agentes granulares se da con el uso de la grava y la arena, son los filtros más económicos y eficientes para remover sólidos suspendidos. Funciona, una vez ingresada el agua, luego se limpia, pasando a través del medio granular utilizado en el proceso para obtener el agua filtrada de los sólidos suspendidos, estos serán importantes para determinar la frecuencia con que se limpie el filtro.',
+          },
         ]"
         :credits="{
           'Foto de ': '',
@@ -44,19 +48,14 @@
     </section>
     <section class="text-justify-custom my-2">
       Para la simulación se reciben como datos de entrada: una cantidad inicial
-      de microplásticos, otra que termina de residuo y el número de días por el 
-      que se estará pasando esa cantidad inicial de microplásticos por el filtro.
-      Simplemente haz clic en el botón que dice "Simulación" a continuación y 
-      comencemos.
+      de microplásticos, otra que termina de residuo y el número de días por el
+      que se estará pasando esa cantidad inicial de microplásticos por el
+      filtro. Simplemente haz clic en el botón que dice "Simulación" a
+      continuación y comencemos.
     </section>
-    <FiltracionForm v-if="choice"/>
+    <FiltracionForm v-if="choice" />
     <FiltracionResults
-      v-if="
-        microplastics &&
-        residues &&
-        timeUnits &&
-        choiceIsMade
-      "
+      v-if="microplastics && residues && timeUnits && choiceIsMade"
     />
     <FiltracionSimulation
       @chart-obtained="obtainSVG"
@@ -66,7 +65,7 @@
         microplastics &&
         residues &&
         timeUnits &&
-        choiceIsMade          
+        choiceIsMade
       "
     />
     <FiltracionExplained
@@ -79,7 +78,8 @@
         choiceIsMade
       "
     />
-    <FiltracionPDF :svgData ="svgData"
+    <FiltracionPDF
+      :svgData="svgData"
       v-if="
         onFilterValues.length > 0 &&
         releasedValues.length > 0 &&
@@ -92,7 +92,7 @@
     />
     <div class="d-flex justify-content-center my-2">
       <button @click="handleButton" class="btn btn-bd-primary">
-        <i class="bi bi-graph-up"></i> 
+        <i class="bi bi-graph-up"></i>
         {{
           choiceIsMade
             ? choice
@@ -126,7 +126,7 @@
   --bs-btn-color: #50d890;
   --bs-btn-bg: #effffb;
   --bs-btn-border-color: #50d890;
-  --bs-btn-hover-color: #272727;;
+  --bs-btn-hover-color: #272727;
   --bs-btn-hover-bg: #50d890;
   --bs-btn-hover-border-color: #50d890;
   --bs-btn-active-color: #272727;

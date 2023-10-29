@@ -1,10 +1,9 @@
 <template>
   <main class="container-fluid text-justify-custom color-home">
     Para combatir este problema es necesario fomentar el cuidado del medio
-    ambiente, esto puede ser ayuda con tres enfoques prácticos. El primero es la
-    educación ambiental, el segundo es la comunicación efectiva del problema, y
-    el tercero la participación comunitaria en la solución de problemas
-    ambientales.
+    ambiente, con ayuda de tres enfoques prácticos. El primero es la educación
+    ambiental, el segundo es la comunicación efectiva del problema, y el tercero
+    la participación comunitaria en la solución de problemas ambientales.
     <article>
       <section>
         <h3 class="fw-semibold text-center section-title">The Ocean Cleanup</h3>
@@ -15,7 +14,9 @@
           }"
           :sideImage="true"
           :arrayText="[
-            `Fundación sin fines de lucro, creada en 2013 y ubicada en los Países Bajos. Su objetivo principal es limpiar 90% del plástico en el mar para 2040, a través de investigaciones, así como, soluciones tecnológicas especializadas para océanos y ríos.`,
+            {
+              '': 'Fundación sin fines de lucro, creada en 2013 y ubicada en los Países Bajos. Su objetivo principal es limpiar 90% del plástico en el mar para 2040, a través de investigaciones, así como, soluciones tecnológicas especializadas para océanos y ríos.',
+            },
           ]"
           :credits="{
             'Foto de ': '',
@@ -35,7 +36,9 @@
           }"
           :sideImage="false"
           :arrayText="[
-            `En 2021, “The Ocean Cleanup” desplegó un sistema de limpieza en “La Gran Mancha de Basura del Pacífico”, caracterizada por cubrir de plástico un área de 1.6 millones km cuadrados. El funcionamiento del sistema estaba compuesto por una barrera en forma de “U” y mallas, éstas arrastrarían el plástico hasta la costa para reciclarlo.`,
+            {
+              '': 'En 2021, “The Ocean Cleanup” desplegó un sistema de limpieza en “La Gran Mancha de Basura del Pacífico”, caracterizada por cubrir de plástico un área de 1.6 millones km cuadrados. El funcionamiento del sistema estaba compuesto por una barrera en forma de “U” y mallas, éstas arrastrarían el plástico hasta la costa para reciclarlo.',
+            },
           ]"
           :credits="{
             'Foto de ': '',
@@ -59,7 +62,9 @@
           }"
           :sideImage="true"
           :arrayText="[
-            `Organización sin fines de lucro, que tiene el objetivo de acabar con la contaminación por plástico, por medio de programas educativos, campañas sociales, investigaciones documentales y audiovisuales para invitar a más personas en involucrarse en la reducción de contaminación por plástico.`,
+            {
+              '': 'Organización sin fines de lucro, que tiene el objetivo de acabar con la contaminación por plástico, por medio de programas educativos, campañas sociales, investigaciones documentales y audiovisuales para invitar a más personas en involucrarse en la reducción de contaminación por plástico.',
+            },
           ]"
           :credits="{
             'Foto de ': '',
@@ -79,7 +84,9 @@
           }"
           :sideImage="false"
           :arrayText="[
-            `Durante el 2019, se desarrolló el programa educativo “Rethink. Refill”, consistió en brindar botellas reutilizables y estaciones de rellenado, para todas aquellas escuelas con deficiencias en el servicio de agua potable. De esta forma, invitaba a los jóvenes a participar en la lucha contra el problema de la contaminación por plástico en el agua. Cabe destacar que, participaron dos escuelas de Quintana Roo, México.`,
+            {
+              '': 'Durante el 2019, se desarrolló el programa educativo “Rethink. Refill”, consistió en brindar botellas reutilizables y estaciones de rellenado, para todas aquellas escuelas con deficiencias en el servicio de agua potable. De esta forma, invitaba a los jóvenes a participar en la lucha contra el problema de la contaminación por plástico en el agua. Cabe destacar que, participaron dos escuelas de Quintana Roo, México.',
+            },
           ]"
           :credits="{
             'Foto de ': '',
@@ -97,7 +104,7 @@
         Una vez revisada la información, es fundamental e indispensable que
         forme parte del conocimiento sobre nuestro entorno, de tal forma que
         contribuyamos a la protección de la naturaleza y sus elementos, de
-        diferentes maneras
+        diferentes maneras.
         <ReferencesAuthors
           :img="{
             src: require('@/assets/guillaume-de-germain-6Xw9wMJyHus-unsplash.jpg'),
@@ -145,7 +152,7 @@
 
     <article class="mt-2">
       <section class="fw-bold">
-        Toda la información presentada se utilizaron las siguientes referencias
+        Toda la información presentada se utilizaron las siguientes referencias.
       </section>
       <SectionReferences
         :references="[
