@@ -14,9 +14,12 @@
           }"
           :sideImage="true"
           :arrayText="[
-            {
-              '': 'Fundación sin fines de lucro, creada en 2013 y ubicada en los Países Bajos. Su objetivo principal es limpiar 90% del plástico en el mar para 2040, a través de investigaciones, así como, soluciones tecnológicas especializadas para océanos y ríos.',
-            },
+            [
+              {
+                value:
+                  'Fundación sin fines de lucro creada en 2013 y ubicada en los Países Bajos. Su objetivo principal es limpiar 90% del plástico en el mar para 2040, utilizando soluciones tecnológicas especializadas para océanos y ríos, a la par que investigaciones.',
+              },
+            ],
           ]"
           :credits="{
             'Foto de ': '',
@@ -36,9 +39,12 @@
           }"
           :sideImage="false"
           :arrayText="[
-            {
-              '': 'En 2021, “The Ocean Cleanup” desplegó un sistema de limpieza en “La Gran Mancha de Basura del Pacífico”, caracterizada por cubrir de plástico un área de 1.6 millones km cuadrados. El funcionamiento del sistema estaba compuesto por una barrera en forma de “U” y mallas, éstas arrastrarían el plástico hasta la costa para reciclarlo.',
-            },
+            [
+              {
+                value:
+                  'En 2021, “The Ocean Cleanup” desplegó un sistema de limpieza en “La Gran Mancha de Basura del Pacífico”, caracterizada por cubrir de plástico un área de 1.6 millones de kilómetros cuadrados. El funcionamiento del sistema estaba compuesto por una barrera en forma de “U” y mallas, que arrastrarían el plástico hasta la costa para reciclarlo.',
+              },
+            ],
           ]"
           :credits="{
             'Foto de ': '',
@@ -62,9 +68,12 @@
           }"
           :sideImage="true"
           :arrayText="[
-            {
-              '': 'Organización sin fines de lucro, que tiene el objetivo de acabar con la contaminación por plástico, por medio de programas educativos, campañas sociales, investigaciones documentales y audiovisuales para invitar a más personas en involucrarse en la reducción de contaminación por plástico.',
-            },
+            [
+              {
+                value:
+                  'Organización sin fines de lucro, que tiene el objetivo de acabar con la contaminación por plástico, por medio de programas educativos, campañas sociales, investigaciones documentales y audiovisuales para invitar a más personas en involucrarse en la reducción de contaminación por plástico.',
+              },
+            ],
           ]"
           :credits="{
             'Foto de ': '',
@@ -84,9 +93,12 @@
           }"
           :sideImage="false"
           :arrayText="[
-            {
-              '': 'Durante el 2019, se desarrolló el programa educativo “Rethink. Refill”, consistió en brindar botellas reutilizables y estaciones de rellenado, para todas aquellas escuelas con deficiencias en el servicio de agua potable. De esta forma, invitaba a los jóvenes a participar en la lucha contra el problema de la contaminación por plástico en el agua. Cabe destacar que, participaron dos escuelas de Quintana Roo, México.',
-            },
+            [
+              {
+                value:
+                  'Durante el 2019, se desarrolló el programa educativo “Rethink. Refill”, que consistió en brindar botellas reutilizables y estaciones de rellenado, para todas aquellas escuelas con deficiencias en el servicio de agua potable. De esta forma, invitaba a los jóvenes a participar en la lucha contra el problema de la contaminación por plástico en el agua. Cabe destacar que participaron dos escuelas de Quintana Roo, México.',
+              },
+            ],
           ]"
           :credits="{
             'Foto de ': '',
@@ -102,9 +114,8 @@
     <article class="mt-4 row">
       <section class="col-md-6 col-12">
         Una vez revisada la información, es fundamental e indispensable que
-        forme parte del conocimiento sobre nuestro entorno, de tal forma que
-        contribuyamos a la protección de la naturaleza y sus elementos, de
-        diferentes maneras.
+        forme parte del nuestro conocimiento sobre el entorno, contribuyendo a
+        la protección de la naturaleza y sus elementos, de diferentes maneras.
         <ReferencesAuthors
           :img="{
             src: require('@/assets/guillaume-de-germain-6Xw9wMJyHus-unsplash.jpg'),

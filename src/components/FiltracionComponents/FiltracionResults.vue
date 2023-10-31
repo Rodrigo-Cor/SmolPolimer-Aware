@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <h2 class="section-subtitle text-center animate__animated animate__flash">Resultados</h2>
+    <h2 class="section-subtitle text-center animate__animated animate__flash" id="results-section">Resultados</h2>
     <section class="text-justify-custom my-2">
       En la siguiente lista se encuentra el resumen de los datos introducidos al simulador,
       mientras que en la tabla están los resultados donde se indican los días y el porcentaje
@@ -11,9 +11,9 @@
         <h3 class="section-sub-subtitle text-center mb-4 animate__animated animate__flash">Resumen de datos de entrada</h3>
         <ul class="list-group custom-list">
           <li class="list-group-item custom-list-item">
-            <b>Microplásticos: </b>{{ microplastics }}</li>
+            <b>Microplásticos: </b>{{ microplastics }} mg</li>
           <li class="list-group-item custom-list-item">
-            <b>Residuos: </b>{{ residues }}</li>
+            <b>Residuos: </b>{{ residues }} mg</li>
           <li class="list-group-item custom-list-item">
             <b>Días: </b>{{ timeUnits }}</li>
         </ul>

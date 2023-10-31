@@ -1,27 +1,12 @@
 <template>
-  <!--
-  <div class="container-fluid">
-    <p>Color: {{ color[0] }}</p>
-    <button class="btn" @click="showColor('blue', 'light', 1)">
-      Generar colores
-    </button>
-  </div>
-   -->
-
   <CarouselHome />
   <main class="container-fluid text-justify-custom">
     <article id="section-question">
       <AwarenessHomeSection />
     </article>
-    <article class="row">
-      <section class="my-2 col-md-5 col-12">
-        El uso excesivo de productos plásticos ha brindado múltiples beneficios
-        en la vida cotidiana, pero también ha llevado a consecuencias no
-        deseadas. Uno de los más grandes problemas es la formación de
-        microplásticos, los cuales representan una amenaza global debido a su
-        persistencia y amplia distribución en la vida silvestre y los seres
-        humanos.
-        <ReferencesAuthors
+    <article>
+      <section class="my-2">
+        <InfoSection
           :img="{
             src: require('@/assets/image-from-rawpixel-id-5901973-jpeg.jpg'),
             alt: 'Botella flotando en el mar',
@@ -32,40 +17,26 @@
             'by ': '',
             rawpixel: 'https://www.rawpixel.com/',
           }"
-        />
-      </section>
-      <section class="col-md-4 offset-md-2 col-12">
-        <CollapseInformation
-          :informationCollapse="[
-            {
-              information:
-                'Desde el año 2016, se ha registrado un alarmante aumento en el uso de plásticos en la sociedad.',
-              title: 'Causa',
-              isOpen: false,
-            },
-            {
-              information:
-                'Diversos factores físicos y químicos provocan que los plásticos se fragmentes, resultando así los microplásticos.',
-              title: 'Consecuencia',
-              isOpen: false,
-            },
-            {
-              information:
-                'Los microplásticos son partículas sólidas sintéticas con un rango de tamaño que comprende de 1 µm hasta 5 mm.',
-              title: 'Definición',
-              isOpen: false,
-            },
-            {
-              information:
-                'Se identifican como esferas, fragmentos irregulares, fibras, gránulos, microperlas y películas.',
-              title: 'Formas',
-              isOpen: false,
-            },
+          :sideImage="true"
+          :arrayText="[
+            [
+              {
+                value:
+                  'Desde el año 2016, se ha registrado un alarmante aumento en el uso de plásticos en la sociedad, lo cual ha generado uno de los más grandes problemas, que es la formación de microplásticos, representando una amenaza global debido a su persistencia y amplia distribución en la vida silvestre y en los seres humanos.',
+                key: '',
+              },
+            ],
+            [
+              {
+                value:
+                  'En el 2008 fue la primera vez que se estableció un tamaño límite de los microplásticos, durante el evento de la Primera Jornada Internacional sobre la Aparición, Efectos y Destino de los desechos marinos de microplásticos: son partículas sólidas sintéticas con un rango de tamaño que comprende de 1 µm hasta 5 mm. Se pueden encontrar en forma de esferas, fragmentos irregulares, fibras, gránulos, microperlas películas.',
+                key: '',
+              },
+            ],
           ]"
         />
       </section>
     </article>
-
     <article>
       <span
         >En cuanto a su origen, se pueden clasificar en primarios y
@@ -76,7 +47,7 @@
           {
             type: 'Primarios',
             description:
-              'Son los fabricados intencionalmente para artículos como cosméticos, pinturas, exfoliantes, pasta de dientes, junto con productos de limpieza.',
+              'Son fabricados intencionalmente para artículos como cosméticos, pinturas, exfoliantes, pasta de dientes, junto con productos de limpieza.',
             imgData: {
               src: require('@/assets/robert-laursoo-m-cTm7EWlGI-unsplash.jpg'),
               alt: 'Microplásticos primarios',
@@ -93,7 +64,7 @@
           {
             type: 'Secundarios',
             description:
-              'Son derivados de procesos como la fragmentación, significando acciones mecánicas y fricciones con el ambiente. El otro proceso es la degradación, implicando la pérdida de peso molecular mediante cinco diferentes mecanismos: biodegradación, fotodegradación, degradación oxidativa, degradación térmica e hidrólisis.',
+              'Son derivados de procesos como la fragmentación, involucrando acciones mecánicas y fricciones con el ambiente. El otro proceso es la degradación, implicando la pérdida de peso molecular mediante cinco diferentes mecanismos: biodegradación, fotodegradación, degradación oxidativa, degradación térmica e hidrólisis.',
             imgData: {
               src: require('@/assets/brian-yurasits-2W603t4Q76M-unsplash.jpg'),
               alt: 'Gaviota con microplásticos en su pico',
@@ -112,11 +83,7 @@
         :img="true"
       />
     </article>
-
     <article>
-      <h3 class="text-center fw-semibold section-title">
-        Curiosidades de los microplásticos
-      </h3>
       <InfoSection
         :img="{
           src: require('@/assets/fly-d-NXyXNl5LTqM-unsplash.jpg'),
@@ -124,9 +91,13 @@
         }"
         :sideImage="false"
         :arrayText="[
-          {
-            '': 'Estas partículas provienen de muchas partes, en especial de objetos de uso cotidiano y con el paso del tiempo se van degastando, ocasionando un desprendimiento de fibras que van directamente al agua. Esto significa una gran fuente de contaminación, pero como todo problema ambiental, siempre tiene sus datos curiosos, en cuanto a propiedades, su descubrimiento y dondemás se han encontrado.',
-          },
+          [
+            {
+              value:
+                'Estas partículas provienen de muchas partes, en especial de objetos de uso cotidiano y con el paso del tiempo se van degastando, ocasionando un desprendimiento de fibras que van directamente al agua. Esto significa una gran fuente de contaminación, pero como todo problema ambiental, siempre tiene sus datos curiosos, en cuanto a propiedades, su descubrimiento y dondemás se han encontrado.',
+              key: '',
+            },
+          ],
         ]"
         :credits="{
           'Foto de ': '',
@@ -137,46 +108,17 @@
             'https://unsplash.com/es/fotos/NXyXNl5LTqM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
         }"
       />
-      <CollapseInformation
-        :informationCollapse="[
-          {
-            information:
-              'Al tener diversas densidades significando que su propagación sobre el ecosistema acuático es mucho mayor.',
-            title: 'Densidad',
-            isOpen: false,
-          },
-          {
-            information:
-              'En el 2008 fue la primera vez que se estableció un tamaño límite de los microplásticos, durante el evento de la Primera Jornada Internacional sobre la Aparición, Efectos y Destino de los desechos marinos de microplásticos.',
-            title: 'Hallazgo',
-            isOpen: false,
-          },
-          {
-            information:
-              'Los microplásticos pueden adsorber y transferir contaminantes orgánicos debido a su capacidad por repeler el agua.',
-            title: 'Propiedades',
-            isOpen: false,
-          },
-          {
-            information:
-              'Se han encontrado cantidades considerables de microplásticos, gracias a los procesos de envasado.',
-            title: 'Agua embotellada',
-            isOpen: false,
-          },
-        ]"
-      />
     </article>
-
     <article>
       <h3 class="text-center fw-semibold section-title">
-        Efectos de los microplásticos en organismos
+        Efectos en organismos
       </h3>
-      Los microplásticos son un problema en crecimiento a nivel global que tiene
-      como característica principal el diminuto tamaño de los plásticos,
-      provocando así una probabilidad demasiado alta de ingesta en organismo
-      acuáticos, afectando su biología. Al igual que, afectar la calidad de
-      recursos hídricos y alimentos de consumo humano, ya que su propagación se
-      puede dar en cualquier cuerpo de agua.
+      Pueden adsorber y transferir contaminantes orgánicos debido a su capacidad
+      por repeler el agua. Sumado a eso, su diminuto tamaño aumenta
+      considerablemente la probabilidad de ingesta en organismos acuáticos,
+      perjudicando su biología. Por otra parte, afectan la calidad de recursos
+      hídricos y alimentos de consumo humano, ya que su propagación se puede dar
+      en cualquier cuerpo de agua.
       <InformationPages
         :infoComponent="[
           {
@@ -194,9 +136,17 @@
                 'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
             },
             arrayText: [
-              {
-                '': 'Los microplásticos representan una amenaza física y química para los ecosistemas y organismos, puesto que, se pueden llegar a confundir con alimento por diferentes especies como mariscos, peces, aves marinas, tortugas marinas y mamíferos.',
-              },
+              [
+                {
+                  value:
+                    'Los microplásticos representan una amenaza física y química para los ecosistemas y organismos, puesto que, se pueden llegar a confundir con alimento por diferentes especies como ',
+                },
+                {
+                  value:
+                    'mariscos, peces, aves marinas, tortugas marinas y mamíferos.',
+                  key: 'bold',
+                },
+              ],
             ],
           },
           {
@@ -214,9 +164,20 @@
                 'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
             },
             arrayText: [
-              {
-                '': 'Una vez que los ingieren, el primer gran efecto en organismos acuáticos son las obstrucciones intestinales, ocurriendo en el tracto digestivo, en el cual, puede tener dos desenlaces, el primero es que sean expulsados, o bien, retenidas.',
-              },
+              [
+                {
+                  value:
+                    'Una vez que los ingieren, el primer gran efecto en organismos acuáticos son las ',
+                },
+                {
+                  value: 'obstrucciones intestinales, ',
+                  key: 'bold',
+                },
+                {
+                  value:
+                    'ocurriendo en el tracto digestivo, en el cual, puede tener dos desenlaces, el primero es que sean expulsados, o bien, retenidos.',
+                },
+              ],
             ],
           },
           {
@@ -234,9 +195,19 @@
                 'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
             },
             arrayText: [
-              {
-                '': 'El segundo grande efecto es la disminución de la ingesta de nutrientes, afectando las tasas de crecimiento, junto a la reproducción. Teniendo un riesgo de desequilibrio en la cadena alimenticia acuática.',
-              },
+              [
+                {
+                  value: 'El segundo gran efecto es la ',
+                },
+                {
+                  value: 'disminución de la ingesta de nutrientes, ',
+                  key: 'bold',
+                },
+                {
+                  value:
+                    'afectando las tasas de crecimiento, junto a la reproducción. Teniendo un riesgo de desequilibrio en la cadena alimenticia acuática.',
+                },
+              ],
             ],
           },
           {
@@ -254,9 +225,20 @@
                 'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
             },
             arrayText: [
-              {
-                '': 'Aunado a lo anterior, también existen afectaciones graves en su proceso de reproducción, a causa de que los microplásticos pueden simular ser hormonas repercutiendo en la etapa de gestación e inicios de desarrollo.',
-              },
+              [
+                {
+                  value:
+                    'Aunado a lo anterior, también existen afectaciones graves en su proceso de reproducción, a causa de que ',
+                },
+                {
+                  value: 'los microplásticos pueden simular ser hormonas, ',
+                  key: 'bold',
+                },
+                {
+                  value:
+                    'repercutiendo en la etapa de gestación e inicios de desarrollo.',
+                },
+              ],
             ],
           },
           {
@@ -274,24 +256,30 @@
                 'https://unsplash.com/es/fotos/qq-8dpdlBsY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
             },
             arrayText: [
-              {
-                '': 'Finalmente, existe una especifica interacción entre los microplásticos y los seres humanos, siendo el consumo de mariscos y pescados. Sin embargo, el tracto digestivo no es común ingerirlo, por lo que la posibilidad de comer microplásticos es baja.',
-              },
+              [
+                {
+                  'value': 'Finalmente, existe una especifica interacción entre los microplásticos y los seres humanos, siendo esta el ',
+                },
+                {
+                  'value': 'consumo de mariscos y pescados. ',
+                  'key': 'bold'
+                },
+                {
+                  'value': 'Sin embargo, el tracto digestivo no es común ingerirlo, por lo que la posibilidad de comer microplásticos es baja.',
+                },
+              ],
             ],
           },
         ]"
       />
     </article>
-
     <article>
       <SectionRecomendation />
     </article>
-
     <article class="mt-2">
       <section class="fw-bold">
         Toda la información presentada se utilizaron las siguientes referencias.
       </section>
-
       <SectionReferences
         :references="[
           {

@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <h2 class="section-subtitle text-center animate__animated animate__flash">Resultados</h2>
+    <h2 class="section-subtitle text-center animate__animated animate__flash" id="results-section">Resultados</h2>
     <section class="text-justify-custom my-2">
       En la siguiente lista se encuentra el resumen de los datos introducidos al simulador,
       mientras que en la tabla, están los resultados, que indican cómo disminuyen los

@@ -21,9 +21,11 @@
         }"
         :sideImage="true"
         :arrayText="[
-          {
-            '': 'La filtración por medio de agentes granulares se da con el uso de la grava y la arena, son los filtros más económicos y eficientes para remover sólidos suspendidos. Funciona, una vez ingresada el agua, luego se limpia, pasando a través del medio granular utilizado en el proceso para obtener el agua filtrada de los sólidos suspendidos, estos serán importantes para determinar la frecuencia con que se limpie el filtro.',
-          },
+          [
+            {
+              value: 'La filtración por medio de agentes granulares se da con el uso de la grava y la arena, son los filtros más económicos y eficientes para remover sólidos suspendidos. Funciona, una vez ingresada el agua, luego se limpia, pasando a través del medio granular utilizado en el proceso para obtener el agua filtrada de los sólidos suspendidos, estos serán importantes para determinar la frecuencia con que se limpie el filtro.',
+            },
+          ],
         ]"
         :credits="{
           'Foto de ': '',
@@ -36,22 +38,19 @@
       />
     </section>
     <section class="text-justify-custom my-2">
-      En esta simulación, tendrás la oportunidad de controlar la cantidad de
-      microplásticos que pasarán a través del filtro. El filtro está diseñado
-      para capturar una cierta cantidad de microplásticos, que se mostrará en
-      forma de porcentaje. Sin embargo, es importante tener en cuenta que el
-      filtro no garantiza la eliminación total de microplásticos, lo que
-      significa que algunos de ellos aún podrían llegar al cuerpo de agua. El
-      objetivo ideal es asegurarse de que la cantidad de microplásticos que
-      quedan en el cuerpo de agua sea menor que la cantidad atrapada por el
-      filtro.
-    </section>
-    <section class="text-justify-custom my-2">
-      Para la simulación se reciben como datos de entrada: una cantidad inicial
-      de microplásticos, otra que termina de residuo y el número de días por el
-      que se estará pasando esa cantidad inicial de microplásticos por el
-      filtro. Simplemente haz clic en el botón que dice "Simulación" a
-      continuación y comencemos.
+      En esta simulación, tendrás la oportunidad de controlar la cantidad en
+      miligramos de microplásticos que pasarán a través del filtro. El filtro
+      está diseñado para capturar una cierta cantidad de microplásticos, que se
+      mostrará en forma de porcentaje. Sin embargo, es importante tener en
+      cuenta que el filtro no garantiza la eliminación total de microplásticos,
+      lo que significa que algunos de ellos aún podrían llegar al cuerpo de
+      agua. El objetivo ideal es asegurarse de que la cantidad de microplásticos
+      que quedan en el cuerpo de agua sea menor que la cantidad atrapada por el
+      filtro. Para la simulación se reciben como datos de entrada: una cantidad
+      de microplásticos en miligramos, otra que termina de residuo y el número
+      de días por el que se estará pasando esa cantidad por el filtro.
+      Simplemente haz clic en el botón que dice "Simulación" a continuación y
+      comencemos.
     </section>
     <FiltracionForm v-if="choice" />
     <FiltracionResults
@@ -114,6 +113,58 @@
         choiceIsMade
       "
     />
+    <SectionReferences
+      :references="[
+        {
+          authors: ['H. Hidayaturrahman', 'T. Lee'],
+          title:
+            'A study on characteristics of microplastic in wastewater of South Korea: Identification, quantification, and fate of microplastics during treatment process',
+          editorial: 'Mar. Pollut. Bull.',
+          vol: '146',
+          no: '71',
+          pages: ['696', '702'],
+          yearPublication: '2019',
+          link: 'https://doi.org/10.1016/j.marpolbul.2019.06.071',
+          dateAccess: '24-07-2023',
+        },
+        {
+          authors: ['Z. Wang', 'M. Sedighi', 'A. Lea-Langton'],
+          title:
+            'Filtration of microplastic spheres by biochar: removal efficiency and immobilisation mechanisms',
+          editorial: 'Water Res.',
+          vol: '184',
+          no: '116165',
+          pages: ['116165'],
+          yearPublication: '2020',
+          link: 'https://doi.org/10.1016/j.watres.2020.116165',
+          dateAccess: '19-07-2023',
+        },
+        {
+          authors: ['J. Bayo', 'J. López-Castellanos', 'S. Olmos'],
+          title:
+            'Membrane bioreactor and rapid sand filtration for the removal of microplastics in an urban wastewater treatment plant',
+          editorial: 'Mar. Pollut. Bull.',
+          vol: '156',
+          no: '111211',
+          pages: [],
+          yearPublication: '2020',
+          link: 'https://doi.org/10.1016/j.marpolbul.2020.111211',
+          dateAccess: '19-07-2023',
+        },
+        {
+          authors: ['J. Talvitie', 'A. Mikola', 'A. Koistinen', 'O. Setälä'],
+          title:
+            'Solutions to microplastic pollution -Removal of microplastics from wastewater effluent with advanced wastewater treatment technologies',
+          editorial: 'Water Res.',
+          vol: '123',
+          no: '5',
+          pages: ['401', '407'],
+          yearPublication: '2017',
+          link: 'https://doi.org/10.1016/j.watres.2017.07.005',
+          dateAccess: '20-07-2023',
+        },
+      ]"
+    />
   </div>
 </template>
 <style scoped>
@@ -142,6 +193,7 @@ import FiltracionExplained from "@/components/FiltracionComponents/FiltracionExp
 import FiltracionPDF from "@/components/FiltracionComponents/FiltracionPDF.vue";
 import AwarenessSimulationSection from "@/components/AwarenessSimulationSection.vue";
 import InfoSection from "@/components/InfoSection.vue";
+import SectionReferences from "@/components/SectionReferences.vue";
 import Swal from "sweetalert2";
 import { mapGetters, mapMutations } from "vuex";
 export default {
@@ -154,6 +206,7 @@ export default {
     FiltracionExplained,
     InfoSection,
     FiltracionPDF,
+    SectionReferences,
   },
   data() {
     return {
@@ -245,6 +298,15 @@ export default {
           this.choice = this.choice;
           this.choiceIsMade = this.choiceIsMade;
         }
+        setTimeout(() => {
+          const resultsSection = document.getElementById("results-section");
+          if (resultsSection && !result.isDismissed) {
+            resultsSection.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        }, 340);
       });
     },
     obtainSVG(svg) {

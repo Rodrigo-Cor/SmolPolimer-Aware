@@ -12,17 +12,27 @@
           <ReferencesAuthors :img="img" :credits="credits" />
         </template>
         <template v-else>
-          <p class="text-justify-custom">
+          <p
+            v-for="(paragraph, index) in arrayText"
+            :key="index"
+            class="text-justify-custom p-2 mb-md-0 mb-2"
+          >
             <template
-              v-for="paragraph in arrayText"
-              :key="paragraph"
-              class="rounded p-2 mb-md-0 mb-2"
+              v-for="({ value, key }, index) in paragraph"
+              :key="index"
+              v-if="value !== ''"
             >
-              <template v-for="(value, key) in paragraph" :key="value">
-                <span v-bind:class="{ 'fst-italic': key === 'italic' }">
-                  {{ value }}
-                </span>
-              </template>
+              <span
+                :class="
+                  key === 'italic'
+                    ? 'fst-italic'
+                    : key === 'bold'
+                    ? 'fw-bold'
+                    : null
+                "
+              >
+                {{ value }}
+              </span>
             </template>
           </p>
         </template>
@@ -35,17 +45,27 @@
         }"
       >
         <template v-if="sideImage">
-          <p class="text-justify-custom">
+          <p
+            v-for="(paragraph, index) in arrayText"
+            :key="index"
+            class="text-justify-custom p-2 mb-md-0 mb-2"
+          >
             <template
-              v-for="paragraph in arrayText"
-              :key="paragraph"
-              class="rounded p-2 mb-md-0 mb-2"
+              v-for="({ value, key }, index) in paragraph"
+              :key="index"
+              v-if="value !== ''"
             >
-              <template v-for="(value, key) in paragraph" :key="value">
-                <span v-bind:class="{ 'fst-italic': key === 'italic' }">
-                  {{ value }}
-                </span>
-              </template>
+              <span
+                :class="
+                  key === 'italic'
+                    ? 'fst-italic'
+                    : key === 'bold'
+                    ? 'fw-bold'
+                    : null
+                "
+              >
+                {{ value }}
+              </span>
             </template>
           </p>
         </template>

@@ -11,7 +11,7 @@
     degradación, con n = {{ microplastics }} y p = {{ percentage }}%,
     de t = 0, hasta t = {{ timeUnits }}.
     El porcentaje depende de la cepa y del medio de cultivo con el que
-    se están alimentando las bacterias, que se hayan escogido, que fue
+    se están alimentando las bacterias, que para el presente caso fue
     {{ growthMedium }}, dando al bimestre {{ timeUnits }} la cantidad
     final de {{ lastDegradatedValue.toFixed(2) }} mg.
   </section>

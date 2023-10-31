@@ -101,8 +101,8 @@ export default {
         pdf.setFontSize(12);
         pdf.setTextColor("#272727");
         pdf.setFont("Courier", "normal");
-        pdf.text("\u2022  Microplásticos: " + self.microplastics.toString() + " microplásticos", 20, 50);
-        pdf.text("\u2022  Residuos: " + self.residues.toString() + " microplásticos", 20, 60);
+        pdf.text("\u2022  Microplásticos: " + self.microplastics.toString() + " mg", 20, 50);
+        pdf.text("\u2022  Residuos: " + self.residues.toString() + " mg", 20, 60);
         pdf.text("\u2022  Días: " + self.timeUnits.toString() + " días", 20, 70);
 
         pdf.setFontSize(18);

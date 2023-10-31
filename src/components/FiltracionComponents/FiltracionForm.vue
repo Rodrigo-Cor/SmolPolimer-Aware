@@ -72,78 +72,82 @@
           @keypress = "validateKeyPress"
         />
         <br>
-        <span class="myAlert"  v-if="treatment > 24 || (!treatment && sendButtonPressed)">Mínimo 1, máximo 24</span>
+        <span class="myAlert"  v-if="treatment == 1 || treatment >= 25  || (!treatment && sendButtonPressed)">Mínimo 2, máximo 24</span>
       </div>
     </div>
     <div class="d-flex justify-content-center my-4">
-      <button @click="handleSendButton" class="btn btn-bd-primary">
+      <button type= "button" @click="handleSendButton" class="btn btn-bd-primary">
         <i class="bi bi-check-circle"></i> Calcular
       </button>
     </div>
   </div>
-  </template>
-  <style scoped>
-  .myAlert{
-    color: #50d890; 
-    font-size: 1rem;
-    font-weight: bold;
-  }
-  .my-label {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #4f98ca;
-  }
-  .my-input{
-    width: 8rem;
-    height: 2rem;
-    padding: 0.2rem;
-    border: 0.2rem solid #4f98ca;
-    border-radius: 0.8rem;
-    background-color:#effffb;
-    transition: 0.5s;
-    outline: none;
-  }
-  .my-input:focus{
-    color: #effffb;
-    font-weight: bold;
-    border: 0.2rem solid #50d890;
-    background-color: #50d890;  
-  }
+</template>
+<style scoped>
+.myAlert{
+  color: #50d890; 
+  font-size: 1rem;
+  font-weight: bold;
+}
+.my-label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #4f98ca;
+}
+.my-input{
+  width: 8rem;
+  height: 2rem;
+  padding: 0.2rem;
+  border: 0.2rem solid #4f98ca;
+  border-radius: 0.8rem;
+  background-color:#effffb;
+  transition: 0.5s;
+  outline: none;
+}
+.custom-input:focus{
+  box-shadow: none; 
+  outline: none;
+}
+.my-input:focus{
+  color: #effffb;
+  font-weight: bold;
+  border: 0.2rem solid #50d890;
+  background-color: #50d890;  
+}
 .btn-bd-info{
-  --bs-btn-border-radius: 2rem;
-  --bs-btn-color: #50d890;
-  --bs-btn-bg: #272727;
-  --bs-btn-border-color: #272727;
-  --bs-btn-hover-color: #272727;;
-  --bs-btn-hover-bg: #50d890;
-  --bs-btn-hover-border-color: #50d890;
-  --bs-btn-active-color: #272727;
-  --bs-btn-active-bg: #50d890;
-  --bs-btn-active-border-color: #50d890;
+--bs-btn-border-radius: 2rem;
+--bs-btn-color: #50d890;
+--bs-btn-bg: #272727;
+--bs-btn-border-color: #272727;
+--bs-btn-hover-color: #272727;;
+--bs-btn-hover-bg: #50d890;
+--bs-btn-hover-border-color: #50d890;
+--bs-btn-active-color: #272727;
+--bs-btn-active-bg: #50d890;
+--bs-btn-active-border-color: #50d890;
 }
 .btn-bd-primary {
-  --bs-btn-border-radius: 2rem;
-  --bs-btn-font-weight: bold;
-  --bs-btn-color: #effffb;
-  --bs-btn-bg: #4f98ca;
-  --bs-btn-border-color: #4f98ca;
-  --bs-btn-hover-color: #effffb;;
-  --bs-btn-hover-bg: #50d890;
-  --bs-btn-hover-border-color: #50d890;
-  --bs-btn-active-color: #effffb;
-  --bs-btn-active-bg: #50d890;
-  --bs-btn-active-border-color: #50d890;
+--bs-btn-border-radius: 2rem;
+--bs-btn-font-weight: bold;
+--bs-btn-color: #effffb;
+--bs-btn-bg: #4f98ca;
+--bs-btn-border-color: #4f98ca;
+--bs-btn-hover-color: #effffb;;
+--bs-btn-hover-bg: #50d890;
+--bs-btn-hover-border-color: #50d890;
+--bs-btn-active-color: #effffb;
+--bs-btn-active-bg: #50d890;
+--bs-btn-active-border-color: #50d890;
 }
-  .popper-box {
-      --popper-theme-background-color: #272727;
-      --popper-theme-background-color-hover: #272727;
-      --popper-theme-text-color: #effffb;
-      --popper-theme-border-width: 0rem;
-      --popper-theme-border-style: solid;
-      --popper-theme-border-radius: 1rem;
-      --popper-theme-padding: 0.8rem;
-      --popper-theme-box-shadow: 0 0.375rem 1.875rem -0.375rem rgba(39, 39, 39, 0.25);
-  }
+.popper-box {
+  --popper-theme-background-color: #272727;
+  --popper-theme-background-color-hover: #272727;
+  --popper-theme-text-color: #effffb;
+  --popper-theme-border-width: 0rem;
+  --popper-theme-border-style: solid;
+  --popper-theme-border-radius: 1rem;
+  --popper-theme-padding: 0.8rem;
+  --popper-theme-box-shadow: 0 0.375rem 1.875rem -0.375rem rgba(39, 39, 39, 0.25);
+}
 </style>
 <script>
   import { mapMutations } from 'vuex';
@@ -185,7 +189,7 @@
         const isValid = [
           this.microplastic >= 1 && this.microplastic <= 70,
           this.residue >= 1 && this.residue <= 20,
-          this.treatment >= 1 && this.treatment <= 24,
+          this.treatment >= 2 && this.treatment <= 24,
         ];
         if (isValid.every(element => element)) {
         this.$store.commit('setMicroplastics', this.microplastic);

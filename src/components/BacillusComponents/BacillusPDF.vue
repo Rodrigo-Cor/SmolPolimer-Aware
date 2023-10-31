@@ -155,7 +155,7 @@ export default {
         pdf.text("la cantidad de microplásticos en mg y p representa al porcentaje de", 20, 255);
         pdf.text("degradación, con n = " + self.microplastics + " y p = " + self.percentage + "%, de t = 0, hasta t = " + self.timeUnits +"." , 20, 260);
         pdf.text("El porcentaje depende de la cepa y del medio de cultivo con el  que" , 20, 270);
-        pdf.text("se están alimentando las bacterias, que se hayan escogido, que  fue" , 20, 275);
+        pdf.text("se  están alimentando las bacterias, que para el presente caso  fue" , 20, 275);
         pdf.text(self.growthMedium + ", dando al bimestre " + self.timeUnits +" la cantidad final de " + self.lastDegradatedValue.toFixed(2) +" mg." , 20, 280);
         pdf.addPage();
 

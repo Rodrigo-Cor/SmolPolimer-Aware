@@ -23,16 +23,23 @@
           }"
           :sideImage="false"
           :arrayText="[
-            {
-              '': 'Considerada por ser el género de bacterias más benéfica en los sistemas acuícolas, por ser capaces de producir flóculos. Posee 6 cepas con notables porcentajes de degradación de polietileno de baja densidad, entre ellas se encuentran ',
-            },
-            {
-              italic:
-                'B. carbonipphilus, B. sporothermodurans, B. coagulans, B. neidei, B. smithii, B. megaterium',
-            },
-            {
-              '': ' con un porcentaje de 34.55%, 36.54 %, 18.37 %, 36.07 %, 16.0 % y 34.48%, respectivamente.',
-            },
+            [
+              {
+                value:
+                  'Considerada por ser el género de bacterias más benéfica en los sistemas acuícolas, por ser capaces de producir flóculos. Posee 6 cepas con notables porcentajes de degradación de polietileno de baja densidad, entre ellas se encuentran',
+                key: '',
+              },
+              {
+                value:
+                  'B. carbonipphilus, B. sporothermodurans, B. coagulans, B. neidei, B. smithii, B. megaterium',
+                key: 'italic',
+              },
+              {
+                value:
+                  ' con un porcentaje de 34.55%, 36.54 %, 18.37 %, 36.07 %, 16.0 % y 34.48%, respectivamente.',
+                key: '',
+              },
+            ],
           ]"
           :credits="{
             'Foto de ': '',
@@ -55,11 +62,11 @@
         inglés). Estos ingredientes son como el "alimento" de nuestras bacterias
         y afectarán su capacidad de degradación en un periodo de dos meses. Los
         valores de entrada que se ocuparán para la simulación incluyen la
-        cantidad de microplásticos a degradar, el número de bimestres en los que
-        se estará degradando, la cepa de <i>Bacillus</i> a utilizar, que
-        dependiendo del medio de cultivo (agar o broth) seleccionado,
-        determinará el porcentaje de degradación. Simplemente haz clic en el
-        botón que dice "Simulación" a continuación y comencemos.
+        cantidad de microplásticos a degradar (en miligramos), el número de
+        bimestres en los que se estará degradando, la cepa de <i>Bacillus</i> a
+        utilizar, que dependiendo del medio de cultivo (agar o broth)
+        seleccionado, determinará el porcentaje de degradación. Simplemente haz
+        clic en el botón que dice "Simulación" a continuación y comencemos.
       </section>
     </article>
     <BacillusForm v-if="choice" />
@@ -134,6 +141,103 @@
         choiceIsMade
       "
     />
+    <SectionReferences
+      :references="[
+        {
+          authors: [
+            'J. K. Shrestha',
+            'Joshi, P. Regmi',
+            'P. Regmi',
+            'G. Badahit',
+          ],
+          title:
+            'Isolation and Identification of Low-Density Polyethylene (LDPE) Degrading Bacillus spp. from a Soil of Landfill Site',
+          editorial: 'Acta Sci. Microbiol',
+          vol: '2',
+          no: '4',
+          pages: ['30', '34'],
+          yearPublication: '2019',
+          link: 'https://www.researchgate.net/publication/331702789_Isolation_and_Identification_of_Low_Density_Polyethylene_LDPE_Degrading_Bacillus_spp_from_a_Soil_of_Landfill_Site',
+          dateAccess: '17-07-2023',
+        },
+        {
+          authors: ['H. Salehizadeh', 'M. Vossoughi', 'I. Alemzadeh'],
+          title: 'Some investigations on bioflocculant producing bacteria',
+          editorial: 'Biochem. Eng. J',
+          vol: '5',
+          no: '1',
+          pages: ['39', '44'],
+          yearPublication: '2000',
+          link: 'https://doi.org/10.1016/S1369-703X(99)00066-2',
+          dateAccess: '10-07-2023',
+        },
+        {
+          authors: ['S. Saeed', 'A. Iqbal', 'F. Deeba'],
+          title:
+            'Biodegradation study of Polyethylene and PVC using naturally occurring plastic degrading microbes',
+          editorial: 'Arch. Microbiol.',
+          vol: '204',
+          no: '8',
+          pages: ['497'],
+          yearPublication: '2022',
+          link: 'https://doi.org/10.1007/s00203-022-03081-8 ',
+          dateAccess: '10-07-2023',
+        },
+        {
+          authors: ['A. Tarafdar', 'et al.'],
+          title:
+            'Biofilm development of Bacillus siamensis ATKU1 on pristine short chain low-density polyethylene: A case study on microbe-microplastics interaction',
+          editorial: 'J. Hazard. Mater.',
+          vol: '409',
+          no: '124516',
+          pages: [],
+          yearPublication: '2021',
+          link: 'https://doi.org/10.1016/j.jhazmat.2020.124516',
+          dateAccess: '10-07-2023',
+        },
+        {
+          authors: [
+            'S. D. Khandare',
+            'D. Agrawal',
+            'N. Mehru',
+            'D. R. Chaundhary',
+          ],
+          title:
+            'Marine bacterial based enzymatic degradation of low-density polyethylene (LDPE) plastic',
+          editorial: 'J. Environ. Chem. Eng.',
+          vol: '10',
+          no: '3',
+          pages: ['107437'],
+          yearPublication: '2022',
+          link: 'https://doi.org/10.1016/j.jece.2022.107437 ',
+          dateAccess: '10-07-2023',
+        },
+        {
+          authors: ['J. Sharma', 'P. Agnihotri', 'K. Nandy ', 'A. K. Mitra'],
+          title:
+            'Isolation and Characterization of Plastic Degrading Bacteria from Soil Collected from the Dumping Grounds of an Industrial Area',
+          editorial: 'Int. J. Adv. Innov Res.',
+          vol: '3',
+          no: '3',
+          pages: ['225', '232'],
+          yearPublication: '2014',
+          link: 'https://www.researchgate.net/publication/279024937_Isolation_and_Characterization_of_Plastic_Degrading_Bacteria_from_Soil_Collected_from_the_Dumping_Grounds_of_an_Industrial_Area',
+          dateAccess: '10-07-2023',
+        },
+        {
+          authors: ['T. C. Ha Dang', 'et al.'],
+          title:
+            'Plastic degradation by thermophilic Bacillus sp. BCBT21 isolated from composting agricultural residual in Vietnam',
+          editorial: 'Adv. Nat. Sci.: Nanosci. Nanotechnol.',
+          vol: '9',
+          no: '1',
+          pages: ['11'],
+          yearPublication: '2018',
+          link: 'https://iopscience.iop.org/article/10.1088/2043-6254/aaabaf/meta',
+          dateAccess: '10-07-2023',
+        },
+      ]"
+    />
   </div>
 </template>
 <style scoped>
@@ -162,6 +266,7 @@ import BacillusExplained from "@/components/BacillusComponents/BacillusExplained
 import BacillusPDF from "@/components/BacillusComponents/BacillusPDF.vue";
 import TableInformation from "@/components/TableInformation.vue";
 import AwarenessSimulationSection from "@/components/AwarenessSimulationSection.vue";
+import SectionReferences from "@/components/SectionReferences.vue";
 import InfoSection from "@/components/InfoSection.vue";
 import Swal from "sweetalert2";
 import { mapGetters, mapMutations } from "vuex";
@@ -177,6 +282,7 @@ export default {
     TableInformation,
     InfoSection,
     AwarenessSimulationSection,
+    SectionReferences,
   },
   data() {
     return {
@@ -277,6 +383,15 @@ export default {
           this.choiceIsMade = this.choiceIsMade;
           this.choice = this.choice;
         }
+        setTimeout(() => {
+          const resultsSection = document.getElementById("results-section");
+          if (resultsSection && !result.isDismissed) {
+            resultsSection.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        }, 340);
       });
     },
     obtainSVG(svg) {

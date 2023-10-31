@@ -3,7 +3,7 @@
     id="carouselHome"
     class="carousel slide"
     data-bs-ride="carousel"
-    data-bs-interval="5000"
+    data-bs-interval="7000"
   >
     <div class="carousel-indicators">
       <button
