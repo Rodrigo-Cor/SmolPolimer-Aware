@@ -8,8 +8,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(value, key) in information" :key="key">
-        <th class="text-start" scope="row">{{ value.type }}</th>
+      <tr v-for="({type, description, links, imgData, credits }, key) in information" :key="key">
+        <th class="text-start" scope="row">{{ type }}</th>
         <td>
           <div class="row">
             <div
@@ -17,7 +17,16 @@
                 'col-md-8 col-12': img,
               }"
             >
-              {{ value.description }}
+            {{ description }}    
+            <template v-for="({ text, id }, index) in links" :key="index">       
+              <button
+                    @click="() => goReferences(id)"
+                    type="button"
+                    class="btn btn-link btn-sm p-0 m-0"
+                  >
+                    {{ text }}
+                  </button>
+                </template>
             </div>
             <div
               v-bind:class="{
@@ -26,8 +35,8 @@
               v-if="img"
             >
               <ReferencesAuthors
-                :img="value.imgData"
-                :credits="value.credits"
+                :img="imgData"
+                :credits="credits"
               />
             </div>
           </div>
@@ -39,7 +48,7 @@
 
 <script>
 import ReferencesAuthors from "./ReferencesAuthors.vue";
-
+import { mapMutations } from "vuex";
 export default {
   name: "TableInformation",
   props: {
@@ -58,6 +67,22 @@ export default {
   },
   components: {
     ReferencesAuthors,
+  },
+  methods: {
+    ...mapMutations({
+      setShowReferences: "setShowReferences",
+    }),
+    goReferences(id) {
+      this.setShowReferences(true);
+      setTimeout(() => {
+        const reference = document.getElementById(id);
+        if (reference) {
+          reference.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+      }, 200);
+    },
   },
 };
 </script>

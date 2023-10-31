@@ -15,9 +15,10 @@ export default {
   name: "AwarenessHomeSection",
   created() {
     if (this.id === "") {
+      //Math.floor(Math.random() * this.startQuestions.length)
       this.modifyData({
         idUser: uuidv4(),
-        numberQuestion: Math.floor(Math.random() * this.startQuestions.length),
+        numberQuestion: 0,
       });
     }
   },

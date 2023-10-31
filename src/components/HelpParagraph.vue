@@ -1,35 +1,25 @@
 <template>
   <div class="my-1">
-    <template v-for="(value, key) in text" :key="key">
-      <span
-        >{{ value.value === "" ? key : "" }}
-        <button
-          type="button"
-          v-if="value.value !== ''"
-          @click="
-            () =>
-              (concept = {
-                value: text[key].value,
-                meaning: text[key].meaning,
-              })
-          "
-          class="btn btn-link p-0 m-0 fst-italic"
-        >
-          {{ value.value }}
+    <template v-for="({ value }, key) in text" :key="key">
+      <span>{{ value === "" ? key : "" }}
+        <button type="button" v-if="value !== ''" @click="() =>
+        (concept = {
+          value: text[key].value,
+          meaning: text[key].meaning,
+        })
+          " class="btn btn-link p-0 m-0 fst-italic">
+          {{ value }}
         </button>
       </span>
     </template>
-    <TableInformation
-      v-if="concept.value !== '' || concept.meaning !== ''"
-      :information="[{ type: concept.value, description: concept.meaning }]"
-      :headers="['Concepto', 'Definición']"
-    />
+    <TableInformation v-if="concept.value !== '' || concept.meaning !== ''" :information="[{
+      type: concept.value, description: concept.meaning, links: findReferences(concept.value)
+    }]" :headers="['Concepto', 'Definición',]" />
   </div>
 </template>
 
 <script>
 import TableInformation from "./TableInformation.vue";
-import { generateColor } from "@/globalFunctions.js";
 
 export default {
   name: "HelpParagraph",
@@ -39,8 +29,47 @@ export default {
         value: "",
         meaning: "",
       },
-      color: [],
+      referencesMeaning: {
+        'plástico': {
+          text: '[1]',
+          id: 'home0'
+        },
+        fragmentos: {
+          text: '[2]',
+          id: 'home4'
+        },
+        'erosionándose con el ambiente': {
+          text: '[3]',
+          id: 'home7'
+        },
+        'prenda sintética': {
+          text: '[4]',
+          id: 'home3'
+        },
+        'fibras de poliéster': {
+          text: '[5]',
+          id: 'home4'
+        },
+        'flora y fauna marina': {
+          text: '[6]',
+          id: 'home5'
+        },
+        'tracto digestivo': {
+          text: '[7]',
+          id: 'home6'
+        },
+        'tracto digestivo': {
+          text: '[8]',
+          id: 'home7'
+        },
+        'tracto digestivo': {
+          text: '[9]',
+          id: 'home8'
+        },
+      },
+      objectReferences: {},
     };
+
   },
   computed: {
     filteredText() {
@@ -63,9 +92,19 @@ export default {
     TableInformation,
   },
   methods: {
-    showColor(color, luminisity, count) {
-      this.color = generateColor(color, luminisity, count);
-    },
+    findReferences(value) {
+      console.log("El valor a buscar es: " + value)
+      const reference = Object.keys(this.referencesMeaning).map(meaning => {
+        if (meaning === value) {
+          return this.referencesMeaning[meaning]
+        }
+        else {
+          return "";
+        }
+      });
+      return reference.filter((r) => r !== "");
+    }
+
   },
 };
 </script>
