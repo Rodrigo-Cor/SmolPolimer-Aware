@@ -15,9 +15,10 @@
     <div class="my-2">
       <span class="py-3">{{ questions[numberQuestion].question }}</span>
     </div>
-    <form @submit.prevent>
+    <form @submit.prevent :id="'form' + typeQuestion">
       <div class="col-md-6 col-12">
         <select
+          :name="typeQuestion"
           class="form-select"
           v-model="localSelectedOption"
           :disabled="typeQuestion === 'start' ? disabledInitial : disabledFinal"
@@ -93,7 +94,7 @@ export default {
     }),
     async saveResults() {
       try {
-        if(this.selectedOptionFinal["option"] === '') return;
+        if (this.selectedOptionFinal["option"] === "") return;
 
         this.stateRequestResult = true;
         await axios.post(

@@ -1,7 +1,7 @@
 <template>
   <div class="my-2">
     <button
-      @click="() => (showReferences = !showReferences)"
+      @click="() => setShowReferences(!showReferences)"
       v-bind:class="{
         'btn btn-dark': isHovered,
         'btn btn-outline-dark': !isHovered,
@@ -13,12 +13,17 @@
       <i v-else class="bi bi-eye-slash-fill"></i>
       {{ showReferences ? "Ocultar " : "Ver " }}referencias consultadas
     </button>
-    <InformationReference v-if="showReferences" :references="references" />
+    <InformationReference
+      v-if="showReferences"
+      :references="references"
+      :view="view"
+    />
   </div>
 </template>
 
 <script>
 import InformationReference from "./InformationReference.vue";
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
   name: "SectionReferences",
@@ -27,14 +32,26 @@ export default {
   },
   data() {
     return {
-      showReferences: false,
       isHovered: false,
     };
+  },
+  computed: {
+    ...mapGetters({
+      showReferences: "getShowReferences",
+    }),
+  },
+  methods: {
+    ...mapMutations({
+      setShowReferences: "setShowReferences",
+    }),
   },
   props: {
     references: {
       type: Array,
       required: true,
+    },
+    view: {
+      type: String,
     },
   },
 };

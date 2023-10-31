@@ -66,6 +66,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  store.commit("setShowReferences", false)
   const optionInitial = store.getters.getSelectedOptionInitial.option;
   if (optionInitial !== "") {
     store.commit("setIsDisabledInitial", true);

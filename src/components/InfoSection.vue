@@ -18,9 +18,8 @@
             class="text-justify-custom p-2 mb-md-0 mb-2"
           >
             <template
-              v-for="({ value, key }, index) in paragraph"
+              v-for="({ value, key, link }, index) in paragraph"
               :key="index"
-              v-if="value !== ''"
             >
               <span
                 :class="
@@ -30,8 +29,18 @@
                     ? 'fw-bold'
                     : null
                 "
+                v-if="value !== ''"
               >
                 {{ value }}
+                <template v-for="({ text, id }, index) in link" :key="index">
+                  <button
+                    @click="() => goReferences(id)"
+                    type="button"
+                    class="btn btn-link btn-sm p-0 m-0"
+                  >
+                    {{ text }}
+                  </button>
+                </template>
               </span>
             </template>
           </p>
@@ -51,9 +60,8 @@
             class="text-justify-custom p-2 mb-md-0 mb-2"
           >
             <template
-              v-for="({ value, key }, index) in paragraph"
+              v-for="({ value, key, link }, index) in paragraph"
               :key="index"
-              v-if="value !== ''"
             >
               <span
                 :class="
@@ -63,8 +71,18 @@
                     ? 'fw-bold'
                     : null
                 "
+                v-if="value !== ''"
               >
                 {{ value }}
+                <template v-for="({ text, id }, index) in link" :key="index">
+                  <button
+                    @click="() => goReferences(id)"
+                    type="button"
+                    class="btn btn-link btn-sm p-0 m-0"
+                  >
+                    {{ text }}
+                  </button>
+                </template>
               </span>
             </template>
           </p>
@@ -79,7 +97,7 @@
 
 <script>
 import ReferencesAuthors from "./ReferencesAuthors.vue";
-
+import { mapMutations } from "vuex";
 export default {
   name: "InfoSection",
   components: {
@@ -101,6 +119,22 @@ export default {
     arrayText: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    ...mapMutations({
+      setShowReferences: "setShowReferences",
+    }),
+    goReferences(id) {
+      this.setShowReferences(true);
+      setTimeout(() => {
+        const reference = document.getElementById(id);
+        if (reference) {
+          reference.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+      }, 200);
     },
   },
 };

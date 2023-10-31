@@ -85,10 +85,12 @@ export default createStore({
       state: {
         referencesData: [],
         stateRequest: false,
+        showReferences: false,
       },
       getters: {
         getReferences: (state) => state.referencesData,
         getStateRequest: (state) => state.stateRequest,
+        getShowReferences: (state) => state.showReferences,
       },
       mutations: {
         setReferences(state, references) {
@@ -96,6 +98,9 @@ export default createStore({
         },
         setStateRequest(state, stateRequest) {
           state.stateRequest = stateRequest;
+        },
+        setShowReferences(state, showReferences) {
+          state.showReferences = showReferences;
         },
       },
       actions: {

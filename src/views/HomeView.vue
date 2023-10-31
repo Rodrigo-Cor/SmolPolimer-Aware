@@ -22,8 +22,18 @@
             [
               {
                 value:
-                  'Desde el año 2016, se ha registrado un alarmante aumento en el uso de plásticos en la sociedad, lo cual ha generado uno de los más grandes problemas, que es la formación de microplásticos, representando una amenaza global debido a su persistencia y amplia distribución en la vida silvestre y en los seres humanos.',
+                  'Desde el año 2016, se ha registrado un alarmante aumento en el uso de plásticos en la sociedad, lo cual ha generado uno de los más grandes problemas, que es la formación de microplásticos, representando una amenaza global debido a su persistencia y amplia distribución en la vida silvestre y en los seres humanos',
                 key: '',
+                link: [
+                  {
+                    text: '[1]',
+                    id: 'home1',
+                  },
+                  {
+                    text: '[2].',
+                    id: 'home2',
+                  },
+                ],
               },
             ],
             [
@@ -258,14 +268,16 @@
             arrayText: [
               [
                 {
-                  'value': 'Finalmente, existe una especifica interacción entre los microplásticos y los seres humanos, siendo esta el ',
+                  value:
+                    'Finalmente, existe una especifica interacción entre los microplásticos y los seres humanos, siendo esta el ',
                 },
                 {
-                  'value': 'consumo de mariscos y pescados. ',
-                  'key': 'bold'
+                  value: 'consumo de mariscos y pescados. ',
+                  key: 'bold',
                 },
                 {
-                  'value': 'Sin embargo, el tracto digestivo no es común ingerirlo, por lo que la posibilidad de comer microplásticos es baja.',
+                  value:
+                    'Sin embargo, el tracto digestivo no es común ingerirlo, por lo que la posibilidad de comer microplásticos es baja.',
                 },
               ],
             ],
@@ -281,6 +293,7 @@
         Toda la información presentada se utilizaron las siguientes referencias.
       </section>
       <SectionReferences
+        :view="'home'"
         :references="[
           {
             authors: ['United Nations Environment Programme'],
