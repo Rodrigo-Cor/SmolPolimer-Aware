@@ -1,43 +1,58 @@
 <template>
   <div class="text-card">
     <div class="row">
-      <template v-for="(reference, index) in references">
+      <template
+        v-for="(
+          {
+            authors,
+            title,
+            editorial,
+            vol,
+            no,
+            pages,
+            yearPublication,
+            link,
+            dateAccess,
+          },
+          index
+        ) in references"
+      >
         <div class="col-md-4 col-12">
           <div class="card mx-1 my-2">
             <div class="card-body" :id="view + index">
               <p class="card-title">Referencia {{ index + 1 }}</p>
               <p class="card-subtitle mb-2 text-body-secondary">
-                <template v-if="reference.authors[1] === 'et al.'"
-                  >Autores: {{ reference.authors[0] }}
+                <template v-if="authors[1] === 'et al.'"
+                  >Autores: {{ authors[0] }}
                   <span class="fst-italic">et al.</span></template
                 >
                 <template v-else>
                   {{
-                    reference.authors.length === 1
-                      ? "Autor: " + reference.authors[0]
-                      : "Autores: " + reference.authors.join(", ")
+                    authors.length === 1
+                      ? "Autor: " + authors[0]
+                      : "Autores: " + authors.join(", ")
                   }}
                 </template>
               </p>
               <p class="card-text text-justify-custom">
-                {{ reference.title }}.
-                <span class="fst-italic">{{ reference.editorial }}</span>
-                {{ reference.vol !== "" ? ", vol. " + reference.vol : "" }}
-                {{ reference.no !== "" ? ", no. " + reference.no : "" }}
+                {{ title }}.
+                <span class="fst-italic">{{ editorial }}</span>
+                {{ vol !== "" ? ", vol. " + vol : "" }}
+                {{ no !== "" ? ", no. " + no : "" }}
                 {{
-                  reference.pages.length === 0
+                  pages.length === 0
                     ? ""
-                    : reference.pages.length === 1
-                    ? ", p. " + reference.pages[0] + ", "
-                    : ", pp. " + reference.pages.join("- ") + ", "
+                    : pages.length === 1
+                    ? ", p. " + pages[0] + ", "
+                    : ", pp. " + pages.join("- ") + ", "
                 }}
-                {{ reference.yearPublication }}. [En línea].
+                {{ yearPublication }}. [En línea].
               </p>
               <p>
                 Disponible en:
-                <a :href="reference.link" target="_blank" class="card-link"
+                <a :href="link" target="_blank" class="card-link"
                   >Ir al artículo</a
-                >. [Accedido el {{ reference.dateAccess }}]
+                >. [Accedido el {{ dateAccess }}]
               </p>
             </div>
           </div>

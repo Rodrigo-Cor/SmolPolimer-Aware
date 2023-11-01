@@ -11,7 +11,14 @@
       degradación. En los procesos de separación, se incluyen técnicas como la
       filtración granular rápida, la filtración de disco, la filtración por
       membrana y la flotación por aire disuelto, todos estos pueden eliminar al
-      menos el 90% de microplásticos presentes en el agua.
+      menos el 90% de microplásticos presentes en el agua
+      <button
+        @click="() => goReferences('filtracion0')"
+        type="button"
+        class="btn btn-link btn-sm p-0 m-0"
+      >
+        [1].
+      </button>
     </section>
     <section class="p-2 my-2 rounded color-techniques">
       <InfoSection
@@ -23,7 +30,14 @@
         :arrayText="[
           [
             {
-              value: 'La filtración por medio de agentes granulares se da con el uso de la grava y la arena, son los filtros más económicos y eficientes para remover sólidos suspendidos. Funciona, una vez ingresada el agua, luego se limpia, pasando a través del medio granular utilizado en el proceso para obtener el agua filtrada de los sólidos suspendidos, estos serán importantes para determinar la frecuencia con que se limpie el filtro.',
+              value:
+                'La filtración por medio de agentes granulares se da con el uso de la grava y la arena, son los filtros más económicos y eficientes para remover sólidos suspendidos. Funciona, una vez ingresada el agua, luego se limpia, pasando a través del medio granular utilizado en el proceso para obtener el agua filtrada de los sólidos suspendidos, estos serán importantes para determinar la frecuencia con que se limpie el filtro',
+              link: [
+                {
+                  text: '[2].',
+                  id: 'filtracion1',
+                },
+              ],
             },
           ],
         ]"
@@ -113,58 +127,94 @@
         choiceIsMade
       "
     />
-    <SectionReferences
-      :references="[
-        {
-          authors: ['H. Hidayaturrahman', 'T. Lee'],
-          title:
-            'A study on characteristics of microplastic in wastewater of South Korea: Identification, quantification, and fate of microplastics during treatment process',
-          editorial: 'Mar. Pollut. Bull.',
-          vol: '146',
-          no: '71',
-          pages: ['696', '702'],
-          yearPublication: '2019',
-          link: 'https://doi.org/10.1016/j.marpolbul.2019.06.071',
-          dateAccess: '24-07-2023',
-        },
-        {
-          authors: ['Z. Wang', 'M. Sedighi', 'A. Lea-Langton'],
-          title:
-            'Filtration of microplastic spheres by biochar: removal efficiency and immobilisation mechanisms',
-          editorial: 'Water Res.',
-          vol: '184',
-          no: '116165',
-          pages: ['116165'],
-          yearPublication: '2020',
-          link: 'https://doi.org/10.1016/j.watres.2020.116165',
-          dateAccess: '19-07-2023',
-        },
-        {
-          authors: ['J. Bayo', 'J. López-Castellanos', 'S. Olmos'],
-          title:
-            'Membrane bioreactor and rapid sand filtration for the removal of microplastics in an urban wastewater treatment plant',
-          editorial: 'Mar. Pollut. Bull.',
-          vol: '156',
-          no: '111211',
-          pages: [],
-          yearPublication: '2020',
-          link: 'https://doi.org/10.1016/j.marpolbul.2020.111211',
-          dateAccess: '19-07-2023',
-        },
-        {
-          authors: ['J. Talvitie', 'A. Mikola', 'A. Koistinen', 'O. Setälä'],
-          title:
-            'Solutions to microplastic pollution -Removal of microplastics from wastewater effluent with advanced wastewater treatment technologies',
-          editorial: 'Water Res.',
-          vol: '123',
-          no: '5',
-          pages: ['401', '407'],
-          yearPublication: '2017',
-          link: 'https://doi.org/10.1016/j.watres.2017.07.005',
-          dateAccess: '20-07-2023',
-        },
-      ]"
-    />
+
+    <article class="mt-2">
+      <section class="fw-bold">
+        Toda la información presentada se utilizaron las siguientes referencias.
+      </section>
+      <SectionReferences
+        :view="'filtracion'"
+        :references="[
+          {
+            authors: [
+              'M. R. Karimi Estahbanati',
+              'M. Kiendrebeogo',
+              'A. Khosravanipour Mostafazadeh',
+              'P. Drogui',
+              'R. D. Tyagi',
+            ],
+            title:
+              'Treatment processes for microplastics and nanoplastics in waters: State-of-the-art review',
+            editorial: 'Mar. Pollut. Bull.',
+            vol: '168',
+            no: '112374',
+            pages: [],
+            yearPublication: '2021',
+            link: 'https://doi.org/10.1016/j.marpolbul.2021.112374 ',
+            dateAccess: '26-09-2023',
+          },
+          {
+            authors: ['Geocities.ws'],
+            title: 'FILTRACIÓN EN MEDIOS GRANULARES',
+            editorial: 'Ingeniería de Tratamiento y Acondicionamiento de Aguas',
+            vol: '',
+            no: '',
+            pages: [],
+            yearPublication: '',
+            link: 'https://www.geocities.ws/edrochac/sanitaria/filtracion4.pdf',
+            dateAccess: '02-10-2023',
+          },
+          {
+            authors: ['H. Hidayaturrahman', 'T. Lee'],
+            title:
+              'A study on characteristics of microplastic in wastewater of South Korea: Identification, quantification, and fate of microplastics during treatment process',
+            editorial: 'Mar. Pollut. Bull.',
+            vol: '146',
+            no: '71',
+            pages: ['696', '702'],
+            yearPublication: '2019',
+            link: 'https://doi.org/10.1016/j.marpolbul.2019.06.071',
+            dateAccess: '24-07-2023',
+          },
+          {
+            authors: ['Z. Wang', 'M. Sedighi', 'A. Lea-Langton'],
+            title:
+              'Filtration of microplastic spheres by biochar: removal efficiency and immobilisation mechanisms',
+            editorial: 'Water Res.',
+            vol: '184',
+            no: '116165',
+            pages: ['116165'],
+            yearPublication: '2020',
+            link: 'https://doi.org/10.1016/j.watres.2020.116165',
+            dateAccess: '19-07-2023',
+          },
+          {
+            authors: ['J. Bayo', 'J. López-Castellanos', 'S. Olmos'],
+            title:
+              'Membrane bioreactor and rapid sand filtration for the removal of microplastics in an urban wastewater treatment plant',
+            editorial: 'Mar. Pollut. Bull.',
+            vol: '156',
+            no: '111211',
+            pages: [],
+            yearPublication: '2020',
+            link: 'https://doi.org/10.1016/j.marpolbul.2020.111211',
+            dateAccess: '19-07-2023',
+          },
+          {
+            authors: ['J. Talvitie', 'A. Mikola', 'A. Koistinen', 'O. Setälä'],
+            title:
+              'Solutions to microplastic pollution -Removal of microplastics from wastewater effluent with advanced wastewater treatment technologies',
+            editorial: 'Water Res.',
+            vol: '123',
+            no: '5',
+            pages: ['401', '407'],
+            yearPublication: '2017',
+            link: 'https://doi.org/10.1016/j.watres.2017.07.005',
+            dateAccess: '20-07-2023',
+          },
+        ]"
+      />
+    </article>
   </div>
 </template>
 <style scoped>
@@ -253,6 +303,7 @@ export default {
 
   methods: {
     handleButton() {
+      this.setShowReferences(false);
       Swal.fire({
         title: "¿Valores por defecto o formulario?",
         text: "Ve a la simulación con valores por defecto o asígnalos por medio del formulario.",
@@ -311,6 +362,20 @@ export default {
     },
     obtainSVG(svg) {
       this.svgData = svg;
+    },
+    ...mapMutations({
+      setShowReferences: "setShowReferences",
+    }),
+    goReferences(id) {
+      this.setShowReferences(true);
+      setTimeout(() => {
+        const reference = document.getElementById(id);
+        if (reference) {
+          reference.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+      }, 200);
     },
   },
 };

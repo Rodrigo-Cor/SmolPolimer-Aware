@@ -2,7 +2,7 @@
   <div
     class="accordion p-1"
     :id="'accordion' + typeAccordion"
-    v-for="(info, index) in informationAccordion"
+    v-for="({ paragraph, link, author, title }, index) in informationAccordion"
     :key="index"
   >
     <div class="accordion-item m-2">
@@ -27,22 +27,33 @@
         :data-bs-parent="'#accordion' + typeAccordion"
       >
         <div class="accordion-body color-home">
-          <p
-            class="fw-bolder text-title"
-          >
-            {{ info.title }}
+          <p class="fw-bolder text-title">
+            {{ title }}
           </p>
           <section
             v-bind:class="{ 'text-card': typeAccordion === 'references' }"
           >
             <template v-if="typeAccordion === 'references'">
-              <p class="text-body-secondary fs-6">Autores: {{ info.author }}</p>
-              <a target="_blank" :href="info.link" class="btn btn-dark"
+              <p class="text-body-secondary fs-6">Autores: {{ author }}</p>
+              <a target="_blank" :href="link" class="btn btn-dark"
                 >Ir al articulo</a
               >
             </template>
             <template v-else>
-              <p class="text-body-secondary fs-6">{{ info.paragraph }}</p>
+              <p class="text-body-secondary fs-6">
+                {{ paragraph }}
+                <span>
+                  <template v-for="({ text, id }, index) in link" :key="index">
+                    <button
+                      @click="() => goReferences(id)"
+                      type="button"
+                      class="btn btn-link btn-sm p-0 m-0"
+                    >
+                      {{ text }}
+                    </button>
+                  </template>
+                </span>
+              </p>
             </template>
           </section>
         </div>
@@ -52,7 +63,7 @@
 </template>
 
 <script>
-import { generateColor } from "@/globalFunctions";
+import { mapMutations } from "vuex";
 
 export default {
   name: "AccordionInformation",
@@ -70,22 +81,27 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      color: [],
-    };
-  },
   methods: {
-    showColor(color, luminisity, count) {
-      this.color = generateColor(color, luminisity, count);
+    ...mapMutations({
+      setShowReferences: "setShowReferences",
+    }),
+    goReferences(id) {
+      this.setShowReferences(true);
+      setTimeout(() => {
+        const reference = document.getElementById(id);
+        if (reference) {
+          reference.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+      }, 200);
     },
   },
 };
 </script>
 
 <style scoped>
-
-.text-title{
+.text-title {
   color: #160c7f;
 }
 </style>

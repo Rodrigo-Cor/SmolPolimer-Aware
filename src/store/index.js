@@ -49,6 +49,14 @@ export default createStore({
         },
         setSelectedOptionFinal(state, selectedOptionFinal) {
           state.selectedOption.final = selectedOptionFinal;
+          localStorage.setItem(
+            "selectedOptionFinalOption",
+            selectedOptionFinal["option"]
+          );
+          localStorage.setItem(
+            "selectedOptionFinalValue",
+            selectedOptionFinal["value"]
+          );
         },
         setIsDisabledInitial(state, isDisabled) {
           state.isDisabled.initial = isDisabled;
@@ -58,6 +66,7 @@ export default createStore({
         },
         setIsAnswered(state, isAnswered) {
           state.isAnswered = isAnswered;
+          localStorage.setItem("isAnswered", isAnswered);
         },
       },
       actions: {

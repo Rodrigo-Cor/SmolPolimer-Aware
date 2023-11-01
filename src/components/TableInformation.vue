@@ -8,7 +8,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="({type, description, links, imgData, credits }, key) in information" :key="key">
+      <tr v-for="({type, description, link, imgData, credits }, key) in information" :key="key">
         <th class="text-start" scope="row">{{ type }}</th>
         <td>
           <div class="row">
@@ -18,7 +18,7 @@
               }"
             >
             {{ description }}    
-            <template v-for="({ text, id }, index) in links" :key="index">       
+            <template v-for="({ text, id }, index) in link" :key="index">       
               <button
                     @click="() => goReferences(id)"
                     type="button"

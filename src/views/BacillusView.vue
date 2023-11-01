@@ -13,7 +13,23 @@
         <i
           >Bacillus, Enterobacter, Pseudomonas, Staphylococcus, Klebsiella,
           Flavobacterium, Rhodococcus y Nocardia</i
-        >.
+        >
+        <span>
+          <button
+            @click="() => goReferences('bacillus0')"
+            type="button"
+            class="btn btn-link btn-sm p-0 m-0"
+          >
+            [1],
+          </button>
+          <button
+            @click="() => goReferences('bacillus1')"
+            type="button"
+            class="btn btn-link btn-sm p-0 m-0"
+          >
+            [2].
+          </button>
+        </span>
       </section>
       <section class="p-2 mb-4 rounded color-techniques">
         <InfoSection
@@ -36,8 +52,14 @@
               },
               {
                 value:
-                  ' con un porcentaje de 34.55%, 36.54 %, 18.37 %, 36.07 %, 16.0 % y 34.48%, respectivamente.',
+                  ' con un porcentaje de 34.55%, 36.54 %, 18.37 %, 36.07 %, 16.0 % y 34.48%, respectivamente',
                 key: '',
+                link: [
+                  {
+                    text: '[2].',
+                    id: 'bacillus1',
+                  },
+                ],
               },
             ],
           ]"
@@ -141,103 +163,139 @@
         choiceIsMade
       "
     />
-    <SectionReferences
-      :references="[
-        {
-          authors: [
-            'J. K. Shrestha',
-            'Joshi, P. Regmi',
-            'P. Regmi',
-            'G. Badahit',
-          ],
-          title:
-            'Isolation and Identification of Low-Density Polyethylene (LDPE) Degrading Bacillus spp. from a Soil of Landfill Site',
-          editorial: 'Acta Sci. Microbiol',
-          vol: '2',
-          no: '4',
-          pages: ['30', '34'],
-          yearPublication: '2019',
-          link: 'https://www.researchgate.net/publication/331702789_Isolation_and_Identification_of_Low_Density_Polyethylene_LDPE_Degrading_Bacillus_spp_from_a_Soil_of_Landfill_Site',
-          dateAccess: '17-07-2023',
-        },
-        {
-          authors: ['H. Salehizadeh', 'M. Vossoughi', 'I. Alemzadeh'],
-          title: 'Some investigations on bioflocculant producing bacteria',
-          editorial: 'Biochem. Eng. J',
-          vol: '5',
-          no: '1',
-          pages: ['39', '44'],
-          yearPublication: '2000',
-          link: 'https://doi.org/10.1016/S1369-703X(99)00066-2',
-          dateAccess: '10-07-2023',
-        },
-        {
-          authors: ['S. Saeed', 'A. Iqbal', 'F. Deeba'],
-          title:
-            'Biodegradation study of Polyethylene and PVC using naturally occurring plastic degrading microbes',
-          editorial: 'Arch. Microbiol.',
-          vol: '204',
-          no: '8',
-          pages: ['497'],
-          yearPublication: '2022',
-          link: 'https://doi.org/10.1007/s00203-022-03081-8 ',
-          dateAccess: '10-07-2023',
-        },
-        {
-          authors: ['A. Tarafdar', 'et al.'],
-          title:
-            'Biofilm development of Bacillus siamensis ATKU1 on pristine short chain low-density polyethylene: A case study on microbe-microplastics interaction',
-          editorial: 'J. Hazard. Mater.',
-          vol: '409',
-          no: '124516',
-          pages: [],
-          yearPublication: '2021',
-          link: 'https://doi.org/10.1016/j.jhazmat.2020.124516',
-          dateAccess: '10-07-2023',
-        },
-        {
-          authors: [
-            'S. D. Khandare',
-            'D. Agrawal',
-            'N. Mehru',
-            'D. R. Chaundhary',
-          ],
-          title:
-            'Marine bacterial based enzymatic degradation of low-density polyethylene (LDPE) plastic',
-          editorial: 'J. Environ. Chem. Eng.',
-          vol: '10',
-          no: '3',
-          pages: ['107437'],
-          yearPublication: '2022',
-          link: 'https://doi.org/10.1016/j.jece.2022.107437 ',
-          dateAccess: '10-07-2023',
-        },
-        {
-          authors: ['J. Sharma', 'P. Agnihotri', 'K. Nandy ', 'A. K. Mitra'],
-          title:
-            'Isolation and Characterization of Plastic Degrading Bacteria from Soil Collected from the Dumping Grounds of an Industrial Area',
-          editorial: 'Int. J. Adv. Innov Res.',
-          vol: '3',
-          no: '3',
-          pages: ['225', '232'],
-          yearPublication: '2014',
-          link: 'https://www.researchgate.net/publication/279024937_Isolation_and_Characterization_of_Plastic_Degrading_Bacteria_from_Soil_Collected_from_the_Dumping_Grounds_of_an_Industrial_Area',
-          dateAccess: '10-07-2023',
-        },
-        {
-          authors: ['T. C. Ha Dang', 'et al.'],
-          title:
-            'Plastic degradation by thermophilic Bacillus sp. BCBT21 isolated from composting agricultural residual in Vietnam',
-          editorial: 'Adv. Nat. Sci.: Nanosci. Nanotechnol.',
-          vol: '9',
-          no: '1',
-          pages: ['11'],
-          yearPublication: '2018',
-          link: 'https://iopscience.iop.org/article/10.1088/2043-6254/aaabaf/meta',
-          dateAccess: '10-07-2023',
-        },
-      ]"
-    />
+    <article class="mt-2">
+      <section class="fw-bold">
+        Toda la información presentada se utilizaron las siguientes referencias.
+      </section>
+      <SectionReferences
+        :view="'bacillus'"
+        :references="[
+          {
+            authors: [
+              'M. R. Karimi Estahbanati',
+              'M. Kiendrebeogo',
+              'A. Khosravanipour Mostafazadeh',
+              'P. Drogui',
+              'R. D. Tyagi',
+            ],
+            title:
+              'Treatment processes for microplastics and nanoplastics in waters: State-of-the-art review',
+            editorial: 'Mar. Pollut. Bull.',
+            vol: '168',
+            no: '112374',
+            pages: [],
+            yearPublication: '2021',
+            link: 'https://doi.org/10.1016/j.marpolbul.2021.112374 ',
+            dateAccess: '26-09-2023',
+          },
+          {
+            authors: ['S. Hossain', 'et al.'],
+            title:
+              'Microplastics biodegradation by biofloc-producing bacteria: An inventive biofloc technology approach',
+            editorial: 'Microbiol. Res.',
+            vol: '266',
+            no: '127239',
+            pages: [],
+            yearPublication: '2023',
+            link: 'https://doi.org/10.1016/j.micres.2022.127239',
+            dateAccess: '17-07-2023',
+          },
+          {
+            authors: [
+              'J. K. Shrestha',
+              'Joshi, P. Regmi',
+              'P. Regmi',
+              'G. Badahit',
+            ],
+            title:
+              'Isolation and Identification of Low-Density Polyethylene (LDPE) Degrading Bacillus spp. from a Soil of Landfill Site',
+            editorial: 'Acta Sci. Microbiol',
+            vol: '2',
+            no: '4',
+            pages: ['30', '34'],
+            yearPublication: '2019',
+            link: 'https://www.researchgate.net/publication/331702789_Isolation_and_Identification_of_Low_Density_Polyethylene_LDPE_Degrading_Bacillus_spp_from_a_Soil_of_Landfill_Site',
+            dateAccess: '17-07-2023',
+          },
+          {
+            authors: ['H. Salehizadeh', 'M. Vossoughi', 'I. Alemzadeh'],
+            title: 'Some investigations on bioflocculant producing bacteria',
+            editorial: 'Biochem. Eng. J',
+            vol: '5',
+            no: '1',
+            pages: ['39', '44'],
+            yearPublication: '2000',
+            link: 'https://doi.org/10.1016/S1369-703X(99)00066-2',
+            dateAccess: '10-07-2023',
+          },
+          {
+            authors: ['S. Saeed', 'A. Iqbal', 'F. Deeba'],
+            title:
+              'Biodegradation study of Polyethylene and PVC using naturally occurring plastic degrading microbes',
+            editorial: 'Arch. Microbiol.',
+            vol: '204',
+            no: '8',
+            pages: ['497'],
+            yearPublication: '2022',
+            link: 'https://doi.org/10.1007/s00203-022-03081-8 ',
+            dateAccess: '10-07-2023',
+          },
+          {
+            authors: ['A. Tarafdar', 'et al.'],
+            title:
+              'Biofilm development of Bacillus siamensis ATKU1 on pristine short chain low-density polyethylene: A case study on microbe-microplastics interaction',
+            editorial: 'J. Hazard. Mater.',
+            vol: '409',
+            no: '124516',
+            pages: [],
+            yearPublication: '2021',
+            link: 'https://doi.org/10.1016/j.jhazmat.2020.124516',
+            dateAccess: '10-07-2023',
+          },
+          {
+            authors: [
+              'S. D. Khandare',
+              'D. Agrawal',
+              'N. Mehru',
+              'D. R. Chaundhary',
+            ],
+            title:
+              'Marine bacterial based enzymatic degradation of low-density polyethylene (LDPE) plastic',
+            editorial: 'J. Environ. Chem. Eng.',
+            vol: '10',
+            no: '3',
+            pages: ['107437'],
+            yearPublication: '2022',
+            link: 'https://doi.org/10.1016/j.jece.2022.107437 ',
+            dateAccess: '10-07-2023',
+          },
+          {
+            authors: ['J. Sharma', 'P. Agnihotri', 'K. Nandy ', 'A. K. Mitra'],
+            title:
+              'Isolation and Characterization of Plastic Degrading Bacteria from Soil Collected from the Dumping Grounds of an Industrial Area',
+            editorial: 'Int. J. Adv. Innov Res.',
+            vol: '3',
+            no: '3',
+            pages: ['225', '232'],
+            yearPublication: '2014',
+            link: 'https://www.researchgate.net/publication/279024937_Isolation_and_Characterization_of_Plastic_Degrading_Bacteria_from_Soil_Collected_from_the_Dumping_Grounds_of_an_Industrial_Area',
+            dateAccess: '10-07-2023',
+          },
+          {
+            authors: ['T. C. Ha Dang', 'et al.'],
+            title:
+              'Plastic degradation by thermophilic Bacillus sp. BCBT21 isolated from composting agricultural residual in Vietnam',
+            editorial: 'Adv. Nat. Sci.: Nanosci. Nanotechnol.',
+            vol: '9',
+            no: '1',
+            pages: ['11'],
+            yearPublication: '2018',
+            link: 'https://iopscience.iop.org/article/10.1088/2043-6254/aaabaf/meta',
+            dateAccess: '10-07-2023',
+          },
+        ]"
+      />
+    </article>
   </div>
 </template>
 <style scoped>
@@ -335,6 +393,8 @@ export default {
   },
   methods: {
     handleButton() {
+      this.setShowReferences(false);
+
       Swal.fire({
         title: "¿Valores por defecto o formulario?",
         text: "Ve a la simulación con valores por defecto o asígnalos por medio del formulario.",
@@ -396,6 +456,20 @@ export default {
     },
     obtainSVG(svg) {
       this.svgData = svg;
+    },
+    ...mapMutations({
+      setShowReferences: "setShowReferences",
+    }),
+    goReferences(id) {
+      this.setShowReferences(true);
+      setTimeout(() => {
+        const reference = document.getElementById(id);
+        if (reference) {
+          reference.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+      }, 200);
     },
   },
 };

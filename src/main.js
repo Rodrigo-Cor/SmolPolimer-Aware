@@ -9,7 +9,6 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "animate.css";
 
-/*
 const idUser = localStorage.getItem("idUser");
 const numberQuestion = localStorage.getItem("numberQuestion");
 const selectedOptionInitialOption = localStorage.getItem(
@@ -18,6 +17,15 @@ const selectedOptionInitialOption = localStorage.getItem(
 const selectedOptionInitialValue = localStorage.getItem(
   "selectedOptionInitialValue"
 );
+
+const selectedOptionFinalOption = localStorage.getItem(
+  "selectedOptionFinalOption"
+);
+const selectedOptionFinalValue = localStorage.getItem(
+  "selectedOptionFinalValue"
+);
+
+const isAnswered = localStorage.getItem("isAnswered");
 
 if (numberQuestion !== -1 && idUser !== null) {
   store.commit("setInitialData", {
@@ -32,6 +40,16 @@ if (selectedOptionInitialOption !== null && selectedOptionInitialValue != -1) {
     value: selectedOptionInitialValue,
   });
 }
-*/
+
+if (selectedOptionFinalOption !== null && selectedOptionFinalValue != -1) {
+  store.commit("setSelectedOptionFinal", {
+    option: selectedOptionFinalOption,
+    value: selectedOptionFinalValue,
+  });
+}
+
+if (isAnswered != null) {
+  store.commit("setIsAnswered", isAnswered);
+}
 
 createApp(App).use(store).use(router).mount("#app");

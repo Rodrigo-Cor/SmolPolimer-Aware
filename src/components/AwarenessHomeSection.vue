@@ -15,10 +15,9 @@ export default {
   name: "AwarenessHomeSection",
   created() {
     if (this.id === "") {
-      //Math.floor(Math.random() * this.startQuestions.length)
       this.modifyData({
         idUser: uuidv4(),
-        numberQuestion: 0,
+        numberQuestion: Math.floor(Math.random() * this.startQuestions.length),
       });
     }
   },
@@ -53,19 +52,19 @@ export default {
             plastico: {
               value: "plástico",
               meaning:
-                "Creado a partir de polímeros sintéticos y considerado como una alternativa a los materiales de origen natural.",
+                "Creado a partir de polímeros sintéticos y considerado como una alternativa a los materiales de origen natural",
             },
             ", éste actualmente se encuentra en la mayoría de los artículos de cualquier índole, utilizados en nuestra vida cotidiana. Pero realmente, ¿qué está ocurriendo? Con el paso de los años, es conocido que el aumento excesivo de este material ha contribuido a una considerable contaminación, aunque ¿no te has puesto a pensar, que este material como cualquier otro objeto, comience a desgastarse, ya sea desprendiendo pequeños":
               { value: "", meaning: "" },
             fragmentos: {
               value: "fragmentos",
-              meaning: "Cada una de las partes en que se rompe o divide algo.",
+              meaning: "Cada una de las partes en que se rompe o divide algo",
             },
             " o bien,": { value: "", meaning: "" },
             erosion: {
               value: "erosionándose con el ambiente",
               meaning:
-                "Proceso de degaste ejercido en un objeto que producen diversos factores físicos o químicos.",
+                "Proceso de degaste ejercido en un objeto que producen diversos factores físicos o químicos",
             },
             "?": { value: "", meaning: "" },
           },
@@ -85,7 +84,7 @@ export default {
               { value: "", meaning: "" },
             prenda: {
               value: "prenda sintética",
-              meaning: "Vestimenta compuesta por fibras de poliéster.",
+              meaning: "Vestimenta compuesta por fibras de poliéster",
             },
             ", eso significa que, en su mayoría está compuesta por poliéster. De ahí, se necesita lavar la prenda por higiene personal y una buena presentación, entonces, en ese preciso momento, la prenda sintética comienza a desprender pequeñas":
               { value: "", meaning: "" },
@@ -93,7 +92,7 @@ export default {
             fibras: {
               value: "fibras de poliéster",
               meaning:
-                "Fibras sintéticas utilizadas para simular tela en prendas de vestir.",
+                "Fibras sintéticas utilizadas para simular tela en prendas de vestir",
             },
             ", dirigiéndose al desagüe. El mejor escenario es que desemboque en una zona de agua tratada y el peor escenario es terminar en un cuerpo de agua, donde exista una flora y fauna.":
               { value: "", meaning: "" },
@@ -115,14 +114,14 @@ export default {
             marina: {
               value: "flora y fauna marina",
               meaning:
-                "Algas, mariscos, peces, plantas, aves y tortugas marinas hasta mamíferos.",
+                "Algas, mariscos, peces, plantas, aves y tortugas marinas hasta mamíferos",
             },
             ". ¿Qué efectos tendrá? En primera, su reproducción se verá afectada, debido a que los microplásticos pueden hacerse pasar por hormonas, aunado a esto, se tiene una esperanza de vida mucho más baja, ya que, probablemente en su":
               { value: "", meaning: "" },
             digestivo: {
               value: "tracto digestivo",
               meaning:
-                "Conjunto de órganos cuya función es digerir y absorben los alimentos.",
+                "Conjunto de órganos cuya función es digerir y absorben los alimentos",
             },
             " se le complique procesar plásticos pequeños.": {
               value: "",
@@ -146,7 +145,7 @@ export default {
             polimero: {
               value: "polímero",
               meaning:
-                "Cadena de moléculas formada por muchas unidades conocidas como monómeros.",
+                "Cadena de moléculas formada por muchas unidades conocidas como monómeros",
             },
             " ha tomado fuerza, debido a las grandes ganancias que ha dejado la comercialización de productos compuestos por plástico. México se encuentra en los primeros 15 lugares de los países con mayor producción y uso de plástico. De tal modo, que deja a la sociedad, la industria y el estado como los principales actores para regular, gestionar y estandarizar la venta, fabricación y tratamiento del consumo de plástico.":
               { value: "", meaning: "" },
@@ -181,15 +180,15 @@ export default {
             "La fragmentación de los plásticos conlleva a una acumulación excesiva de pequeñas partículas en los océanos, al tener diferentes densidades, puede ser que algunas lleguen más profunda que otras. Por lo tanto, el riesgo de ingesta por los ":
               { value: "", meaning: "" },
             organismos: {
-              value: "organismos acuáticos ",
+              value: "organismos acuáticos",
               meaning:
-                "Plancton, krill, larvas de peces, crustáceos, peces, mamíferos y depredadores.",
+                "Plancton, krill, larvas de peces, crustáceos, peces, mamíferos y depredadores",
             },
             " es mayor. Esto lleva a una": { value: "", meaning: "" },
             trofica: {
               value: "cadena trófica",
               meaning:
-                "Conjunto de seres vivos que se comen entre ellos para obtener los nutrientes necesarios, manteniendo al mismo tiempo un equilibrio en el ecosistema en cuestión.",
+                "Conjunto de seres vivos que se comen entre ellos para obtener los nutrientes necesarios, manteniendo al mismo tiempo un equilibrio en el ecosistema en cuestión",
             },
             " en la cual, los microplásticos se hacen presente en el proceso.":
               {
@@ -212,15 +211,15 @@ export default {
             "Existen diversos procesos para la limpieza de microplásticos en el agua, pero están divididos en dos grandes grupos. Por medio de  ":
               { value: "", meaning: "" },
             separacion: {
-              value: "procesos de separación ",
+              value: "procesos de separación",
               meaning:
-                "Se incluyen técnicas como la filtración granular rápida, filtración de disco, filtración de membrana y filtración por aire disuelto.",
+                "Se incluyen técnicas como la filtración granular rápida, filtración de disco, filtración de membrana y filtración por aire disuelto",
             },
             " y ": { value: "", meaning: "" },
             degradacion: {
               value: "procesos de degradación",
               meaning:
-                "Se presenta en géneros de bacterias como Bacillus, Enterobacter, Pseudomonas, Staphylococcus, Klebsiella, Flavobacterium, Rhodococcus y Nocardia.",
+                "Se presenta en géneros de bacterias como Bacillus, Enterobacter, Pseudomonas, Staphylococcus, Klebsiella, Flavobacterium, Rhodococcus y Nocardia",
             },
             ".": {
               value: "",
@@ -242,9 +241,9 @@ export default {
             "Los hábitos se consideran como acciones programadas para realizar nuestras actividades cotidianas. Sin embargo, éstas pueden afectar al ambiente, si utilizamos constantemente productos plásticos. Alternativas, existen muchas, desde la compra de productos":
               { value: "", meaning: "" },
             biodegradables: {
-              value: "biodegradables ",
+              value: "biodegradables",
               meaning:
-                "Son productos con la capacidad de descomposición evidente, ya que se dan con mayor facilidad y en poco tiempo.",
+                "Son productos con la capacidad de descomposición evidente, ya que se dan con mayor facilidad y en poco tiempo",
             },
             " hasta las acciones de reutilizar y reciclar, promoviendo una reducción de tu consumo de productos plásticos.":
               { value: "", meaning: "" },

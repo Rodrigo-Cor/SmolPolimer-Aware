@@ -17,7 +17,13 @@
             [
               {
                 value:
-                  'Fundación sin fines de lucro creada en 2013 y ubicada en los Países Bajos. Su objetivo principal es limpiar 90% del plástico en el mar para 2040, utilizando soluciones tecnológicas especializadas para océanos y ríos, a la par que investigaciones.',
+                  'Fundación sin fines de lucro creada en 2013 y ubicada en los Países Bajos. Su objetivo principal es limpiar 90% del plástico en el mar para 2040, utilizando soluciones tecnológicas especializadas para océanos y ríos, a la par que investigaciones',
+                link: [
+                  {
+                    text: '[1].',
+                    id: 'fight0',
+                  },
+                ],
               },
             ],
           ]"
@@ -42,7 +48,13 @@
             [
               {
                 value:
-                  'En 2021, “The Ocean Cleanup” desplegó un sistema de limpieza en “La Gran Mancha de Basura del Pacífico”, caracterizada por cubrir de plástico un área de 1.6 millones de kilómetros cuadrados. El funcionamiento del sistema estaba compuesto por una barrera en forma de “U” y mallas, que arrastrarían el plástico hasta la costa para reciclarlo.',
+                  'En 2021, “The Ocean Cleanup” desplegó un sistema de limpieza en “La Gran Mancha de Basura del Pacífico”, caracterizada por cubrir de plástico un área de 1.6 millones de kilómetros cuadrados. El funcionamiento del sistema estaba compuesto por una barrera en forma de “U” y mallas, que arrastrarían el plástico hasta la costa para reciclarlo',
+                link: [
+                  {
+                    text: '[1].',
+                    id: 'fight0',
+                  },
+                ],
               },
             ],
           ]"
@@ -71,7 +83,13 @@
             [
               {
                 value:
-                  'Organización sin fines de lucro, que tiene el objetivo de acabar con la contaminación por plástico, por medio de programas educativos, campañas sociales, investigaciones documentales y audiovisuales para invitar a más personas en involucrarse en la reducción de contaminación por plástico.',
+                  'Organización sin fines de lucro, que tiene el objetivo de acabar con la contaminación por plástico, por medio de programas educativos, campañas sociales, investigaciones documentales y audiovisuales para invitar a más personas en involucrarse en la reducción de contaminación por plástico',
+                link: [
+                  {
+                    text: '[2].',
+                    id: 'fight1',
+                  },
+                ],
               },
             ],
           ]"
@@ -96,7 +114,13 @@
             [
               {
                 value:
-                  'Durante el 2019, se desarrolló el programa educativo “Rethink. Refill”, que consistió en brindar botellas reutilizables y estaciones de rellenado, para todas aquellas escuelas con deficiencias en el servicio de agua potable. De esta forma, invitaba a los jóvenes a participar en la lucha contra el problema de la contaminación por plástico en el agua. Cabe destacar que participaron dos escuelas de Quintana Roo, México.',
+                  'Durante el 2019, se desarrolló el programa educativo “Rethink. Refill”, que consistió en brindar botellas reutilizables y estaciones de rellenado, para todas aquellas escuelas con deficiencias en el servicio de agua potable. De esta forma, invitaba a los jóvenes a participar en la lucha contra el problema de la contaminación por plástico en el agua. Cabe destacar que participaron dos escuelas de Quintana Roo, México',
+                link: [
+                  {
+                    text: '[2].',
+                    id: 'fight1',
+                  },
+                ],
               },
             ],
           ]"
@@ -113,23 +137,27 @@
     </article>
     <article class="mt-4 row">
       <section class="col-md-6 col-12">
-        Una vez revisada la información, es fundamental e indispensable que
-        forme parte del nuestro conocimiento sobre el entorno, contribuyendo a
-        la protección de la naturaleza y sus elementos, de diferentes maneras.
-        <ReferencesAuthors
-          :img="{
-            src: require('@/assets/guillaume-de-germain-6Xw9wMJyHus-unsplash.jpg'),
-            alt: 'Planeta Tierra en el pasto',
-          }"
-          :credits="{
-            'Foto de ': '',
-            'Guillaume de Germain ':
-              'https://unsplash.com/es/@guillaumedegermain?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
-            'en ': '',
-            Unsplash:
-              'https://unsplash.com/es/fotos/6Xw9wMJyHus?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
-          }"
-        />
+        <section class="mb-2">
+          Una vez revisada la información, es fundamental e indispensable que
+          forme parte del nuestro conocimiento sobre el entorno, contribuyendo a
+          la protección de la naturaleza y sus elementos, de diferentes maneras.
+        </section>
+        <section>
+          <ReferencesAuthors
+            :img="{
+              src: require('@/assets/guillaume-de-germain-6Xw9wMJyHus-unsplash.jpg'),
+              alt: 'Planeta Tierra en el pasto',
+            }"
+            :credits="{
+              'Foto de ': '',
+              'Guillaume de Germain ':
+                'https://unsplash.com/es/@guillaumedegermain?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
+              'en ': '',
+              Unsplash:
+                'https://unsplash.com/es/fotos/6Xw9wMJyHus?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
+            }"
+          />
+        </section>
       </section>
       <section class="col-md-6 col-12">
         <AccordionInformation
@@ -137,22 +165,62 @@
             {
               title: 'Productos cotidianos',
               paragraph:
-                'Procura comprar cosméticos, jabones y artículos de higiene personal de origen natural.',
+                'Procura comprar cosméticos, jabones y artículos de higiene personal de origen natural',
+              link: [
+                {
+                  text: '[3],',
+                  id: 'fight2',
+                },
+                {
+                  text: '[4].',
+                  id: 'fight3',
+                },
+              ],
             },
             {
               title: 'Empaquetados',
               paragraph:
-                'Trata de comprar productos a granel, un ejemplo pueden ser productos de limpieza.',
+                'Trata de comprar productos a granel, un ejemplo pueden ser productos de limpieza',
+              link: [
+                {
+                  text: '[3],',
+                  id: 'fight2',
+                },
+                {
+                  text: '[4].',
+                  id: 'fight3',
+                },
+              ],
             },
             {
               title: 'Reutiliza',
               paragraph:
-                'Toma conciencia sobre nuestro impacto en el ambiente y cambia tu actitud como consumidor.',
+                'Toma conciencia sobre nuestro impacto en el ambiente y cambia tu actitud como consumidor',
+              link: [
+                {
+                  text: '[3],',
+                  id: 'fight2',
+                },
+                {
+                  text: '[4].',
+                  id: 'fight3',
+                },
+              ],
             },
             {
               title: 'Educación ambiental',
               paragraph:
-                'Participa en campañas ambientales y mantente constantemente informado sobre este problema ambiental progresivo.',
+                'Participa en campañas ambientales y mantente constantemente informado sobre este problema ambiental progresivo',
+              link: [
+                {
+                  text: '[3],',
+                  id: 'fight2',
+                },
+                {
+                  text: '[4].',
+                  id: 'fight3',
+                },
+              ],
             },
           ]"
           :typeAccordion="'acciones'"
@@ -166,18 +234,8 @@
         Toda la información presentada se utilizaron las siguientes referencias.
       </section>
       <SectionReferences
+        :view="'fight'"
         :references="[
-          {
-            authors: ['G. Acosta', 'D. V. Carillo', 'J. A. Caballero'],
-            title: 'Microplásticos en agua y organismos',
-            editorial: 'ciencia',
-            vol: '73',
-            no: '2',
-            pages: ['14', '21'],
-            yearPublication: 'abril-junio 2022',
-            link: 'https://www.revistaciencia.amc.edu.mx/images/revista/73_2/PDF/Ciencia_73-2.pdf',
-            dateAccess: '26-09-2023',
-          },
           {
             authors: ['Oceans • The Ocean Cleanup'],
             title: 'The Ocean Cleanup',

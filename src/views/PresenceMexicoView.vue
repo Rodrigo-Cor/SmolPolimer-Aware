@@ -20,8 +20,14 @@
             [
               {
                 value:
-                  'Existe una falta significativa tanto de divulgación como de cobertura científica en México, ya que solo se tienen registradas 19 investigaciones documentales, en su mayoría realizadas en estados costeros como en el centro del país.',
+                  'Existe una falta significativa tanto de divulgación como de cobertura científica en México, ya que solo se tienen registradas 19 investigaciones documentales, en su mayoría realizadas en estados costeros como en el centro del país',
                 key: '',
+                link: [
+                  {
+                    text: '[1].',
+                    id: 'presence0',
+                  },
+                ],
               },
             ],
             [
@@ -47,12 +53,28 @@
             {
               type: 'IMTA',
               description:
-                'El Instituto Mexicano de Tecnología del Agua fue fundado en 1986, está ubicado en Jiutepec, Morelos. Se enfoca en el desarrollo de metodologías confiables para obtener resultados cuantitativos sobre los materiales plásticos presentes en el agua, desde el muestreo hasta el análisis.',
+                'El Instituto Mexicano de Tecnología del Agua fue fundado en 1986, está ubicado en Jiutepec, Morelos. Se enfoca en el desarrollo de metodologías confiables para obtener resultados cuantitativos sobre los materiales plásticos presentes en el agua, desde el muestreo hasta el análisis',
+              link: [
+                {
+                  text: '[2].',
+                  id: 'presence1',
+                },
+              ],
             },
             {
               type: 'INECC',
               description:
-                'El Instituto Nacional de Ecología y Cambio Climático fue creado en 2013, ubicándose en la Ciudad de México. Su objetivo es combinar la investigación técnica, al igual que la científica en relación con la ecología y cambio climático para apoyar la toma de decisiones en esos ámbitos.',
+                'El Instituto Nacional de Ecología y Cambio Climático fue creado en 2013, ubicándose en la Ciudad de México. Su objetivo es combinar la investigación técnica, al igual que la científica en relación con la ecología y cambio climático para apoyar la toma de decisiones en esos ámbitos',
+              link: [
+                {
+                  text: '[3],',
+                  id: 'presence2',
+                },
+                {
+                  text: '[4].',
+                  id: 'presence3',
+                },
+              ],
             },
           ]"
           :headers="['Instituto', 'Características']"
@@ -61,7 +83,7 @@
     </article>
 
     <article>
-      <section>
+      <section class="mb-1">
         A continuación, se presentan los estudios destacados y divulgados por
         parte del IMTA e INECC.
       </section>
@@ -85,7 +107,13 @@
               arrayText: [
                 [
                   {
-                    value: `En el 2019, el IMTA realizó un estudio sobre el análisis microscópico de partículas que podrían ser de plástico derivado, tomando como base a muestras de agua de dos plantas potabilizadoras ubicadas en Valle de Bravo, Estado de México y el Lago de Chapala, Jalisco, así como de sus fuentes de abastecimiento.`,
+                    value: `En el 2019, el IMTA realizó un estudio sobre el análisis microscópico de partículas que podrían ser de plástico derivado, tomando como base a muestras de agua de dos plantas potabilizadoras ubicadas en Valle de Bravo, Estado de México y el Lago de Chapala, Jalisco, así como de sus fuentes de abastecimiento`,
+                    link: [
+                      {
+                        text: '[2].',
+                        id: 'presence1',
+                      },
+                    ],
                   },
                 ],
               ],
@@ -107,7 +135,17 @@
               arrayText: [
                 [
                   {
-                    value: `En 2020, el INECC informó durante su intervención en Diálogos Ambientales, un evento organizado por la Secretaría de Medio Ambiente y Recursos Naturales (SEMARNAT), que los microplásticos representan entre el 60 y el 80% de los residuos que se encuentran en los océanos que rodean a México.`,
+                    value: `En 2020, el INECC informó durante su intervención en Diálogos Ambientales, un evento organizado por la Secretaría de Medio Ambiente y Recursos Naturales (SEMARNAT), que los microplásticos representan entre el 60 y el 80% de los residuos que se encuentran en los océanos que rodean a México`,
+                    link: [
+                      {
+                        text: '[3],',
+                        id: 'presence2',
+                      },
+                      {
+                        text: '[4].',
+                        id: 'presence3',
+                      },
+                    ],
                   },
                 ],
               ],
@@ -129,9 +167,15 @@
               arrayText: [
                 [
                   {
-                value: `La presencia de microplásticos está relacionada con las actividades realizadas en cada región. Un ejemplo son las playas turísticas, en donde se encontraron fragmentos rígidos y fibras, producto de la degradación de cubiertos desechables y bolsas plásticas. Aunado a lo anterior, se hallaron microplásticos en las costas del océano Pacifico, golfo de California, golfo de México, en el mar Caribe, además de un río en Puebla en conjunto con otro en Tijuana.`,
-                  }
-                ]
+                    value: `La presencia de microplásticos está relacionada con las actividades realizadas en cada región. Un ejemplo son las playas turísticas, en donde se encontraron fragmentos rígidos y fibras, producto de la degradación de cubiertos desechables y bolsas plásticas. Aunado a lo anterior, se hallaron microplásticos en las costas del océano Pacifico, golfo de California, golfo de México, en el mar Caribe, además de un río en Puebla en conjunto con otro en Tijuana`,
+                    link: [
+                      {
+                        text: '[1].',
+                        id: 'presence0',
+                      },
+                    ],
+                  },
+                ],
               ],
             },
           ]"
@@ -139,7 +183,7 @@
       </section>
     </article>
     <article>
-      <section>
+      <section class="mb-1">
         No sólo existen concentración de microplásticos en zonas costeras o ríos
         como se explicó, sino también en las fuentes públicas de agua potable de
         la Ciudad de México.
@@ -162,8 +206,14 @@
             [
               {
                 value:
-                  'Los resultados arrojaron un total de 770 partículas microplásticas, de las cuales se identificaron en su mayoría con forma de fragmentos irregulares y fibras. Con relación a los rangos de tamaño se encontraron menores a 500 μm, 0.5 a 1 mm, 1 a 2 mm y 3 a 5 mm, representando respectivamente un 50%, 25%, 22% y 3% de las partículas microplásticas captadas.',
+                  'Los resultados arrojaron un total de 770 partículas microplásticas, de las cuales se identificaron en su mayoría con forma de fragmentos irregulares y fibras. Con relación a los rangos de tamaño se encontraron menores a 500 μm, 0.5 a 1 mm, 1 a 2 mm y 3 a 5 mm, representando respectivamente un 50%, 25%, 22% y 3% de las partículas microplásticas captadas',
                 key: '',
+                link: [
+                  {
+                    text: '[5].',
+                    id: 'presence4',
+                  },
+                ],
               },
             ],
           ]"
@@ -184,6 +234,7 @@
         Toda la información presentada se utilizaron las siguientes referencias.
       </section>
       <SectionReferences
+        :view="'presence'"
         :references="[
           {
             authors: ['G. Acosta', 'D. V. Carillo', 'J. A. Caballero'],
@@ -195,17 +246,6 @@
             yearPublication: 'abril-junio 2022',
             link: 'https://www.revistaciencia.amc.edu.mx/images/revista/73_2/PDF/Ciencia_73-2.pdf',
             dateAccess: '26-09-2023',
-          },
-          {
-            authors: ['Forbes Staff'],
-            title: 'Pacífico mexicano, un mar lleno de microplásticos',
-            editorial: 'Forbes México',
-            vol: '',
-            no: '',
-            pages: [],
-            yearPublication: '',
-            link: 'https://www.forbes.com.mx/pacifico-mexicano-un-mar-lleno-de-microplasticos/',
-            dateAccess: '02-10-2023',
           },
           {
             authors: ['I. M. de T. del Agua'],

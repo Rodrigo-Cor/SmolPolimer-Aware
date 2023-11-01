@@ -1,9 +1,9 @@
-<template>  
+<template>
   <div class="text-justify-custom pt-2">
     ¿Quieres conocer más? Selecciona el tema de tu interés
     <div class="row">
       <div
-        class="col-6 col-md-4 mt-2"
+        class="col-12 col-md-6 mt-2"
         v-for="(value, key) in buttonValues"
         :key="key"
       >
@@ -64,12 +64,10 @@ export default {
     return {
       buttonValue: "",
       buttonStates: {
-        "bacillus": false,
         "microplastics water": false,
         "microplastic effects": false,
       },
       buttonValues: {
-        "bacillus": "Conservación del agua",
         "microplastics water": "Microplásticos en el agua",
         "microplastic effects": "Efectos de los microplásticos",
       },
