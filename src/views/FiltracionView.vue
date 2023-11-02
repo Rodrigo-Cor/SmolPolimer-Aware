@@ -349,9 +349,12 @@ export default {
           this.choice = this.choice;
           this.choiceIsMade = this.choiceIsMade;
         }
+        const currentScrollY = window.scrollY;
+        const resultsSection = document.getElementById("results-section");
         setTimeout(() => {
-          const resultsSection = document.getElementById("results-section");
-          if (resultsSection && !result.isDismissed) {
+          if (!resultsSection)
+            window.scrollTo(0, currentScrollY);
+          else if (resultsSection && !result.isDismissed) {
             resultsSection.scrollIntoView({
               behavior: "smooth",
               block: "start",
