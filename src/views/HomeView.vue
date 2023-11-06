@@ -113,7 +113,7 @@
           src: require('@/assets/fly-d-NXyXNl5LTqM-unsplash.jpg'),
           alt: 'Popotes de plástico',
         }"
-        :sideImage="false"
+        :sideImage="true"
         :arrayText="[
           [
             {
@@ -165,7 +165,7 @@
               src: require('@/assets/tim-mossholder-qq-8dpdlBsY-unsplash.jpg'),
               alt: 'Gaviota con microplásticos en su pico',
             },
-            sideImage: true,
+            sideImage: false,
             credits: {
               'Foto de ': '',
               'Tim Mossholder ':
@@ -199,7 +199,7 @@
               src: require('@/assets/tim-mossholder-qq-8dpdlBsY-unsplash.jpg'),
               alt: 'Gaviota con microplásticos en su pico',
             },
-            sideImage: true,
+            sideImage: false,
             credits: {
               'Foto de ': '',
               'Tim Mossholder ':
@@ -236,7 +236,7 @@
               src: require('@/assets/tim-mossholder-qq-8dpdlBsY-unsplash.jpg'),
               alt: 'Gaviota con microplásticos en su pico',
             },
-            sideImage: true,
+            sideImage: false,
             credits: {
               'Foto de ': '',
               'Tim Mossholder ':
@@ -272,7 +272,7 @@
               src: require('@/assets/tim-mossholder-qq-8dpdlBsY-unsplash.jpg'),
               alt: 'Gaviota con microplásticos en su pico',
             },
-            sideImage: true,
+            sideImage: false,
             credits: {
               'Foto de ': '',
               'Tim Mossholder ':
@@ -309,7 +309,7 @@
               src: require('@/assets/tim-mossholder-qq-8dpdlBsY-unsplash.jpg'),
               alt: 'Gaviota con microplásticos en su pico',
             },
-            sideImage: true,
+            sideImage: false,
             credits: {
               'Foto de ': '',
               'Tim Mossholder ':

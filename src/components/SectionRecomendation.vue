@@ -3,7 +3,7 @@
     ¿Quieres conocer más? Selecciona el tema de tu interés
     <div class="row">
       <div
-        class="col-12 col-md-6 mt-2"
+        class="col-6 col-md-4 offset-md-1 mt-2 d-flex justify-content-center"
         v-for="(value, key) in buttonValues"
         :key="key"
       >

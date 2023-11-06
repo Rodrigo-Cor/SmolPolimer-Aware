@@ -35,16 +35,26 @@
       </div>
       <button
         v-if="typeQuestion === 'final'"
-        class="btn btn-info my-3 rounded-pill rounded-2"
+        class="my-3 rounded-pill rounded-2 fw-bold"
         @click="saveResults"
         :disabled="disabledFinal"
+        v-bind:class="{
+          'btn btn-light': isHovered,
+          'btn btn-info': !isHovered,
+        }"
+        @mouseenter="isHovered = true"
+        @mouseleave="isHovered = false"
       >
+        <i
+          class="bi bi-floppy-fill"
+          v-if="!stateRequestResult && !disabledFinal"
+        ></i>
         {{
           stateRequestResult
             ? "Guardando..."
             : disabledFinal
             ? "Gracias por tu respuesta"
-            : "Guardar resultados"
+            : "Guardar tu respuesta"
         }}
       </button>
     </form>
@@ -73,6 +83,7 @@ export default {
     return {
       localSelectedOption: "",
       stateRequestResult: false,
+      isHovered: false,
     };
   },
   computed: {
@@ -115,9 +126,12 @@ export default {
     },
     searchValue(value) {
       const foundOption = this.questions[this.numberQuestion].options.find(
-        (option) => option.option === value
+        ({ option }) => option === value
       );
-      return { option: foundOption["option"], value: foundOption["value"] };
+      return {
+        option: foundOption["option"],
+        value: parseInt(foundOption["value"]),
+      };
     },
   },
   watch: {

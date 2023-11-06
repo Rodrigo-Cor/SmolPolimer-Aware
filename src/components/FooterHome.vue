@@ -1,24 +1,38 @@
 <template>
   <footer class="text-center text-lg-start">
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+    <section class="my-2">
+      <SectionSharing />
+    </section>
+    <section
+      class="text-center p-3"
+      style="background-color: rgba(0, 0, 0, 0.2)"
+    >
       TT 2023-B007. Prototipo de aplicación web progresiva para concientizar
       sobre riesgos de contaminación por microplásticos en el agua
-    </div>
-    <div class="container p-4">
-      <div class="row">
-        <div class="col-lg-4 col-md-12 mb-4 mb-md-0">Corona Rivera Rodrigo</div>
-        <div class="col-lg-4 col-md-12 mb-4 mb-md-0">Cortés Lugo Arturo</div>
-        <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+    </section>
+    <section class="container p-4">
+      <section class="row">
+        <article class="col-lg-4 col-md-12 mb-4 mb-md-0">
+          Corona Rivera Rodrigo
+        </article>
+        <article class="col-lg-4 col-md-12 mb-4 mb-md-0">
+          Cortés Lugo Arturo
+        </article>
+        <article class="col-lg-4 col-md-12 mb-4 mb-md-0">
           Hernandéz Penilla Diego Armando
-        </div>
-      </div>
-    </div>
+        </article>
+      </section>
+    </section>
   </footer>
 </template>
 
 <script>
+import SectionSharing from "./SectionSharing.vue";
 export default {
   name: "FooterHome",
+  components: {
+    SectionSharing,
+  },
 };
 </script>
 

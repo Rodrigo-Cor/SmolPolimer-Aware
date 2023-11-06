@@ -37,14 +37,14 @@ if (numberQuestion !== -1 && idUser !== null) {
 if (selectedOptionInitialOption !== null && selectedOptionInitialValue != -1) {
   store.commit("setSelectedOptionInitial", {
     option: selectedOptionInitialOption,
-    value: selectedOptionInitialValue,
+    value: parseInt(selectedOptionInitialValue),
   });
 }
 
 if (selectedOptionFinalOption !== null && selectedOptionFinalValue != -1) {
   store.commit("setSelectedOptionFinal", {
     option: selectedOptionFinalOption,
-    value: selectedOptionFinalValue,
+    value: parseInt(selectedOptionFinalValue),
   });
 }
 

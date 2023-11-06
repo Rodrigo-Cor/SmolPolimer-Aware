@@ -1,10 +1,11 @@
 import Swal from "sweetalert2";
-import randomColor from "randomcolor";
 
 export const genericAlert = (message, icon) => {
   Swal.fire({
     title: message,
     icon: icon,
+    background: "#272727",
+    color: "#effffb",
     showConfirmButton: true,
     confirmButtonText: "OK",
     allowOutsideClick: false,

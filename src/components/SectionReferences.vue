@@ -6,6 +6,7 @@
         'btn btn-dark': isHovered,
         'btn btn-outline-dark': !isHovered,
       }"
+      class="rounded-pill rounded-2 fw-bold"
       @mouseenter="isHovered = true"
       @mouseleave="isHovered = false"
     >

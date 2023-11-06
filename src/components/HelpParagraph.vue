@@ -13,6 +13,7 @@
                 meaning: text[key].meaning,
               })
           "
+          @blur="concept = { value: '', meaning: '' }"
           class="btn btn-link p-0 m-0 fst-italic"
         >
           {{ value }}
@@ -51,11 +52,11 @@ export default {
         },
         fragmentos: {
           text: "[2].",
-          id: "home4",
+          id: "home1",
         },
         "erosionándose con el ambiente": {
           text: "[3].",
-          id: "home7",
+          id: "home2",
         },
         "prenda sintética": {
           text: "[4].",
@@ -73,7 +74,7 @@ export default {
           text: "[7].",
           id: "home6",
         },
-        "polímero": {
+        polímero: {
           text: "[8].",
           id: "home7",
         },
@@ -91,9 +92,9 @@ export default {
         },
         "procesos de degradación": {
           text: "[12].",
-          id: "home13",
+          id: "home11",
         },
-        "biodegradables": {
+        biodegradables: {
           text: "[13].",
           id: "home12",
         },
@@ -120,12 +121,5 @@ export default {
   components: {
     TableInformation,
   },
-  methods: {},
 };
 </script>
-
-<style scoped>
-.text-justify-custom {
-  text-align: justify;
-}
-</style>

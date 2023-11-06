@@ -1,6 +1,7 @@
 import { createStore } from "vuex";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { genericAlert } from "@/globalFunctions";
 
 export default createStore({
   modules: {
@@ -127,16 +128,14 @@ export default createStore({
               config
             );
             const references = response.data.filter(
-              (element) => !element.title.startsWith("{")
+              ({ title }) => !title.startsWith("{")
             );
             commit("setReferences", references);
           } catch (error) {
-            Swal.fire({
-              icon: "error",
-              title: "¡Error!",
-              text: "Ocurrió un problema con la obtención de las referencias. Vuelve a intentarlo.",
-              allowOutsideClick: false,
-            });
+            genericAlert(
+              "Ocurrió un problema con la obtención de las referencias. Vuelve a intentarlo con otro tema.",
+              "error"
+            );
             commit("setReferences", []);
           } finally {
             commit("setStateRequest", false);

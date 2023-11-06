@@ -26,7 +26,7 @@
           src: require('@/assets/ivan-bandura-Ac97OqAWDvg-unsplash.jpg'),
           alt: 'Agua con filtro granular rápido',
         }"
-        :sideImage="true"
+        :sideImage="false"
         :arrayText="[
           [
             {
