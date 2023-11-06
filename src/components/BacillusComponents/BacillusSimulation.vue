@@ -36,7 +36,7 @@
   --bs-btn-active-border-color: #4f98ca;
 }
 .slider {
-  -webkit-appearance: none;  /* Override default CSS styles */
+  -webkit-appearance: none;
   appearance: none;
   border-radius: 1rem;
   height: 1rem;

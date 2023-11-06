@@ -87,80 +87,57 @@
         cantidad de microplásticos a degradar (en miligramos), el número de
         bimestres en los que se estará degradando, la cepa de <i>Bacillus</i> a
         utilizar, que dependiendo del medio de cultivo (agar o broth)
-        seleccionado, determinará el porcentaje de degradación. Simplemente haz
-        clic en el botón que dice "Simulación" a continuación y comencemos.
+        seleccionado, determinará el porcentaje de degradación.
+      </section>
+      <section>
+        Para poder simular, se presentan dos opciones: simulación con valores
+        por defecto (en la que se valores predefinidos son ingresados
+        automáticamente) y simulación con formulario (donde podrás escoger qué
+        valores definirán la simulación gráfica). Si los datos introducidos son
+        válidos, se mostrará un resumen de los campos llenados, a la vez que los
+        resultados; una simulación gráfica con la que puedes interactuar y
+        finalmente la explicación de dicha simulación sumado a la opción de
+        descargar un PDF con los resultados.
       </section>
     </article>
-    <BacillusForm v-if="choice" />
+    <BacillusForm v-if="disableFormButton" />
     <BacillusResults
-      v-if="
-        microplastics &&
-        timeUnits &&
-        percentage &&
-        growthMedium &&
-        strain &&
-        choiceIsMade
-      "
+      v-if="microplastics && timeUnits && percentage && growthMedium && strain"
     />
     <BacillusSimulation
       @chart-obtained="obtainSVG"
-      v-if="
-        degradatedValues.length > 0 &&
-        microplastics &&
-        timeUnits &&
-        percentage &&
-        growthMedium &&
-        strain &&
-        choiceIsMade
-      "
+      v-if="degradatedValues.length > 1"
     />
-    <BacillusExplained
-      v-if="
-        degradatedValues.length > 0 &&
-        microplastics &&
-        timeUnits &&
-        percentage &&
-        growthMedium &&
-        strain &&
-        choiceIsMade
-      "
-    />
+    <BacillusExplained v-if="degradatedValues.length > 1" />
     <BacillusPDF
       :svgData="svgData"
-      v-if="
-        degradatedValues.length > 0 &&
-        microplastics &&
-        timeUnits &&
-        percentage &&
-        growthMedium &&
-        strain &&
-        svgData &&
-        choiceIsMade
-      "
+      v-if="degradatedValues.length > 1 && svgData"
     />
     <div class="d-flex justify-content-center my-2">
-      <button @click="handleButton" class="btn btn-bd-primary">
-        <i class="bi bi-graph-down"></i>
-        {{
-          choiceIsMade
-            ? choice
-              ? "Valores por defecto"
-              : "Formulario"
-            : "Simulación"
-        }}
+      <button
+        v-show="!disableFormButton"
+        type="button"
+        @click="handleButton1"
+        class="btn btn-bd-primary"
+      >
+        <i class="bi bi-graph-up"></i> Simulación con formulario
+      </button>
+    </div>
+    <div class="d-flex justify-content-center my-2">
+      <button
+        v-show="!disableDefaultButton"
+        type="button"
+        @click="handleButton2"
+        class="btn btn-bd-secondary"
+      >
+        <i class="bi bi-graph-up"></i> Simulación con valores por defecto
       </button>
     </div>
     <AwarenessSimulationSection
       v-if="
         !getIsAnswered &&
-        degradatedValues.length > 0 &&
-        microplastics &&
-        timeUnits &&
-        percentage &&
-        growthMedium &&
-        strain &&
-        svgData &&
-        choiceIsMade
+        degradatedValues.length > 1 &&
+        svgData
       "
     />
     <article class="mt-2">
@@ -315,6 +292,19 @@
   --bs-btn-active-bg: #50d890;
   --bs-btn-active-border-color: #50d890;
 }
+.btn-bd-secondary {
+  --bs-btn-border-radius: 2rem;
+  --bs-btn-font-weight: bold;
+  --bs-btn-color: #4f98ca;
+  --bs-btn-bg: #effffb;
+  --bs-btn-border-color: #4f98ca;
+  --bs-btn-hover-color: #272727;
+  --bs-btn-hover-bg: #4f98ca;
+  --bs-btn-hover-border-color: #4f98ca;
+  --bs-btn-active-color: #272727;
+  --bs-btn-active-bg: #4f98ca;
+  --bs-btn-active-border-color: #4f98ca;
+}
 </style>
 <script>
 import BacillusForm from "@/components/BacillusComponents/BacillusForm.vue";
@@ -326,7 +316,6 @@ import TableInformation from "@/components/TableInformation.vue";
 import AwarenessSimulationSection from "@/components/AwarenessSimulationSection.vue";
 import SectionReferences from "@/components/SectionReferences.vue";
 import InfoSection from "@/components/InfoSection.vue";
-import Swal from "sweetalert2";
 import { mapGetters, mapMutations } from "vuex";
 
 export default {
@@ -344,14 +333,14 @@ export default {
   },
   data() {
     return {
-      choiceIsMade: false,
-      choice: null,
       defaultMicroplastics: 1000,
       defaultTimeUnits: 12,
       defaultPercentage: 34.55,
       defaultGrowthMedium: "mineral agar",
       defaultStrain: "B. carbonipphilus",
       svgData: null,
+      disableFormButton: false,
+      disableDefaultButton: false,
     };
   },
   computed: {
@@ -392,70 +381,41 @@ export default {
     },
   },
   methods: {
-    handleButton() {
+    handleButton1() {
       this.setShowReferences(false);
-
-      Swal.fire({
-        title: "¿Valores por defecto o formulario?",
-        text: "Ve a la simulación con valores por defecto o asígnalos por medio del formulario.",
-        background: "#272727",
-        color: "#effffb",
-        icon: "question",
-        position: "center",
-
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        allowEnterKey: false,
-        stopKeydownPropagation: false,
-
-        showConfirmButton: true,
-        confirmButtonText: "Formulario",
-        confirmButtonColor: "#50d890",
-        confirmButtonAriaLabel: "Formulario",
-
-        showDenyButton: true,
-        denyButtonText: "Valores por defecto",
-        denyButtonColor: "#4f98ca",
-        denyButtonAriaLabel: "Valores por defecto",
-
-        showCancelButton: true,
-        cancelButtonText: "Cancelar",
-        cancelButtonAriaLabel: "Cancelar",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.choice = true;
-          this.$store.commit("setMicroplastics", "");
-          this.$store.commit("setTimeUnits", "");
-          this.$store.commit("setGrowthMedium", "");
-          this.$store.commit("setStrain", "");
-          this.$store.commit("setPercentage", "");
-          this.$store.commit("setDegradatedValues", []);
-          this.choiceIsMade = true;
-        } else if (result.isDenied) {
-          this.choice = false;
-          this.$store.commit("setMicroplastics", this.defaultMicroplastics);
-          this.$store.commit("setTimeUnits", this.defaultTimeUnits);
-          this.$store.commit("setGrowthMedium", this.defaultGrowthMedium);
-          this.$store.commit("setStrain", this.defaultStrain);
-          this.$store.commit("setPercentage", this.defaultPercentage);
-          this.choiceIsMade = true;
-        } else if (result.isDismissed) {
-          this.choiceIsMade = this.choiceIsMade;
-          this.choice = this.choice;
+      this.$store.commit("setMicroplastics", "");
+      this.$store.commit("setTimeUnits", "");
+      this.$store.commit("setGrowthMedium", "");
+      this.$store.commit("setStrain", "");
+      this.$store.commit("setPercentage", "");
+      this.$store.commit("setDegradatedValues", []);
+      this.disableDefaultButton = false;
+      this.disableFormButton = true;
+      console.log(this.degradatedValues.length);
+      console.log(this.degradatedValues);
+    },
+    handleButton2() {
+      this.setShowReferences(false);
+      this.$store.commit("setMicroplastics", this.defaultMicroplastics);
+      this.$store.commit("setTimeUnits", this.defaultTimeUnits);
+      this.$store.commit("setGrowthMedium", this.defaultGrowthMedium);
+      this.$store.commit("setStrain", this.defaultStrain);
+      this.$store.commit("setPercentage", this.defaultPercentage);
+      this.disableDefaultButton = true;
+      this.disableFormButton = false;
+      console.log(this.degradatedValues.length);
+      console.log(this.degradatedValues);
+      const currentScrollY = window.scrollY;
+      const resultsSection = document.getElementById("results-section");
+      setTimeout(() => {
+        if (!resultsSection) window.scrollTo(0, currentScrollY);
+        else if (resultsSection) {
+          resultsSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
         }
-        const currentScrollY = window.scrollY;
-        const resultsSection = document.getElementById("results-section");
-        setTimeout(() => {
-          if (!resultsSection)
-            window.scrollTo(0, currentScrollY);
-          else if (resultsSection && !result.isDismissed) {
-            resultsSection.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }
-        }, 340);
-      });
+      }, 340);
     },
     obtainSVG(svg) {
       this.svgData = svg;

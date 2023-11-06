@@ -63,56 +63,48 @@
       filtro. Para la simulación se reciben como datos de entrada: una cantidad
       de microplásticos en miligramos, otra que termina de residuo y el número
       de días por el que se estará pasando esa cantidad por el filtro.
-      Simplemente haz clic en el botón que dice "Simulación" a continuación y
-      comencemos.
     </section>
-    <FiltracionForm v-if="choice" />
-    <FiltracionResults
-      v-if="microplastics && residues && timeUnits && choiceIsMade"
-    />
+    <section class="text-justify-custom my-2">
+      Para poder simular, se presentan dos opciones: simulación con valores por
+      defecto (en la que se valores predefinidos son ingresados automáticamente)
+      y simulación con formulario (donde podrás escoger qué valores definirán la
+      simulación gráfica). Si los datos introducidos son válidos, se mostrará un
+      resumen de los campos llenados, a la vez que los resultados; una
+      simulación gráfica con la que puedes interactuar y finalmente la
+      explicación de dicha simulación sumado a la opción de descargar un PDF con
+      los resultados.
+    </section>
+    <FiltracionForm v-if="disableFormButton" />
+    <FiltracionResults v-if="microplastics && residues && timeUnits" />
     <FiltracionSimulation
       @chart-obtained="obtainSVG"
-      v-if="
-        onFilterValues.length > 0 &&
-        releasedValues.length > 0 &&
-        microplastics &&
-        residues &&
-        timeUnits &&
-        choiceIsMade
-      "
+      v-if="onFilterValues.length > 0 && releasedValues.length > 0"
     />
     <FiltracionExplained
-      v-if="
-        onFilterValues.length > 0 &&
-        releasedValues.length > 0 &&
-        microplastics &&
-        residues &&
-        timeUnits &&
-        choiceIsMade
-      "
+      v-if="onFilterValues.length > 0 && releasedValues.length > 0"
     />
     <FiltracionPDF
       :svgData="svgData"
-      v-if="
-        onFilterValues.length > 0 &&
-        releasedValues.length > 0 &&
-        microplastics &&
-        residues &&
-        timeUnits &&
-        svgData &&
-        choiceIsMade
-      "
+      v-if="onFilterValues.length > 0 && releasedValues.length > 0 && svgData"
     />
     <div class="d-flex justify-content-center my-2">
-      <button @click="handleButton" class="btn btn-bd-primary">
-        <i class="bi bi-graph-up"></i>
-        {{
-          choiceIsMade
-            ? choice
-              ? "Valores por defecto"
-              : "Formulario"
-            : "Simulación"
-        }}
+      <button
+        v-show="!disableFormButton"
+        type="button"
+        @click="handleButton1"
+        class="btn btn-bd-primary"
+      >
+        <i class="bi bi-graph-up"></i> Simulación con formulario
+      </button>
+    </div>
+    <div class="d-flex justify-content-center my-2">
+      <button
+        v-show="!disableDefaultButton"
+        type="button"
+        @click="handleButton2"
+        class="btn btn-bd-secondary"
+      >
+        <i class="bi bi-graph-up"></i> Simulación con valores por defecto
       </button>
     </div>
     <AwarenessSimulationSection
@@ -120,11 +112,7 @@
         !getIsAnswered &&
         onFilterValues.length > 0 &&
         releasedValues.length > 0 &&
-        microplastics &&
-        residues &&
-        timeUnits &&
-        svgData &&
-        choiceIsMade
+        svgData
       "
     />
 
@@ -234,6 +222,19 @@
   --bs-btn-active-bg: #50d890;
   --bs-btn-active-border-color: #50d890;
 }
+.btn-bd-secondary {
+  --bs-btn-border-radius: 2rem;
+  --bs-btn-font-weight: bold;
+  --bs-btn-color: #4f98ca;
+  --bs-btn-bg: #effffb;
+  --bs-btn-border-color: #4f98ca;
+  --bs-btn-hover-color: #272727;
+  --bs-btn-hover-bg: #4f98ca;
+  --bs-btn-hover-border-color: #4f98ca;
+  --bs-btn-active-color: #272727;
+  --bs-btn-active-bg: #4f98ca;
+  --bs-btn-active-border-color: #4f98ca;
+}
 </style>
 <script>
 import FiltracionForm from "@/components/FiltracionComponents/FiltracionForm.vue";
@@ -244,7 +245,6 @@ import FiltracionPDF from "@/components/FiltracionComponents/FiltracionPDF.vue";
 import AwarenessSimulationSection from "@/components/AwarenessSimulationSection.vue";
 import InfoSection from "@/components/InfoSection.vue";
 import SectionReferences from "@/components/SectionReferences.vue";
-import Swal from "sweetalert2";
 import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "FiltracionView",
@@ -260,12 +260,12 @@ export default {
   },
   data() {
     return {
-      choiceIsMade: false,
-      choice: null,
       defaultMicroplastics: 29,
       defaultResidues: 5,
       defaultTimeUnits: 9,
       svgData: null,
+      disableFormButton: false,
+      disableDefaultButton: false,
     };
   },
   computed: {
@@ -302,66 +302,34 @@ export default {
   },
 
   methods: {
-    handleButton() {
+    handleButton1() {
       this.setShowReferences(false);
-      Swal.fire({
-        title: "¿Valores por defecto o formulario?",
-        text: "Ve a la simulación con valores por defecto o asígnalos por medio del formulario.",
-        background: "#272727",
-        color: "#effffb",
-        icon: "question",
-        position: "center",
-
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        allowEnterKey: false,
-        stopKeydownPropagation: false,
-
-        showConfirmButton: true,
-        confirmButtonText: "Formulario",
-        confirmButtonColor: "#50d890",
-        confirmButtonAriaLabel: "Formulario",
-
-        showDenyButton: true,
-        denyButtonText: "Valores por defecto",
-        denyButtonColor: "#4f98ca",
-        denyButtonAriaLabel: "Valores por defecto",
-
-        showCancelButton: true,
-        cancelButtonText: "Cancelar",
-        cancelButtonAriaLabel: "Cancelar",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.choice = true;
-          this.$store.commit("setMicroplastics", "");
-          this.$store.commit("setResidues", "");
-          this.$store.commit("setTimeUnits", "");
-          this.$store.commit("setOnFilterValues", []);
-          this.$store.commit("setReleasedValues", []);
-          this.choiceIsMade = true;
-        } else if (result.isDenied) {
-          this.choice = false;
-          this.$store.commit("setMicroplastics", this.defaultMicroplastics);
-          this.$store.commit("setTimeUnits", this.defaultTimeUnits);
-          this.$store.commit("setResidues", this.defaultResidues);
-          this.choiceIsMade = true;
-        } else if (result.isDismissed) {
-          this.choice = this.choice;
-          this.choiceIsMade = this.choiceIsMade;
+      this.$store.commit("setMicroplastics", "");
+      this.$store.commit("setResidues", "");
+      this.$store.commit("setTimeUnits", "");
+      this.$store.commit("setOnFilterValues", []);
+      this.$store.commit("setReleasedValues", []);
+      this.disableDefaultButton = false;
+      this.disableFormButton = true;
+    },
+    handleButton2() {
+      this.setShowReferences(false);
+      this.$store.commit("setMicroplastics", this.defaultMicroplastics);
+      this.$store.commit("setTimeUnits", this.defaultTimeUnits);
+      this.$store.commit("setResidues", this.defaultResidues);
+      this.disableDefaultButton = true;
+      this.disableFormButton = false;
+      const currentScrollY = window.scrollY;
+      const resultsSection = document.getElementById("results-section");
+      setTimeout(() => {
+        if (!resultsSection) window.scrollTo(0, currentScrollY);
+        else if (resultsSection) {
+          resultsSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
         }
-        const currentScrollY = window.scrollY;
-        const resultsSection = document.getElementById("results-section");
-        setTimeout(() => {
-          if (!resultsSection)
-            window.scrollTo(0, currentScrollY);
-          else if (resultsSection && !result.isDismissed) {
-            resultsSection.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }
-        }, 340);
-      });
+      }, 340);
     },
     obtainSVG(svg) {
       this.svgData = svg;
