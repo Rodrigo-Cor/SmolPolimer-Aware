@@ -177,7 +177,7 @@ export default {
           tableWidth: "auto",
           margin: 50,
           headStyles: { halign: 'center', fillColor: "#50d890"},
-          bodyStyles: { halign: 'center', fontSize: "bold"},
+          bodyStyles: { halign: 'center'},
         });
         pdf.save("ReporteBacillus.pdf");
       };
