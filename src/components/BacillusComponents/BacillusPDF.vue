@@ -173,11 +173,11 @@ export default {
 
         autoTable(pdf, {
           html: "#tableResults",
-          startY: 30,
+          startY: 25,
           tableWidth: "auto",
           margin: 50,
           headStyles: { halign: 'center', fillColor: "#50d890"},
-          bodyStyles: { halign: 'center'},
+          bodyStyles: { halign: 'center', fontSize: "bold"},
         });
         pdf.save("ReporteBacillus.pdf");
       };

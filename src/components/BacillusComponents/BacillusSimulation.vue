@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid" style="background-color: white; border-radius: 1rem;" >
+  <div class="container-fluid" style="background-color: white; border-radius: 1rem;">
     <h2 class="section-subtitle text-center my-2 animate__animated animate__flash">Simulación</h2>
     <p class="degradatedTag text-center ">Microplásticos (mg)-----</p>
     <div class="col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-12">
@@ -8,33 +8,54 @@
       <div id="chartPDF-container"></div>
     </div>
     <div class="d-flex justify-content-center my-2">
-      <label class="my-label" for="simulationTimeInput">Tiempo de simulación</label>
-      <span>: {{ simulationTime }} {{ simulationTime != 1 ? "segundos" : "segundo" }}</span>  
+      <Popper class="popper-box" arrow content="Controla en cuántos segundos se redibuja la simulación" placement="top" hover>
+        <button class="btn btn-bd-info btn-sm mb-2"><i class="bi bi-lightbulb"></i></button>
+      </Popper>
     </div>
     <div class="d-flex justify-content-center my-2">
-      <input v-model="simulationTime" type="range" min="1" max="10" class="slider" id="simulationTimeInput" name="simulationTimeInput">
+      <label class="my-label" for="simulationTimeInput">Vel. Redibujado</label>
+    </div>
+    <div class="d-flex justify-content-center my-2">
+      <input v-model="simulationTime" type="range" min="1" max="10" class="slider" id="simulationTimeInput"
+        name="simulationTimeInput">
+    </div>
+    <div class="d-flex justify-content-center my-2">
+      <span> {{ simulationTime }} {{ simulationTime != 1 ? "segundos" : "segundo" }}</span>
     </div>
   </div>
 </template>
 <style scoped>
-.degradatedTag{
-    font-size: 1rem;
-    font-weight: bold;
-    color: #4f98ca;
+.degradatedTag {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #4f98ca;
 }
-.btn-bd-primary {
+
+.btn-bd-info {
   --bs-btn-border-radius: 2rem;
-  --bs-btn-font-weight: bold;
-  --bs-btn-color: #4f98ca;
-  --bs-btn-bg: #ffffff;
-  --bs-btn-border-color: #4f98ca;
-  --bs-btn-hover-color: #ffffff;;
-  --bs-btn-hover-bg: #4f98ca;
-  --bs-btn-hover-border-color: #4f98ca;
-  --bs-btn-active-color: #ffffff;
-  --bs-btn-active-bg: #4f98ca;
-  --bs-btn-active-border-color: #4f98ca;
+  --bs-btn-color: #50d890;
+  --bs-btn-bg: #272727;
+  --bs-btn-border-color: #272727;
+  --bs-btn-hover-color: #272727;
+  ;
+  --bs-btn-hover-bg: #50d890;
+  --bs-btn-hover-border-color: #50d890;
+  --bs-btn-active-color: #272727;
+  --bs-btn-active-bg: #50d890;
+  --bs-btn-active-border-color: #50d890;
 }
+
+.popper-box {
+  --popper-theme-background-color: #272727;
+  --popper-theme-background-color-hover: #272727;
+  --popper-theme-text-color: #effffb;
+  --popper-theme-border-width: 0rem;
+  --popper-theme-border-style: solid;
+  --popper-theme-border-radius: 1rem;
+  --popper-theme-padding: 0.8rem;
+  --popper-theme-box-shadow: 0 0.375rem 1.875rem -0.375rem rgba(39, 39, 39, 0.25);
+}
+
 .slider {
   -webkit-appearance: none;
   appearance: none;
@@ -50,6 +71,7 @@
 .slider:hover {
   opacity: 1;
 }
+
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -59,13 +81,15 @@
   background: #50d890;
   cursor: pointer;
 }
+
 .slider::-moz-range-thumb {
   width: 1.2rem;
   height: 1.2rem;
   background: #50d890;
   cursor: pointer;
 }
-.my-label{
+
+.my-label {
   font-size: 1rem;
   font-weight: bold;
   color: #4f98ca;
@@ -73,16 +97,20 @@
 </style>
 <script>
 import * as d3 from "d3";
-import { mapGetters} from 'vuex';
+import Popper from "vue3-popper";
+import { mapGetters } from 'vuex';
 export default {
   name: "BacillusSimulation",
-  data () {
+  components: {
+    Popper
+  },
+  data() {
     return {
-      isFullscreen : false,
-      simulationTime : 2,
+      isFullscreen: false,
+      simulationTime: 2,
     };
   },
-  mounted () {
+  mounted() {
     if (this.$refs.containerRef) {
       this.createChart();
     };
@@ -128,11 +156,11 @@ export default {
       this.isFullscreen = isFullscreen;
 
       const width = isFullscreen
-          ? fullscreenWidth - margin.left - margin.right
-          : containerWidth - margin.left - margin.right;
-        const height = isFullscreen
-          ? fullscreenHeight - margin.top - margin.bottom
-          : containerHeight - margin.top - margin.bottom;
+        ? fullscreenWidth - margin.left - margin.right
+        : containerWidth - margin.left - margin.right;
+      const height = isFullscreen
+        ? fullscreenHeight - margin.top - margin.bottom
+        : containerHeight - margin.top - margin.bottom;
 
       var x = d3.scaleLinear()
         .range([0, width]);
@@ -141,16 +169,16 @@ export default {
 
       var svg = d3.select("#chart-container")
         .append("svg")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
         .append("g")
-          .attr("transform", `translate(${margin.left},${margin.top})`);
-      
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
       svg.append("rect")
         .attr("width", width)
         .attr("height", height)
         .attr("fill", "#272727");
-      
+
       x.domain([0, this.degradatedValues.length - 1]);
       y.domain([d3.min(this.degradatedValues), d3.max(this.degradatedValues)]);
 
@@ -160,11 +188,11 @@ export default {
 
       svg.append("g")
         .call(d3.axisLeft(y));
-        
+
       var lineDegradated = d3.line()
         .x((d, i) => x(i))
         .y(d => y(d));
-      
+
       var pathDegradated = svg.append("path")
         .datum(this.degradatedValues)
         .attr("fill", "none")
@@ -180,7 +208,7 @@ export default {
         .transition()
         .duration(this.simulationTime * 1000)
         .attr("stroke-dashoffset", 0);
-      
+
       svg
         .append("text")
         .attr("x", width / 2)
@@ -196,86 +224,86 @@ export default {
         .attr("text-anchor", "middle")
         .text("Miligramos");
 
-        this.createChartForPDF();
+      this.createChartForPDF();
     },
     createChartForPDF() {
-        d3.select("#chartPDF-container").select("svg").remove();
-        var margin = { top: 20, right: 75, bottom: 75, left: 75 };
-        const width = 522;
-        const height = 308.2;
+      d3.select("#chartPDF-container").select("svg").remove();
+      var margin = { top: 20, right: 75, bottom: 75, left: 75 };
+      const width = 522;
+      const height = 308.2;
 
-        var x = d3.scaleLinear()
-          .range([0, width]);
-        var y = d3.scaleLinear()
-          .range([height, 0]);
-        
-        var svg = d3.select("#chartPDF-container")/* var svg = d3.create("svg") */
+      var x = d3.scaleLinear()
+        .range([0, width]);
+      var y = d3.scaleLinear()
+        .range([height, 0]);
+
+      var svg = d3.select("#chartPDF-container")/* var svg = d3.create("svg") */
         .append("svg")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
         .append("g")
-          .attr("transform", `translate(${margin.left},${margin.top})`);
+        .attr("transform", `translate(${margin.left},${margin.top})`);
 
-        x.domain([0, this.degradatedValues.length - 1]);
-        y.domain([d3.min(this.degradatedValues), d3.max(this.degradatedValues)]);
-        
-        svg.append("g")
-          .attr("transform", `translate(0,${height})`)
-          .call(d3.axisBottom(x));
+      x.domain([0, this.degradatedValues.length - 1]);
+      y.domain([d3.min(this.degradatedValues), d3.max(this.degradatedValues)]);
 
-        svg.append("g")
-          .call(d3.axisLeft(y));
+      svg.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x));
 
-        var lineDegradated = d3.line()
+      svg.append("g")
+        .call(d3.axisLeft(y));
+
+      var lineDegradated = d3.line()
         .x((d, i) => x(i))
         .y(d => y(d));
-      
-        svg.append("path")
-          .datum(this.degradatedValues)
-          .attr("fill", "none")
-          .attr("stroke", "#4f98ca")
-          .attr("stroke-width", 2)
-          .attr("d", lineDegradated);
 
-        svg.append("g")
-          .attr("class", "grid")
-          .attr("transform", `translate(0,${height})`)
-          .attr("stroke", "#1e1e1e")
-          .attr("stroke-width", .5)
-          .call(d3.axisBottom(x)
-            .tickSize(-height)
-            .tickFormat("")
-          );
+      svg.append("path")
+        .datum(this.degradatedValues)
+        .attr("fill", "none")
+        .attr("stroke", "#4f98ca")
+        .attr("stroke-width", 2)
+        .attr("d", lineDegradated);
 
-        svg.append("g")
-          .attr("class", "grid")
-          .attr("stroke", "#1e1e1e")
-          .attr("stroke-width", .5)
-          .call(d3.axisLeft(y)
-            .tickSize(-width)
-            .tickFormat("")
-          );
-        
-        svg
-          .append("text")
-          .attr("x", width / 2)
-          .attr("y", height + margin.bottom - 25)
-          .attr("text-anchor", "middle")
-          .text("Bimestres");
+      svg.append("g")
+        .attr("class", "grid")
+        .attr("transform", `translate(0,${height})`)
+        .attr("stroke", "#1e1e1e")
+        .attr("stroke-width", .5)
+        .call(d3.axisBottom(x)
+          .tickSize(-height)
+          .tickFormat("")
+        );
 
-        svg
-          .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("x", - height / 2)
-          .attr("y", (margin.left / 2) - 90)
-          .attr("text-anchor", "middle")
-          .text("Miligramos");
+      svg.append("g")
+        .attr("class", "grid")
+        .attr("stroke", "#1e1e1e")
+        .attr("stroke-width", .5)
+        .call(d3.axisLeft(y)
+          .tickSize(-width)
+          .tickFormat("")
+        );
 
-        const svgElement = document.querySelector("#chartPDF-container svg")
-        const svgString = new XMLSerializer().serializeToString(svgElement/* svg.node() */);
-        this.$emit('chart-obtained', svgString);
-        d3.select("#chartPDF-container").select("svg").remove();
-      },
+      svg
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", height + margin.bottom - 25)
+        .attr("text-anchor", "middle")
+        .text("Bimestres");
+
+      svg
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("x", - height / 2)
+        .attr("y", (margin.left / 2) - 90)
+        .attr("text-anchor", "middle")
+        .text("Miligramos");
+
+      const svgElement = document.querySelector("#chartPDF-container svg")
+      const svgString = new XMLSerializer().serializeToString(svgElement/* svg.node() */);
+      this.$emit('chart-obtained', svgString);
+      d3.select("#chartPDF-container").select("svg").remove();
+    },
     observeContainerResize() {
       const container = this.$refs.containerRef;
       this.resizeObserver = new ResizeObserver(() => {
@@ -295,6 +323,6 @@ export default {
         this.createChart();
       }
     },
-  },  
+  },
 };
 </script>

@@ -169,7 +169,7 @@ export default {
         pdf.line(pageWidth - right, top, pageWidth - right, pageHeight - bottom);
 
         pdf.text("Generalmente, el porcentaje acumulado del filtro debe ser mayor  al", 20, 20);
-        pdf.text("del río, sin embargo, este comportamiento puede no darse en  algún ", 20, 25);
+        pdf.text("del  río, sin embargo, este comportamiento puede no darse en  algún", 20, 25);
         pdf.text("o algunos días. El porcentaje acumulado final para el filtro y para", 20, 30);
         pdf.text("el río son " + self.lastOnFilterValue.toFixed(2) +"% y " + self.lastReleasedValue.toFixed(2) + "%, respectivamente.", 20, 35);
 
@@ -181,11 +181,11 @@ export default {
         pdf.text("Tabla de resultados", xCoordinate, 45);
         autoTable(pdf, {
           html: "#tableResults",
-          startY: 55,
+          startY: 50,
           tableWidth: "auto",
           margin: 50,
           headStyles: { halign: 'center', fillColor: "#50d890"},
-          bodyStyles: { halign: 'center'},
+          bodyStyles: { halign: 'center', fontStyle: "bold"},
         });
         pdf.save("ReporteFiltracion.pdf");
       };

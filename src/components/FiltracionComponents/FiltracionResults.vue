@@ -170,7 +170,6 @@ export default {
     scrollVisualization() {
       const currentScrollY = window.scrollY;
       const resultsSection = document.getElementById("results-section");
-      console.log(resultsSection);
       setTimeout(() => {
         if (!resultsSection) window.scrollTo(0, currentScrollY);
         else if (resultsSection) {
@@ -178,7 +177,6 @@ export default {
             behavior: "smooth",
             block: "start",
           });
-          console.log(resultsSection);
         }
       }, 340);
     },

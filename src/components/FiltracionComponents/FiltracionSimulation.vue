@@ -9,11 +9,19 @@
       <div id="chartPDF-container"></div>
     </div>
     <div class="d-flex justify-content-center my-2">
-      <label class="my-label" for="simulationTimeInput">Tiempo de simulación</label>
-      <span>: {{ simulationTime }} {{ simulationTime != 1 ? "segundos" : "segundo" }}</span>  
+      <Popper class="popper-box" arrow content="Controla en cuántos segundos se redibuja la simulación" placement="top" hover>
+        <button class="btn btn-bd-info btn-sm mb-2"><i class="bi bi-lightbulb"></i></button>
+      </Popper>
     </div>
     <div class="d-flex justify-content-center my-2">
-      <input v-model="simulationTime" type="range" min="1" max="10" class="slider" id="simulationTimeInput" name="simulationTimeInput">
+      <label class="my-label" for="simulationTimeInput">Vel. Redibujado</label>
+    </div>
+    <div class="d-flex justify-content-center my-2">
+      <input v-model="simulationTime" type="range" min="1" max="10" class="slider" id="simulationTimeInput"
+        name="simulationTimeInput">
+    </div>
+    <div class="d-flex justify-content-center my-2">
+      <span> {{ simulationTime }} {{ simulationTime != 1 ? "segundos" : "segundo" }}</span>
     </div>
   </div>
 </template>
@@ -28,18 +36,29 @@
     font-weight: bold;
     color: #50d890;
 }
-.btn-bd-primary {
+.btn-bd-info {
   --bs-btn-border-radius: 2rem;
-  --bs-btn-font-weight: bold;
-  --bs-btn-color: #4f98ca;
-  --bs-btn-bg: #ffffff;
-  --bs-btn-border-color: #4f98ca;
-  --bs-btn-hover-color: #ffffff;;
-  --bs-btn-hover-bg: #4f98ca;
-  --bs-btn-hover-border-color: #4f98ca;
-  --bs-btn-active-color: #ffffff;
-  --bs-btn-active-bg: #4f98ca;
-  --bs-btn-active-border-color: #4f98ca;
+  --bs-btn-color: #50d890;
+  --bs-btn-bg: #272727;
+  --bs-btn-border-color: #272727;
+  --bs-btn-hover-color: #272727;
+  ;
+  --bs-btn-hover-bg: #50d890;
+  --bs-btn-hover-border-color: #50d890;
+  --bs-btn-active-color: #272727;
+  --bs-btn-active-bg: #50d890;
+  --bs-btn-active-border-color: #50d890;
+}
+
+.popper-box {
+  --popper-theme-background-color: #272727;
+  --popper-theme-background-color-hover: #272727;
+  --popper-theme-text-color: #effffb;
+  --popper-theme-border-width: 0rem;
+  --popper-theme-border-style: solid;
+  --popper-theme-border-radius: 1rem;
+  --popper-theme-padding: 0.8rem;
+  --popper-theme-box-shadow: 0 0.375rem 1.875rem -0.375rem rgba(39, 39, 39, 0.25);
 }
 .slider {
   -webkit-appearance: none;
@@ -79,9 +98,13 @@
 </style>
 <script>
 import * as d3 from "d3";
+import Popper from "vue3-popper";
 import { mapGetters} from 'vuex';
 export default {
   name: "FiltracionSimulation",
+  components: {
+    Popper
+  },
   data () {
     return {
       isFullscreen : false,

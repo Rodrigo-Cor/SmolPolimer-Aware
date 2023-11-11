@@ -1,205 +1,143 @@
 <template>
   <div class="container-fluid">
-    <h2 class="section-subtitle text-center animate__animated animate__flash">Formulario</h2>
-    <div class="row justify-content-center">
-      <div class="col-sm-12 col-md-3 text-center my-1">
-        <Popper
-          class="popper-box"
-          arrow
-          content="Cantidad de microplasticos a degradar"
-          placement="top"
-          hover
-        >
-        <button class="btn btn-bd-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
+    <h2 class="section-subtitle text-center animate__animated animate__flash" id="form-section">Formulario</h2>
+    <form class="row g-3">
+      <div class="col-md-4 col-12 text-center">
+        <Popper class="popper-box" arrow content="Cantidad de microplasticos a degradar" placement="top" hover>
+          <button class="btn btn-bd-info btn-sm mb-2"><i class="bi bi-lightbulb"></i></button>
         </Popper>
-        <br>
-        <label class="my-label" for="quantityInput">Microplásticos</label>
-        <br>
-        <input
-          class="my-input"
-          v-model="quantity"
-          type="text"
-          id="quantityInput"
-          name="quantityInput"
-          @keypress= "validateKeyPress"
-        />
-        <br>
-        <span class= "myAlert" v-if="quantity > 10000 || (!quantity && sendButtonPressed)">Mínimo 1, máximo 10000</span>
+        <div class="input-group mb-3">
+          <div class="form-floating">
+            <input type="text" class="form-control" v-model="quantity" id="quantityInput" name="quantityInput"
+              placeholder="Microplásticos" aria-label="Microplásticos" aria-describedby="basic-addon1"
+              @keypress="validateKeyPress">
+            <label for="quantityInput">Microplásticos</label>
+          </div>
+          <span class="input-group-text" id="basic-addon1">mg</span>
+        </div>
+        <span class="myAlert" v-if="quantity > 10000 || (!quantity && sendButtonPressed)"><i
+            class="bi bi-exclamation-diamond-fill"></i> Mínimo 1, máximo 10000</span>
       </div>
-      <div class="col-sm-12 col-md-3 text-center my-1">
-        <Popper
-          class="popper-box" 
-          arrow 
-          content="Cuántos bimestres van a estar degradándose"
-          placement="top"
-          hover
-        >
-        <button class="btn btn-bd-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
+      <div class="col-md-4 col-12 text-center">
+        <Popper class="popper-box" arrow content="Cuántos bimestres van a estar degradándose" placement="top" hover>
+          <button class="btn btn-bd-info btn-sm mb-2"><i class="bi bi-lightbulb"></i></button>
         </Popper>
-        <br>
-        <label class="my-label" for="bimestersInput">Bimestres</label>
-        <br>
-        <input
-          class="my-input"
-          v-model="bimester"
-          type="text"
-          id="bimestersInput"
-          name="bimestersInput"
-          @keypress= "validateKeyPress"
-        />
-        <br>
-        <span class= "myAlert" v-if="bimester > 12 || (!bimester && sendButtonPressed)">Mínimo 1, máximo 12</span>
+        <div class="input-group mb-3">
+          <div class="form-floating">
+            <input type="text" class="form-control" v-model="bimester" id="bimestersInput" name="bimestersInput"
+              placeholder="Tiempo" aria-label="Tiempo" aria-describedby="basic-addon2" @keypress="validateKeyPress">
+            <label for="bimestersInput">Tiempo</label>
+          </div>
+          <span class="input-group-text" id="basic-addon2">{{ bimester != 1 ? "bimestres" : "bimestre" }}</span>
+        </div>
+        <span class="myAlert" v-if="bimester > 12 || (!bimester && sendButtonPressed)"><i
+            class="bi bi-exclamation-diamond-fill"></i> Mínimo 1, máximo 12</span>
       </div>
-      <div class="col-sm-12 col-md-3 text-center my-1">
-        <Popper
-          class="popper-box"
-          arrow
-          content="Alimento para las bacterias, determina el porcentaje de degradación."
-          placement="top"
-          hover
-        >
-        <button class="btn btn-bd-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
+      <div class="col-md-4 col-12 text-center">
+        <Popper class="popper-box" arrow content="Alimento para las bacterias, determina el porcentaje de degradación."
+          placement="top" hover>
+          <button class="btn btn-bd-info btn-sm mb-2"><i class="bi bi-lightbulb"></i></button>
         </Popper>
-        <br>
-        <label class="my-label" for="mineralInput">Medio de cultivo</label>
-        <br>
-        <select 
-          class="my-select"
-          v-model="mineral"
-          aria-label="Select de mineral"
-          id="mineralInput"
-          name="mineralInput"
-          @change="handleMaterialSelect"
-        >
-          <option :value="'mineral agar'">mineral agar</option>
-          <option :value="'mineral broth'">mineral broth</option>
-        </select>
-        <br>
-        <span class= "myAlert" v-if="!mineral && sendButtonPressed">Selecciona un medio de cultivo</span>
+        <div class="input-group mb-3">
+          <div class="form-floating">
+            <select class="form-select" v-model="mineral" id="mineralInput" name="mineralInput"
+              aria-label="Select de mineral" @change="handleMaterialSelect">
+              <option :value="'mineral agar'">mineral agar</option>
+              <option :value="'mineral broth'">mineral broth</option>
+            </select>
+            <label for="mineralInput">Medio de cultivo</label>
+          </div>
+        </div>
+        <span class="myAlert" v-if="!mineral && sendButtonPressed"><i class="bi bi-exclamation-diamond-fill"></i>
+          Selecciona un medio de cultivo</span>
       </div>
-      <div v-show="this.buttonPressed" class="col-sm-12 col-md-3 text-center my-1">
-        <Popper
-          class="popper-box" 
-          arrow 
-          content="La cepa define el porcentaje de degradación"
-          placement="top"
-          hover
-        >
-        <button class="btn btn-bd-info btn-sm"><i class= "bi bi-lightbulb"></i></button>
+      <div class="col-md-4 offset-md-4 col-12 text-center" v-show="this.mediumSelected">
+        <Popper class="popper-box" arrow content="La cepa define el porcentaje de degradación" placement="top" hover>
+          <button class="btn btn-bd-info btn-sm mb-2"><i class="bi bi-lightbulb"></i></button>
         </Popper>
-        <br>
-        <label class="my-label" for="percentageInput">Porcentaje de degradación</label>
-        <span>: {{ percentage }}%</span>
-        <br>
-        <select
-          class="my-bacteria mx-auto"
-          v-model="percentage"
-          aria-label="Select de Porcentaje"
-          id="percentageInput"
-          name="percentageInput"
-          @change = "setBacillusStrain"
-        >
-          <option :value="percentageOptions[0]">B. carbonipphilus</option>
-          <option :value="percentageOptions[1]" >B. sporothermodurans</option>
-          <option :value="percentageOptions[2]" >B. coagulans</option>
-          <option :value="percentageOptions[3]" >B. neidei</option>
-          <option :value="percentageOptions[4]" >B. smithii</option>
-          <option :value="percentageOptions[5]" >B. megaterium</option>
-        </select>
-        <br>
-        <span class= "myAlert" v-if="!percentage && sendButtonPressed">Selecciona una cepa de bacteria</span>
+        <div class="input-group mb-3">
+          <div class="form-floating">
+            <select class="form-select" v-model="percentage" id="percentageInput" aria-label="Select de Porcentaje"
+              aria-describedby="basic-addon3" name="percentageInput" @change="setBacillusStrain">
+              <option :value="percentageOptions[0]">B. carbonipphilus</option>
+              <option :value="percentageOptions[1]">B. sporothermodurans</option>
+              <option :value="percentageOptions[2]">B. coagulans</option>
+              <option :value="percentageOptions[3]">B. neidei</option>
+              <option :value="percentageOptions[4]">B. smithii</option>
+              <option :value="percentageOptions[5]">B. megaterium</option>
+            </select>
+            <label for="percentageInput">% degradación</label>
+          </div>
+          <span class="input-group-text" id="basic-addon3">{{ percentage }}%</span>
+        </div>
+        <span class="myAlert" v-if="!percentage && sendButtonPressed"><i class="bi bi-exclamation-diamond-fill"></i>
+          Selecciona una cepa de bacteria</span>
       </div>
-    </div>
+    </form>
     <div class="d-flex justify-content-center my-4">
       <button @click="handleSendButton" class="btn btn-bd-primary">
         <i class="bi bi-check-circle"></i> Calcular
       </button>
     </div>
-  </div> 
+  </div>
 </template>
 <style scoped>
-.myAlert{
+.myAlert {
   margin: 1rem;
-  color: #50d890; 
+  color: #f41b35;
   font-size: 0.85rem;
   font-weight: bold;
 }
-.my-label{
-  font-size: 1rem;
-  font-weight: bold;
-  color: #4f98ca;
+
+.form-control:focus {
+  box-shadow: none;
 }
-.my-input{
-  width: 8rem;
-  height: 2rem;
-  padding: 0.2rem;
-  border: 0.2rem solid #4f98ca;
-  border-radius: 0.8rem;
-  background-color:#effffb;
-  transition: 0.5s;
-  outline: none;
+
+.form-select:focus {
+  box-shadow: none;
 }
-.my-select {
-  width: 8rem;
-  height: 2rem;
-  padding: 0.2rem;
-  border: 0.2rem solid #4f98ca;
-  border-radius: 0.8rem;
-  background-color:#effffb;
-  transition: 0.5s;
-  outline: none;
-}
-.my-bacteria {
-  height: 2rem;
-  width: 13rem;
-  padding: 0.2rem;
-  border: 0.2rem solid #4f98ca;
-  border-radius: 0.8rem;
-  background-color:#effffb;
-  transition: 0.5s;
-  outline: none;
-}
-.my-input:focus{
-  color: #effffb;
-  font-weight: bold;
-  border: 0.2rem solid #50d890;
+
+.input-group-text {
   background-color: #50d890;
 }
-.btn-bd-info{
+
+.btn-bd-info {
   --bs-btn-border-radius: 2rem;
   --bs-btn-color: #50d890;
   --bs-btn-bg: #272727;
   --bs-btn-border-color: #272727;
-  --bs-btn-hover-color: #272727;;
+  --bs-btn-hover-color: #272727;
   --bs-btn-hover-bg: #50d890;
   --bs-btn-hover-border-color: #50d890;
   --bs-btn-active-color: #272727;
   --bs-btn-active-bg: #50d890;
   --bs-btn-active-border-color: #50d890;
 }
+
 .btn-bd-primary {
   --bs-btn-border-radius: 2rem;
   --bs-btn-font-weight: bold;
   --bs-btn-color: #effffb;
   --bs-btn-bg: #4f98ca;
   --bs-btn-border-color: #4f98ca;
-  --bs-btn-hover-color: #effffb;;
+  --bs-btn-hover-color: #effffb;
   --bs-btn-hover-bg: #50d890;
   --bs-btn-hover-border-color: #50d890;
   --bs-btn-active-color: #effffb;
   --bs-btn-active-bg: #50d890;
   --bs-btn-active-border-color: #50d890;
 }
+
 .popper-box {
-    --popper-theme-background-color: #272727;
-    --popper-theme-background-color-hover: #272727;
-    --popper-theme-text-color: #effffb;
-    --popper-theme-border-width: 0rem;
-    --popper-theme-border-style: solid;
-    --popper-theme-border-radius: 1rem;
-    --popper-theme-padding: 0.8rem;
-    --popper-theme-box-shadow: 0 0.375rem 1.875rem -0.375rem rgba(39, 39, 39, 0.25);
-  }
+  --popper-theme-background-color: #272727;
+  --popper-theme-background-color-hover: #272727;
+  --popper-theme-text-color: #effffb;
+  --popper-theme-border-width: 0rem;
+  --popper-theme-border-style: solid;
+  --popper-theme-border-radius: 1rem;
+  --popper-theme-padding: 0.8rem;
+  --popper-theme-box-shadow: 0 0.375rem 1.875rem -0.375rem rgba(39, 39, 39, 0.25);
+}
 </style>
 <script>
 import { mapMutations } from 'vuex';
@@ -207,7 +145,7 @@ import Swal from "sweetalert2";
 import Popper from "vue3-popper";
 export default {
   name: "BacillusForm",
-  components : {
+  components: {
     Popper
   },
   data() {
@@ -221,7 +159,7 @@ export default {
       mineralAgarValues: [34.55, 36.54, 18.37, 36.07, 16.40, 34.48],
       mineralBrothValues: [25.00, 21.00, 16.00, 14.00, 8.00, 21.00],
       percentageOptions: [],
-      buttonPressed: false,
+      mediumSelected: false,
       sendButtonPressed: false,
     };
   },
@@ -234,6 +172,9 @@ export default {
       "setStrain",
       "setPercentage",
     ]),
+  },
+  mounted() {
+    this.scrollVisualization();
   },
   methods: {
     validateKeyPress(event) {
@@ -261,12 +202,12 @@ export default {
         this.percentageOptions = this.mineralBrothValues.slice();
         this.mineral = "mineral broth";
       }
-      this.buttonPressed = true;
+      this.mediumSelected = true;
       this.percentage = null;
     },
     setBacillusStrain(event) {
       const selectedValue = parseFloat(event.target.value);
-      if(selectedValue === this.percentageOptions[0]) {
+      if (selectedValue === this.percentageOptions[0]) {
         this.strain = "B. carbonipphilus";
       } else if (selectedValue === this.percentageOptions[1]) {
         this.strain = "B. sporothermodurans";
@@ -274,9 +215,9 @@ export default {
         this.strain = "B. coagulans";
       } else if (selectedValue === this.percentageOptions[3]) {
         this.strain = "B. neidei";
-      } else if(selectedValue === this.percentageOptions[4]) {
+      } else if (selectedValue === this.percentageOptions[4]) {
         this.strain = "smithii";
-      } else if(selectedValue === this.percentageOptions[5]) {
+      } else if (selectedValue === this.percentageOptions[5]) {
         this.strain = "B. megaterium";
       }
     },
@@ -302,22 +243,35 @@ export default {
           color: "#effffb",
           icon: "warning",
           position: "center",
-    
+
           allowOutsideClick: false,
           allowEscapeKey: false,
           allowEnterKey: false,
           stopKeydownPropagation: false,
-    
+
           showConfirmButton: true,
           confirmButtonText: "Confirmar",
           confirmButtonColor: "#50d890",
           confirmButtonAriaLabel: "Confirmar",
-    
+
           showCancelButton: false,
           cancelButtonText: "Cancelar",
           cancelButtonAriaLabel: "Cancelar",
         })
       }
+    },
+    scrollVisualization() {
+      const currentScrollY = window.scrollY;
+      const resultsSection = document.getElementById("form-section");
+      setTimeout(() => {
+        if (!resultsSection) window.scrollTo(0, currentScrollY);
+        else if (resultsSection) {
+          resultsSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }, 340);
     },
   },
 };
