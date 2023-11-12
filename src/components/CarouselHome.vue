@@ -56,7 +56,7 @@
         />
         <div class="carousel-caption top-0 mt-4">
           <p class="mt-5 mb-3 text-uppercase text-size">
-            Aumento preocupante de plásticos de un sólo uso desde 2016
+            Aumento preocupante de plásticos desde 2016
           </p>
           <p
             class="position-absolute bottom-0 end-0 p-3 text-credits fst-italic"

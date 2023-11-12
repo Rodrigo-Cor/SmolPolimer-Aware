@@ -231,7 +231,7 @@
 
     <article class="mt-2">
       <section class="fw-bold">
-        Toda la información presentada se utilizaron las siguientes referencias.
+        Toda la información presentada fue obtenida de las siguientes referencias.
       </section>
       <SectionReferences
         :view="'fight'"

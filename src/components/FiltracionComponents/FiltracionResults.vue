@@ -111,8 +111,7 @@ import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "FiltracionResults",
   mounted() {
-    this.calculateCleansing(),
-    this.scrollVisualization()
+    this.calculateCleansing();
   },
   watch: {
     microplastics() {
@@ -133,9 +132,12 @@ export default {
       onFilterValues: "getOnFilterValues",
       releasedValues: "getReleasedValues",
     }),
-    ...mapMutations(["setOnFilterValues", "setReleasedValues"]),
   },
   methods: {
+    ...mapMutations({
+      setOnFilterValues: "setOnFilterValues",
+      setReleasedValues: "setReleasedValues",
+    }),
     calculateCleansing() {
       let onFilterArray = [];
       let releasedArray = [];
@@ -157,8 +159,8 @@ export default {
         onFilterArray.push(onFilter);
         releasedArray.push(released);
       }
-      this.$store.commit("setOnFilterValues", onFilterArray);
-      this.$store.commit("setReleasedValues", releasedArray);
+      this.setOnFilterValues(onFilterArray);
+      this.setReleasedValues(releasedArray);
     },
     obtainNoise() {
       const randomValue = Math.random();
@@ -166,19 +168,6 @@ export default {
         Math.sqrt(-2 * Math.log(randomValue)) *
         Math.cos(2 * Math.PI * randomValue);
       return standardNormalValue;
-    },
-    scrollVisualization() {
-      const currentScrollY = window.scrollY;
-      const resultsSection = document.getElementById("results-section");
-      setTimeout(() => {
-        if (!resultsSection) window.scrollTo(0, currentScrollY);
-        else if (resultsSection) {
-          resultsSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }
-      }, 340);
     },
   },
 };

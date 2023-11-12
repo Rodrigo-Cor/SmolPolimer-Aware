@@ -165,7 +165,7 @@
               src: require('@/assets/tim-mossholder-qq-8dpdlBsY-unsplash.jpg'),
               alt: 'Gaviota con microplásticos en su pico',
             },
-            sideImage: false,
+            sideImage: true,
             credits: {
               'Foto de ': '',
               'Tim Mossholder ':
@@ -199,7 +199,7 @@
               src: require('@/assets/tim-mossholder-qq-8dpdlBsY-unsplash.jpg'),
               alt: 'Gaviota con microplásticos en su pico',
             },
-            sideImage: false,
+            sideImage: true,
             credits: {
               'Foto de ': '',
               'Tim Mossholder ':
@@ -236,7 +236,7 @@
               src: require('@/assets/tim-mossholder-qq-8dpdlBsY-unsplash.jpg'),
               alt: 'Gaviota con microplásticos en su pico',
             },
-            sideImage: false,
+            sideImage: true,
             credits: {
               'Foto de ': '',
               'Tim Mossholder ':
@@ -272,7 +272,7 @@
               src: require('@/assets/tim-mossholder-qq-8dpdlBsY-unsplash.jpg'),
               alt: 'Gaviota con microplásticos en su pico',
             },
-            sideImage: false,
+            sideImage: true,
             credits: {
               'Foto de ': '',
               'Tim Mossholder ':
@@ -309,7 +309,7 @@
               src: require('@/assets/tim-mossholder-qq-8dpdlBsY-unsplash.jpg'),
               alt: 'Gaviota con microplásticos en su pico',
             },
-            sideImage: false,
+            sideImage: true,
             credits: {
               'Foto de ': '',
               'Tim Mossholder ':
@@ -353,7 +353,7 @@
     </article>
     <article class="mt-2">
       <section class="fw-bold">
-        Toda la información presentada se utilizaron las siguientes referencias.
+        Toda la información presentada fue obtenida de las siguientes referencias.
       </section>
       <SectionReferences
         :view="'home'"
