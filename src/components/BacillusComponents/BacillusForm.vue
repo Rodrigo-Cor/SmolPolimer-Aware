@@ -4,7 +4,7 @@
     <form class="row g-3">
       <div class="col-md-4 col-12 text-center">
         <Popper class="popper-box" arrow content="Cantidad de microplasticos a degradar" placement="top" hover>
-          <button class="btn btn-bd-info btn-sm mb-2"><i class="bi bi-lightbulb"></i></button>
+          <button class="btn btn-bd-info btn-sm mb-2" type="button"><i class="bi bi-lightbulb"></i></button>
         </Popper>
         <div class="input-group mb-3">
           <div class="form-floating">
@@ -20,7 +20,7 @@
       </div>
       <div class="col-md-4 col-12 text-center">
         <Popper class="popper-box" arrow content="Cuántos bimestres van a estar degradándose" placement="top" hover>
-          <button class="btn btn-bd-info btn-sm mb-2"><i class="bi bi-lightbulb"></i></button>
+          <button class="btn btn-bd-info btn-sm mb-2" type="button"><i class="bi bi-lightbulb"></i></button>
         </Popper>
         <div class="input-group mb-3">
           <div class="form-floating">
@@ -36,7 +36,7 @@
       <div class="col-md-4 col-12 text-center">
         <Popper class="popper-box" arrow content="Alimento para las bacterias, determina el porcentaje de degradación."
           placement="top" hover>
-          <button class="btn btn-bd-info btn-sm mb-2"><i class="bi bi-lightbulb"></i></button>
+          <button class="btn btn-bd-info btn-sm mb-2" type="button"><i class="bi bi-lightbulb"></i></button>
         </Popper>
         <div class="input-group mb-3">
           <div class="form-floating">
@@ -75,7 +75,7 @@
       </div>
     </form>
     <div class="d-flex justify-content-center my-4">
-      <button @click="handleSendButton" class="btn btn-bd-primary">
+      <button class="btn btn-bd-primary" type="button" @click="handleSendButton" >
         <i class="bi bi-check-circle"></i> Calcular
       </button>
     </div>
@@ -178,18 +178,18 @@ export default {
   },
   methods: {
     validateKeyPress(event) {
-      const pattern = /[0-9\b]/
-      if (
-        !pattern.test(event.key)
-      ) event.preventDefault();
+      const isDigitOrBackspace =
+        /[0-9\b]/.test(event.key) || event.which === 8;
       const inputValue = event.target.value;
+      console.log(inputValue);
+      const isMaxLengthExceeded = inputValue.length >= 5;
+      if (!isDigitOrBackspace || isMaxLengthExceeded) {
+        event.preventDefault();
+        console.log("Valor denegado");
+      }
       if (inputValue.length === 0 && event.key === '0') {
         event.preventDefault();
-        return;
-      }
-      if (inputValue.length >= 5) {
-        event.preventDefault();
-        return;
+        console.log("cero no puede ser el primer valor");
       }
     },
     handleMaterialSelect(event) {

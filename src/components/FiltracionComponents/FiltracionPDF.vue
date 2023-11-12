@@ -185,7 +185,7 @@ export default {
           tableWidth: "auto",
           margin: 50,
           headStyles: { halign: 'center', fillColor: "#50d890"},
-          bodyStyles: { halign: 'center', fontStyle: "bold"},
+          bodyStyles: { halign: 'center'},
         });
         pdf.save("ReporteFiltracion.pdf");
       };
