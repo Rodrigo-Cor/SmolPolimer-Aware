@@ -60,28 +60,20 @@
       lo que significa que algunos de ellos aún podrían llegar al cuerpo de
       agua. El objetivo ideal es asegurarse de que la cantidad de microplásticos
       que quedan en el cuerpo de agua sea menor que la cantidad atrapada por el
-      filtro. Para la simulación se reciben como datos de entrada: una cantidad
-      de microplásticos en miligramos, otra que termina de residuo y el número
-      de días por el que se estará pasando esa cantidad por el filtro.
+      filtro.
     </section>
     <section class="text-justify-custom my-2">
-      Para simular, se presentan dos opciones: simulación con valores por
-      defecto (en la que se valores predefinidos son ingresados automáticamente)
-      y simulación con formulario (donde podrás escoger qué valores definirán la
-      simulación gráfica). Si los datos introducidos son válidos, se mostrará un
-      resumen de los campos llenados, a la vez que los resultados; una
-      simulación gráfica con la que puedes interactuar y finalmente la
-      explicación de dicha simulación sumado a la opción de descargar un PDF con
-      los resultados.
-    </section>
-    <section class="text-justify-custom my-2">
-      Al seleccionar "Simulación con valores por defecto", se introducen al
-      simulador 29 mg de microplásticos que durante 9 días se estarán filtrando,
-      al mismo tiempo que se indican 9 mg de residuos microplásticos para el
-      cálculo. Si por otro se escoge el formulario, se limita hasta 40 mg de
-      microplásticos, 20 mg de residuos y un máximo de 24 días; se recomienda
-      introducir una cantidad considerable de días, ya que dentro de estas
-      restricciones el simulador muestra el comportamiento deseado.
+      Para acceder a la simulación, deberás interactuar con el formulario, en el 
+      que ya se te presentan en cada uno de los campos, valores recomendados para simular: 
+      se introducen 29 mg de microplásticos que durante 9 días se estarán filtrando, 
+      al mismo tiempo que se indican 9 mg de residuos microplásticos para los cálculos. 
+      También tienes la posibilidad de introducir tus propios valores, procurando que no 
+      excedan los 40 mg de microplásticos, 20 mg de residuos y un máximo de 24 días; se recomienda
+      introducir una cantidad alta de días, ya que dentro de estas restricciones el simulador 
+      muestra el comportamiento deseado. Si los datos introducidos son válidos, se mostrará un 
+      resumen de los campos llenados, a la vez que los resultados, la simulación gráfica y 
+      finalmente una explicación de ésta, sumado a la opción de descargar un archivo PDF 
+      con todo lo mencionado previamente.
     </section>
     <FiltracionForm />
     <FiltracionResults v-if="microplastics && residues && timeUnits" />

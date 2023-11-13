@@ -36,7 +36,7 @@
             <template v-if="typeAccordion === 'references'">
               <p class="text-body-secondary fs-6">Autores: {{ author }}</p>
               <a target="_blank" :href="link" class="btn btn-dark"
-                >Ir al articulo</a
+                >Ir al artículo</a
               >
             </template>
             <template v-else>

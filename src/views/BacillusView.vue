@@ -37,7 +37,7 @@
     },
     {
       value:
-        ' con un porcentaje de 34.55%, 36.54 %, 18.37 %, 36.07 %, 16.0 % y 34.48%, respectivamente',
+        ' con un porcentaje de 34.55%, 36.54 %, 18.37 %, 36.07 %, 16.0 % y 34.48%, respectivamente con mineral agar como medio de cultivo, mientras que con mineral broth, tienen un porcentaje de degradación de 25%, 21%, 16%, 14%, 8% y 21%',
       key: '',
       link: [
         {
@@ -57,55 +57,35 @@
 }" />
       </section>
     </article>
-    <article class="text-justify-custom">
-      <section>
+    <article>
+      <section class="text-justify-custom my-2">
         En esta simulación, tendrás la oportunidad de explorar la degradación
         con diferentes cepas de la bacteria <i>Bacillus</i>. Cada una de las
         seis cepas que se presentan tiene su propia capacidad de degradación
         única, todo gracias a los ingredientes especiales conocidos como caldo
         mineral (mineral broth, en inglés) y agar mineral (mineral agar, en
         inglés). Estos ingredientes son como el "alimento" de nuestras bacterias
-        y afectarán su capacidad de degradación en un periodo de dos meses. Los
-        valores de entrada que se ocuparán para la simulación incluyen la
-        cantidad de microplásticos a degradar (en miligramos), el número de
-        bimestres en los que se estará degradando, la cepa de <i>Bacillus</i> a
-        utilizar, que dependiendo del medio de cultivo (agar o broth)
-        seleccionado, determinará el porcentaje de degradación.
+        y afectarán su capacidad de degradación en un periodo de dos meses.
       </section>
-      <section>
-        Para simular, se presentan dos opciones: simulación con valores
-        por defecto (en la que se valores predefinidos son ingresados
-        automáticamente) y simulación con formulario (donde podrás escoger qué
-        valores definirán la simulación gráfica). Si los datos introducidos son
-        válidos, se mostrará un resumen de los campos llenados, a la vez que los
-        resultados; una simulación gráfica con la que puedes interactuar y
-        finalmente la explicación de dicha simulación sumado a la opción de
-        descargar un PDF con los resultados.
-      </section>
-      <section>
-        Al seleccionar "Simulación con valores por defecto", se introducen al simulador 1000 mg de microplásticos, que
-        durante 12 bimestres se estarán degradando; mineral agar como medio de cultivo, la cepa <i>B. carbonipphilus</i> y
-        34.55% de porcentaje de degradacion. Si por otro lado se escoge el formulario, se limita hasta 10,000 mg de
-        microplásticos y un máximo de 12 bimestres, ya que dentro de estas restricciones el simulador muestra el
-        comportamiento deseado.
+      <section class="text-justify-custom my-2">
+        Para acceder a la simulación, deberás interactuar con el formulario, en el que ya se te presentan en cada uno de
+        los campos, valores recomendados para simular: se introducen 1000 mg de microplásticos, que durante
+        12 bimestres se estarán degradando; el medio de cultivo es mineral agar, que alimenta a bacterias de la cepa <i>B.
+        carbonipphilus</i>, resultando en 34.55% como porcentaje de degradación. También tienes la posibilidad de
+        introducir tus propios valores, procurando que no excedan los 10,000 mg de microplásticos y hasta 12 bimestres, ya
+        que dentro de estas restricciones el simulador muestra un comportamiento adecuado.
+        Si los datos introducidos son válidos, se mostrará un resumen de los campos llenados, a la vez que los
+        resultados, la simulación gráfica y finalmente una explicación de ésta,
+        sumado a la opción de descargar un archivo PDF con todo lo mencionado previamente.
       </section>
     </article>
-    <BacillusForm v-if="disableFormButton" />
+    <BacillusForm />
     <BacillusResults v-if="microplastics && timeUnits && percentage && growthMedium && strain" />
     <BacillusSimulation @chart-obtained="obtainSVG" v-if="degradatedValues.length > 1" />
     <BacillusExplained v-if="degradatedValues.length > 1" />
     <BacillusPDF :svgData="svgData" v-if="degradatedValues.length > 1 && svgData" />
-    <div class="d-flex justify-content-center my-2">
-      <button v-show="!disableFormButton" type="button" @click="handleButton1" class="btn btn-bd-primary">
-        <i class="bi bi-graph-up"></i> Simulación con formulario
-      </button>
-    </div>
-    <div class="d-flex justify-content-center my-2">
-      <button v-show="!disableDefaultButton" type="button" @click="handleButton2" class="btn btn-bd-secondary">
-        <i class="bi bi-graph-up"></i> Simulación con valores por defecto
-      </button>
-    </div>
-    <AwarenessSimulationSection v-if="!getIsAnswered &&
+    
+    <AwarenessSimulationSection v-if="!isAnswered &&
       degradatedValues.length > 1 &&
       svgData
       " />
@@ -301,90 +281,33 @@ export default {
   },
   data() {
     return {
-      defaultMicroplastics: 1000,
-      defaultTimeUnits: 12,
-      defaultPercentage: 34.55,
-      defaultGrowthMedium: "mineral agar",
-      defaultStrain: "B. carbonipphilus",
       svgData: null,
       disableFormButton: false,
       disableDefaultButton: false,
     };
   },
   computed: {
-    ...mapGetters([
-      "getDegradatedValues",
-      "getIsAnswered",
-      "getMicroplastics",
-      "getTimeUnits",
-      "getGrowthMedium",
-      "getStrain",
-      "getPercentage",
-    ]),
-    ...mapMutations([
-      "setMicroplastics",
-      "setTimeUnits",
-      "setGrowthMedium",
-      "setStrain",
-      "setPercentage",
-      "setDegradatedValues",
-    ]),
-    microplastics() {
-      return this.getMicroplastics;
-    },
-    timeUnits() {
-      return this.getTimeUnits;
-    },
-    percentage() {
-      return this.getPercentage;
-    },
-    growthMedium() {
-      return this.getGrowthMedium;
-    },
-    strain() {
-      return this.getStrain;
-    },
-    degradatedValues() {
-      return this.getDegradatedValues;
-    },
+    ...mapGetters({
+      microplastics: "getMicroplastics",
+      timeUnits: "getTimeUnits",
+      growthMedium: "getGrowthMedium",
+      strain: "getStrain",
+      percentage: "getPercentage",
+      degradatedValues: "getDegradatedValues",
+      isAnswered: "getIsAnswered",
+    }),
   },
   methods: {
-    handleButton1() {
-      this.setShowReferences(false);
-      this.$store.commit("setMicroplastics", "");
-      this.$store.commit("setTimeUnits", "");
-      this.$store.commit("setGrowthMedium", "");
-      this.$store.commit("setStrain", "");
-      this.$store.commit("setPercentage", "");
-      this.$store.commit("setDegradatedValues", []);
-      this.disableDefaultButton = false;
-      this.disableFormButton = true;
-    },
-    handleButton2() {
-      this.setShowReferences(false);
-      this.$store.commit("setMicroplastics", this.defaultMicroplastics);
-      this.$store.commit("setTimeUnits", this.defaultTimeUnits);
-      this.$store.commit("setGrowthMedium", this.defaultGrowthMedium);
-      this.$store.commit("setStrain", this.defaultStrain);
-      this.$store.commit("setPercentage", this.defaultPercentage);
-      this.disableDefaultButton = true;
-      this.disableFormButton = false;
-      const currentScrollY = window.scrollY;
-      const resultsSection = document.getElementById("results-section");
-      setTimeout(() => {
-        if (!resultsSection) window.scrollTo(0, currentScrollY);
-        else if (resultsSection) {
-          resultsSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }
-      }, 340);
-    },
     obtainSVG(svg) {
       this.svgData = svg;
     },
     ...mapMutations({
+      setMicroplastics: "setMicroplastics",
+      setTimeUnits: "setTimeUnits",
+      setGrowthMedium: "setGrowthMedium",
+      setStrain: "setStrain",
+      setPercentage: "setPercentage",
+      setDegradatedValues: "setDegradatedValues",
       setShowReferences: "setShowReferences",
     }),
     goReferences(id) {

@@ -13,7 +13,7 @@
       </Popper>
     </div>
     <div class="d-flex justify-content-center my-2">
-      <label class="my-label" for="simulationTimeInput">Vel. Redibujado</label>
+      <label class="my-label" for="simulationTimeInput">Velocidad de redibujado</label>
     </div>
     <div class="d-flex justify-content-center my-2">
       <input v-model="simulationTime" type="range" min="1" max="10" class="slider" id="simulationTimeInput"
@@ -37,7 +37,6 @@
   --bs-btn-bg: #272727;
   --bs-btn-border-color: #272727;
   --bs-btn-hover-color: #272727;
-  ;
   --bs-btn-hover-bg: #50d890;
   --bs-btn-hover-border-color: #50d890;
   --bs-btn-active-color: #272727;
@@ -133,10 +132,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getDegradatedValues']),
-    degradatedValues() {
-      return this.getDegradatedValues;
-    },
+    ...mapGetters({getDegradatedValues:"getDegradatedValues"}),
   },
   methods: {
     createChart() {
@@ -179,8 +175,8 @@ export default {
         .attr("height", height)
         .attr("fill", "#272727");
 
-      x.domain([0, this.degradatedValues.length - 1]);
-      y.domain([d3.min(this.degradatedValues), d3.max(this.degradatedValues)]);
+      x.domain([0, this.getDegradatedValues.length - 1]);
+      y.domain([d3.min(this.getDegradatedValues), d3.max(this.getDegradatedValues)]);
 
       svg.append("g")
         .attr("transform", `translate(0,${height})`)
@@ -194,7 +190,7 @@ export default {
         .y(d => y(d));
 
       var pathDegradated = svg.append("path")
-        .datum(this.degradatedValues)
+        .datum(this.getDegradatedValues)
         .attr("fill", "none")
         .attr("stroke", "#4f98ca")
         .attr("stroke-width", 2)
@@ -237,15 +233,15 @@ export default {
       var y = d3.scaleLinear()
         .range([height, 0]);
 
-      var svg = d3.select("#chartPDF-container")/* var svg = d3.create("svg") */
+      var svg = d3.select("#chartPDF-container")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-      x.domain([0, this.degradatedValues.length - 1]);
-      y.domain([d3.min(this.degradatedValues), d3.max(this.degradatedValues)]);
+      x.domain([0, this.getDegradatedValues.length - 1]);
+      y.domain([d3.min(this.getDegradatedValues), d3.max(this.getDegradatedValues)]);
 
       svg.append("g")
         .attr("transform", `translate(0,${height})`)
@@ -259,7 +255,7 @@ export default {
         .y(d => y(d));
 
       svg.append("path")
-        .datum(this.degradatedValues)
+        .datum(this.getDegradatedValues)
         .attr("fill", "none")
         .attr("stroke", "#4f98ca")
         .attr("stroke-width", 2)

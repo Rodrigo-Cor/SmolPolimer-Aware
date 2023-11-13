@@ -115,8 +115,7 @@ import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "BacillusResults",
   mounted() {
-    this.calculateCleansing(),
-    this.scrollVisualization()
+    this.calculateCleansing()
   },
   watch: {
     microplastics() {
@@ -144,9 +143,9 @@ export default {
       percentage: "getPercentage",
       degradatedValues: "getDegradatedValues",
     }),
-    ...mapMutations(["setDegradatedValues"]),
   },
   methods: {
+    ...mapMutations({setDegradatedValues:"setDegradatedValues"}),
     calculateCleansing() {
       let degradatedArray = [];
       let n = this.microplastics;
@@ -156,20 +155,7 @@ export default {
         let degradated = n * Math.pow(1 - percentage, i);
         degradatedArray.push(degradated);
       }
-      this.$store.commit("setDegradatedValues", degradatedArray);
-    },
-    scrollVisualization() {
-      const currentScrollY = window.scrollY;
-      const resultsSection = document.getElementById("results-section");
-      setTimeout(() => {
-        if (!resultsSection) window.scrollTo(0, currentScrollY);
-        else if (resultsSection) {
-          resultsSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }
-      }, 340);
+      this.setDegradatedValues(degradatedArray);
     },
   },
 };
