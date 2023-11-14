@@ -9,6 +9,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "animate.css";
 
+/*
 const idUser = localStorage.getItem("idUser");
 const numberQuestion = localStorage.getItem("numberQuestion");
 const selectedOptionInitialOption = localStorage.getItem(
@@ -51,5 +52,6 @@ if (selectedOptionFinalOption !== null && selectedOptionFinalValue != -1) {
 if (isAnswered != null) {
   store.commit("setIsAnswered", isAnswered);
 }
+*/
 
 createApp(App).use(store).use(router).mount("#app");
