@@ -48,8 +48,8 @@
           <tbody>
             <tr v-for="(item, index) in onFilterValues" :key="index">
               <td>{{ index + 1 }}</td>
-              <td>{{ item.toFixed(2) }}%</td>
-              <td>{{ releasedValues[index].toFixed(2) }}%</td>
+              <td>{{ item.toFixed(2) }}</td>
+              <td>{{ releasedValues[index].toFixed(2) }}</td>
             </tr>
           </tbody>
         </table>

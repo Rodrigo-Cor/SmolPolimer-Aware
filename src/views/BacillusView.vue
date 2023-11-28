@@ -37,7 +37,7 @@
     },
     {
       value:
-        ' con un porcentaje de 34.55%, 36.54 %, 18.37 %, 36.07 %, 16.0 % y 34.48%, respectivamente con mineral agar como medio de cultivo, mientras que con mineral broth, tienen un porcentaje de degradación de 25%, 21%, 16%, 14%, 8% y 21%',
+        ' con un porcentaje de 34.55%, 36.54%, 18.37%, 36.07%, 16.0% y 34.48%, respectivamente con mineral agar como medio de cultivo, mientras que con mineral broth, tienen un porcentaje de degradación de 25%, 21%, 16%, 14%, 8% y 21%',
       key: '',
       link: [
         {

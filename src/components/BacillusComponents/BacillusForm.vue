@@ -41,8 +41,8 @@
           <div class="form-floating">
             <select class="form-select" v-model="mineral.value" id="mineralInput" name="mineralInput"
               aria-label="Select de mineral" @change="handleMaterialSelect">
-              <option :value="'mineral agar'">mineral agar</option>
-              <option :value="'mineral broth'">mineral broth</option>
+              <option :value="'mineral agar'">Mineral agar</option>
+              <option :value="'mineral broth'">Mineral broth</option>
             </select>
             <label for="mineralInput">Medio de cultivo</label>
           </div>
@@ -56,7 +56,7 @@
         </Popper>
         <div class="input-group mb-3">
           <div class="form-floating">
-            <select class="form-select" v-model="percentage.value" id="percentageInput" aria-label="Select de Porcentaje"
+            <select class="form-select fst-italic" v-model="percentage.value" id="percentageInput" aria-label="Select de Porcentaje"
               aria-describedby="basic-addon3" name="percentageInput" @change="setBacillusStrain">
               <option :value="percentageOptions[0]">B. carbonipphilus</option>
               <option :value="percentageOptions[1]">B. sporothermodurans</option>
@@ -65,7 +65,7 @@
               <option :value="percentageOptions[4]">B. smithii</option>
               <option :value="percentageOptions[5]">B. megaterium</option>
             </select>
-            <label for="percentageInput">% degradación</label>
+            <label for="percentageInput">Degradación</label>
           </div>
           <span class="input-group-text" id="basic-addon3">{{ percentage.value }}%</span>
         </div>
@@ -178,7 +178,7 @@ export default {
       } else if (selectedValue === this.percentageOptions[3]) {
         this.strain.value = "B. neidei";
       } else if (selectedValue === this.percentageOptions[4]) {
-        this.strain.value = "smithii";
+        this.strain.value = "B. smithii";
       } else if (selectedValue === this.percentageOptions[5]) {
         this.strain.value = "B. megaterium";
       }

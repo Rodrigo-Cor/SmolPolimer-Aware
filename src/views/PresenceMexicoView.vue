@@ -135,7 +135,7 @@
               arrayText: [
                 [
                   {
-                    value: `En 2020, el INECC informó durante su intervención en Diálogos Ambientales, un evento organizado por la Secretaría de Medio Ambiente y Recursos Naturales (SEMARNAT), que los microplásticos representan entre el 60 y el 80% de los residuos que se encuentran en los océanos que rodean a México`,
+                    value: `En 2020, el INECC informó durante su intervención en Diálogos Ambientales, un evento organizado por la Secretaría de Medio Ambiente y Recursos Naturales (SEMARNAT), que los microplásticos representan entre el 60% y el 80% de los residuos que se encuentran en los océanos que rodean a México`,
                     link: [
                       {
                         text: '[3],',
@@ -272,7 +272,7 @@
           {
             authors: ['A. Enciso'],
             title:
-              'Entre 60 y 80% de residuos en el mar son microplásticos: Inecc',
+              'Entre 60% y 80% de residuos en el mar son microplásticos: Inecc',
             editorial: 'La Jornada',
             vol: '',
             no: '',
