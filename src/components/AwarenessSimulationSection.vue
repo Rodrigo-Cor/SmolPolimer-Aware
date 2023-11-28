@@ -59,7 +59,7 @@ export default {
         },
         {
           question:
-            "¿Qué tanto cambio tu nivel de conciencia sobre la contaminación por microplásticos en México?",
+            "¿Qué tanto cambió tu nivel de conciencia sobre la contaminación por microplásticos en México?",
           options: [
             { option: "Nada", value: 0 },
             { option: "Un poco", value: 1 },
@@ -69,7 +69,7 @@ export default {
           ],
         },
         {
-          question: "¿Ya te disté cuenta de que consumiste microplásticos?",
+          question: "¿Ya te diste cuenta de que consumiste microplásticos?",
           options: [
             { option: "Nada", value: 0 },
             { option: "Un poco", value: 1 },
