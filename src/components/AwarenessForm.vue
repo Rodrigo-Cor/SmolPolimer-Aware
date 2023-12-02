@@ -17,42 +17,25 @@
     </div>
     <form @submit.prevent :id="'form' + typeQuestion">
       <div class="col-md-6 col-12">
-        <select
-          :name="typeQuestion"
-          class="form-select"
-          v-model="localSelectedOption"
-          :disabled="typeQuestion === 'start' ? disabledInitial : disabledFinal"
-          :aria-label="typeQuestion + 'Question'"
-        >
+        <select :name="typeQuestion" class="form-select" v-model="localSelectedOption"
+          :disabled="typeQuestion === 'start' ? disabledInitial : disabledFinal" :aria-label="typeQuestion + 'Question'"
+          @change="handleOptionChange">
           <option value="" disabled>Selecciona una opción</option>
-          <template
-            v-for="radio in questions[numberQuestion].options"
-            :key="radio['value']"
-          >
+          <template v-for="radio in questions[numberQuestion].options" :key="radio['value']">
             <option :value="radio['option']">{{ radio["option"] }}</option>
           </template>
         </select>
       </div>
-      <button
-        v-if="typeQuestion === 'final'"
-        class="my-3 rounded-pill rounded-2 fw-bold"
-        @click="saveResults"
-        :disabled="disabledFinal"
-        v-bind:class="{
+      <button v-if="typeQuestion === 'final'" class="my-3 rounded-pill rounded-2 fw-bold" @click="saveResults"
+        :disabled="disabledFinal" v-bind:class="{
           'btn btn-light': isHovered,
           'btn btn-info': !isHovered,
-        }"
-        @mouseenter="isHovered = true"
-        @mouseleave="isHovered = false"
-      >
-        <i
-          class="bi bi-floppy-fill"
-          v-if="!stateRequestResult && !disabledFinal"
-        ></i>
+        }" @mouseenter="isHovered = true" @mouseleave="isHovered = false">
+        <i class="bi bi-floppy-fill" v-if="!stateRequestResult && !disabledFinal"></i>
         {{
           stateRequestResult
-            ? "Guardando..."
-            : disabledFinal
+          ? "Guardando..."
+          : disabledFinal
             ? "Gracias por tu respuesta"
             : "Guardar tu respuesta"
         }}
@@ -65,6 +48,7 @@
 import { mapActions, mapGetters } from "vuex";
 import axios from "axios";
 import HelpParagraph from "./HelpParagraph.vue";
+import Swal from "sweetalert2";
 
 export default {
   name: "AwarenessForm",
@@ -84,6 +68,7 @@ export default {
       localSelectedOption: "",
       stateRequestResult: false,
       isHovered: false,
+      showToastOnce: false,
     };
   },
   computed: {
@@ -103,6 +88,32 @@ export default {
       modifySelectedOptionFinal: "modifySelectedOptionFinal",
       modifyisDisabledFinal: "modifyisDisabledFinal",
     }),
+    handleOptionChange() {
+      if (this.typeQuestion === 'start' && !this.showToastOnce) {
+        const message = 'Ahora todos los contenidos están disponibles.';
+        this.showToast(message);
+        this.showToastOnce = true;
+      }
+    },
+    showToast(message) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "center",
+        showConfirmButton: false,
+        timer: 3000,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: 'info',
+        title: 'Barra de navegación activada',
+        text: message,
+        background: "#272727",
+        color: "#effffb",
+      });
+    },
     async saveResults() {
       try {
         if (this.selectedOptionFinal["option"] === "") return;

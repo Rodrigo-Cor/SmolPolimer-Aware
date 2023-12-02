@@ -5,7 +5,7 @@
     ambiental, el segundo es la comunicación efectiva del problema, y el tercero
     la participación comunitaria en la solución de problemas ambientales.
     <article>
-      <section>
+      <section class="border border-dark rounded-4 p-2">
         <h3 class="fw-semibold text-center section-title">The Ocean Cleanup</h3>
         <InfoSection
           :img="{
@@ -69,7 +69,7 @@
         />
       </section>
 
-      <section class="mt-2">
+      <section class="mt-2 border border-dark rounded-4 p-2">
         <h3 class="fw-semibold text-center section-title">
           Plastic Oceans International
         </h3>
@@ -165,7 +165,7 @@
             {
               title: 'Productos cotidianos',
               paragraph:
-                'Procura comprar cosméticos, jabones y artículos de higiene personal de origen natural',
+                'Elige cosméticos y jabones sin ingredientes plásticos, preferiblemente a base de aceites naturales. También considera productos de higiene personal como cotonetes de bambú y cepillos de dientes biodegradables',
               link: [
                 {
                   text: '[3],',
@@ -180,7 +180,7 @@
             {
               title: 'Empaquetados',
               paragraph:
-                'Trata de comprar productos a granel, un ejemplo pueden ser productos de limpieza',
+                'Reduce el uso de productos con envases plásticos: opta por adquirir productos de limpieza y alimentos a granel',
               link: [
                 {
                   text: '[3],',
@@ -195,7 +195,7 @@
             {
               title: 'Reutiliza',
               paragraph:
-                'Toma conciencia sobre nuestro impacto en el ambiente y cambia tu actitud como consumidor',
+              'Reemplaza los productos plásticos desechables por alternativas sostenibles, como popotes de acero inoxidable, bolsas, rastrillos y botellas no plásticas reutilizables',
               link: [
                 {
                   text: '[3],',
@@ -210,7 +210,7 @@
             {
               title: 'Educación ambiental',
               paragraph:
-                'Participa en campañas ambientales y mantente constantemente informado sobre este problema ambiental progresivo',
+                'Participa en campañas ambientales y mantente constantemente informado sobre este creciente problema ambiental',
               link: [
                 {
                   text: '[3],',
