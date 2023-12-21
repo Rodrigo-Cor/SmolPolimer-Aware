@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid" style="background-color: white; border-radius: 1rem;">
     <h2 class="section-subtitle text-center my-2 animate__animated animate__flash">Simulación</h2>
-    <p class="filteredTag text-center">% microplásticos en filtro -----</p>
-    <p class="releasedTag text-center">% microplásticos sueltos en el río -----</p>
+    <p class="filteredTag text-center">% Microplásticos en filtro -----</p>
+    <p class="releasedTag text-center">% Microplásticos sueltos en el río -----</p>
     <div class="col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-12">
       <div ref="containerRef"></div>
       <div id="chart-container"></div>

@@ -34,7 +34,7 @@
             >Presencia en México</router-link
           >
           <router-link class="nav-link navegacion" to="/contaminacion"
-            >Combatir contra la contaminación</router-link
+            >Combatir la contaminación</router-link
           >
           <router-link class="nav-link navegacion" to="/filtracion"
             ><i class="bi bi-graph-up"></i> Filtración granular rápida
